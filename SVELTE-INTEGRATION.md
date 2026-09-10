@@ -130,8 +130,27 @@ Class ↔ component map:
 Example routes in `sveltekit/src/routes/`: `/` dashboard (bars, sparklines,
 activity), `/chat` (word-by-word streaming, composer, model switcher, RAG panel),
 `/api-keys` (filters, bulk-select, create-key slide-over with one-time reveal),
+`/files` (RAG corpus browser, dropzone, preview slide-over), `/monitor` (live
+telemetry: ticking stats, latency line, throughput, donut, event log),
 `/users` (tabs, role/presence filters, bulk bar, invite modal), `/tokens`
-(data-driven swatches), `/components` (every component above, live).
+(data-driven swatches), `/components` (every component, live), `/patterns`
+(validation, async states, confirmations, shortcuts), `/tailwind`
+(utility-first twin of the same tokens).
+
+| Static class | Svelte twin | Notes |
+|---|---|---|
+| `.spark` (big) | `LineChart.svelte` | SVG line + area, `id`-prefixed gradients (SSR-safe) |
+| — | `Donut.svelte` | share-of-total ring + legend |
+| `.input` + error | `TextField` `error` prop | red ring + message, `aria-invalid` |
+
+## 8. Tailwind v4 (optional dialect)
+
+Prefer utilities? `sveltekit/src/lib/ember/tailwind.css` maps `@theme` straight
+onto the runtime `--tw-*` variables — `bg-card`, `text-muted-foreground`,
+`border-border` follow `.ember` / `.ember-light` automatically, and the scale
+overrides (`--text-sm: 13px`, `--radius-md: 6px`) keep utilities pixel-identical
+to the class-first components. Preflight is deliberately **off** (Ember has its
+own reset). See the live side-by-side at `/tailwind`.
 
 ## 5. Icons
 

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import '$lib/ember/ember.css';
+	import '$lib/ember/tailwind.css';
 	import { CommandPalette, Shell, Toasts } from '$lib/ember/index.js';
 
 	let { children }: { children: Snippet } = $props();

@@ -2,6 +2,7 @@
 	interface Props {
 		label?: string;
 		hint?: string;
+		error?: string;
 		value?: string;
 		placeholder?: string;
 		mono?: boolean;
@@ -15,6 +16,7 @@
 	let {
 		label,
 		hint,
+		error,
 		value = $bindable(''),
 		placeholder,
 		mono = false,

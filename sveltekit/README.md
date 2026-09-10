@@ -23,9 +23,10 @@ Other scripts: `npm run build`, `npm run preview`, `npm run check` (svelte-check
 | `src/lib/ember/actions.svelte.ts` | Svelte actions: `use:spotlight`, `use:reveal`, `use:count`, `use:clickOutside`. |
 | `src/lib/ember/toast.svelte.ts` | Toast store: `toast.success/info/warning/error(title, desc)`. |
 | `src/lib/ember/icons.ts` + `Icon.svelte` | Inline SVG set, 1:1 with `../icons.js`. |
-| `src/lib/ember/*.svelte` | `Shell`, `Button`, `Card`, `Badge`, `StatCard`, `Switch`, `Segmented`, `Progress`, `Modal`, `Toasts`, `CommandPalette` (⌘K), `TokenBars`, `Sparkline`, `ThemeToggle`, `TextField`, `Tabs`, `Dropdown`, `SlidePanel`, `Banner`, `CodeBlock`, `Avatar` + `AvatarStack`, `EmptyState`, `Pagination`, `SearchField`, `CopyButton`. |
+| `src/lib/ember/*.svelte` | `Shell`, `Button`, `Card`, `Badge`, `StatCard`, `Switch`, `Segmented`, `Progress`, `Modal`, `Toasts`, `CommandPalette` (⌘K), `TokenBars`, `Sparkline`, `LineChart`, `Donut`, `ThemeToggle`, `TextField` (+ validation), `Tabs`, `Dropdown`, `SlidePanel`, `Banner`, `CodeBlock`, `Avatar` + `AvatarStack`, `EmptyState`, `Pagination`, `SearchField`, `CopyButton`. |
+| `src/lib/ember/tailwind.css` | Tailwind v4 `@theme` bound to the same `--tw-*` tokens (no preflight). Copy into `web-svelte` for `bg-card` / `text-primary` / … |
 | `src/lib/ember/utils.ts` | `sleep()`, `copyText()`, `seededRandom()` — clipboard + timing + SSR-safe demo data. |
-| `src/routes/` | `/` dashboard, `/tokens`, `/components`, `/chat` (streaming), `/api-keys` (create-key slide-over), `/users` (admin table + invite). |
+| `src/routes/` | `/` dashboard, `/chat` (streaming), `/api-keys` (create-key slide-over), `/files` (RAG browser), `/monitor` (live telemetry), `/users` (admin + invite), `/tokens`, `/components`, `/patterns` (validation, async states, confirms, shortcuts), `/tailwind` (utility-first demo). |
 | `src/app.html` | Inline pre-paint theme script (no dark-mode flash). |
 
 ## Porting to `web-svelte/`
