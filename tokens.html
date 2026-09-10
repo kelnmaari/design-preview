@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" class="ember">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ember · Design Tokens</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+	/* Page-local layout only — no design values here. */
+	.wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+	.hero { margin-bottom: 3rem; }
+	.hero h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
+	.hero h1 .accent { font-weight: 800; }
+	.hero p { color: var(--color-muted-foreground); margin-top: .5rem; max-width: 60ch; }
+	.section { margin-bottom: 3rem; }
+	.section-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--color-muted-foreground); margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem; }
+	.section-title::after { content: ''; flex: 1; height: 1px; background: var(--color-border); }
+
+	/* swatch grid */
+	.swatch-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .75rem; }
+	.swatch { border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; background: var(--color-card); }
+	.swatch .chip { height: 64px; }
+	.swatch .meta { padding: .625rem .75rem; }
+	.swatch .name { font-size: 12px; font-weight: 600; }
+	.swatch .hex { font-family: var(--font-mono); font-size: 11px; color: var(--color-muted-foreground); margin-top: 2px; }
+	.swatch .tok { font-family: var(--font-mono); font-size: 10px; color: var(--color-subtle); margin-top: 2px; }
+
+	/* gradient showcase */
+	.grad-strip { height: 96px; border-radius: var(--radius-lg); border: 1px solid var(--color-border); display: flex; align-items: flex-end; padding: .75rem; }
+	.grad-label { font-family: var(--font-mono); font-size: 11px; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.4); }
+
+	/* type scale */
+	.type-row { display: flex; align-items: baseline; gap: 1rem; padding: .75rem 0; border-bottom: 1px solid var(--color-border); }
+	.type-row:last-child { border-bottom: none; }
+	.type-label { width: 180px; flex: none; font-family: var(--font-mono); font-size: 11px; color: var(--color-muted-foreground); }
+	.type-sample { color: var(--color-foreground); }
+
+	/* radius */
+	.radius-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+	.radius-demo { width: 96px; height: 96px; background: var(--color-card-elevated); border: 1px solid var(--color-border-strong); display: flex; align-items: flex-end; justify-content: center; padding: .5rem; }
+	.radius-demo .r-label { font-family: var(--font-mono); font-size: 10px; color: var(--color-muted-foreground); }
+
+	/* elevation surfaces */
+	.surf-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: .75rem; }
+	.surf { padding: 1.25rem; border-radius: var(--radius-lg); border: 1px solid var(--color-border); }
+	.surf .s-name { font-size: 12px; font-weight: 600; }
+	.surf .s-tok { font-family: var(--font-mono); font-size: 10.5px; color: var(--color-muted-foreground); margin-top: 2px; }
+
+	/* theme toggle */
+	.theme-pill { display: inline-flex; border: 1px solid var(--color-border); border-radius: 9999px; padding: 2px; background: var(--color-card); }
+	.theme-pill button { font-size: 12px; padding: .3rem .75rem; border-radius: 9999px; color: var(--color-muted-foreground); }
+	.theme-pill button.active { background: var(--color-primary); color: #fff; }
+
+	/* nav between mockups */
+	.mockup-nav { display: flex; gap: .5rem; flex-wrap: wrap; }
+	.mockup-nav a { font-size: 12px; padding: .4rem .6rem; border: 1px solid var(--color-border); border-radius: var(--radius-sm); color: var(--color-muted-foreground); }
+	.mockup-nav a:hover { background: var(--color-accent); color: var(--color-foreground); }
+</style>
+</head>
+<body>
+<div class="wrap">
+	<!-- HERO -->
+	<div class="hero ember-glow" style="padding: 2rem; border-radius: var(--radius-lg); border: 1px solid var(--color-border); margin-bottom: 2.5rem;">
+		<div class="theme-pill" style="float:right;">
+			<button id="t-dark" class="active">Dark</button>
+			<button id="t-light">Light</button>
+		</div>
+		<div style="display:flex; align-items:center; gap:.75rem; margin-bottom:.5rem;">
+			<div style="width:40px;height:40px;border-radius:10px;background-image:linear-gradient(135deg,#F59E0B,#F43F5E);display:grid;place-items:center;color:#fff;font-weight:700;font-size:20px;box-shadow:0 4px 20px rgb(244 63 94 / .4);">E</div>
+			<span class="eyebrow" style="margin:0;">Design System · v1.0</span>
+		</div>
+		<h1>The <span class="text-gradient-ember accent">Ember</span> Design System</h1>
+		<p>Premium Dark surfaces, a warm Amber→Rose signature gradient, and a dense, data-focused rhythm. Every token below maps 1:1 to a <code style="font-size:12px;background:var(--color-muted);padding:1px 5px;border-radius:4px;">--tw-*</code> variable in <code style="font-size:12px;background:var(--color-muted);padding:1px 5px;border-radius:4px;">web-svelte/src/app.css</code>.</p>
+
+		<div class="mockup-nav mt-4">
+			<a href="components.html">→ Components</a>
+			<a href="dashboard.html">→ Dashboard</a>
+			<a href="chat.html">→ Chat</a>
+			<a href="api-keys.html">→ API Keys</a>
+			<a href="admin-users.html">→ Admin · Users</a>
+			<a href="admin-models-before-after.html">→ Before/After</a>
+		</div>
+	</div>
+
+	<!-- SURFACES -->
+	<div class="section">
+		<div class="section-title">Surfaces</div>
+		<div class="surf-row">
+			<div class="surf" style="background:var(--color-background);">
+				<div class="s-name">Background</div>
+				<div class="s-tok">--tw-background</div>
+			</div>
+			<div class="surf" style="background:var(--color-card);">
+				<div class="s-name">Card</div>
+				<div class="s-tok">--tw-card</div>
+			</div>
+			<div class="surf" style="background:var(--color-card-elevated);">
+				<div class="s-name">Card Elevated</div>
+				<div class="s-tok">--tw-card-elevated</div>
+			</div>
+			<div class="surf" style="background:var(--color-muted);">
+				<div class="s-name">Muted</div>
+				<div class="s-tok">--tw-muted</div>
+			</div>
+			<div class="surf" style="background:var(--color-background); border-style:dashed;">
+				<div class="s-name">Border / Strong</div>
+				<div class="s-tok">--tw-border / -strong</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ACCENTS -->
+	<div class="section">
+		<div class="section-title">Accents — signature warm spectrum</div>
+		<div class="swatch-row">
+			<div class="swatch"><div class="chip" style="background:#F43F5E;"></div><div class="meta"><div class="name">Primary · Rose</div><div class="hex">#F43F5E</div><div class="tok">--tw-primary</div></div></div>
+			<div class="swatch"><div class="chip" style="background:#F59E0B;"></div><div class="meta"><div class="name">Amber</div><div class="hex">#F59E0B</div><div class="tok">--tw-amber</div></div></div>
+			<div class="swatch"><div class="chip" style="background:#DC2626;"></div><div class="meta"><div class="name">Destructive</div><div class="hex">#DC2626</div><div class="tok">--tw-destructive</div></div></div>
+			<div class="swatch"><div class="chip" style="background:#10B981;"></div><div class="meta"><div class="name">Success</div><div class="hex">#10B981</div><div class="tok">--tw-success</div></div></div>
+			<div class="swatch"><div class="chip" style="background:#22D3EE;"></div><div class="meta"><div class="name">Info</div><div class="hex">#22D3EE</div><div class="tok">--tw-info</div></div></div>
+			<div class="swatch"><div class="chip" style="background:var(--color-muted);"></div><div class="meta"><div class="name">Secondary</div><div class="hex">#27272A</div><div class="tok">--tw-secondary</div></div></div>
+		</div>
+	</div>
+
+	<!-- GRADIENT -->
+	<div class="section">
+		<div class="section-title">Signature Gradient — the "Ember" glow</div>
+		<div class="grid grid-2 gap-3">
+			<div class="grad-strip bg-gradient-ember"><span class="grad-label">linear-gradient(135°, #F59E0B → #F43F5E)</span></div>
+			<div class="grad-strip" style="background:var(--color-card); align-items:center; justify-content:center;">
+				<span class="text-gradient-ember" style="font-size:28px; font-weight:800;">text-gradient-ember</span>
+			</div>
+		</div>
+		<p class="field-hint mt-2">Used on: logo, hero/featured banners, featured CTA buttons, active nav highlight (reduced opacity), and progress accents.</p>
+	</div>
+
+	<!-- STAT COLORS -->
+	<div class="section">
+		<div class="section-title">Stat Colors — harmonized warm</div>
+		<div class="swatch-row">
+			<div class="swatch"><div class="chip" style="background:#FBBF24;"></div><div class="meta"><div class="name">Conversations</div><div class="hex">#FBBF24</div><div class="tok">--tw-stat-conversations</div></div></div>
+			<div class="swatch"><div class="chip" style="background:#FB7185;"></div><div class="meta"><div class="name">API Keys</div><div class="hex">#FB7185</div><div class="tok">--tw-stat-apikeys</div></div></div>
+			<div class="swatch"><div class="chip" style="background:#E879F9;"></div><div class="meta"><div class="name">Models</div><div class="hex">#E879F9</div><div class="tok">--tw-stat-models</div></div></div>
+			<div class="swatch"><div class="chip" style="background:#FB923C;"></div><div class="meta"><div class="name">Requests</div><div class="hex">#FB923C</div><div class="tok">--tw-stat-requests</div></div></div>
+		</div>
+	</div>
+
+	<!-- TYPOGRAPHY -->
+	<div class="section">
+		<div class="section-title">Typography — Inter + JetBrains Mono</div>
+		<div class="card" style="padding: 0 1.25rem;">
+			<div class="type-row"><span class="type-label">page-title / 18 600</span><span class="type-sample" style="font-size:18px;font-weight:600;">Dashboard Overview</span></div>
+			<div class="type-row"><span class="type-label">section / 14 600</span><span class="type-sample" style="font-size:14px;font-weight:600;">Recent Conversations</span></div>
+			<div class="type-row"><span class="type-label">body / 13 400</span><span class="type-sample" style="font-size:13px;">The quick brown fox jumps over the lazy dog. Body copy at the default reading size.</span></div>
+			<div class="type-row"><span class="type-label">caption / 12 muted</span><span class="type-sample text-muted-foreground" style="font-size:12px;">Helper text and secondary metadata live here.</span></div>
+			<div class="type-row"><span class="type-label">subtle / 11 subtle</span><span class="type-sample text-subtle" style="font-size:11px;">Tertiary information, timestamps, the quietest layer.</span></div>
+			<div class="type-row"><span class="type-label">stat-value / mono 24</span><span class="type-sample font-mono tabular" style="font-size:24px;font-weight:600;">2,418,902</span></div>
+			<div class="type-row"><span class="type-label">code / mono 12</span><span class="type-sample font-mono" style="font-size:12px;background:var(--color-muted);padding:2px 6px;border-radius:4px;">gpt-4o-mini-2024</span></div>
+			<div class="type-row"><span class="type-label">eyebrow / 11 UPPER</span><span class="eyebrow">SECTION HEADER</span></div>
+		</div>
+	</div>
+
+	<!-- RADIUS -->
+	<div class="section">
+		<div class="section-title">Radius — dense, explicit values</div>
+		<div class="radius-row">
+			<div class="radius-demo" style="border-radius:0;"><span class="r-label">0 · none</span></div>
+			<div class="radius-demo" style="border-radius:4px;"><span class="r-label">4 · sm</span></div>
+			<div class="radius-demo" style="border-radius:6px;"><span class="r-label">6 · md/lg</span></div>
+			<div class="radius-demo" style="border-radius:9999px;"><span class="r-label">∞ · pill</span></div>
+		</div>
+		<p class="field-hint mt-2">Migration note: replace the current <code style="font-size:11px;">calc(var(--radius) - 2px)</code> / <code style="font-size:11px;">- 4px</code> derivations in <code style="font-size:11px;">app.css</code> with these explicit values — the calc was causing mismatched radii across components.</p>
+	</div>
+
+	<!-- DENSITY REFERENCE -->
+	<div class="section">
+		<div class="section-title">Density Rhythm</div>
+		<div class="grid grid-3 gap-3">
+			<div class="card card-body"><div class="eyebrow mb-2">Card padding</div><div class="font-mono text-sm">p-4 · 1rem</div><div class="text-xs text-muted-foreground mt-2">was p-6 — tighter cards across the board.</div></div>
+			<div class="card card-body"><div class="eyebrow mb-2">Grid gap</div><div class="font-mono text-sm">gap-2 / gap-3</div><div class="text-xs text-muted-foreground mt-2">was gap-4 / gap-8 — denser stacks.</div></div>
+			<div class="card card-body"><div class="eyebrow mb-2">Control height</div><div class="font-mono text-sm">32px (28 sm)</div><div class="text-xs text-muted-foreground mt-2">Buttons & inputs share one height.</div></div>
+		</div>
+	</div>
+</div>
+
+<script>
+	// Theme toggle — flips the root class between dark (default) and light variant.
+	const root = document.documentElement;
+	document.getElementById('t-dark').onclick = () => { root.classList.remove('ember-light'); root.classList.add('ember'); setPill('t-dark'); };
+	document.getElementById('t-light').onclick = () => { root.classList.remove('ember'); root.classList.add('ember-light'); setPill('t-light'); };
+	function setPill(id) {
+		document.querySelectorAll('.theme-pill button').forEach(b => b.classList.remove('active'));
+		document.getElementById(id).classList.add('active');
+	}
+</script>
+</body>
+</html>

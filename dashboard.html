@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" class="ember">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ember · Dashboard</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="dashboard">
+<div id="page-root">
+
+	<!-- UPDATE BANNER (ember gradient, the signature glow) -->
+	<div class="bg-gradient-ember ember-grid" style="border-radius:var(--radius-lg); padding:.875rem 1rem; margin-bottom:1.5rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; position:relative; overflow:hidden;">
+		<div style="display:flex; align-items:center; gap:.75rem;">
+			<div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.18);display:grid;place-items:center;color:#fff;backdrop-filter:blur(4px);"><i data-icon="wand-sparkles" data-size="18"></i></div>
+			<div>
+				<div style="font-size:13.5px;font-weight:600;color:#fff;display:flex;align-items:center;gap:.5rem;">
+					A new version is available
+					<span style="font-family:var(--font-mono);font-size:11px;background:rgba(255,255,255,.2);padding:1px 7px;border-radius:9999px;color:#fff;">v6.20.0</span>
+				</div>
+				<div style="font-size:12px;color:rgba(255,255,255,.85);margin-top:1px;">You're on v7.0.0 — view the changelog to see what's new.</div>
+			</div>
+		</div>
+		<div style="display:flex; align-items:center; gap:.5rem;">
+			<a href="#" style="font-size:12.5px;font-weight:500;background:#fff;color:#1a1a1f;padding:0 .75rem;height:30px;border-radius:var(--radius-sm);display:inline-flex;align-items:center;gap:.4rem;"><i data-icon="download" data-size="14"></i> View changelog</a>
+			<button class="icon-btn" style="color:#fff;background:rgba(255,255,255,.12);"><i data-icon="xmark" data-size="14"></i></button>
+		</div>
+	</div>
+
+	<!-- PAGE HEADER -->
+	<div class="page-header">
+		<div>
+			<div class="eyebrow mb-2">Overview</div>
+			<h1 class="page-title">Welcome back, Alex</h1>
+			<p class="page-subtitle">Here's what's happening across your gateway today.</p>
+		</div>
+		<div class="flex gap-2">
+			<button class="btn btn-outline btn-sm"><i data-icon="refresh" data-size="13"></i> Refresh</button>
+			<button class="btn btn-ember btn-sm"><i data-icon="plus"></i> New chat</button>
+		</div>
+	</div>
+
+	<!-- STAT CARDS -->
+	<div class="grid grid-4 mb-4">
+		<div class="stat-card card-hover">
+			<div class="stat-icon bg-amber/10 text-stat-conversations"><i data-icon="comments" data-size="15"></i></div>
+			<div class="stat-label">Conversations</div>
+			<div class="stat-value">2,418</div>
+			<div class="stat-delta text-success"><i data-icon="arrow-up" data-size="10"></i> 12.4% <span class="text-subtle">vs last wk</span></div>
+		</div>
+		<div class="stat-card card-hover">
+			<div class="stat-icon bg-primary/10 text-stat-apikeys"><i data-icon="key" data-size="15"></i></div>
+			<div class="stat-label">API Keys</div>
+			<div class="stat-value">156</div>
+			<div class="stat-delta text-success"><i data-icon="arrow-up" data-size="10"></i> 3 <span class="text-subtle">new this wk</span></div>
+		</div>
+		<div class="stat-card card-hover">
+			<div class="stat-icon bg-primary/10 text-stat-models"><i data-icon="microchip" data-size="15"></i></div>
+			<div class="stat-label">Models</div>
+			<div class="stat-value">42</div>
+			<div class="stat-delta text-muted-foreground">— <span class="text-subtle">unchanged</span></div>
+		</div>
+		<div class="stat-card card-hover">
+			<div class="stat-icon bg-amber/10 text-stat-requests"><i data-icon="chart-line" data-size="15"></i></div>
+			<div class="stat-label">Requests</div>
+			<div class="stat-value">84.2k</div>
+			<div class="stat-delta text-destructive"><i data-icon="arrow-down" data-size="10"></i> 2.1% <span class="text-subtle">vs last wk</span></div>
+		</div>
+	</div>
+
+	<!-- MAIN GRID -->
+	<div class="grid grid-2 mb-4">
+		<!-- TOKENS CHART -->
+		<div class="card">
+			<div class="card-header flex items-center justify-between">
+				<div>
+					<div class="card-title">Tokens per day</div>
+					<div class="card-description">Last 30 days · 2.4M total</div>
+				</div>
+				<div class="flex gap-1">
+					<button class="badge badge-muted" style="cursor:pointer;">7d</button>
+					<button class="badge badge-primary" style="cursor:pointer;">30d</button>
+					<button class="badge badge-muted" style="cursor:pointer;">90d</button>
+				</div>
+			</div>
+			<div class="card-body">
+				<!-- bar chart, dependency-free CSS -->
+				<div style="display:flex; align-items:flex-end; gap:3px; height:140px;">
+					<!-- 30 bars with pseudo-random heights using ember gradient -->
+					<div class="bar" style="flex:1;height:32%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:45%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:28%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:60%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:52%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:70%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:40%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:55%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:78%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:62%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:48%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:65%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:82%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:58%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:44%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:68%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:90%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.7"></div>
+					<div class="bar" style="flex:1;height:75%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:50%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:63%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:85%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:72%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:95%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:1;box-shadow:0 0 12px rgb(244 63 94 / .5)"></div>
+					<div class="bar" style="flex:1;height:67%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:54%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:80%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:88%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:60%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:74%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+					<div class="bar" style="flex:1;height:81%;background-image:linear-gradient(180deg,#F43F5E,#F59E0B);border-radius:2px 2px 0 0;opacity:.55"></div>
+				</div>
+				<div class="flex justify-between mt-2 text-xs text-subtle font-mono">
+					<span>Jul 23</span><span>Aug 2</span><span>Aug 12</span><span>Aug 22</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- TOP MODELS -->
+		<div class="card">
+			<div class="card-header flex items-center justify-between">
+				<div>
+					<div class="card-title">Top models</div>
+					<div class="card-description">By token usage</div>
+				</div>
+				<a href="#" class="text-xs text-primary">View all →</a>
+			</div>
+			<div class="card-body">
+				<div class="stack">
+					<div>
+						<div class="flex justify-between mb-2"><code class="text-xs bg-muted px-1.5 py-0.5 rounded-sm">gpt-4o-mini</code><span class="text-xs text-muted-foreground font-mono">842k · 1.2k req</span></div>
+						<div class="progress"><div class="progress-bar ember" style="width:92%"></div></div>
+					</div>
+					<div>
+						<div class="flex justify-between mb-2"><code class="text-xs bg-muted px-1.5 py-0.5 rounded-sm">claude-3.5-sonnet</code><span class="text-xs text-muted-foreground font-mono">610k · 880 req</span></div>
+						<div class="progress"><div class="progress-bar ember" style="width:67%;opacity:.85"></div></div>
+					</div>
+					<div>
+						<div class="flex justify-between mb-2"><code class="text-xs bg-muted px-1.5 py-0.5 rounded-sm">llama-3.1-70b</code><span class="text-xs text-muted-foreground font-mono">421k · 2.4k req</span></div>
+						<div class="progress"><div class="progress-bar ember" style="width:46%;opacity:.7"></div></div>
+					</div>
+					<div>
+						<div class="flex justify-between mb-2"><code class="text-xs bg-muted px-1.5 py-0.5 rounded-sm">qwen2.5-coder</code><span class="text-xs text-muted-foreground font-mono">198k · 540 req</span></div>
+						<div class="progress"><div class="progress-bar ember" style="width:22%;opacity:.55"></div></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="grid grid-2">
+		<!-- RECENT CONVERSATIONS -->
+		<div class="card">
+			<div class="card-header flex items-center justify-between">
+				<div class="card-title">Recent conversations</div>
+				<a href="#" class="text-xs text-primary">View all →</a>
+			</div>
+			<div class="card-body-compact">
+				<a href="#" class="flex items-center gap-3 p-2 rounded-md" style="transition:background .12s;" onmouseover="this.style.background='var(--color-accent)'" onmouseout="this.style.background='transparent'">
+					<i data-icon="comments" data-size="15" class="text-muted-foreground"></i>
+					<div class="flex-1 min-w-0"><div class="text-sm font-medium truncate">Refactoring auth middleware</div><div class="text-xs text-muted-foreground">2m ago · 12 messages</div></div>
+					<i data-icon="arrow-right" data-size="13" class="text-subtle"></i>
+				</a>
+				<a href="#" class="flex items-center gap-3 p-2 rounded-md" style="transition:background .12s;" onmouseover="this.style.background='var(--color-accent)'" onmouseout="this.style.background='transparent'">
+					<i data-icon="comments" data-size="15" class="text-muted-foreground"></i>
+					<div class="flex-1 min-w-0"><div class="text-sm font-medium truncate">SQL query optimization for analytics</div><div class="text-xs text-muted-foreground">1h ago · 8 messages</div></div>
+					<i data-icon="arrow-right" data-size="13" class="text-subtle"></i>
+				</a>
+				<a href="#" class="flex items-center gap-3 p-2 rounded-md" style="transition:background .12s;" onmouseover="this.style.background='var(--color-accent)'" onmouseout="this.style.background='transparent'">
+					<i data-icon="comments" data-size="15" class="text-muted-foreground"></i>
+					<div class="flex-1 min-w-0"><div class="text-sm font-medium truncate">Draft API documentation for v2</div><div class="text-xs text-muted-foreground">3h ago · 24 messages</div></div>
+					<i data-icon="arrow-right" data-size="13" class="text-subtle"></i>
+				</a>
+				<a href="#" class="flex items-center gap-3 p-2 rounded-md" style="transition:background .12s;" onmouseover="this.style.background='var(--color-accent)'" onmouseout="this.style.background='transparent'">
+					<i data-icon="comments" data-size="15" class="text-muted-foreground"></i>
+					<div class="flex-1 min-w-0"><div class="text-sm font-medium truncate">Debug WebSocket reconnection logic</div><div class="text-xs text-muted-foreground">yesterday · 31 messages</div></div>
+					<i data-icon="arrow-right" data-size="13" class="text-subtle"></i>
+				</a>
+			</div>
+		</div>
+
+		<!-- AVAILABLE MODELS -->
+		<div class="card">
+			<div class="card-header flex items-center justify-between">
+				<div class="card-title">Available models</div>
+				<span class="badge badge-muted">42 total</span>
+			</div>
+			<div class="card-body-compact">
+				<div class="grid grid-2 gap-2">
+					<div class="card card-body-compact card-hover" style="padding:.625rem;">
+						<div class="flex items-center justify-between mb-2">
+							<div class="flex items-center gap-2 min-w-0"><i data-icon="microchip" data-size="13" class="text-primary"></i><span class="text-xs font-semibold truncate">gpt-4o-mini</span></div>
+							<span class="badge badge-success" style="font-size:9px;padding:1px 5px;">STABLE</span>
+						</div>
+						<div class="flex gap-1"><span class="badge badge-muted" style="font-size:9px;padding:1px 5px;">128k ctx</span><span class="badge badge-primary" style="font-size:9px;padding:1px 5px;">vision</span></div>
+					</div>
+					<div class="card card-body-compact card-hover" style="padding:.625rem;">
+						<div class="flex items-center justify-between mb-2">
+							<div class="flex items-center gap-2 min-w-0"><i data-icon="microchip" data-size="13" class="text-primary"></i><span class="text-xs font-semibold truncate">claude-3.5-sonnet</span></div>
+							<span class="badge badge-success" style="font-size:9px;padding:1px 5px;">STABLE</span>
+						</div>
+						<div class="flex gap-1"><span class="badge badge-muted" style="font-size:9px;padding:1px 5px;">200k ctx</span><span class="badge badge-primary" style="font-size:9px;padding:1px 5px;">vision</span></div>
+					</div>
+					<div class="card card-body-compact card-hover" style="padding:.625rem;">
+						<div class="flex items-center justify-between mb-2">
+							<div class="flex items-center gap-2 min-w-0"><i data-icon="microchip" data-size="13" class="text-primary"></i><span class="text-xs font-semibold truncate">llama-3.1-70b</span></div>
+							<span class="badge badge-amber" style="font-size:9px;padding:1px 5px;">EXPERIMENTAL</span>
+						</div>
+						<div class="flex gap-1"><span class="badge badge-muted" style="font-size:9px;padding:1px 5px;">128k ctx</span></div>
+					</div>
+					<div class="card card-body-compact card-hover" style="padding:.625rem;">
+						<div class="flex items-center justify-between mb-2">
+							<div class="flex items-center gap-2 min-w-0"><i data-icon="microchip" data-size="13" class="text-primary"></i><span class="text-xs font-semibold truncate">qwen2.5-coder</span></div>
+							<span class="badge badge-success" style="font-size:9px;padding:1px 5px;">STABLE</span>
+						</div>
+						<div class="flex gap-1"><span class="badge badge-muted" style="font-size:9px;padding:1px 5px;">32k ctx</span><span class="badge badge-primary" style="font-size:9px;padding:1px 5px;">code</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="icons.js"></script>
+<script src="_shell.js"></script>
+<script>EmberShell.mount();</script>
+</body>
+</html>

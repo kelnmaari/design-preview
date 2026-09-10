@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" class="ember">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ember · API Keys</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+	/* Inline create-key panel slides in from the right. */
+	.create-panel { position: fixed; top: 0; right: 0; bottom: 0; width: 400px; background: var(--color-card); border-left: 1px solid var(--color-border); box-shadow: -20px 0 60px rgba(0,0,0,.4); z-index: 50; display: flex; flex-direction: column; transform: translateX(100%); transition: transform .25s ease; }
+	.create-panel.open { transform: translateX(0); }
+	.create-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); backdrop-filter: blur(2px); z-index: 49; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+	.create-overlay.open { opacity: 1; pointer-events: auto; }
+	.scope-chip { font-size: 12px; padding: .3rem .55rem; border-radius: var(--radius-sm); border: 1px solid var(--color-border); color: var(--color-muted-foreground); cursor: pointer; transition: all .12s ease; }
+	.scope-chip.active { background: rgb(var(--tw-primary) / 0.12); border-color: rgb(var(--tw-primary) / 0.4); color: var(--color-primary); }
+	.scope-chip:hover { border-color: var(--color-border-strong); }
+	.new-key-box { background: var(--color-background); border: 1px solid var(--color-border-strong); border-radius: var(--radius-lg); padding: 1rem; position: relative; overflow: hidden; }
+	.new-key-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background-image: linear-gradient(90deg, #F59E0B, #F43F5E); }
+</style>
+</head>
+<body data-page="api-keys">
+<div id="page-root">
+
+	<!-- PAGE HEADER -->
+	<div class="page-header">
+		<div>
+			<div class="eyebrow mb-2">Workspace</div>
+			<h1 class="page-title">API Keys</h1>
+			<p class="page-subtitle">Manage credentials for accessing the gateway. Keys inherit your role permissions.</p>
+		</div>
+		<div class="flex gap-2">
+			<button class="btn btn-outline btn-sm"><i data-icon="download" data-size="13"></i> Export</button>
+			<button class="btn btn-ember btn-sm" onclick="togglePanel(true)"><i data-icon="plus"></i> Create key</button>
+		</div>
+	</div>
+
+	<!-- SUMMARY STRIP -->
+	<div class="grid grid-4 mb-4">
+		<div class="stat-card">
+			<div class="stat-icon bg-success/10 text-success"><i data-icon="circle-check" data-size="15"></i></div>
+			<div class="stat-label">Active</div>
+			<div class="stat-value">142</div>
+		</div>
+		<div class="stat-card">
+			<div class="stat-icon bg-amber/10 text-amber"><i data-icon="circle-info" data-size="15"></i></div>
+			<div class="stat-label">Expiring soon</div>
+			<div class="stat-value">8</div>
+		</div>
+		<div class="stat-card">
+			<div class="stat-icon bg-destructive/10 text-destructive"><i data-icon="xmark" data-size="15"></i></div>
+			<div class="stat-label">Revoked</div>
+			<div class="stat-value">6</div>
+		</div>
+		<div class="stat-card">
+			<div class="stat-icon bg-primary/10 text-stat-requests"><i data-icon="chart-line" data-size="15"></i></div>
+			<div class="stat-label">Requests today</div>
+			<div class="stat-value">12.4k</div>
+		</div>
+	</div>
+
+	<!-- FILTER BAR + TABLE -->
+	<div class="card" style="overflow:hidden;">
+		<div class="card-body-compact" style="border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:.5rem; padding:.625rem .75rem;">
+			<div class="input" style="display:flex;align-items:center;gap:.5rem;height:30px;max-width:280px;padding:0 .5rem;">
+				<i data-icon="magnifying-glass" data-size="13" class="text-muted-foreground"></i>
+				<input placeholder="Filter by name or key…" style="background:transparent;border:none;outline:none;color:inherit;font-size:12.5px;flex:1;height:100%;" />
+			</div>
+			<button class="btn btn-outline btn-sm"><i data-icon="filter" data-size="13"></i> Status: All <i data-icon="chevron-down" data-size="11"></i></button>
+			<button class="btn btn-outline btn-sm"><i data-icon="sort" data-size="13"></i> Sort: Created <i data-icon="chevron-down" data-size="11"></i></button>
+			<div class="topbar-spacer"></div>
+			<span class="text-xs text-muted-foreground font-mono">156 keys</span>
+		</div>
+
+		<div style="overflow-x:auto;">
+		<table class="table">
+			<thead>
+				<tr>
+					<th style="width:28px;"><input type="checkbox" /></th>
+					<th>Name</th>
+					<th>Key</th>
+					<th>Status</th>
+					<th>Scopes</th>
+					<th>Last used</th>
+					<th>Requests</th>
+					<th style="width:80px;"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>
+						<div class="flex items-center gap-2"><i data-icon="key" data-size="13" class="text-muted-foreground"></i><div><div class="font-medium">Production · Web</div><div class="text-xs text-subtle">created Jul 2</div></div></div>
+					</td>
+					<td><code class="cell-mono">sk-aigw-9f2e••••4c1b</code> <button class="btn btn-ghost btn-icon" style="width:22px;height:22px;"><i data-icon="copy" data-size="11"></i></button></td>
+					<td><span class="badge badge-success badge-dot">Active</span></td>
+					<td><span class="badge badge-muted">chat</span> <span class="badge badge-muted">models</span></td>
+					<td class="cell-subtle">2 min ago</td>
+					<td class="cell-mono">48,201</td>
+					<td><button class="btn btn-ghost btn-icon btn-sm"><i data-icon="dots"></i></button></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>
+						<div class="flex items-center gap-2"><i data-icon="key" data-size="13" class="text-muted-foreground"></i><div><div class="font-medium">Staging · CI pipeline</div><div class="text-xs text-subtle">created Jun 18</div></div></div>
+					</td>
+					<td><code class="cell-mono">sk-aigw-3b7c••••9a02</code> <button class="btn btn-ghost btn-icon" style="width:22px;height:22px;"><i data-icon="copy" data-size="11"></i></button></td>
+					<td><span class="badge badge-amber">Rate-limited</span></td>
+					<td><span class="badge badge-muted">chat</span></td>
+					<td class="cell-subtle">1 hour ago</td>
+					<td class="cell-mono">1,402</td>
+					<td><button class="btn btn-ghost btn-icon btn-sm"><i data-icon="dots"></i></button></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>
+						<div class="flex items-center gap-2"><i data-icon="key" data-size="13" class="text-muted-foreground"></i><div><div class="font-medium">Mobile app · iOS</div><div class="text-xs text-subtle">created May 30</div></div></div>
+					</td>
+					<td><code class="cell-mono">sk-aigw-7d1f••••2e5c</code> <button class="btn btn-ghost btn-icon" style="width:22px;height:22px;"><i data-icon="copy" data-size="11"></i></button></td>
+					<td><span class="badge badge-success badge-dot">Active</span></td>
+					<td><span class="badge badge-muted">chat</span> <span class="badge badge-muted">vision</span></td>
+					<td class="cell-subtle">3 hours ago</td>
+					<td class="cell-mono">22,889</td>
+					<td><button class="btn btn-ghost btn-icon btn-sm"><i data-icon="dots"></i></button></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>
+						<div class="flex items-center gap-2"><i data-icon="key" data-size="13" class="text-muted-foreground"></i><div><div class="font-medium">Analytics export</div><div class="text-xs text-subtle">created Apr 12</div></div></div>
+					</td>
+					<td><code class="cell-mono">sk-aigw-5a8e••••1f3d</code> <button class="btn btn-ghost btn-icon" style="width:22px;height:22px;"><i data-icon="copy" data-size="11"></i></button></td>
+					<td><span class="badge badge-success badge-dot">Active</span></td>
+					<td><span class="badge badge-muted">read</span></td>
+					<td class="cell-subtle">yesterday</td>
+					<td class="cell-mono">3,144</td>
+					<td><button class="btn btn-ghost btn-icon btn-sm"><i data-icon="dots"></i></button></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>
+						<div class="flex items-center gap-2"><i data-icon="key" data-size="13" class="text-muted-foreground"></i><div><div class="font-medium text-muted-foreground">Legacy · Webhooks</div><div class="text-xs text-subtle">created Jan 5</div></div></div>
+					</td>
+					<td><code class="cell-mono text-subtle">sk-aigw-2c4b••••8a91</code> <button class="btn btn-ghost btn-icon" style="width:22px;height:22px;"><i data-icon="copy" data-size="11"></i></button></td>
+					<td><span class="badge badge-destructive">Revoked</span></td>
+					<td><span class="badge badge-muted">—</span></td>
+					<td class="cell-subtle">3 months ago</td>
+					<td class="cell-mono cell-subtle">0</td>
+					<td><button class="btn btn-ghost btn-icon btn-sm"><i data-icon="dots"></i></button></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>
+						<div class="flex items-center gap-2"><i data-icon="key" data-size="13" class="text-muted-foreground"></i><div><div class="font-medium">Dev · Local testing</div><div class="text-xs text-subtle">created Jul 19</div></div></div>
+					</td>
+					<td><code class="cell-mono">sk-aigw-8e2a••••5b7f</code> <button class="btn btn-ghost btn-icon" style="width:22px;height:22px;"><i data-icon="copy" data-size="11"></i></button></td>
+					<td><span class="badge badge-success badge-dot">Active</span></td>
+					<td><span class="badge badge-muted">chat</span> <span class="badge badge-muted">admin</span></td>
+					<td class="cell-subtle">5 min ago</td>
+					<td class="cell-mono">812</td>
+					<td><button class="btn btn-ghost btn-icon btn-sm"><i data-icon="dots"></i></button></td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+
+		<!-- pagination -->
+		<div class="card-body-compact flex items-center justify-between" style="border-top:1px solid var(--color-border);">
+			<span class="text-xs text-muted-foreground">Showing 1–6 of 156</span>
+			<div class="flex gap-2">
+				<button class="btn btn-outline btn-sm" disabled><i data-icon="chevron-left" data-size="13"></i> Prev</button>
+				<button class="btn btn-outline btn-sm">Next <i data-icon="chevron-right" data-size="13"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- CREATE KEY PANEL -->
+<div class="create-overlay" id="overlay" onclick="togglePanel(false)"></div>
+<aside class="create-panel" id="panel">
+	<div class="card-header flex items-center justify-between">
+		<div>
+			<div class="card-title">Create API key</div>
+			<div class="card-description">Keys are shown once — store securely.</div>
+		</div>
+		<button class="btn btn-ghost btn-icon btn-sm" onclick="togglePanel(false)"><i data-icon="xmark"></i></button>
+	</div>
+	<div class="card-body" style="flex:1; overflow-y:auto;">
+		<div class="stack">
+			<div>
+				<label class="field-label">Name</label>
+				<input class="input" placeholder="e.g. Production · Web" value="Production · API" />
+			</div>
+			<div>
+				<label class="field-label">Description <span class="text-subtle">(optional)</span></label>
+				<textarea class="textarea" rows="2" placeholder="What is this key used for?"></textarea>
+			</div>
+			<div>
+				<label class="field-label">Scopes</label>
+				<div class="flex gap-2" style="flex-wrap:wrap;">
+					<span class="scope-chip active">chat</span>
+					<span class="scope-chip active">models</span>
+					<span class="scope-chip">vision</span>
+					<span class="scope-chip">embeddings</span>
+					<span class="scope-chip">admin</span>
+					<span class="scope-chip">read</span>
+				</div>
+			</div>
+			<div>
+				<label class="field-label">Expiration</label>
+				<div class="input" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;height:32px;">
+					<span class="text-sm">90 days <span class="text-subtle">(Oct 20, 2026)</span></span>
+					<i data-icon="chevron-down" data-size="14" class="text-muted-foreground"></i>
+				</div>
+			</div>
+			<div>
+				<label class="field-label">Rate limit <span class="text-subtle">(req/min)</span></label>
+				<div class="flex items-center gap-3">
+					<input type="range" min="10" max="1000" value="100" style="flex:1;accent-color:var(--color-primary);" />
+					<span class="font-mono text-sm" style="width:50px;text-align:right;">100</span>
+				</div>
+			</div>
+
+			<!-- success state preview -->
+			<div class="new-key-box mt-3">
+				<div class="flex items-center gap-2 mb-2">
+					<i data-icon="circle-check" data-size="15" class="text-success"></i>
+					<span class="text-sm font-semibold">Key created</span>
+				</div>
+				<div class="flex items-center gap-2">
+					<code class="font-mono text-xs flex-1" style="background:var(--color-muted);padding:.5rem .625rem;border-radius:var(--radius-sm);display:block;">sk-aigw-9f2e4c1b8a7d3e5f</code>
+					<button class="btn btn-outline btn-sm"><i data-icon="copy" data-size="13"></i></button>
+				</div>
+				<div class="text-xs text-amber mt-2 flex items-center gap-1"><i data-icon="triangle-exclamation" data-size="12"></i> Copy now — it won't be shown again.</div>
+			</div>
+		</div>
+	</div>
+	<div class="card-footer flex justify-between">
+		<button class="btn btn-ghost btn-sm" onclick="togglePanel(false)">Cancel</button>
+		<button class="btn btn-ember btn-sm"><i data-icon="check"></i> Create key</button>
+	</div>
+</aside>
+
+<script src="icons.js"></script>
+<script src="_shell.js"></script>
+<script>
+	EmberShell.mount();
+	function togglePanel(open) {
+		document.getElementById('panel').classList.toggle('open', open);
+		document.getElementById('overlay').classList.toggle('open', open);
+	}
+</script>
+</body>
+</html>

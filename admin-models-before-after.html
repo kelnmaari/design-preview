@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" class="ember">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ember · Before / After — Tokenization</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+	.wrap { max-width: 1280px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+	.head { margin-bottom: 2rem; }
+	.cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+	@media (max-width: 980px) { .cmp { grid-template-columns: 1fr; } }
+	.panel-label { display:flex; align-items:center; gap:.5rem; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; margin-bottom:.75rem; }
+	.panel-label .tag { padding:2px 7px; border-radius:9999px; font-size:10px; }
+	.panel-label.before .tag { background: rgb(var(--tw-destructive) / .15); color: var(--color-destructive); }
+	.panel-label.after .tag { background: rgb(var(--tw-success) / .15); color: var(--color-success); }
+
+	/* ============ THE "BEFORE" — hardcoded, theme-blind ============ */
+	/* This mirrors the actual dirty code in web-svelte: phantom CSS vars that */
+	/* don't exist (--card-bg, --color-blue) + JS color maps + hardcoded hex.  */
+	.before-card {
+		background: var(--card-bg, #ffffff);
+		border: 1px solid var(--border-color, #e0e0e0);
+		border-radius: 10px;
+		padding: 1rem;
+		color: var(--text-primary, #1a1a1a);
+	}
+	.before-card .before-title { color: var(--text-primary, #1a1a1a); font-weight: 600; font-size: 14px; margin-bottom: .5rem; }
+	.before-card .before-sub { color: var(--text-secondary, #666666); font-size: 12px; margin-bottom: .75rem; }
+	.before-card .before-row { display:flex; justify-content:space-between; padding:.4rem 0; border-bottom: 1px solid #f0f0f0; }
+	.before-card .before-row span:first-child { color: #555; font-size: 12px; }
+	.before-card .before-row span:last-child { font-family: monospace; font-size: 12px; color: #333; }
+	.before-status { display:inline-block; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:600; }
+	.before-status.healthy { background: #dcfce7; color: #166534; }
+	.before-status.loading { background: #fef3c7; color: #92400e; }
+	.before-status.error { background: #fee2e2; color: #991b1b; }
+	.before-bar { height:6px; background:#e5e7eb; border-radius:3px; overflow:hidden; }
+	.before-bar > div { height:100%; background: #3b82f6; }
+	.before-btn { background: var(--color-blue, #3b82f6); color: #fff; border:none; padding:6px 12px; border-radius:6px; font-size:12px; cursor:pointer; }
+
+	/* annotation callouts */
+	.anno { list-style:none; padding:0; margin-top:1rem; font-size:11.5px; }
+	.anno li { display:flex; gap:.5rem; padding:.35rem 0; border-top:1px dashed var(--color-border); color: var(--color-muted-foreground); }
+	.anno li i { color: var(--color-destructive); flex:none; margin-top:1px; }
+	.anno.after li i { color: var(--color-success); }
+	code.snip { font-family: var(--font-mono); font-size:10.5px; background: var(--color-muted); padding:1px 5px; border-radius:4px; color: var(--color-foreground); }
+</style>
+</head>
+<body>
+<div class="wrap">
+	<!-- HEAD -->
+	<div class="head">
+		<div class="eyebrow mb-2">Case Study · The "dirty zone"</div>
+		<h1 class="page-title">Before & After — tokenizing hardcoded components</h1>
+		<p class="page-subtitle" style="max-width:70ch;">7 files in <code class="snip">web-svelte</code> bypass the token system with hardcoded hex and phantom CSS variables (<code class="snip">--card-bg</code>, <code class="snip">--color-blue</code>) that don't exist — so they render fixed light colors and <strong>break in dark mode</strong>. This page proves the Ember tokens fix it.</p>
+	</div>
+
+	<div class="cmp">
+		<!-- ====================== BEFORE ====================== -->
+		<div>
+			<div class="panel-label before">
+				<span class="tag">BEFORE</span>
+				<span>Hardcoded · theme-blind · the current dirty code</span>
+			</div>
+			<!-- The component as it renders today: fixed white bg, won't adapt to dark -->
+			<div class="before-card">
+				<div class="before-title">Model · llama-3.1-70b</div>
+				<div class="before-sub">Loaded on worker-02 · 48GB VRAM</div>
+				<div class="before-row"><span>Status</span><span><span class="before-status healthy">HEALTHY</span></span></div>
+				<div class="before-row"><span>Load progress</span><span style="color:#333">72%</span></div>
+				<div class="before-bar" style="margin:.4rem 0 .6rem;"><div style="width:72%"></div></div>
+				<div class="before-row"><span>Queue depth</span><span>4</span></div>
+				<div class="before-row"><span>Latency p50</span><span>140ms</span></div>
+				<button class="before-btn">Restart model</button>
+			</div>
+
+			<ul class="anno">
+				<li><i data-icon="xmark" data-size="13"></i> <span><code class="snip">var(--card-bg, #ffffff)</code> — token doesn't exist; falls back to <code class="snip">#ffffff</code> always.</span></li>
+				<li><i data-icon="xmark" data-size="13"></i> <span><code class="snip">#e0e0e0</code> / <code class="snip">#f0f0f0</code> borders — invisible-on-dark, no contrast.</span></li>
+				<li><i data-icon="xmark" data-size="13"></i> <span><code class="snip">#1a1a1a</code> / <code class="snip">#666</code> text — black on near-black bg in dark mode.</span></li>
+				<li><i data-icon="xmark" data-size="13"></i> <span><code class="snip">#3b82f6</code> blue — wrong accent; doesn't match the indigo/rose system.</span></li>
+				<li><i data-icon="xmark" data-size="13"></i> <span>Status pills <code class="snip">#dcfce7/#fef3c7/#fee2e2</code> — Tailwind-100 tints, blown-out on dark.</span></li>
+				<li><i data-icon="xmark" data-size="13"></i> <span>JS color map <code class="snip">C = {gray, red, yellow...}</code> — separate per file, mutually inconsistent.</span></li>
+			</ul>
+		</div>
+
+		<!-- ====================== AFTER ====================== -->
+		<div>
+			<div class="panel-label after">
+				<span class="tag">AFTER</span>
+				<span>Tokenized · theme-aware · Ember system</span>
+			</div>
+			<!-- Same component rebuilt with semantic tokens -->
+			<div class="card">
+				<div class="card-header">
+					<div class="flex items-center justify-between">
+						<div class="flex items-center gap-2"><i data-icon="microchip" data-size="15" class="text-primary"></i><span class="card-title">Model · llama-3.1-70b</span></div>
+						<span class="badge badge-success badge-dot">Healthy</span>
+					</div>
+					<div class="card-description">Loaded on worker-02 · 48GB VRAM</div>
+				</div>
+				<div class="card-body-compact">
+					<div class="flex items-center justify-between py-2" style="border-bottom:1px solid var(--color-border);">
+						<span class="text-xs text-muted-foreground">Load progress</span>
+						<span class="font-mono text-xs">72%</span>
+					</div>
+					<div class="progress mt-2 mb-3"><div class="progress-bar ember" style="width:72%"></div></div>
+					<div class="flex items-center justify-between py-2" style="border-bottom:1px solid var(--color-border);">
+						<span class="text-xs text-muted-foreground">Queue depth</span>
+						<span class="font-mono text-xs">4</span>
+					</div>
+					<div class="flex items-center justify-between py-2">
+						<span class="text-xs text-muted-foreground">Latency p50</span>
+						<span class="font-mono text-xs text-success">140ms</span>
+					</div>
+				</div>
+				<div class="card-footer flex justify-between">
+					<button class="btn btn-ghost btn-sm"><i data-icon="chart-line" data-size="13"></i> Metrics</button>
+					<button class="btn btn-outline btn-sm"><i data-icon="refresh" data-size="13"></i> Restart model</button>
+				</div>
+			</div>
+
+			<ul class="anno after">
+				<li><i data-icon="check" data-size="13"></i> <span>BG uses <code class="snip">var(--color-card)</code> — adapts to light/dark automatically.</span></li>
+				<li><i data-icon="check" data-size="13"></i> <span>Borders use <code class="snip">--color-border</code> — visible in both themes.</span></li>
+				<li><i data-icon="check" data-size="13"></i> <span>Text uses <code class="snip">--color-foreground</code> / <code class="snip">--color-muted-foreground</code>.</span></li>
+				<li><i data-icon="check" data-size="13"></i> <span>Accent is the Ember gradient <code class="snip">.progress-bar.ember</code> — on-brand.</span></li>
+				<li><i data-icon="check" data-size="13"></i> <span>Status uses <code class="snip">.badge-success</code> token — correct contrast in dark.</span></li>
+				<li><i data-icon="check" data-size="13"></i> <span>Built from the shared <code class="snip">Card</code> primitive — no scoped <code class="snip">&lt;style&gt;</code> duplication.</span></li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- DIFF SUMMARY -->
+	<div class="card mt-4">
+		<div class="card-header"><div class="card-title">What changes in the code</div></div>
+		<div class="card-body">
+			<div class="grid grid-2 gap-3">
+				<div>
+					<div class="panel-label before" style="margin-bottom:.5rem;"><span class="tag">REMOVED</span></div>
+					<pre style="font-family:var(--font-mono);font-size:11.5px;background:var(--color-background);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:.75rem;overflow-x:auto;color:var(--color-muted-foreground);line-height:1.7;">/* phantom vars + hex — deleted */
+background: var(--card-bg, #ffffff);
+border: 1px solid var(--border-color, #e0e0e0);
+color: var(--text-primary, #1a1a1a);
+background: var(--color-blue, #3b82f6);
+const C = { gray:'#6b7280', red:'#ef4444', ... };
+box-shadow: 0 4px 20px rgba(0,0,0,0.15);</pre>
+				</div>
+				<div>
+					<div class="panel-label after" style="margin-bottom:.5rem;"><span class="tag">ADDED</span></div>
+					<pre style="font-family:var(--font-mono);font-size:11.5px;background:var(--color-background);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:.75rem;overflow-x:auto;color:var(--color-foreground);line-height:1.7;">/* semantic tokens — theme-aware */
+&lt;div class="card"&gt;            /* var(--color-card) */
+border-border              /* var(--color-border) */
+text-foreground            /* var(--color-foreground) */
+text-muted-foreground
+.progress-bar.ember        /* brand gradient */
+.badge-success             /* var(--tw-success) */
+/* Card primitive — no scoped CSS */</pre>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="text-center mt-4">
+		<a href="tokens.html" class="btn btn-outline btn-sm">← Back to tokens</a>
+	</div>
+</div>
+
+<script src="icons.js"></script>
+</body>
+</html>

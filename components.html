@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" class="ember">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ember · Components</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+	.wrap { max-width: 1200px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+	.head { display:flex; align-items:center; justify-content:space-between; margin-bottom: 2rem; }
+	.head h1 { font-size: 1.5rem; font-weight: 700; }
+	.back { font-size: 12.5px; color: var(--color-muted-foreground); }
+	.back:hover { color: var(--color-foreground); }
+	.block { margin-bottom: 2.5rem; }
+	.block-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--color-muted-foreground); margin-bottom: 1rem; display:flex; align-items:center; gap:.5rem; }
+	.block-title::after { content:''; flex:1; height:1px; background: var(--color-border); }
+	.row { display:flex; align-items:center; gap: .75rem; flex-wrap: wrap; }
+	.stack { display:flex; flex-direction:column; gap: .75rem; }
+	.demo-card { padding: 1.25rem; border: 1px dashed var(--color-border); border-radius: var(--radius-lg); }
+	.label { font-size: 11px; color: var(--color-subtle); font-family: var(--font-mono); margin-bottom: .4rem; }
+	.modal-demo { position: relative; height: 360px; display:grid; place-items:center; background: var(--color-background); border-radius: var(--radius-lg); overflow:hidden; }
+	.modal-overlay { position:absolute; inset:0; background: rgba(0,0,0,.6); backdrop-filter: blur(2px); }
+	.modal { position:relative; width: 380px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+	<div class="head">
+		<div>
+			<h1>Components</h1>
+			<p class="text-sm text-muted-foreground">Building blocks shared across all pages. Every value comes from a token.</p>
+		</div>
+		<a href="tokens.html" class="back">← Tokens</a>
+	</div>
+
+	<!-- BUTTONS -->
+	<div class="block">
+		<div class="block-title">Buttons</div>
+		<div class="stack">
+			<div>
+				<div class="label">Variants · default size (32px)</div>
+				<div class="row">
+					<button class="btn btn-primary"><i data-icon="plus"></i> Primary</button>
+					<button class="btn btn-ember"><i data-icon="bolt"></i> Ember CTA</button>
+					<button class="btn btn-secondary">Secondary</button>
+					<button class="btn btn-outline">Outline</button>
+					<button class="btn btn-ghost">Ghost</button>
+					<button class="btn btn-destructive"><i data-icon="trash"></i> Destructive</button>
+					<button class="btn btn-primary" disabled>Disabled</button>
+				</div>
+			</div>
+			<div>
+				<div class="label">Sizes · sm (28) / default (32) / lg (38)</div>
+				<div class="row">
+					<button class="btn btn-primary btn-sm">Small</button>
+					<button class="btn btn-primary">Default</button>
+					<button class="btn btn-primary btn-lg">Large</button>
+					<button class="btn btn-outline btn-icon btn-sm"><i data-icon="pencil"></i></button>
+					<button class="btn btn-outline btn-icon"><i data-icon="copy"></i></button>
+					<button class="btn btn-ghost btn-icon"><i data-icon="dots"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- BADGES -->
+	<div class="block">
+		<div class="block-title">Badges & Status</div>
+		<div class="row">
+			<span class="badge badge-primary"><i data-icon="bolt" data-size="11"></i> Active</span>
+			<span class="badge badge-success badge-dot">Online</span>
+			<span class="badge badge-amber">Experimental</span>
+			<span class="badge badge-info">Streaming</span>
+			<span class="badge badge-destructive">Deprecated</span>
+			<span class="badge badge-muted">Draft</span>
+			<span class="badge badge-primary badge-dot">v7.0.0</span>
+		</div>
+		<div class="row mt-3">
+			<span class="badge badge-muted">role: member</span>
+			<span class="badge badge-amber">role: maintainer</span>
+			<span class="badge badge-primary">role: admin</span>
+		</div>
+	</div>
+
+	<!-- STAT CARD -->
+	<div class="block">
+		<div class="block-title">Stat Card (dense)</div>
+		<div class="grid grid-4">
+			<div class="stat-card">
+				<div class="stat-icon bg-amber/10 text-stat-conversations"><i data-icon="comments" data-size="15"></i></div>
+				<div class="stat-label">Conversations</div>
+				<div class="stat-value">2,418</div>
+				<div class="stat-delta text-success"><i data-icon="arrow-up" data-size="10"></i> 12.4% wk</div>
+			</div>
+			<div class="stat-card">
+				<div class="stat-icon bg-primary/10 text-stat-apikeys"><i data-icon="key" data-size="15"></i></div>
+				<div class="stat-label">API Keys</div>
+				<div class="stat-value">156</div>
+				<div class="stat-delta text-success"><i data-icon="arrow-up" data-size="10"></i> 3 new</div>
+			</div>
+			<div class="stat-card">
+				<div class="stat-icon bg-primary/10 text-stat-models"><i data-icon="microchip" data-size="15"></i></div>
+				<div class="stat-label">Models</div>
+				<div class="stat-value">42</div>
+				<div class="stat-delta text-muted-foreground">— unchanged</div>
+			</div>
+			<div class="stat-card">
+				<div class="stat-icon bg-amber/10 text-stat-requests"><i data-icon="chart-line" data-size="15"></i></div>
+				<div class="stat-label">Requests</div>
+				<div class="stat-value">84.2k</div>
+				<div class="stat-delta text-destructive"><i data-icon="arrow-down" data-size="10"></i> 2.1% wk</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- INPUTS -->
+	<div class="block">
+		<div class="block-title">Form Controls</div>
+		<div class="grid grid-3">
+			<div>
+				<label class="field-label">Model name</label>
+				<input class="input" placeholder="gpt-4o-mini" />
+				<div class="field-hint">Lowercase, hyphenated.</div>
+			</div>
+			<div>
+				<label class="field-label">API key (mono)</label>
+				<input class="input input-mono" value="sk-aigw-9f2e••••••••" />
+			</div>
+			<div>
+				<label class="field-label">Status</label>
+				<div class="input" style="display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
+					<span>Active</span>
+					<i data-icon="chevron-down" data-size="14" class="text-muted-foreground"></i>
+				</div>
+			</div>
+			<div style="grid-column: span 2;">
+				<label class="field-label">Description</label>
+				<textarea class="textarea" rows="3" placeholder="Describe this resource…"></textarea>
+			</div>
+			<div>
+				<label class="field-label">With leading icon</label>
+				<div class="input" style="display:flex; align-items:center; gap:.5rem; padding-left:.5rem;">
+					<i data-icon="magnifying-glass" data-size="14" class="text-muted-foreground"></i>
+					<input placeholder="Search models…" style="background:transparent;border:none;outline:none;color:inherit;font-size:13px;flex:1;height:100%;" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- TABLE -->
+	<div class="block">
+		<div class="block-title">Dense Table</div>
+		<div class="card" style="overflow:hidden;">
+			<table class="table">
+				<thead>
+					<tr>
+						<th style="width:28px;"><input type="checkbox" /></th>
+						<th>Name <i data-icon="sort" data-size="10" class="text-subtle"></i></th>
+						<th>Status</th>
+						<th>Requests</th>
+						<th>Created</th>
+						<th style="width:60px;"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input type="checkbox" /></td>
+						<td><span class="font-medium">Production · Web</span></td>
+						<td><span class="badge badge-success badge-dot">Active</span></td>
+						<td class="cell-mono">48,201</td>
+						<td class="cell-subtle">2 days ago</td>
+						<td><button class="btn btn-ghost btn-icon btn-sm"><i data-icon="dots"></i></button></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" /></td>
+						<td><span class="font-medium">Staging · CI</span></td>
+						<td><span class="badge badge-amber">Limited</span></td>
+						<td class="cell-mono">1,402</td>
+						<td class="cell-subtle">1 week ago</td>
+						<td><button class="btn btn-ghost btn-icon btn-sm"><i data-icon="dots"></i></button></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" /></td>
+						<td><span class="font-medium">Legacy · Mobile</span></td>
+						<td><span class="badge badge-destructive">Revoked</span></td>
+						<td class="cell-mono cell-subtle">0</td>
+						<td class="cell-subtle">3 months ago</td>
+						<td><button class="btn btn-ghost btn-icon btn-sm"><i data-icon="dots"></i></button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<!-- PROGRESS -->
+	<div class="block">
+		<div class="block-title">Progress & Meter</div>
+		<div class="grid grid-2 gap-3">
+			<div class="card card-body">
+				<div class="flex justify-between mb-2"><span class="text-sm font-medium">Quota usage</span><span class="font-mono text-xs text-muted-foreground">68%</span></div>
+				<div class="progress"><div class="progress-bar ember" style="width:68%"></div></div>
+			</div>
+			<div class="card card-body">
+				<div class="flex justify-between mb-2"><span class="text-sm font-medium">Health</span><span class="font-mono text-xs text-success">92%</span></div>
+				<div class="progress"><div class="progress-bar success" style="width:92%"></div></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- TABS -->
+	<div class="block">
+		<div class="block-title">Tabs</div>
+		<div class="card card-body">
+			<div class="tabs mb-3">
+				<div class="tab active">Overview</div>
+				<div class="tab">Models <span class="badge badge-muted ml-2">42</span></div>
+				<div class="tab">Requests</div>
+				<div class="tab">Settings</div>
+			</div>
+			<p class="text-sm text-muted-foreground">Active tab gets a primary-colored underline. Inactive tabs fade to muted until hover.</p>
+		</div>
+	</div>
+
+	<!-- AVATAR + META -->
+	<div class="block">
+		<div class="block-title">Identity</div>
+		<div class="row">
+			<div class="flex items-center gap-2"><span class="avatar">AK</span><div><div class="text-sm font-medium">Alex Kim</div><div class="text-xs text-muted-foreground">admin · acme</div></div></div>
+			<div class="divider-vertical" style="height:32px;"></div>
+			<div class="flex items-center gap-2"><span class="avatar" style="background-image:linear-gradient(135deg,#10B981,#22D3EE)">JN</span><div><div class="text-sm font-medium">Jordan Ng</div><div class="text-xs text-muted-foreground">member</div></div></div>
+		</div>
+	</div>
+
+	<!-- SKELETON + EMPTY -->
+	<div class="block">
+		<div class="block-title">Loading & Empty States</div>
+		<div class="grid grid-2 gap-3">
+			<div class="card card-body">
+				<div class="label">Skeleton</div>
+				<div class="stack">
+					<div class="skeleton" style="height:14px;width:60%"></div>
+					<div class="skeleton" style="height:14px;width:90%"></div>
+					<div class="skeleton" style="height:14px;width:40%"></div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="empty-state">
+					<div class="empty-icon"><i data-icon="key" data-size="20"></i></div>
+					<p class="text-sm">No API keys yet</p>
+					<button class="btn btn-primary btn-sm mt-3"><i data-icon="plus"></i> Create key</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- MODAL DEMO -->
+	<div class="block">
+		<div class="block-title">Modal</div>
+		<div class="modal-demo">
+			<div class="modal-overlay"></div>
+			<div class="modal card">
+				<div class="card-header flex items-center justify-between">
+					<span class="card-title">Revoke API Key</span>
+					<button class="btn btn-ghost btn-icon btn-sm"><i data-icon="xmark"></i></button>
+				</div>
+				<div class="card-body">
+					<p class="text-sm text-muted-foreground">This action cannot be undone. All applications using this key will immediately stop working.</p>
+					<div class="card mt-3" style="background:var(--color-muted); padding:.625rem;">
+						<code class="text-xs">sk-aigw-9f2e4c1b•••</code>
+					</div>
+				</div>
+				<div class="card-footer flex justify-between">
+					<button class="btn btn-ghost btn-sm">Cancel</button>
+					<button class="btn btn-destructive btn-sm"><i data-icon="trash"></i> Revoke permanently</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- KBD -->
+	<div class="block">
+		<div class="block-title">Keyboard</div>
+		<div class="row">
+			<span class="text-sm text-muted-foreground">Press</span>
+			<kbd>⌘</kbd><kbd>K</kbd>
+			<span class="text-sm text-muted-foreground">to search ·</span>
+			<kbd>⌘</kbd><kbd>/</kbd>
+			<span class="text-sm text-muted-foreground">for shortcuts</span>
+		</div>
+	</div>
+</div>
+
+<script src="icons.js"></script>
+</body>
+</html>
