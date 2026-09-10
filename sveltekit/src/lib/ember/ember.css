@@ -1009,3 +1009,12 @@ i[data-icon]:empty, span[data-icon]:empty { display: inline-block; width: 1em; h
 	.marquee-track { animation: none !important; transform: none !important; will-change: auto; width: auto; max-width: 100%; flex-wrap: wrap; justify-content: center; row-gap: 10px; }
 	.bg-gradient-animated, .text-gradient-animated, .orb { animation: none; }
 }
+/* ---- Forms: error states, required mark, disabled ---- */
+.field-error { font-size: 11px; color: var(--color-destructive); margin-top: .3rem; }
+.field-label-required::after { content: ' *'; color: var(--color-destructive); }
+.input-error, .textarea.input-error, .select.input-error { border-color: var(--color-destructive) !important; }
+.input-error:focus, .textarea.input-error:focus, .select.input-error:focus {
+	border-color: var(--color-destructive) !important;
+	box-shadow: 0 0 0 3px rgb(var(--tw-destructive) / .15);
+}
+.input:disabled, .textarea:disabled { opacity: .55; cursor: not-allowed; }

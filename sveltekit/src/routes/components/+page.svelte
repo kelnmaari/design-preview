@@ -57,6 +57,29 @@
 	<Badge variant="success" dot>SvelteKit</Badge>
 </div>
 
+<div class="grid grid-4 gap-3 mb-4" use:reveal>
+	<a href="/components/forms" class="card card-body sub-gallery">
+		<div class="sub-gallery-icon"><Icon name="pencil" size={16} /></div>
+		<div class="text-sm font-semibold">Forms</div>
+		<div class="text-xs text-subtle">Field · Select · Checkbox · Radio · Slider · InputGroup · Dropzone</div>
+	</a>
+	<a href="/components/data" class="card card-body sub-gallery">
+		<div class="sub-gallery-icon"><Icon name="chart-bar" size={16} /></div>
+		<div class="text-sm font-semibold">Data</div>
+		<div class="text-xs text-subtle">DataTable · ListGroup · Timeline · Presence</div>
+	</a>
+	<a href="/components/overlays" class="card card-body sub-gallery">
+		<div class="sub-gallery-icon"><Icon name="layers" size={16} /></div>
+		<div class="text-sm font-semibold">Overlays</div>
+		<div class="text-xs text-subtle">Alert · Tooltip · Popover · Confirm · Toasts · States</div>
+	</a>
+	<a href="/components/content" class="card card-body sub-gallery">
+		<div class="sub-gallery-icon"><Icon name="comments" size={16} /></div>
+		<div class="text-sm font-semibold">Content</div>
+		<div class="text-xs text-subtle">Headers · Breadcrumb · Stepper · Accordion · Chat</div>
+	</a>
+</div>
+
 <div class="block" use:reveal>
 	<div class="block-title">Buttons</div>
 	<div class="row">
@@ -300,4 +323,16 @@
 	.block-title::after { content: ''; flex: 1; height: 1px; background: var(--color-border); }
 	.row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
 	.label { font-size: 11px; color: var(--color-subtle); font-family: var(--font-mono); margin-bottom: 0.4rem; }
+	.sub-gallery { text-decoration: none; transition: transform var(--dur-fast) ease, border-color var(--dur-fast) ease; }
+	.sub-gallery:hover { transform: translateY(-2px); border-color: var(--color-border-strong); }
+	.sub-gallery-icon {
+		display: inline-grid;
+		place-items: center;
+		width: 32px;
+		height: 32px;
+		border-radius: 8px;
+		background: rgb(var(--tw-primary) / 0.1);
+		color: var(--color-primary);
+		margin-bottom: 0.6rem;
+	}
 </style>

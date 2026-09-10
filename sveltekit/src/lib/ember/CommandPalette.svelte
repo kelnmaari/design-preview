@@ -27,6 +27,10 @@
 		{ group: 'Pages', label: 'Users', hint: 'admin', icon: 'users', href: '/users' },
 		{ group: 'Pages', label: 'Design Tokens', hint: 'system', icon: 'fire', href: '/tokens' },
 		{ group: 'Pages', label: 'Components', hint: 'library', icon: 'cube', href: '/components' },
+		{ group: 'Pages', label: 'Forms', hint: 'components', icon: 'pencil', href: '/components/forms' },
+		{ group: 'Pages', label: 'Data', hint: 'components', icon: 'chart-bar', href: '/components/data' },
+		{ group: 'Pages', label: 'Overlays', hint: 'components', icon: 'layers', href: '/components/overlays' },
+		{ group: 'Pages', label: 'Content', hint: 'components', icon: 'comments', href: '/components/content' },
 		{ group: 'Pages', label: 'Patterns', hint: 'guide', icon: 'layers', href: '/patterns' },
 		{ group: 'Pages', label: 'Tailwind', hint: 'utilities', icon: 'sparkles', href: '/tailwind' },
 		{ group: 'Actions', label: 'Toggle theme', hint: 'dark / light', icon: 'sun', action: 'theme' }

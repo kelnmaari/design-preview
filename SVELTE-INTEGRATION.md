@@ -127,6 +127,9 @@ Class ↔ component map:
 | copy buttons | `CopyButton.svelte` | clipboard + toast built in |
 | app shell | `Shell.svelte` | sidebar + topbar + mobile nav |
 
+> **Building with agents?** Hand them `sveltekit/src/lib/ember/AGENTS.md` —
+> the catalog, tokens, copy-paste recipes and rules (57 components).
+
 Example routes in `sveltekit/src/routes/`: `/` dashboard (bars, sparklines,
 activity), `/chat` (word-by-word streaming, composer, model switcher, RAG panel),
 `/api-keys` (filters, bulk-select, create-key slide-over with one-time reveal),
