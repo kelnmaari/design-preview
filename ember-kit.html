@@ -312,14 +312,18 @@ Duplicate | copy
 
 		<!-- BANNER -->
 		<div class="play reveal" data-play="banner" id="play-banner">
-			<div class="play-head"><div><h3><i data-icon="circle-info" data-size="14"></i> Banner</h3><p class="play-sub">Full-width announcements · ember gradient or ghost.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-head"><div><h3><i data-icon="circle-info" data-size="14"></i> Banner</h3><p class="play-sub">6 colorways + custom gradient builder with angle control.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
 			<div class="play-grid">
 				<div class="stage block" data-stage></div>
 				<div class="knobs">
-					<div class="knob"><label class="knob-label">Tone</label><select class="input" data-k="tone"><option value="ember" selected>ember · gradient</option><option value="ghost">ghost · subtle</option></select></div>
 					<div class="knob"><label class="knob-label">Title</label><input class="input" data-k="title" value="Staging keys rotate on Friday" /></div>
 					<div class="knob"><label class="knob-label">Text</label><input class="input" data-k="text" value="3 keys affected — no action needed for production." /></div>
 					<div class="knob"><label class="knob-label">Button</label><input class="input" data-k="btn" value="Details" /></div>
+					<div class="knob"><label class="knob-label">Tone</label><select class="input" data-k="tone"><option value="ember" selected>ember · signature</option><option value="ocean">ocean · sky → blue</option><option value="grape">grape · violet → pink</option><option value="forest">forest · mint → emerald</option><option value="amber">amber · warning</option><option value="ghost">ghost · subtle</option><option value="custom">custom · gradient builder ↓</option></select></div>
+					<div class="knob"><label class="knob-label">Icon</label><select class="input" data-k="icon" data-icon-list data-icon-auto data-icon-value="auto"></select></div>
+					<div class="knob" data-show-if="tone=custom"><label class="knob-label">From</label><input type="color" class="colorwell" data-k="colorA" value="#38BDF8" /></div>
+					<div class="knob" data-show-if="tone=custom"><label class="knob-label">To</label><input type="color" class="colorwell" data-k="colorB" value="#2563EB" /></div>
+					<div class="knob" data-show-if="tone=custom"><label class="knob-label">Angle · <span class="knob-val" data-val="angle">135</span>°</label><input type="range" class="range" data-k="angle" min="0" max="360" value="135" /></div>
 				</div>
 			</div>
 			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
@@ -599,7 +603,9 @@ const ICONS = ['grid','home','gauge','comments','key','cube','microchip','chart-
 
 $$('select[data-icon-list]').forEach((sel) => {
 	const cur = sel.getAttribute('data-icon-value') || 'none';
-	let html = '<option value="none">none</option>';
+	let html = '';
+	if (sel.hasAttribute('data-icon-auto')) html += '<option value="auto">auto (tone default)</option>';
+	html += '<option value="none">none</option>';
 	ICONS.forEach((n) => { html += '<option value="' + n + '"' + (n === cur ? ' selected' : '') + '>' + n + '</option>'; });
 	sel.innerHTML = html;
 });
@@ -610,6 +616,13 @@ const GRADS = {
 	sea: 'linear-gradient(135deg,#10B981,#22D3EE)',
 	grape: 'linear-gradient(135deg,#8B5CF6,#EC4899)',
 	steel: 'linear-gradient(135deg,#64748B,#334155)'
+};
+
+const BANNER_TONES = {
+	ocean: { css: 'linear-gradient(135deg,#38BDF8,#2563EB)', icon: 'globe' },
+	grape: { css: 'linear-gradient(135deg,#A78BFA,#EC4899)', icon: 'sparkles' },
+	forest: { css: 'linear-gradient(135deg,#34D399,#059669)', icon: 'shield' },
+	amber: { css: 'linear-gradient(135deg,#FBBF24,#EA580C)', icon: 'bell' }
 };
 
 function badgeForStatus(st) {
@@ -740,14 +753,33 @@ const PLAYS = {
 	},
 	banner: {
 		render(s) {
-			const ember = s.tone === 'ember';
-			return '<div class="banner banner-' + s.tone + (ember ? ' noise' : '') + '">' +
-				'<div class="banner-icon"><i data-icon="' + (ember ? 'wand-sparkles' : 'circle-info') + '" data-size="17"></i></div>' +
-				'<div class="flex-1"><div class="text-sm ' + (ember ? 'font-semibold' : 'font-medium') + '">' + esc(s.title) + '</div>' +
-				'<div class="text-xs ' + (ember ? 'banner-sub' : 'text-muted-foreground') + '">' + esc(s.text) + '</div></div>' +
-				(s.btn.trim() ? (ember
-					? '<button class="btn btn-sm" style="background:#fff;color:#1a1a1f;">' + esc(s.btn) + '</button>'
-					: '<button class="btn btn-outline btn-sm">' + esc(s.btn) + '</button>') : '') + '</div>';
+			const pickIcon = (def) => (!s.icon || s.icon === 'auto') ? def : (s.icon === 'none' ? null : s.icon);
+			if (s.tone === 'ghost') {
+				const ic = pickIcon('circle-info');
+				return '<div class="banner banner-ghost">' +
+					(ic ? '<div class="banner-icon"><i data-icon="' + ic + '" data-size="17"></i></div>' : '') +
+					'<div class="flex-1"><div class="text-sm font-medium">' + esc(s.title) + '</div>' +
+					'<div class="text-xs text-muted-foreground">' + esc(s.text) + '</div></div>' +
+					(s.btn.trim() ? '<button class="btn btn-outline btn-sm">' + esc(s.btn) + '</button>' : '') + '</div>';
+			}
+			if (s.tone === 'ember') {
+				const ic = pickIcon('wand-sparkles');
+				return '<div class="banner banner-ember noise">' +
+					(ic ? '<div class="banner-icon"><i data-icon="' + ic + '" data-size="17"></i></div>' : '') +
+					'<div class="flex-1"><div class="text-sm font-semibold">' + esc(s.title) + '</div>' +
+					'<div class="text-xs banner-sub">' + esc(s.text) + '</div></div>' +
+					(s.btn.trim() ? '<button class="btn btn-sm" style="background:#fff;color:#1a1a1f;">' + esc(s.btn) + '</button>' : '') + '</div>';
+			}
+			const T = BANNER_TONES[s.tone] || BANNER_TONES.ocean;
+			const grad = s.tone === 'custom'
+				? 'linear-gradient(' + Math.round(s.angle) + 'deg,' + s.colorA + ',' + s.colorB + ')'
+				: T.css;
+			const ic = pickIcon(s.tone === 'custom' ? 'wand-sparkles' : T.icon);
+			return '<div class="banner noise" style="background-image:' + grad + ';color:#fff;">' +
+				(ic ? '<div class="banner-icon" style="background:rgb(255 255 255 / 0.18);"><i data-icon="' + ic + '" data-size="17"></i></div>' : '') +
+				'<div class="flex-1"><div class="text-sm font-semibold">' + esc(s.title) + '</div>' +
+				'<div class="text-xs" style="color:rgb(255 255 255 / 0.85);">' + esc(s.text) + '</div></div>' +
+				(s.btn.trim() ? '<button class="btn btn-sm" style="background:#fff;color:#1a1a1f;">' + esc(s.btn) + '</button>' : '') + '</div>';
 		}
 	},
 	stat: {
@@ -886,6 +918,10 @@ function refreshPlay(play) {
 	const code = $('[data-code]', play);
 	if (code) code.textContent = P.code ? P.code(s) : P.render(s);
 	$$('[data-val]', play).forEach((out) => { out.textContent = s[out.getAttribute('data-val')]; });
+	$$('[data-show-if]', play).forEach((el) => {
+		const parts = el.getAttribute('data-show-if').split('=');
+		el.style.display = String(s[parts[0]]) === parts[1] ? '' : 'none';
+	});
 	if (window.__renderIcons) window.__renderIcons();
 	if (P.after) P.after(play, s);
 }
@@ -1100,6 +1136,16 @@ document.addEventListener('click', (e) => {
 });
 
 /* ---------------- boot ---------------- */
+renderTokens();
+renderIconGrid('');
+$$('[data-play]').forEach(refreshPlay);
+$$('[data-stat="icons"], [data-stat="icons2"]').forEach((el) => { el.textContent = ICONS.length; });
+
+})();
+</script>
+</body>
+</html>
+- */
 renderTokens();
 renderIconGrid('');
 $$('[data-play]').forEach(refreshPlay);
