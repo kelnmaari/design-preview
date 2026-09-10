@@ -48,6 +48,8 @@
 	--tw-secondary-foreground: 250 250 250;
 	--tw-success: 16 185 129;           /* #10B981 emerald (NEW) */
 	--tw-info: 34 211 238;              /* #22D3EE cyan (NEW) */
+	--tw-gradient-from: 245 158 11;     /* signature gradient poles */
+	--tw-gradient-to: 244 63 94;
 
 	/* --- Stat colors (harmonized warm) --- */
 	--tw-stat-conversations: 251 191 36;  /* #FBBF24 amber-400 */
@@ -119,6 +121,8 @@
 	--tw-secondary-foreground: 10 10 12;
 	--tw-success: 5 150 105;
 	--tw-info: 6 182 212;
+	--tw-gradient-from: 245 158 11;
+	--tw-gradient-to: 225 29 72;
 
 	--tw-stat-conversations: 245 158 11;
 	--tw-stat-apikeys: 244 63 94;
@@ -126,23 +130,168 @@
 	--tw-stat-requests: 249 115 22;
 }
 
+/* ---- Extra themes: 2 dark + 2 light (same --tw-* contract) ---- */
+.ember-midnight {
+	/* GitHub-dark inspired cool slate */
+	--tw-background: 13 17 23;
+	--tw-foreground: 230 237 243;
+	--tw-card: 22 27 34;
+	--tw-card-foreground: 230 237 243;
+	--tw-card-elevated: 33 38 45;
+	--tw-muted: 33 38 45;
+	--tw-muted-foreground: 139 148 158;
+	--tw-subtle: 110 119 129;
+	--tw-accent: 33 38 45;
+	--tw-accent-foreground: 230 237 243;
+	--tw-border: 48 54 61;
+	--tw-border-strong: 60 68 78;
+	--tw-input: 48 54 61;
+	--tw-ring: 99 102 241;
+
+	--tw-primary: 96 165 250;
+	--tw-primary-foreground: 13 17 23;
+	--tw-amber: 245 158 11;
+	--tw-destructive: 248 81 73;
+	--tw-destructive-foreground: 255 255 255;
+	--tw-secondary: 33 38 45;
+	--tw-secondary-foreground: 230 237 243;
+	--tw-success: 63 185 80;
+	--tw-info: 121 192 255;
+
+	--tw-stat-conversations: 121 192 255;
+	--tw-stat-apikeys: 88 166 255;
+	--tw-stat-models: 210 168 255;
+	--tw-stat-requests: 57 197 207;
+
+	--tw-gradient-from: 56 189 248;
+	--tw-gradient-to: 99 102 241;
+}
+
+.ember-forest {
+	/* deep green-black, emerald accent */
+	--tw-background: 9 14 12;
+	--tw-foreground: 240 253 244;
+	--tw-card: 15 23 19;
+	--tw-card-foreground: 240 253 244;
+	--tw-card-elevated: 23 33 28;
+	--tw-muted: 23 33 28;
+	--tw-muted-foreground: 148 163 184;
+	--tw-subtle: 100 116 139;
+	--tw-accent: 23 33 28;
+	--tw-accent-foreground: 240 253 244;
+	--tw-border: 32 45 38;
+	--tw-border-strong: 53 69 60;
+	--tw-input: 32 45 38;
+	--tw-ring: 52 211 153;
+
+	--tw-primary: 52 211 153;
+	--tw-primary-foreground: 9 14 12;
+	--tw-amber: 245 158 11;
+	--tw-destructive: 248 113 113;
+	--tw-destructive-foreground: 9 14 12;
+	--tw-secondary: 23 33 28;
+	--tw-secondary-foreground: 240 253 244;
+	--tw-success: 74 222 128;
+	--tw-info: 34 211 238;
+
+	--tw-stat-conversations: 110 231 183;
+	--tw-stat-apikeys: 52 211 153;
+	--tw-stat-models: 45 212 191;
+	--tw-stat-requests: 163 230 53;
+
+	--tw-gradient-from: 110 231 183;
+	--tw-gradient-to: 52 211 153;
+}
+
+.ember-frost {
+	/* cool slate light */
+	--tw-background: 248 250 252;
+	--tw-foreground: 15 23 42;
+	--tw-card: 255 255 255;
+	--tw-card-foreground: 15 23 42;
+	--tw-card-elevated: 255 255 255;
+	--tw-muted: 241 245 249;
+	--tw-muted-foreground: 100 116 139;
+	--tw-subtle: 148 163 184;
+	--tw-accent: 241 245 249;
+	--tw-accent-foreground: 15 23 42;
+	--tw-border: 226 232 240;
+	--tw-border-strong: 203 213 225;
+	--tw-input: 226 232 240;
+	--tw-ring: 37 99 235;
+
+	--tw-primary: 37 99 235;
+	--tw-primary-foreground: 255 255 255;
+	--tw-amber: 217 119 6;
+	--tw-destructive: 220 38 38;
+	--tw-destructive-foreground: 255 255 255;
+	--tw-secondary: 241 245 249;
+	--tw-secondary-foreground: 15 23 42;
+	--tw-success: 5 150 105;
+	--tw-info: 2 132 199;
+
+	--tw-stat-conversations: 14 165 233;
+	--tw-stat-apikeys: 59 130 246;
+	--tw-stat-models: 139 92 246;
+	--tw-stat-requests: 6 182 212;
+
+	--tw-gradient-from: 14 165 233;
+	--tw-gradient-to: 99 102 241;
+}
+
+.ember-sand {
+	/* warm paper light, brand rose accent */
+	--tw-background: 250 247 242;
+	--tw-foreground: 28 25 23;
+	--tw-card: 255 255 255;
+	--tw-card-foreground: 28 25 23;
+	--tw-card-elevated: 255 255 255;
+	--tw-muted: 242 237 230;
+	--tw-muted-foreground: 120 113 108;
+	--tw-subtle: 168 162 158;
+	--tw-accent: 242 237 230;
+	--tw-accent-foreground: 28 25 23;
+	--tw-border: 232 226 218;
+	--tw-border-strong: 214 205 193;
+	--tw-input: 232 226 218;
+	--tw-ring: 225 29 72;
+
+	--tw-primary: 225 29 72;
+	--tw-primary-foreground: 255 255 255;
+	--tw-amber: 217 119 6;
+	--tw-destructive: 220 38 38;
+	--tw-destructive-foreground: 255 255 255;
+	--tw-secondary: 242 237 230;
+	--tw-secondary-foreground: 28 25 23;
+	--tw-success: 5 150 105;
+	--tw-info: 6 182 212;
+
+	--tw-stat-conversations: 245 158 11;
+	--tw-stat-apikeys: 244 63 94;
+	--tw-stat-models: 217 70 239;
+	--tw-stat-requests: 249 115 22;
+
+	--tw-gradient-from: 245 158 11;
+	--tw-gradient-to: 225 29 72;
+}
+
 /* -------------------------------------------------------------------------
    2. SIGNATURE GRADIENT (the "Ember" glow)
    ------------------------------------------------------------------------- */
-.bg-gradient-ember { background-image: linear-gradient(135deg, #F59E0B 0%, #F43F5E 100%); }
+.bg-gradient-ember { background-image: linear-gradient(135deg, rgb(var(--tw-gradient-from)) 0%, rgb(var(--tw-gradient-to)) 100%); }
 .text-gradient-ember {
-	background-image: linear-gradient(135deg, #FBBF24 0%, #F43F5E 100%);
+	background-image: linear-gradient(135deg, rgb(var(--tw-gradient-from)) 0%, rgb(var(--tw-gradient-to)) 100%);
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
 }
-.border-gradient-ember { border-image: linear-gradient(135deg, #F59E0B, #F43F5E) 1; }
+.border-gradient-ember { border-image: linear-gradient(135deg, rgb(var(--tw-gradient-from)), rgb(var(--tw-gradient-to))) 1; }
 
 /* Radial ember glow — used as ambient background atmosphere. */
 .ember-glow {
 	background:
-		radial-gradient(ellipse 80% 50% at 20% -10%, rgba(245, 158, 11, 0.08), transparent 60%),
-		radial-gradient(ellipse 60% 50% at 100% 0%, rgba(244, 63, 94, 0.10), transparent 55%);
+		radial-gradient(ellipse 80% 50% at 20% -10%, rgb(var(--tw-gradient-from) / 0.08), transparent 60%),
+		radial-gradient(ellipse 60% 50% at 100% 0%, rgb(var(--tw-gradient-to) / 0.10), transparent 55%);
 }
 /* Subtle dotted grid texture for hero areas. */
 .ember-grid {
@@ -274,7 +423,7 @@ code, kbd, pre { font-family: var(--font-mono); }
 .btn-primary { background: var(--color-primary); color: var(--color-primary-foreground); }
 .btn-primary:hover { background: rgb(var(--tw-primary) / 0.88); }
 
-.btn-ember { background-image: linear-gradient(135deg, #F59E0B 0%, #F43F5E 100%); color: #fff; }
+.btn-ember { background-image: linear-gradient(135deg, rgb(var(--tw-gradient-from)) 0%, rgb(var(--tw-gradient-to)) 100%); color: #fff; }
 .btn-ember:hover { filter: brightness(1.08); }
 
 .btn-secondary { background: var(--color-secondary); color: var(--color-secondary-foreground); }
@@ -382,7 +531,7 @@ code, kbd, pre { font-family: var(--font-mono); }
 /* ---- Progress bar ---- */
 .progress { height: 6px; background: var(--color-muted); border-radius: 9999px; overflow: hidden; }
 .progress-bar { height: 100%; border-radius: 9999px; transition: width .4s ease; }
-.progress-bar.ember { background-image: linear-gradient(90deg, #F59E0B, #F43F5E); }
+.progress-bar.ember { background-image: linear-gradient(90deg, rgb(var(--tw-gradient-from)), rgb(var(--tw-gradient-to))); }
 .progress-bar.primary { background: var(--color-primary); }
 .progress-bar.success { background: var(--color-success); }
 
@@ -538,11 +687,11 @@ kbd {
 	--shadow-sm: 0 2px 8px -2px rgb(0 0 0 / 0.5);
 	--shadow-md: 0 8px 24px -8px rgb(0 0 0 / 0.55);
 	--shadow-lg: 0 20px 60px -12px rgb(0 0 0 / 0.6);
-	--shadow-ember: 0 4px 24px -4px rgb(244 63 94 / 0.45), 0 2px 12px -2px rgb(245 158 11 / 0.3);
-	--shadow-ember-lg: 0 8px 44px -6px rgb(244 63 94 / 0.5), 0 4px 20px -4px rgb(245 158 11 / 0.35);
+	--shadow-ember: 0 4px 24px -4px rgb(var(--tw-primary) / 0.45), 0 2px 12px -2px rgb(var(--tw-amber) / 0.3);
+	--shadow-ember-lg: 0 8px 44px -6px rgb(var(--tw-primary) / 0.5), 0 4px 20px -4px rgb(var(--tw-amber) / 0.35);
 
 	/* --- Glow --- */
-	--glow-ember: 0 0 0 1px rgb(244 63 94 / 0.25), 0 0 24px rgb(244 63 94 / 0.25);
+	--glow-ember: 0 0 0 1px rgb(var(--tw-primary) / 0.25), 0 0 24px rgb(var(--tw-primary) / 0.25);
 
 	/* --- Chart palette (ordered, colorblind-safer warm→cool) --- */
 	--chart-1: 244 63 94;    /* rose */
@@ -563,14 +712,16 @@ kbd {
 	--z-toast: 80;
 }
 
-.ember-light {
+.ember-light,
+.ember-frost,
+.ember-sand {
 	--shadow-xs: 0 1px 2px rgb(10 10 12 / 0.08);
 	--shadow-sm: 0 2px 8px -2px rgb(10 10 12 / 0.12);
 	--shadow-md: 0 8px 24px -8px rgb(10 10 12 / 0.16);
 	--shadow-lg: 0 20px 60px -12px rgb(10 10 12 / 0.22);
-	--shadow-ember: 0 4px 20px -4px rgb(225 29 72 / 0.35), 0 2px 10px -2px rgb(217 119 6 / 0.25);
-	--shadow-ember-lg: 0 8px 40px -6px rgb(225 29 72 / 0.4), 0 4px 18px -4px rgb(217 119 6 / 0.3);
-	--glow-ember: 0 0 0 1px rgb(225 29 72 / 0.2), 0 0 24px rgb(225 29 72 / 0.18);
+	--shadow-ember: 0 4px 20px -4px rgb(var(--tw-primary) / 0.35), 0 2px 10px -2px rgb(var(--tw-amber) / 0.25);
+	--shadow-ember-lg: 0 8px 40px -6px rgb(var(--tw-primary) / 0.4), 0 4px 18px -4px rgb(var(--tw-amber) / 0.3);
+	--glow-ember: 0 0 0 1px rgb(var(--tw-primary) / 0.2), 0 0 24px rgb(var(--tw-primary) / 0.18);
 }
 
 /* -------------------------------------------------------------------------
@@ -629,8 +780,8 @@ kbd {
 .ember-atmo::before {
 	content: ''; position: fixed; inset: 0; z-index: -2; pointer-events: none;
 	background:
-		radial-gradient(ellipse 55% 38% at 12% -6%, rgb(245 158 11 / 0.09), transparent 62%),
-		radial-gradient(ellipse 48% 36% at 88% 4%, rgb(244 63 94 / 0.11), transparent 60%),
+		radial-gradient(ellipse 55% 38% at 12% -6%, rgb(var(--tw-gradient-from) / 0.09), transparent 62%),
+		radial-gradient(ellipse 48% 36% at 88% 4%, rgb(var(--tw-gradient-to) / 0.11), transparent 60%),
 		radial-gradient(ellipse 60% 45% at 50% 110%, rgb(232 121 249 / 0.05), transparent 65%);
 }
 .ember-light.ember-atmo::before {
@@ -669,6 +820,44 @@ kbd {
 .ember-light .orb-amber { background: rgb(217 119 6 / 0.14); }
 .ember-light .orb-rose { background: rgb(225 29 72 / 0.12); }
 .ember-light .orb-fuchsia { background: rgb(217 70 239 / 0.1); }
+
+.ember-midnight .orb-amber { background: rgb(56 189 248 / 0.14); }
+.ember-midnight .orb-rose { background: rgb(99 102 241 / 0.16); }
+.ember-midnight .orb-fuchsia { background: rgb(139 92 246 / 0.12); }
+.ember-forest .orb-amber { background: rgb(110 231 183 / 0.13); }
+.ember-forest .orb-rose { background: rgb(52 211 153 / 0.15); }
+.ember-forest .orb-fuchsia { background: rgb(45 212 191 / 0.12); }
+.ember-frost .orb-amber { background: rgb(14 165 233 / 0.12); }
+.ember-frost .orb-rose { background: rgb(99 102 241 / 0.12); }
+.ember-frost .orb-fuchsia { background: rgb(139 92 246 / 0.10); }
+.ember-sand .orb-amber { background: rgb(217 119 6 / 0.14); }
+.ember-sand .orb-rose { background: rgb(225 29 72 / 0.12); }
+.ember-sand .orb-fuchsia { background: rgb(217 70 239 / 0.1); }
+
+/* ---- Theme dots: compact 6-theme switcher ---- */
+.theme-dots { display: inline-flex; align-items: center; gap: 6px; padding: 4px; border: 1px solid var(--color-border); border-radius: 9999px; background: var(--color-card); }
+.theme-dots button { width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--color-border-strong); cursor: pointer; padding: 0; transition: transform var(--dur-fast) ease, box-shadow var(--dur-fast) ease; }
+.theme-dots button:hover { transform: scale(1.12); }
+.theme-dots button.active { box-shadow: 0 0 0 2px var(--color-card), 0 0 0 4px var(--color-primary); }
+.theme-dots button[data-theme-btn="ember"] { background: linear-gradient(135deg, #0A0A0C 50%, #F43F5E 50%); }
+.theme-dots button[data-theme-btn="midnight"] { background: linear-gradient(135deg, #0D1117 50%, #60A5FA 50%); }
+.theme-dots button[data-theme-btn="forest"] { background: linear-gradient(135deg, #090E0C 50%, #34D399 50%); }
+.theme-dots button[data-theme-btn="light"] { background: linear-gradient(135deg, #FFFFFF 50%, #E11D48 50%); }
+.theme-dots button[data-theme-btn="frost"] { background: linear-gradient(135deg, #F8FAFC 50%, #2563EB 50%); }
+.theme-dots button[data-theme-btn="sand"] { background: linear-gradient(135deg, #FAF7F2 50%, #E11D48 50%); }
+
+/* ---- Theme cards: full 6-theme gallery ---- */
+.theme-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (max-width: 900px) { .theme-cards { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .theme-cards { grid-template-columns: 1fr; } }
+.theme-card { text-align: left; font: inherit; background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 12px; cursor: pointer; color: var(--color-foreground); transition: border-color var(--dur-fast) ease, transform var(--dur-fast) ease, box-shadow var(--dur-fast) ease; }
+.theme-card:hover { transform: translateY(-2px); border-color: var(--color-border-strong); }
+.theme-card.active { border-color: var(--color-primary); box-shadow: 0 0 0 1px var(--color-primary); }
+.theme-card-swatches { display: flex; gap: 4px; margin-bottom: 10px; }
+.theme-card-swatches span { height: 28px; flex: 1; border-radius: 4px; border: 1px solid rgb(0 0 0 / 0.12); }
+.theme-card-swatches span:first-child { flex: 1.4; }
+.theme-card-name { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.theme-card-desc { font-size: 11.5px; color: var(--color-subtle); margin-top: 2px; }
 
 /* -------------------------------------------------------------------------
    11. EFFECTS — glass, glow, spotlight, shine, lift

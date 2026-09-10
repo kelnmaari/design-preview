@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ember · Before / After — Tokenization</title>
-<link rel="stylesheet" href="styles.css?v=2.1" />
+<link rel="stylesheet" href="styles.css?v=2.2" />
 <style>
 	.wrap { max-width: 1280px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
 	.head { margin-bottom: 2rem; }
@@ -53,9 +53,13 @@
 		<div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
 			<div class="eyebrow" style="margin:0;">Case Study · The "dirty zone"</div>
 			<div class="topbar-spacer"></div>
-			<div class="theme-pill" data-theme-pill style="display:inline-flex;border:1px solid var(--color-border);border-radius:9999px;padding:2px;background:var(--color-card);">
-				<button data-theme-btn="dark" class="active" style="font-size:12px;padding:.3rem .75rem;border-radius:9999px;color:var(--color-muted-foreground);"><i data-icon="moon" data-size="12"></i> Dark</button>
-				<button data-theme-btn="light" style="font-size:12px;padding:.3rem .75rem;border-radius:9999px;color:var(--color-muted-foreground);"><i data-icon="sun" data-size="12"></i> Light</button>
+			<div class="theme-dots" data-theme-pill>
+				<button data-theme-btn="ember" class="active" title="Ember (dark)" aria-label="Ember theme"></button>
+				<button data-theme-btn="midnight" title="Midnight (dark)" aria-label="Midnight theme"></button>
+				<button data-theme-btn="forest" title="Forest (dark)" aria-label="Forest theme"></button>
+				<button data-theme-btn="light" title="Light" aria-label="Light theme"></button>
+				<button data-theme-btn="frost" title="Frost (light)" aria-label="Frost theme"></button>
+				<button data-theme-btn="sand" title="Sand (light)" aria-label="Sand theme"></button>
 			</div>
 			<button class="btn btn-ghost btn-sm" data-palette-open><i data-icon="command" data-size="13"></i> <kbd>⌘K</kbd></button>
 		</div>
@@ -175,7 +179,7 @@ text-muted-foreground
 	</div>
 </div>
 
-<script src="icons.js?v=2.1"></script>
-<script src="ember.js?v=2.1"></script>
+<script src="icons.js?v=2.2"></script>
+<script src="ember.js?v=2.2"></script>
 </body>
 </html>

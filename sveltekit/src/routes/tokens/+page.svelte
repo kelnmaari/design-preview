@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Badge, reveal, toast } from '$lib/ember/index.js';
+	import { Badge, THEMES, reveal, theme, toast, type EmberTheme } from '$lib/ember/index.js';
 
 	interface Swatch {
 		name: string;
@@ -32,6 +32,15 @@
 		{ name: 'Muted', token: '--tw-muted', bg: 'var(--color-muted)' }
 	];
 
+	const THEME_DESC: Record<EmberTheme, string> = {
+		ember: 'Signature warm dark · rose accent',
+		midnight: 'Cool slate dark · blue accent',
+		forest: 'Deep green dark · emerald accent',
+		light: 'Neutral light · rose accent',
+		frost: 'Cool slate light · blue accent',
+		sand: 'Warm paper light · rose accent'
+	};
+
 	function copy(text: string) {
 		navigator.clipboard?.writeText(text).catch(() => {});
 		toast.success('Copied to clipboard', text);
@@ -52,6 +61,28 @@
 		</p>
 	</div>
 	<Badge variant="success" dot>SvelteKit</Badge>
+</div>
+
+<div class="section-title" use:reveal>Themes — 3 dark + 3 light</div>
+<p class="text-sm text-muted-foreground" style="max-width:70ch;margin:0 0 1rem;" use:reveal>
+	Every theme implements the same <code class="code-chip">--tw-*</code> contract — gradients,
+	shadows and charts re-skin automatically. Click a card to preview it live.
+</p>
+<div class="theme-cards mb-4" use:reveal>
+	{#each THEMES as t (t.id)}
+		<button class="theme-card" class:active={theme.value === t.id} onclick={() => theme.set(t.id)}>
+			<span class="theme-card-swatches">
+				<span style="background:{t.swatch[0]}"></span>
+				<span style="background:{t.swatch[1]}"></span>
+				<span style="background:{t.swatch[2]}"></span>
+			</span>
+			<span class="theme-card-name">
+				{t.label}
+				<Badge variant={t.mode === 'dark' ? 'info' : 'amber'}>{t.mode}</Badge>
+			</span>
+			<span class="theme-card-desc">{THEME_DESC[t.id]}</span>
+		</button>
+	{/each}
 </div>
 
 <div class="section-title" use:reveal>Surfaces</div>

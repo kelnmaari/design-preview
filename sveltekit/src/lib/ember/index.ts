@@ -58,7 +58,7 @@ export { default as TokenBars } from './TokenBars.svelte';
 export { default as Tooltip } from './Tooltip.svelte';
 export { ICONS, type IconName } from './icons.js';
 export { clickOutside, count, reveal, spotlight } from './actions.svelte.js';
-export { theme, type EmberTheme } from './theme.svelte.js';
+export { THEMES, theme, type EmberTheme, type ThemeMeta } from './theme.svelte.js';
 export { toast, type Toast, type ToastKind } from './toast.svelte.js';
 export { copyText, formatBytes, seededRandom, sleep, timeAgo } from './utils.js';
 export type { AccordionItem } from './Accordion.svelte';

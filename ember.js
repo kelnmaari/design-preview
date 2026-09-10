@@ -15,25 +15,34 @@
 	   1. THEME — persisted dark/light, html.ember <-> html.ember-light
 	------------------------------------------------------------------ */
 	const THEME_KEY = 'ember-theme';
+	const THEME_ORDER = ['ember', 'midnight', 'forest', 'light', 'frost', 'sand'];
+	const THEME_CLASSES = ['ember', 'ember-midnight', 'ember-forest', 'ember-light', 'ember-frost', 'ember-sand'];
+	const THEME_MODES = { ember: 'dark', midnight: 'dark', forest: 'dark', light: 'light', frost: 'light', sand: 'light' };
 	const EmberTheme = {
 		get() {
-			try { return localStorage.getItem(THEME_KEY) || 'dark'; } catch (e) { return 'dark'; }
+			try {
+				const raw = localStorage.getItem(THEME_KEY) || 'ember';
+				if (raw === 'dark') return 'ember'; // legacy value
+				return THEME_ORDER.includes(raw) ? raw : 'ember';
+			} catch (e) { return 'ember'; }
 		},
 		apply(theme) {
+			if (!THEME_ORDER.includes(theme)) theme = 'ember';
 			const root = document.documentElement;
-			root.classList.toggle('ember-light', theme === 'light');
-			root.classList.toggle('ember', theme !== 'light');
-			root.style.colorScheme = theme === 'light' ? 'light' : 'dark';
+			THEME_CLASSES.forEach(c => root.classList.remove(c));
+			root.classList.add(theme === 'ember' ? 'ember' : 'ember-' + theme);
+			root.style.colorScheme = THEME_MODES[theme];
 			$$('[data-theme-pill] button').forEach(b => {
 				b.classList.toggle('active', b.dataset.themeBtn === theme);
 			});
 			$$('[data-theme-icon]').forEach(el => {
-				el.setAttribute('data-icon', theme === 'light' ? 'moon' : 'sun');
+				el.setAttribute('data-icon', THEME_MODES[theme] === 'light' ? 'moon' : 'sun');
 			});
 			if (window.__renderIcons) window.__renderIcons();
 		},
 		toggle() {
-			const next = this.get() === 'light' ? 'dark' : 'light';
+			const order = THEME_ORDER;
+			const next = order[(order.indexOf(this.get()) + 1) % order.length];
 			try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
 			this.apply(next);
 			return next;
@@ -274,7 +283,7 @@
 		{ group: 'Pages', label: 'Design Tokens', hint: 'system', icon: 'fire', href: 'tokens.html' },
 		{ group: 'Pages', label: 'Components', hint: 'library', icon: 'cube', href: 'components.html' },
 		{ group: 'Pages', label: 'Before / After', hint: 'case study', icon: 'wand-sparkles', href: 'admin-models-before-after.html' },
-		{ group: 'Actions', label: 'Toggle theme', hint: 'dark / light', icon: 'sun', action: 'theme' },
+		{ group: 'Actions', label: 'Cycle theme', hint: '6 themes', icon: 'sun', action: 'theme' },
 		{ group: 'Actions', label: 'New chat', hint: 'composer', icon: 'plus', href: 'chat.html' },
 		{ group: 'Actions', label: 'Create API key', hint: 'panel', icon: 'key', href: 'api-keys.html' }
 	];

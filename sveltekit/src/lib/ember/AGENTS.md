@@ -7,6 +7,10 @@
 - **What:** 57 typed Svelte 5 components + Tailwind v4 theme + design tokens.
 - **Style:** premium dark-first admin/RAG aesthetic, Amber→Rose signature
   gradient, dense 13px rhythm, Inter + JetBrains Mono.
+- **Themes:** 6 first-class themes, 3 dark (`ember`, `midnight`, `forest`) + 3 light
+  (`light`, `frost`, `sand`). Same `--tw-*` contract — gradients, shadows,
+  focus rings and orbs re-skin automatically. Brand moments (logo, animated
+  hero gradient) intentionally stay Ember in every theme.
 - **Portability:** every component is **one `.svelte` file** (logic + scoped
   styles). The only shared dependency is the tokens file `ember.css`.
 
@@ -20,7 +24,7 @@ src/lib/ember/
   tailwind.css         <- Tailwind v4 @theme bound to the same tokens
   *.svelte             <- the 57 components (one file each)
   icons.ts             <- stroke icon set (IconName type)
-  theme.svelte.ts      <- theme store (.ember / .ember-light)
+  theme.svelte.ts      <- theme store (6 themes, THEMES meta, persisted)
   toast.svelte.ts      <- toast store
   actions.svelte.ts    <- spotlight, reveal, count, clickOutside
   utils.ts             <- sleep, copyText, seededRandom, timeAgo, formatBytes
@@ -178,7 +182,7 @@ slot), plus named ones listed.
 | `CopyButton` | copy-to-clipboard with check morph | `text` `label` `size` `preview` |
 | `CodeBlock` | titled code card + copy | `title` `language` `code` |
 | `Shell` | app frame: sidebar, topbar, theme | `→onPalette` `children` |
-| `ThemeToggle` | sun/moon switch (persisted) | — |
+| `ThemeToggle` | theme picker dropdown (persisted) | `THEMES` meta + `theme.set(id)` |
 | `Icon` | 90+ stroke icons | `name: IconName` `size` — see `icons.ts` for names |
 
 ### Charts (zero dependencies, SSR-safe SVG)
@@ -195,7 +199,7 @@ slot), plus named ones listed.
 ```ts
 import {
   clickOutside, count, reveal, spotlight,   // actions: use:clickOutside={fn} etc.
-  theme,                                     // theme.current: 'dark' | 'light'; theme.toggle()
+  theme, THEMES,                             // theme.value: EmberTheme id; theme.set(id); theme.toggle() cycles
   toast,                                     // toast.success/info/warning/error(title, desc?, ms?)
   sleep, copyText, seededRandom, timeAgo, formatBytes
 } from '$lib/ember/index.js';
@@ -353,7 +357,8 @@ toast.error('Deploy failed', 'worker-03 out of VRAM.');
 5. **Icons = `Icon name="…"`.** Browse names in `icons.ts`. No emojis in UI.
 6. **No `href="#"`.** Links need real hrefs; otherwise use `<Button>`.
 7. **Dark-first, tokens only.** No hardcoded hex in components — use
-   `var(--color-*)` / utilities. Test `.ember-light` if you touch colors.
+   `var(--color-*)` / utilities. Preview all 6 themes (`/tokens`) if you
+   touch colors — never hardcode per-theme hex, use the tokens.
 8. **SSR-safe.** No `Math.random()`/`Date.now()` in rendered output — use
    `seededRandom()`. Browser APIs only in event handlers or `$effect`.
 9. **A11y is enforced** (`svelte-check` must stay 0/0): real `<button>`s,

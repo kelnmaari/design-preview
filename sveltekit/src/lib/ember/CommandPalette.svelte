@@ -33,7 +33,7 @@
 		{ group: 'Pages', label: 'Content', hint: 'components', icon: 'comments', href: '/components/content' },
 		{ group: 'Pages', label: 'Patterns', hint: 'guide', icon: 'layers', href: '/patterns' },
 		{ group: 'Pages', label: 'Tailwind', hint: 'utilities', icon: 'sparkles', href: '/tailwind' },
-		{ group: 'Actions', label: 'Toggle theme', hint: 'dark / light', icon: 'sun', action: 'theme' }
+		{ group: 'Actions', label: 'Cycle theme', hint: '6 themes', icon: 'sun', action: 'theme' }
 	];
 
 	let { open = $bindable(false), commands = DEFAULTS }: Props = $props();

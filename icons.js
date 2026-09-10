@@ -104,9 +104,10 @@
 	};
 
 	function render() {
-		document.querySelectorAll('i[data-icon]:not([data-icon-done]), span[data-icon]:not([data-icon-done])').forEach(function (el) {
-			el.setAttribute('data-icon-done', '');
+		document.querySelectorAll('i[data-icon], span[data-icon]').forEach(function (el) {
 			const name = el.getAttribute('data-icon');
+			if (el.getAttribute('data-icon-done') === name) return; // already hydrated
+			el.setAttribute('data-icon-done', name);
 			const svg = paths[name];
 			if (!svg) { el.textContent = '·'; return; }
 			const size = el.getAttribute('data-size') || '1em';
