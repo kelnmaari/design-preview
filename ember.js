@@ -282,6 +282,7 @@
 		{ group: 'Pages', label: 'Admin · Users', hint: '248 users', icon: 'users', href: 'admin-users.html' },
 		{ group: 'Pages', label: 'Design Tokens', hint: 'system', icon: 'fire', href: 'tokens.html' },
 		{ group: 'Pages', label: 'Components', hint: 'library', icon: 'cube', href: 'components.html' },
+		{ group: 'Pages', label: 'Ember Kit', hint: 'playground', icon: 'flask', href: 'ember-kit.html' },
 		{ group: 'Pages', label: 'Before / After', hint: 'case study', icon: 'wand-sparkles', href: 'admin-models-before-after.html' },
 		{ group: 'Actions', label: 'Cycle theme', hint: '6 themes', icon: 'sun', action: 'theme' },
 		{ group: 'Actions', label: 'New chat', hint: 'composer', icon: 'plus', href: 'chat.html' },
