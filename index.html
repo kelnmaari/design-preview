@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" class="ember">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ember · Design System v2</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+	.hub-nav { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: rgb(var(--tw-background) / 0.72); border-bottom: 1px solid var(--color-border); }
+	.hub-nav-inner { max-width: 1180px; margin: 0 auto; padding: 0 24px; height: 56px; display: flex; align-items: center; gap: 12px; }
+	.hub-wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px 80px; }
+	.hero { position: relative; text-align: center; padding: 96px 24px 64px; overflow: visible; }
+	.hero h1 { font-size: clamp(40px, 6.4vw, 68px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02; }
+	.hero p { color: var(--color-muted-foreground); font-size: 16px; max-width: 62ch; margin: 18px auto 0; line-height: 1.65; }
+	.pill-announce { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; padding: 5px 12px 5px 6px; border-radius: 9999px; background: rgb(var(--tw-primary) / 0.08); border: 1px solid rgb(var(--tw-primary) / 0.25); color: var(--color-foreground); margin-bottom: 22px; cursor: pointer; transition: all .2s ease; }
+	.pill-announce:hover { background: rgb(var(--tw-primary) / 0.14); transform: translateY(-1px); }
+	.pill-announce .n { font-family: var(--font-mono); font-size: 10.5px; background-image: linear-gradient(135deg,#F59E0B,#F43F5E); color: #fff; padding: 2px 8px; border-radius: 9999px; font-weight: 600; }
+	.hero-ctas { display: flex; gap: 10px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+	.hero-meta { display: flex; gap: 16px; justify-content: center; margin-top: 22px; font-size: 12px; color: var(--color-subtle); font-family: var(--font-mono); flex-wrap: wrap; }
+	.hero-orb-a { width: 480px; height: 480px; top: -140px; left: -120px; }
+	.hero-orb-b { width: 420px; height: 420px; top: -100px; right: -100px; }
+	.page-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+	@media (max-width: 960px) { .page-grid { grid-template-columns: repeat(2, 1fr); } }
+	@media (max-width: 640px) { .page-grid { grid-template-columns: 1fr; } .hero { padding: 64px 12px 48px; } }
+	.page-card { display: block; padding: 18px; border-radius: var(--radius-lg); background: var(--color-card); border: 1px solid var(--color-border); transition: all .22s var(--ease-out); position: relative; overflow: hidden; }
+	.page-card:hover { transform: translateY(-3px); border-color: var(--color-border-strong); box-shadow: var(--shadow-md); }
+	.page-card .pc-icon { width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center; margin-bottom: 12px; }
+	.page-card h3 { font-size: 14.5px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+	.page-card p { font-size: 12.5px; color: var(--color-muted-foreground); margin-top: 4px; line-height: 1.55; }
+	.page-card .go { position: absolute; top: 16px; right: 16px; color: var(--color-subtle); opacity: 0; transform: translate(-4px, 4px); transition: all .2s ease; }
+	.page-card:hover .go { opacity: 1; transform: none; color: var(--color-primary); }
+	.sec-head { display: flex; align-items: baseline; justify-content: space-between; margin: 56px 0 4px; gap: 12px; }
+	.sec-head h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
+	.sec-head p { font-size: 13px; color: var(--color-muted-foreground); }
+	.marquee-chip { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 500; padding: 8px 14px; border-radius: 9999px; background: var(--color-card); border: 1px solid var(--color-border); white-space: nowrap; color: var(--color-muted-foreground); }
+	.kbd-row { display: flex; gap: 8px; justify-content: center; margin-top: 26px; align-items: center; font-size: 12.5px; color: var(--color-subtle); }
+	.svelte-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; align-items: start; }
+	@media (max-width: 900px) { .svelte-grid { grid-template-columns: 1fr; } }
+	.check-list { list-style: none; padding: 0; margin: 12px 0 0; display: flex; flex-direction: column; gap: 9px; font-size: 13px; color: var(--color-muted-foreground); }
+	.check-list li { display: flex; gap: 9px; align-items: flex-start; line-height: 1.5; }
+	.check-list li i { color: var(--color-success); flex: none; margin-top: 2px; }
+	.hub-footer { border-top: 1px solid var(--color-border); margin-top: 72px; padding-top: 24px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--color-subtle); }
+</style>
+</head>
+<body class="ember-atmo">
+<nav class="hub-nav">
+	<div class="hub-nav-inner">
+		<a href="index.html" style="display:flex;align-items:center;gap:10px;">
+			<div style="width:28px;height:28px;border-radius:8px;background-image:linear-gradient(135deg,#F59E0B,#F43F5E);display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px;box-shadow:0 2px 14px rgb(244 63 94 / .4);">E</div>
+			<span style="font-weight:600;font-size:14px;">Ember</span>
+			<span class="badge badge-primary" style="font-size:10px;">v2.0</span>
+		</a>
+		<div class="topbar-spacer"></div>
+		<a href="tokens.html" class="btn btn-ghost btn-sm">Tokens</a>
+		<a href="components.html" class="btn btn-ghost btn-sm">Components</a>
+		<a href="dashboard.html" class="btn btn-ghost btn-sm">Dashboard</a>
+		<button class="icon-btn" data-theme-toggle aria-label="Toggle theme"><i data-icon="sun" data-size="15" data-theme-icon></i></button>
+		<button class="btn btn-ember btn-sm" data-palette-open><i data-icon="command" data-size="13"></i> <kbd style="background:rgb(255 255 255 / .2);border:none;color:#fff;">⌘K</kbd></button>
+	</div>
+</nav>
+
+<div class="hub-wrap">
+	<!-- HERO -->
+	<header class="hero noise" style="border-radius:20px;">
+		<div class="orb orb-amber hero-orb-a"></div>
+		<div class="orb orb-rose hero-orb-b"></div>
+		<div class="reveal in">
+			<a class="pill-announce" href="components.html"><span class="n">NEW</span> Motion system · command palette · spotlight cards <i data-icon="arrow-right" data-size="12"></i></a>
+		</div>
+		<h1 class="reveal in">The <span class="text-gradient-animated">Ember</span> Design System</h1>
+		<p class="reveal in">Premium Dark surfaces, a warm Amber→Rose signature gradient, and a dense, data-focused rhythm — now with buttery motion, glow effects, and a Svelte-ready component contract. Zero build step: open any file and it just works.</p>
+		<div class="hero-ctas reveal in">
+			<a href="tokens.html" class="btn btn-ember btn-lg"><i data-icon="fire" data-size="15"></i> Explore tokens</a>
+			<a href="dashboard.html" class="btn btn-outline btn-lg"><i data-icon="gauge" data-size="15"></i> Live dashboard</a>
+		</div>
+		<div class="hero-meta reveal in">
+			<span>● dark-first</span><span>● 32px density</span><span>● Inter + JetBrains Mono</span><span>● SvelteKit example inside</span>
+		</div>
+		<div class="kbd-row reveal in">Press <kbd>⌘</kbd><kbd>K</kbd> anywhere to jump around</div>
+	</header>
+
+	<!-- MARQUEE -->
+	<div class="marquee mt-4 reveal" aria-hidden="true">
+		<div class="marquee-track" id="marquee-track">
+			<span class="marquee-chip"><i data-icon="cube" data-size="13" class="text-primary"></i> 24 components</span>
+			<span class="marquee-chip"><i data-icon="fire" data-size="13" class="text-amber"></i> Amber→Rose gradient</span>
+			<span class="marquee-chip"><i data-icon="command" data-size="13" class="text-info"></i> Command palette</span>
+			<span class="marquee-chip"><i data-icon="sparkles" data-size="13" class="text-stat-models"></i> Spotlight cards</span>
+			<span class="marquee-chip"><i data-icon="activity" data-size="13" class="text-success"></i> Animated charts</span>
+			<span class="marquee-chip"><i data-icon="moon" data-size="13" class="text-stat-requests"></i> Dark + light themes</span>
+			<span class="marquee-chip"><i data-icon="bolt" data-size="13" class="text-primary"></i> Spring motion</span>
+			<span class="marquee-chip"><i data-icon="check" data-size="13" class="text-success"></i> Zero dependencies</span>
+		</div>
+	</div>
+
+	<!-- PAGES -->
+	<div class="sec-head reveal">
+		<div><h2>Mockups</h2><p>Every screen of the gateway, rebuilt on Ember tokens.</p></div>
+		<a href="dashboard.html" class="text-sm text-primary">Start with the dashboard →</a>
+	</div>
+	<div class="page-grid" data-reveal-group>
+		<a href="tokens.html" class="page-card spotlight reveal">
+			<i data-icon="arrow-up-right" data-size="15" class="go"></i>
+			<div class="pc-icon bg-gradient-ember" style="color:#fff;"><i data-icon="fire" data-size="17"></i></div>
+			<h3>Design Tokens</h3>
+			<p>Palette, typography, gradient, motion, elevation. The single source of truth — start here.</p>
+		</a>
+		<a href="components.html" class="page-card spotlight reveal">
+			<i data-icon="arrow-up-right" data-size="15" class="go"></i>
+			<div class="pc-icon bg-primary/15 text-primary"><i data-icon="cube" data-size="17"></i></div>
+			<h3>Components</h3>
+			<p>Buttons, cards, badges, tables, forms, toasts, dialogs, palette. The full library, live.</p>
+		</a>
+		<a href="dashboard.html" class="page-card spotlight reveal">
+			<i data-icon="arrow-up-right" data-size="15" class="go"></i>
+			<div class="pc-icon bg-amber/10 text-stat-conversations"><i data-icon="gauge" data-size="17"></i></div>
+			<h3>Dashboard</h3>
+			<p>Animated counters, token chart with ranges, top models, activity feed. The money screen.</p>
+		</a>
+		<a href="chat.html" class="page-card spotlight reveal">
+			<i data-icon="arrow-up-right" data-size="15" class="go"></i>
+			<div class="pc-icon bg-info/10 text-info"><i data-icon="comments" data-size="17"></i></div>
+			<h3>Chat</h3>
+			<p>Three-pane shell, simulated streaming, working composer, RAG context panel.</p>
+		</a>
+		<a href="api-keys.html" class="page-card spotlight reveal">
+			<i data-icon="arrow-up-right" data-size="15" class="go"></i>
+			<div class="pc-icon bg-primary/10 text-stat-apikeys"><i data-icon="key" data-size="17"></i></div>
+			<h3>API Keys</h3>
+			<p>Dense table, live filter, slide-in creator with one-time key reveal and copy.</p>
+		</a>
+		<a href="admin-users.html" class="page-card spotlight reveal">
+			<i data-icon="arrow-up-right" data-size="15" class="go"></i>
+			<div class="pc-icon bg-success/10 text-success"><i data-icon="users" data-size="17"></i></div>
+			<h3>Admin · Users</h3>
+			<p>Roles, presence dots, bulk-select bar, pagination. Dense admin done right.</p>
+		</a>
+	</div>
+
+	<!-- SVELTE -->
+	<div class="sec-head reveal">
+		<div><h2>Built for Svelte</h2><p>Same tokens, same class names — copy the contract, keep the look.</p></div>
+		<span class="badge badge-success">sveltekit/ included</span>
+	</div>
+	<div class="svelte-grid">
+		<div class="card card-body spotlight reveal">
+			<div class="eyebrow mb-2">Integration contract</div>
+			<ul class="check-list">
+				<li><i data-icon="check" data-size="13"></i><span><span class="code-chip">--tw-*</span> triples map 1:1 to <span class="code-chip">web-svelte/src/app.css</span></span></li>
+				<li><i data-icon="check" data-size="13"></i><span>Every <span class="code-chip">.btn .card .badge .table</span> has a Svelte twin in <span class="code-chip">sveltekit/src/lib/ember/</span></span></li>
+				<li><i data-icon="check" data-size="13"></i><span>Interactions ship as Svelte actions: <span class="code-chip">use:spotlight</span> <span class="code-chip">use:reveal</span></span></li>
+				<li><i data-icon="check" data-size="13"></i><span>Theme store with <span class="code-chip">localStorage</span> persistence + <span class="code-chip">.ember-light</span> class</span></li>
+			</ul>
+			<div class="flex gap-2 mt-4">
+				<a href="admin-models-before-after.html" class="btn btn-outline btn-sm"><i data-icon="wand-sparkles" data-size="13"></i> Before / After proof</a>
+				<button class="btn btn-ghost btn-sm" data-copy="npm --prefix sveltekit install && npm --prefix sveltekit run dev"><i data-icon="copy" data-size="13"></i> Copy run command</button>
+			</div>
+		</div>
+		<div class="codeblock reveal">
+			<div class="codeblock-head">
+				<span class="dots"><span></span><span></span><span></span></span>
+				<span>StatCard.svelte</span>
+				<span style="margin-left:auto"></span>
+				<button class="btn btn-ghost btn-icon btn-sm" data-copy="StatCard.svelte"><i data-icon="copy" data-size="12"></i></button>
+			</div>
+<pre><code><span class="tok-c">&lt;!-- Svelte 5 · same tokens, same classes --&gt;</span>
+<span class="tok-k">&lt;script&gt;</span>
+  <span class="tok-k">let</span> { label, value, delta } = <span class="tok-f">$props</span>();
+<span class="tok-k">&lt;/script&gt;</span>
+
+&lt;div <span class="tok-f">class</span>=<span class="tok-s">"stat-card spotlight"</span> <span class="tok-f">use:spotlight</span>&gt;
+  &lt;div <span class="tok-f">class</span>=<span class="tok-s">"stat-label"</span>&gt;{label}&lt;/div&gt;
+  &lt;div <span class="tok-f">class</span>=<span class="tok-s">"stat-value"</span>&gt;{value}&lt;/div&gt;
+  &lt;div <span class="tok-f">class</span>=<span class="tok-s">"stat-delta"</span>&gt;{delta}&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+		</div>
+	</div>
+
+	<footer class="hub-footer">
+		<span>Ember Design System v2 · Premium Dark · Amber→Rose</span>
+		<span class="font-mono">static preview · no build · <a href="tokens.html" class="text-primary">tokens →</a></span>
+	</footer>
+</div>
+
+<script src="icons.js"></script>
+<script src="ember.js"></script>
+<script>
+	// duplicate marquee content for a seamless loop
+	const track = document.getElementById('marquee-track');
+	track.innerHTML += track.innerHTML;
+</script>
+</body>
+</html>

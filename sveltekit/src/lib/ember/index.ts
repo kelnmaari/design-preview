@@ -1,0 +1,21 @@
+// Ember for Svelte — public API barrel.
+export { default as Badge } from './Badge.svelte';
+export { default as Button } from './Button.svelte';
+export { default as Card } from './Card.svelte';
+export { default as CommandPalette } from './CommandPalette.svelte';
+export { default as Icon } from './Icon.svelte';
+export { default as Modal } from './Modal.svelte';
+export { default as Progress } from './Progress.svelte';
+export { default as Segmented } from './Segmented.svelte';
+export { default as Shell } from './Shell.svelte';
+export { default as Sparkline } from './Sparkline.svelte';
+export { default as StatCard } from './StatCard.svelte';
+export { default as Switch } from './Switch.svelte';
+export { default as ThemeToggle } from './ThemeToggle.svelte';
+export { default as Toasts } from './Toasts.svelte';
+export { default as TokenBars } from './TokenBars.svelte';
+export { ICONS, type IconName } from './icons.js';
+export { clickOutside, count, reveal, spotlight } from './actions.svelte.js';
+export { theme, type EmberTheme } from './theme.svelte.js';
+export { toast, type Toast, type ToastKind } from './toast.svelte.js';
+export type { Command } from './CommandPalette.svelte';

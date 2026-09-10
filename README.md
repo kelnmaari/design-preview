@@ -1,8 +1,10 @@
-# Ember Design Preview
+# Ember Design Preview · v2
 
 Static HTML mockups for the **Ember** redesign of `web-svelte/`: Premium Dark surfaces, a warm **Amber → Rose** signature gradient, and a dense, data-focused rhythm. These mockups exist for **visual approval only** — they do not touch production code.
 
 > Spec: [`../docs/superpowers/specs/2026-07-22-web-redesign-ember-design.md`](../docs/superpowers/specs/2026-07-22-web-redesign-ember-design.md)
+
+**v2 adds:** a motion system (easings, durations, reveal-on-scroll), glow/spotlight/glass effects, an animated signature gradient, a working **⌘K command palette**, toasts, dropdowns, dialogs, switches, segmented controls, animated counters + charts, light-theme polish, responsive + mobile nav — and a **SvelteKit reference app** in `sveltekit/`. Still zero build step for the mockups.
 
 ## Open the mockups
 
@@ -10,18 +12,22 @@ No build step, no server. Just open the files in a browser (double-click, or `fi
 
 | File | What it shows |
 |---|---|
-| **`tokens.html`** | Start here. The full palette, typography scale, gradient, radii, density rhythm. Has a dark/light toggle. |
-| **`components.html`** | The component library: buttons, stat cards, badges, table, inputs, tabs, progress, modal, skeletons, empty states. |
-| **`dashboard.html`** | Main dashboard — stat cards, token bar chart, top models, recent conversations, available models. |
-| **`chat.html`** | Three-pane chat shell — conversation list, message stream (with streaming caret), composer, RAG context panel. |
-| **`api-keys.html`** | Dense key table + a slide-in create-key panel (with the one-time key reveal state). |
-| **`admin-users.html`** | Admin users table with roles, online status dots, bulk-select actions, pagination. |
-| **`admin-models-before-after.html`** | Side-by-side: the current hardcoded "dirty" component vs the tokenized Ember version. Proves dark mode is fixed. |
+| **`index.html`** | Start here. Hub + hero: links to every mockup, live component marquee, Svelte teaser. |
+| **`tokens.html`** | The full palette, typography scale, gradient, radii, density rhythm — plus motion, elevation, z-index. Click-to-copy + persisted dark/light toggle. |
+| **`components.html`** | The component library: buttons, stat cards, badges, table, inputs, tabs, progress, modal, skeletons, empty states — plus switch, segmented, dropdowns, tooltips, toasts, dialog, code blocks. Everything clickable. |
+| **`dashboard.html`** | Main dashboard — animated counters, token bar chart with 7/30/90d ranges, top models, recent conversations, available models, activity feed, gateway health. |
+| **`chat.html`** | Three-pane chat shell — simulated streaming, working composer, model switcher, RAG toggle, context panel. Mobile-ready. |
+| **`api-keys.html`** | Dense key table (live filter, status filter, bulk-select) + a slide-in create-key panel with a real create → one-time reveal flow. |
+| **`admin-users.html`** | Admin users table with roles, presence dots, live search + role/status filters, bulk-select bar, invite dialog, pagination. |
+| **`admin-models-before-after.html`** | Side-by-side: the current hardcoded "dirty" component vs the tokenized Ember version. Flip the theme toggle to prove dark mode is fixed. |
 
 Supporting files (not meant to be opened directly):
-- `styles.css` — the single source of truth for all tokens + component classes.
+- `styles.css` — the single source of truth for all tokens + component classes (§1–§7 = v1, §8+ = v2 wow-layer).
+- `ember.js` — zero-dependency interaction library: theme, ⌘K palette, toasts, spotlight, reveal, counters, tabs, dropdowns, table select/filter, dialogs.
 - `icons.js` — inline SVG icon set (mirrors FontAwesome solid names used in prod, so migration is 1:1). Loaded automatically by each page.
-- `_shell.js` — shared sidebar + topbar app chrome, mounted by the page mockups.
+- `_shell.js` — shared sidebar + topbar app chrome (theme toggle, palette trigger, mobile off-canvas nav), mounted by the page mockups.
+- `SVELTE-INTEGRATION.md` — the integration contract: token mapping, class ↔ component map, behaviour ports, `web-svelte/` checklist.
+- `sveltekit/` — working **SvelteKit + Svelte 5** reference app (dashboard, tokens, components). `npm --prefix sveltekit install && npm --prefix sveltekit run dev`.
 
 ## The design at a glance
 
