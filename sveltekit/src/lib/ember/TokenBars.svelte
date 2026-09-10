@@ -31,15 +31,11 @@
 		});
 	});
 
-	// Retrigger the grow animation when the range changes.
-	let animKey = $state(0);
-	$effect(() => {
-		void days;
-		animKey++;
-	});
+	// NOTE: keyed directly on `days` (not a bumped counter in $effect):
+	// `key++` inside $effect reads + writes the same state and self-loops forever.
 </script>
 
-{#key animKey}
+{#key days}
 	<div class="bars animate">
 		{#each bars as bar (bar.delay)}
 			<div
