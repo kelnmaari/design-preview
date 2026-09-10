@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ember · Design System v2</title>
-<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles.css?v=2.1" />
 <style>
 	.hub-nav { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: rgb(var(--tw-background) / 0.72); border-bottom: 1px solid var(--color-border); }
 	.hub-nav-inner { max-width: 1180px; margin: 0 auto; padding: 0 24px; height: 56px; display: flex; align-items: center; gap: 12px; }
@@ -32,7 +32,6 @@
 	.sec-head { display: flex; align-items: baseline; justify-content: space-between; margin: 56px 0 4px; gap: 12px; }
 	.sec-head h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
 	.sec-head p { font-size: 13px; color: var(--color-muted-foreground); }
-	.marquee-chip { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 500; padding: 8px 14px; border-radius: 9999px; background: var(--color-card); border: 1px solid var(--color-border); white-space: nowrap; color: var(--color-muted-foreground); }
 	.kbd-row { display: flex; gap: 8px; justify-content: center; margin-top: 26px; align-items: center; font-size: 12.5px; color: var(--color-subtle); }
 	.svelte-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; align-items: start; }
 	@media (max-width: 900px) { .svelte-grid { grid-template-columns: 1fr; } }
@@ -182,12 +181,65 @@
 	</footer>
 </div>
 
-<script src="icons.js"></script>
-<script src="ember.js"></script>
+<script src="icons.js?v=2.1"></script>
+<script src="ember.js?v=2.1"></script>
 <script>
-	// duplicate marquee content for a seamless loop
-	const track = document.getElementById('marquee-track');
-	track.innerHTML += track.innerHTML;
+	// Seamless marquee: clone the chip set until the strip covers the viewport
+	// plus one full set, then scroll by exactly one set pitch via WAAPI.
+	// The pitch is measured from live layout, so font swaps, zoom and viewport
+	// width can't break the seam. Runs synchronously — first paint is final.
+	(function () {
+		var track = document.getElementById('marquee-track');
+		if (!track || !track.children.length) return;
+		if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+		if (!track.animate) return; // very old browser: leave a clean static strip
+		var PX_PER_SEC = 85;
+		var set = Array.prototype.slice.call(track.children);
+		var anim = null;
+
+		// Exact width of one set: distance between the first chips of copy 1 and 2.
+		// A difference of rects, so any in-flight transform cancels out.
+		function pitch() {
+			if (track.children.length < set.length + 1) return Math.max(1, track.scrollWidth);
+			var a = set[0].getBoundingClientRect().left;
+			var b = track.children[set.length].getBoundingClientRect().left;
+			return Math.max(1, b - a);
+		}
+		function fill() {
+			var need = track.parentElement.clientWidth + pitch() + 16;
+			var guard = 0;
+			while (track.scrollWidth < need && guard++ < 24) {
+				set.forEach(function (chip) { track.appendChild(chip.cloneNode(true)); });
+			}
+		}
+		function start() {
+			fill();
+			var p = pitch();
+			var duration = (p / PX_PER_SEC) * 1000;
+			// Preserve playback phase across restarts (resize / font load): no snap.
+			var keep = anim && anim.currentTime ? anim.currentTime % duration : 0;
+			if (anim) anim.cancel();
+			anim = track.animate(
+				[{ transform: 'translateX(0)' }, { transform: 'translateX(' + (-p) + 'px)' }],
+				{ duration: duration, iterations: Infinity }
+			);
+			anim.currentTime = keep;
+		}
+
+		start();
+		var strip = track.parentElement;
+		strip.addEventListener('mouseenter', function () { if (anim) anim.pause(); });
+		strip.addEventListener('mouseleave', function () { if (anim) anim.play(); });
+		document.addEventListener('visibilitychange', function () {
+			if (!anim) return;
+			if (document.hidden) anim.pause();
+			else if (!strip.matches(':hover')) anim.play();
+		});
+
+		var t;
+		window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(start, 200); });
+		if (document.fonts && document.fonts.ready) document.fonts.ready.then(start);
+	})();
 </script>
 </body>
 </html>

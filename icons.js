@@ -104,7 +104,8 @@
 	};
 
 	function render() {
-		document.querySelectorAll('i[data-icon], span[data-icon]').forEach(function (el) {
+		document.querySelectorAll('i[data-icon]:not([data-icon-done]), span[data-icon]:not([data-icon-done])').forEach(function (el) {
+			el.setAttribute('data-icon-done', '');
 			const name = el.getAttribute('data-icon');
 			const svg = paths[name];
 			if (!svg) { el.textContent = '·'; return; }
@@ -116,10 +117,12 @@
 		});
 	}
 
+	// Render synchronously: every page includes this script at the end of <body>,
+	// so the DOM is fully parsed and icons land before first paint (zero shift).
+	render();
+	// Fallback for <head> inclusion: re-run once parsing finishes.
 	if (document.readyState === 'loading') {
 		document.addEventListener('DOMContentLoaded', render);
-	} else {
-		render();
 	}
 	// expose for re-render after dynamic DOM changes
 	window.__renderIcons = render;

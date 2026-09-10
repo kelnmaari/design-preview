@@ -617,10 +617,6 @@ kbd {
 	0%, 49% { opacity: 1; }
 	50%, 100% { opacity: 0; }
 }
-@keyframes ember-marquee {
-	from { transform: translateX(0); }
-	to { transform: translateX(-50%); }
-}
 @keyframes ember-spin {
 	to { transform: rotate(360deg); }
 }
@@ -931,10 +927,21 @@ kbd {
 .slide-panel { position: fixed; top: 0; right: 0; bottom: 0; width: 400px; max-width: calc(100vw - 32px); z-index: var(--z-panel); background: var(--color-card); border-left: 1px solid var(--color-border); box-shadow: var(--shadow-lg); display: flex; flex-direction: column; transform: translateX(102%); transition: transform var(--dur-normal) var(--ease-out); }
 .slide-panel.open { transform: none; }
 
-/* ---- Marquee (index hero strip) ---- */
+/* ---- Marquee (index hero strip) ----
+   Seamless by construction: spacing lives on the items (margin, not container
+   gap), so every cloned copy is pixel-identical. Motion is driven by WAAPI
+   (see the marquee script in index.html), which measures the live set pitch —
+   font swaps, zoom and viewport width can't break the seam. Without JS the
+   strip renders as a clean static row. */
 .marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-.marquee-track { display: flex; gap: 10px; width: max-content; animation: ember-marquee 30s linear infinite; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-track { display: flex; flex-wrap: nowrap; align-items: center; width: max-content; max-width: none; will-change: transform; }
+.marquee-track > * { flex: 0 0 auto; margin: 0; margin-inline-end: 10px; }
+.marquee-chip { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 500; padding: 8px 14px; border-radius: 9999px; background: var(--color-card); border: 1px solid var(--color-border); white-space: nowrap; color: var(--color-muted-foreground); }
+
+/* ---- Icon placeholder: reserve the box before icons.js hydrates ----
+   :empty only matches pre-hydration placeholders (the injected SVG child
+   disqualifies it), so final rendering is untouched — but nothing shifts. */
+i[data-icon]:empty, span[data-icon]:empty { display: inline-block; width: 1em; height: 1em; flex: none; }
 
 /* ---- stepped reveal (stagger children) ---- */
 .reveal { opacity: 0; }
@@ -998,5 +1005,7 @@ kbd {
 @media (prefers-reduced-motion: reduce) {
 	*, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 	.reveal { opacity: 1; }
+	.marquee { -webkit-mask-image: none; mask-image: none; overflow: visible; }
+	.marquee-track { animation: none !important; transform: none !important; will-change: auto; width: auto; max-width: 100%; flex-wrap: wrap; justify-content: center; row-gap: 10px; }
 	.bg-gradient-animated, .text-gradient-animated, .orb { animation: none; }
 }
