@@ -1,25 +1,38 @@
 <script lang="ts">
 	import {
+		AvatarStack,
 		Badge,
+		Banner,
 		Button,
 		Card,
+		CodeBlock,
+		CopyButton,
+		Dropdown,
+		EmptyState,
 		Icon,
 		Modal,
+		Pagination,
 		Progress,
+		SearchField,
 		Segmented,
+		SlidePanel,
 		StatCard,
 		Switch,
+		Tabs,
+		TextField,
 		reveal,
 		spotlight,
 		toast
 	} from '$lib/ember/index.js';
 
 	let modalOpen = $state(false);
+	let panelOpen = $state(false);
 	let streaming = $state(true);
 	let range = $state('30');
-	let activeTab = $state(0);
-
-	const TABS = ['Overview', 'Models', 'Requests', 'Settings'];
+	let activeTab = $state('overview');
+	let search = $state('');
+	let modelName = $state('');
+	let page = $state(1);
 
 	const ROWS = [
 		{ name: 'Production · Web', status: 'Active', tone: 'success' as const, req: '48,201', created: '2 days ago' },
@@ -29,11 +42,6 @@
 
 	let checked = $state([false, false, false]);
 	const selectedCount = $derived(checked.filter(Boolean).length);
-
-	function copyText(text: string) {
-		navigator.clipboard?.writeText(text).catch(() => {});
-		toast.success('Copied to clipboard', text.slice(0, 42));
-	}
 </script>
 
 <svelte:head>
@@ -66,6 +74,7 @@
 		<Button size="lg">Large</Button>
 		<Button variant="outline" iconOnly size="sm"><Icon name="pencil" size={13} /></Button>
 		<Button variant="outline" iconOnly><Icon name="copy" size={14} /></Button>
+		<CopyButton text="--tw-primary: 244 63 94;" preview="--tw-primary: 244 63 94;" />
 	</div>
 </div>
 
@@ -95,21 +104,44 @@
 <div class="block" use:reveal>
 	<div class="block-title">Form Controls</div>
 	<div class="grid grid-3">
-		<div>
-			<label class="field-label" for="f-model">Model name</label>
-			<input id="f-model" class="input" placeholder="gpt-4o-mini" />
-			<div class="field-hint">Lowercase, hyphenated.</div>
-		</div>
-		<div>
-			<label class="field-label" for="f-key">API key (mono)</label>
-			<input id="f-key" class="input input-mono" value="sk-aigw-9f2e••••••••" readonly />
-		</div>
+		<TextField label="Model name" hint="Lowercase, hyphenated." placeholder="gpt-4o-mini" bind:value={modelName} />
+		<TextField label="API key (mono)" value="sk-aigw-9f2e••••••••" mono readonly />
 		<div>
 			<span class="field-label">Switch + Segmented</span>
 			<div class="stack">
 				<Switch bind:checked={streaming} label="Streaming responses" />
 				<Segmented options={[{ value: '7', label: '7d' }, { value: '30', label: '30d' }, { value: '90', label: '90d' }]} bind:value={range} />
 			</div>
+		</div>
+		<div>
+			<span class="field-label">Search field</span>
+			<SearchField bind:value={search} placeholder="Search models…" kbd />
+			<div class="field-hint">Try typing — the clear button appears.</div>
+		</div>
+		<div>
+			<span class="field-label">Dropdown menu</span>
+			<Dropdown align="left">
+				{#snippet trigger({ toggle })}
+					<Button variant="outline" onclick={toggle}>
+						<Icon name="filter" size={13} /> Status: All <Icon name="chevron-down" size={11} />
+					</Button>
+				{/snippet}
+				<div class="menu-label">Set status</div>
+				<button class="menu-item" onclick={() => toast.success('Status → Active', 'Dropdown demo.')}><Badge variant="success" dot>Active</Badge></button>
+				<button class="menu-item" onclick={() => toast.warning('Status → Limited', 'Dropdown demo.')}><Badge variant="amber">Limited</Badge></button>
+				<button class="menu-item danger" onclick={() => toast.error('Status → Revoked', 'Dropdown demo.')}><Badge variant="destructive">Revoked</Badge></button>
+			</Dropdown>
+		</div>
+		<div class="flex items-end gap-2">
+			<AvatarStack
+				avatars={[
+					{ initials: 'AK' },
+					{ initials: 'JN', gradient: 'linear-gradient(135deg,#10B981,#22D3EE)' },
+					{ initials: 'SR', gradient: 'linear-gradient(135deg,#8B5CF6,#EC4899)' }
+				]}
+				extra={5}
+			/>
+			<span class="text-xs text-muted-foreground">avatar stack</span>
 		</div>
 	</div>
 </div>
@@ -120,7 +152,7 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th style="width:28px;"><input type="checkbox" class="checkbox" checked={selectedCount === ROWS.length} indeterminate={selectedCount > 0 && selectedCount < ROWS.length} onchange={(e) => (checked = ROWS.map(() => e.currentTarget.checked))} /></th>
+					<th style="width:28px;"><input type="checkbox" class="checkbox" checked={selectedCount === ROWS.length} indeterminate={selectedCount > 0 && selectedCount < ROWS.length} onchange={(e) => (checked = ROWS.map(() => e.currentTarget.checked))} aria-label="Select all" /></th>
 					<th>Name</th>
 					<th>Status</th>
 					<th>Requests</th>
@@ -130,7 +162,7 @@
 			<tbody>
 				{#each ROWS as row, i (row.name)}
 					<tr class:selected={checked[i]}>
-						<td><input type="checkbox" class="checkbox" bind:checked={checked[i]} /></td>
+						<td><input type="checkbox" class="checkbox" bind:checked={checked[i]} aria-label="Select {row.name}" /></td>
 						<td><span class="font-medium">{row.name}</span></td>
 						<td><Badge variant={row.tone} dot={row.tone === 'success'}>{row.status}</Badge></td>
 						<td class="cell-mono">{row.req}</td>
@@ -139,6 +171,10 @@
 				{/each}
 			</tbody>
 		</table>
+		<div class="card-footer flex items-center justify-between">
+			<span class="text-xs text-muted-foreground">{selectedCount} selected</span>
+			<Pagination total={12} bind:page onchange={(p) => toast.info(`Page ${p}`, 'Pagination demo.')} />
+		</div>
 	</div>
 </div>
 
@@ -152,15 +188,19 @@
 			<Progress value={92} tone="success" />
 		</Card>
 		<Card>
-			<div class="tabs mb-3" role="tablist">
-				{#each TABS as tab, i (tab)}
-					<button class="tab" class:active={activeTab === i} onclick={() => (activeTab = i)} role="tab" aria-selected={activeTab === i}>{tab}</button>
-				{/each}
-			</div>
-			<p class="text-sm text-muted-foreground">
-				{#if activeTab === 0}Active tab gets a primary underline. Click — state lives in one $state variable.
-				{:else if activeTab === 1}42 models indexed · 4 providers · all healthy.
-				{:else if activeTab === 2}84.2k requests this week · p50 380ms · p99 1.2s.
+			<Tabs
+				bind:value={activeTab}
+				tabs={[
+					{ value: 'overview', label: 'Overview' },
+					{ value: 'models', label: 'Models', badge: '42' },
+					{ value: 'requests', label: 'Requests' },
+					{ value: 'settings', label: 'Settings' }
+				]}
+			/>
+			<p class="text-sm text-muted-foreground mt-3">
+				{#if activeTab === 'overview'}Active tab gets a primary underline. State lives in one bindable variable.
+				{:else if activeTab === 'models'}42 models indexed · 4 providers · all healthy.
+				{:else if activeTab === 'requests'}84.2k requests this week · p50 380ms · p99 1.2s.
 				{:else}Gateway URL, default model, retention — all tokenized.{/if}
 			</p>
 		</Card>
@@ -168,7 +208,37 @@
 </div>
 
 <div class="block" use:reveal>
-	<div class="block-title">Spotlight · Modal · Toasts</div>
+	<div class="block-title">Banners</div>
+	<div class="stack">
+		<Banner variant="ember" title="A new version is available" subtitle="You're on v7.0.0 — view the changelog to see what's new.">
+			<Button size="sm" onclick={() => toast.info('Changelog', 'Banner demo.')}>
+				<Icon name="download" size={13} /> View changelog
+			</Button>
+		</Banner>
+		<Banner variant="ghost" icon="circle-info" title="Heads up: staging keys rotate on Friday." subtitle="3 keys affected — no action needed for production.">
+			<Button variant="outline" size="sm" onclick={() => toast.info('Rotation plan', 'Banner demo.')}>Details</Button>
+		</Banner>
+	</div>
+</div>
+
+<div class="block" use:reveal>
+	<div class="block-title">Code Block · Empty State</div>
+	<div class="grid grid-2 gap-3">
+		<CodeBlock
+			title="app.css — tokens"
+			language="css"
+			code={'/* .dark becomes the Ember palette */\n.dark {\n  --tw-background: 10 10 12;\n  --tw-primary: 244 63 94;  /* rose-500 */\n  --tw-amber: 245 158 11;\n}'}
+		/>
+		<div class="card">
+			<EmptyState icon="key" title="No API keys yet" description="Create your first key to start calling the gateway.">
+				<Button variant="primary" size="sm" onclick={() => toast.info('Create key', 'Empty-state demo.')}><Icon name="plus" size={13} /> Create key</Button>
+			</EmptyState>
+		</div>
+	</div>
+</div>
+
+<div class="block" use:reveal>
+	<div class="block-title">Spotlight · Modal · Slide-over · Toasts</div>
 	<div class="grid grid-2 gap-3">
 		<div class="card card-body spotlight spotlight-border" use:spotlight>
 			<div class="label">spotlight (move your cursor)</div>
@@ -178,9 +248,9 @@
 		<Card>
 			<div class="row">
 				<Button variant="outline" size="sm" onclick={() => (modalOpen = true)}><Icon name="cube" size={13} /> Open dialog</Button>
+				<Button variant="outline" size="sm" onclick={() => (panelOpen = true)}><Icon name="panel-right" size={13} /> Open slide-over</Button>
 				<Button variant="outline" size="sm" onclick={() => toast.success('Deployed', 'gateway v7.0.1 is live on worker-02.')}>Success toast</Button>
 				<Button variant="outline" size="sm" onclick={() => toast.warning('Quota at 82%', 'Consider raising the limit before Friday.')}>Warning toast</Button>
-				<Button variant="outline" size="sm" onclick={() => copyText('--tw-primary: 244 63 94;')}><Icon name="copy" size={13} /> Copy token</Button>
 			</div>
 			<div class="mt-3"><div class="typing-dots"><span></span><span></span><span></span></div></div>
 		</Card>
@@ -205,6 +275,19 @@
 		</Button>
 	{/snippet}
 </Modal>
+
+<SlidePanel bind:open={panelOpen} title="Slide-over panel" description="Same pattern as the create-key flow.">
+	<TextField label="Name" placeholder="Something memorable" />
+	<div class="mt-3">
+		<Switch label="Enable notifications" />
+	</div>
+	{#snippet footer()}
+		<Button variant="ghost" size="sm" onclick={() => (panelOpen = false)}>Cancel</Button>
+		<Button variant="ember" size="sm" onclick={() => { panelOpen = false; toast.success('Saved', 'Slide-over demo.'); }}>
+			<Icon name="check" size={13} /> Save changes
+		</Button>
+	{/snippet}
+</SlidePanel>
 
 <style>
 	.block { margin-bottom: 2.5rem; }

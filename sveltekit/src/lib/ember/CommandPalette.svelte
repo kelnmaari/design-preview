@@ -20,6 +20,9 @@
 
 	const DEFAULTS: Command[] = [
 		{ group: 'Pages', label: 'Dashboard', hint: 'overview', icon: 'gauge', href: '/' },
+		{ group: 'Pages', label: 'Chat', hint: 'thread', icon: 'comments', href: '/chat' },
+		{ group: 'Pages', label: 'API Keys', hint: '156 keys', icon: 'key', href: '/api-keys' },
+		{ group: 'Pages', label: 'Users', hint: 'admin', icon: 'users', href: '/users' },
 		{ group: 'Pages', label: 'Design Tokens', hint: 'system', icon: 'fire', href: '/tokens' },
 		{ group: 'Pages', label: 'Components', hint: 'library', icon: 'cube', href: '/components' },
 		{ group: 'Actions', label: 'Toggle theme', hint: 'dark / light', icon: 'sun', action: 'theme' }

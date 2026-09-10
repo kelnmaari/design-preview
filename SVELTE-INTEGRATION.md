@@ -114,7 +114,24 @@ Class ↔ component map:
 | `#ember-toasts` | `toast` store + `Toasts.svelte` | `toast.success/info/warning/error()` |
 | `.cmdk-*` | `CommandPalette.svelte` | ⌘K built in, `goto()` navigation |
 | `.bars` | `TokenBars.svelte` | seeded data — SSR-safe |
+| `.input` / `.field-*` | `TextField.svelte` | `bind:value`, `mono`, `multiline`, `hint` |
+| `.tabs` | `Tabs.svelte` | `bind:value` + `tabs` (+ optional badges) |
+| `.dropdown` / `.menu` | `Dropdown.svelte` | render-prop `trigger` snippet, click-outside close |
+| `.slide-panel` | `SlidePanel.svelte` | `bind:open`, Esc + scrim close |
+| `.banner` | `Banner.svelte` | `ember` / `ghost` variants |
+| `.codeblock` | `CodeBlock.svelte` | title + copy button built in |
+| `.avatar` | `Avatar.svelte` / `AvatarStack.svelte` | initials + gradient, `+N` overflow |
+| `.empty-state` | `EmptyState.svelte` | icon + title + action snippet |
+| `.pagination` | `Pagination.svelte` | `bind:page`, ellipsis window |
+| `.search-field` | `SearchField.svelte` | `bind:value`, clear button, ⌘K hint |
+| copy buttons | `CopyButton.svelte` | clipboard + toast built in |
 | app shell | `Shell.svelte` | sidebar + topbar + mobile nav |
+
+Example routes in `sveltekit/src/routes/`: `/` dashboard (bars, sparklines,
+activity), `/chat` (word-by-word streaming, composer, model switcher, RAG panel),
+`/api-keys` (filters, bulk-select, create-key slide-over with one-time reveal),
+`/users` (tabs, role/presence filters, bulk bar, invite modal), `/tokens`
+(data-driven swatches), `/components` (every component above, live).
 
 ## 5. Icons
 

@@ -23,8 +23,9 @@ Other scripts: `npm run build`, `npm run preview`, `npm run check` (svelte-check
 | `src/lib/ember/actions.svelte.ts` | Svelte actions: `use:spotlight`, `use:reveal`, `use:count`, `use:clickOutside`. |
 | `src/lib/ember/toast.svelte.ts` | Toast store: `toast.success/info/warning/error(title, desc)`. |
 | `src/lib/ember/icons.ts` + `Icon.svelte` | Inline SVG set, 1:1 with `../icons.js`. |
-| `src/lib/ember/*.svelte` | `Shell`, `Button`, `Card`, `Badge`, `StatCard`, `Switch`, `Segmented`, `Progress`, `Modal`, `Toasts`, `CommandPalette` (⌘K), `TokenBars`, `Sparkline`, `ThemeToggle`. |
-| `src/routes/` | `/` dashboard, `/tokens`, `/components`. |
+| `src/lib/ember/*.svelte` | `Shell`, `Button`, `Card`, `Badge`, `StatCard`, `Switch`, `Segmented`, `Progress`, `Modal`, `Toasts`, `CommandPalette` (⌘K), `TokenBars`, `Sparkline`, `ThemeToggle`, `TextField`, `Tabs`, `Dropdown`, `SlidePanel`, `Banner`, `CodeBlock`, `Avatar` + `AvatarStack`, `EmptyState`, `Pagination`, `SearchField`, `CopyButton`. |
+| `src/lib/ember/utils.ts` | `sleep()`, `copyText()`, `seededRandom()` — clipboard + timing + SSR-safe demo data. |
+| `src/routes/` | `/` dashboard, `/tokens`, `/components`, `/chat` (streaming), `/api-keys` (create-key slide-over), `/users` (admin table + invite). |
 | `src/app.html` | Inline pre-paint theme script (no dark-mode flash). |
 
 ## Porting to `web-svelte/`

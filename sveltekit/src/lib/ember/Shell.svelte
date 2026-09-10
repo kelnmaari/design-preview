@@ -24,15 +24,17 @@
 	const NAV: NavItem[] = [
 		{ section: 'Workspace' },
 		{ label: 'Dashboard', icon: 'gauge', href: '/' },
+		{ label: 'Chat', icon: 'comments', href: '/chat' },
+		{ label: 'API Keys', icon: 'key', href: '/api-keys', badge: '3' },
+		{ section: 'System' },
 		{ label: 'Tokens', icon: 'fire', href: '/tokens' },
 		{ label: 'Components', icon: 'cube', href: '/components' },
-		{ label: 'API Keys', icon: 'key', href: '#', badge: '3' },
 		{ section: 'Platform' },
 		{ label: 'Models', icon: 'microchip', href: '#' },
 		{ label: 'RAG', icon: 'database', href: '#' },
 		{ label: 'Monitor', icon: 'chart-line', href: '#' },
 		{ section: 'Admin' },
-		{ label: 'Users', icon: 'users', href: '#' },
+		{ label: 'Users', icon: 'users', href: '/users' },
 		{ label: 'Settings', icon: 'gear', href: '#' }
 	];
 
