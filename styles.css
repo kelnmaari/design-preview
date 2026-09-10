@@ -43,6 +43,8 @@
 	--tw-secondary-foreground: 250 250 250;
 	--tw-success: 16 185 129;           /* #10B981 emerald (NEW) */
 	--tw-info: 34 211 238;              /* #22D3EE cyan (NEW) */
+	--tw-gradient-from: 245 158 11;     /* signature gradient poles */
+	--tw-gradient-to: 244 63 94;
 
 	/* --- Stat colors (harmonized warm) --- */
 	--tw-stat-conversations: 251 191 36;  /* #FBBF24 amber-400 */
@@ -114,6 +116,8 @@
 	--tw-secondary-foreground: 10 10 12;
 	--tw-success: 5 150 105;
 	--tw-info: 6 182 212;
+	--tw-gradient-from: 245 158 11;
+	--tw-gradient-to: 225 29 72;
 
 	--tw-stat-conversations: 245 158 11;
 	--tw-stat-apikeys: 244 63 94;
@@ -121,23 +125,168 @@
 	--tw-stat-requests: 249 115 22;
 }
 
+/* ---- Extra themes: 2 dark + 2 light (same --tw-* contract) ---- */
+.ember-midnight {
+	/* GitHub-dark inspired cool slate */
+	--tw-background: 13 17 23;
+	--tw-foreground: 230 237 243;
+	--tw-card: 22 27 34;
+	--tw-card-foreground: 230 237 243;
+	--tw-card-elevated: 33 38 45;
+	--tw-muted: 33 38 45;
+	--tw-muted-foreground: 139 148 158;
+	--tw-subtle: 110 119 129;
+	--tw-accent: 33 38 45;
+	--tw-accent-foreground: 230 237 243;
+	--tw-border: 48 54 61;
+	--tw-border-strong: 60 68 78;
+	--tw-input: 48 54 61;
+	--tw-ring: 99 102 241;
+
+	--tw-primary: 96 165 250;
+	--tw-primary-foreground: 13 17 23;
+	--tw-amber: 245 158 11;
+	--tw-destructive: 248 81 73;
+	--tw-destructive-foreground: 255 255 255;
+	--tw-secondary: 33 38 45;
+	--tw-secondary-foreground: 230 237 243;
+	--tw-success: 63 185 80;
+	--tw-info: 121 192 255;
+
+	--tw-stat-conversations: 121 192 255;
+	--tw-stat-apikeys: 88 166 255;
+	--tw-stat-models: 210 168 255;
+	--tw-stat-requests: 57 197 207;
+
+	--tw-gradient-from: 56 189 248;
+	--tw-gradient-to: 99 102 241;
+}
+
+.ember-forest {
+	/* deep green-black, emerald accent */
+	--tw-background: 9 14 12;
+	--tw-foreground: 240 253 244;
+	--tw-card: 15 23 19;
+	--tw-card-foreground: 240 253 244;
+	--tw-card-elevated: 23 33 28;
+	--tw-muted: 23 33 28;
+	--tw-muted-foreground: 148 163 184;
+	--tw-subtle: 100 116 139;
+	--tw-accent: 23 33 28;
+	--tw-accent-foreground: 240 253 244;
+	--tw-border: 32 45 38;
+	--tw-border-strong: 53 69 60;
+	--tw-input: 32 45 38;
+	--tw-ring: 52 211 153;
+
+	--tw-primary: 52 211 153;
+	--tw-primary-foreground: 9 14 12;
+	--tw-amber: 245 158 11;
+	--tw-destructive: 248 113 113;
+	--tw-destructive-foreground: 9 14 12;
+	--tw-secondary: 23 33 28;
+	--tw-secondary-foreground: 240 253 244;
+	--tw-success: 74 222 128;
+	--tw-info: 34 211 238;
+
+	--tw-stat-conversations: 110 231 183;
+	--tw-stat-apikeys: 52 211 153;
+	--tw-stat-models: 45 212 191;
+	--tw-stat-requests: 163 230 53;
+
+	--tw-gradient-from: 110 231 183;
+	--tw-gradient-to: 52 211 153;
+}
+
+.ember-frost {
+	/* cool slate light */
+	--tw-background: 248 250 252;
+	--tw-foreground: 15 23 42;
+	--tw-card: 255 255 255;
+	--tw-card-foreground: 15 23 42;
+	--tw-card-elevated: 255 255 255;
+	--tw-muted: 241 245 249;
+	--tw-muted-foreground: 100 116 139;
+	--tw-subtle: 148 163 184;
+	--tw-accent: 241 245 249;
+	--tw-accent-foreground: 15 23 42;
+	--tw-border: 226 232 240;
+	--tw-border-strong: 203 213 225;
+	--tw-input: 226 232 240;
+	--tw-ring: 37 99 235;
+
+	--tw-primary: 37 99 235;
+	--tw-primary-foreground: 255 255 255;
+	--tw-amber: 217 119 6;
+	--tw-destructive: 220 38 38;
+	--tw-destructive-foreground: 255 255 255;
+	--tw-secondary: 241 245 249;
+	--tw-secondary-foreground: 15 23 42;
+	--tw-success: 5 150 105;
+	--tw-info: 2 132 199;
+
+	--tw-stat-conversations: 14 165 233;
+	--tw-stat-apikeys: 59 130 246;
+	--tw-stat-models: 139 92 246;
+	--tw-stat-requests: 6 182 212;
+
+	--tw-gradient-from: 14 165 233;
+	--tw-gradient-to: 99 102 241;
+}
+
+.ember-sand {
+	/* warm paper light, brand rose accent */
+	--tw-background: 250 247 242;
+	--tw-foreground: 28 25 23;
+	--tw-card: 255 255 255;
+	--tw-card-foreground: 28 25 23;
+	--tw-card-elevated: 255 255 255;
+	--tw-muted: 242 237 230;
+	--tw-muted-foreground: 120 113 108;
+	--tw-subtle: 168 162 158;
+	--tw-accent: 242 237 230;
+	--tw-accent-foreground: 28 25 23;
+	--tw-border: 232 226 218;
+	--tw-border-strong: 214 205 193;
+	--tw-input: 232 226 218;
+	--tw-ring: 225 29 72;
+
+	--tw-primary: 225 29 72;
+	--tw-primary-foreground: 255 255 255;
+	--tw-amber: 217 119 6;
+	--tw-destructive: 220 38 38;
+	--tw-destructive-foreground: 255 255 255;
+	--tw-secondary: 242 237 230;
+	--tw-secondary-foreground: 28 25 23;
+	--tw-success: 5 150 105;
+	--tw-info: 6 182 212;
+
+	--tw-stat-conversations: 245 158 11;
+	--tw-stat-apikeys: 244 63 94;
+	--tw-stat-models: 217 70 239;
+	--tw-stat-requests: 249 115 22;
+
+	--tw-gradient-from: 245 158 11;
+	--tw-gradient-to: 225 29 72;
+}
+
 /* -------------------------------------------------------------------------
    2. SIGNATURE GRADIENT (the "Ember" glow)
    ------------------------------------------------------------------------- */
-.bg-gradient-ember { background-image: linear-gradient(135deg, #F59E0B 0%, #F43F5E 100%); }
+.bg-gradient-ember { background-image: linear-gradient(135deg, rgb(var(--tw-gradient-from)) 0%, rgb(var(--tw-gradient-to)) 100%); }
 .text-gradient-ember {
-	background-image: linear-gradient(135deg, #FBBF24 0%, #F43F5E 100%);
+	background-image: linear-gradient(135deg, rgb(var(--tw-gradient-from)) 0%, rgb(var(--tw-gradient-to)) 100%);
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
 }
-.border-gradient-ember { border-image: linear-gradient(135deg, #F59E0B, #F43F5E) 1; }
+.border-gradient-ember { border-image: linear-gradient(135deg, rgb(var(--tw-gradient-from)), rgb(var(--tw-gradient-to))) 1; }
 
 /* Radial ember glow — used as ambient background atmosphere. */
 .ember-glow {
 	background:
-		radial-gradient(ellipse 80% 50% at 20% -10%, rgba(245, 158, 11, 0.08), transparent 60%),
-		radial-gradient(ellipse 60% 50% at 100% 0%, rgba(244, 63, 94, 0.10), transparent 55%);
+		radial-gradient(ellipse 80% 50% at 20% -10%, rgb(var(--tw-gradient-from) / 0.08), transparent 60%),
+		radial-gradient(ellipse 60% 50% at 100% 0%, rgb(var(--tw-gradient-to) / 0.10), transparent 55%);
 }
 /* Subtle dotted grid texture for hero areas. */
 .ember-grid {
@@ -269,7 +418,7 @@ code, kbd, pre { font-family: var(--font-mono); }
 .btn-primary { background: var(--color-primary); color: var(--color-primary-foreground); }
 .btn-primary:hover { background: rgb(var(--tw-primary) / 0.88); }
 
-.btn-ember { background-image: linear-gradient(135deg, #F59E0B 0%, #F43F5E 100%); color: #fff; }
+.btn-ember { background-image: linear-gradient(135deg, rgb(var(--tw-gradient-from)) 0%, rgb(var(--tw-gradient-to)) 100%); color: #fff; }
 .btn-ember:hover { filter: brightness(1.08); }
 
 .btn-secondary { background: var(--color-secondary); color: var(--color-secondary-foreground); }
@@ -377,7 +526,7 @@ code, kbd, pre { font-family: var(--font-mono); }
 /* ---- Progress bar ---- */
 .progress { height: 6px; background: var(--color-muted); border-radius: 9999px; overflow: hidden; }
 .progress-bar { height: 100%; border-radius: 9999px; transition: width .4s ease; }
-.progress-bar.ember { background-image: linear-gradient(90deg, #F59E0B, #F43F5E); }
+.progress-bar.ember { background-image: linear-gradient(90deg, rgb(var(--tw-gradient-from)), rgb(var(--tw-gradient-to))); }
 .progress-bar.primary { background: var(--color-primary); }
 .progress-bar.success { background: var(--color-success); }
 
@@ -504,3 +653,543 @@ kbd {
    so mockups render offline. We keep names aligned to FA solid icons.
    ------------------------------------------------------------------------- */
 .i { display: inline-block; width: 1em; height: 1em; line-height: 1; }
+
+/* =========================================================================
+   EMBER v2 — the "wow" layer  ·  ADDITIVE ONLY (v1 tokens above untouched)
+   Motion system · atmosphere · glass/glow/spotlight · new components ·
+   command palette · toasts · responsive · light-theme polish.
+   >> SVELTE: every block below has a 1:1 Svelte counterpart in
+   >> SVELTE-INTEGRATION.md / sveltekit/src/lib/ember/
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   8. MOTION + EFFECT TOKENS
+   ------------------------------------------------------------------------- */
+:root,
+.ember {
+	/* --- Motion --- */
+	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+	--ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+	--ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+	--dur-instant: 80ms;
+	--dur-fast: 150ms;
+	--dur-normal: 250ms;
+	--dur-slow: 400ms;
+	--dur-slower: 700ms;
+
+	/* --- Elevation (warm-tinted shadows, dark-first) --- */
+	--shadow-xs: 0 1px 2px rgb(0 0 0 / 0.4);
+	--shadow-sm: 0 2px 8px -2px rgb(0 0 0 / 0.5);
+	--shadow-md: 0 8px 24px -8px rgb(0 0 0 / 0.55);
+	--shadow-lg: 0 20px 60px -12px rgb(0 0 0 / 0.6);
+	--shadow-ember: 0 4px 24px -4px rgb(var(--tw-primary) / 0.45), 0 2px 12px -2px rgb(var(--tw-amber) / 0.3);
+	--shadow-ember-lg: 0 8px 44px -6px rgb(var(--tw-primary) / 0.5), 0 4px 20px -4px rgb(var(--tw-amber) / 0.35);
+
+	/* --- Glow --- */
+	--glow-ember: 0 0 0 1px rgb(var(--tw-primary) / 0.25), 0 0 24px rgb(var(--tw-primary) / 0.25);
+
+	/* --- Chart palette (ordered, colorblind-safer warm→cool) --- */
+	--chart-1: 244 63 94;    /* rose */
+	--chart-2: 245 158 11;   /* amber */
+	--chart-3: 232 121 249;  /* fuchsia */
+	--chart-4: 34 211 238;   /* cyan */
+	--chart-5: 16 185 129;   /* emerald */
+	--chart-6: 251 146 60;   /* orange */
+
+	/* --- Z-index scale --- */
+	--z-base: 1;
+	--z-sticky: 10;
+	--z-dropdown: 40;
+	--z-overlay: 49;
+	--z-panel: 50;
+	--z-dialog: 60;
+	--z-palette: 70;
+	--z-toast: 80;
+}
+
+.ember-light,
+.ember-frost,
+.ember-sand {
+	--shadow-xs: 0 1px 2px rgb(10 10 12 / 0.08);
+	--shadow-sm: 0 2px 8px -2px rgb(10 10 12 / 0.12);
+	--shadow-md: 0 8px 24px -8px rgb(10 10 12 / 0.16);
+	--shadow-lg: 0 20px 60px -12px rgb(10 10 12 / 0.22);
+	--shadow-ember: 0 4px 20px -4px rgb(var(--tw-primary) / 0.35), 0 2px 10px -2px rgb(var(--tw-amber) / 0.25);
+	--shadow-ember-lg: 0 8px 40px -6px rgb(var(--tw-primary) / 0.4), 0 4px 18px -4px rgb(var(--tw-amber) / 0.3);
+	--glow-ember: 0 0 0 1px rgb(var(--tw-primary) / 0.2), 0 0 24px rgb(var(--tw-primary) / 0.18);
+}
+
+/* -------------------------------------------------------------------------
+   9. KEYFRAMES
+   ------------------------------------------------------------------------- */
+@keyframes ember-fade-up {
+	from { opacity: 0; transform: translateY(10px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ember-fade-in {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+@keyframes ember-scale-in {
+	from { opacity: 0; transform: scale(0.96) translateY(6px); }
+	to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes ember-gradient-pan {
+	0%, 100% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+}
+@keyframes ember-orb-drift {
+	0%, 100% { transform: translate(0, 0) scale(1); }
+	33% { transform: translate(24px, -18px) scale(1.08); }
+	66% { transform: translate(-18px, 14px) scale(0.94); }
+}
+@keyframes ember-pulse-dot {
+	0%, 100% { box-shadow: 0 0 0 0 rgb(var(--pulse-rgb, 16 185 129) / 0.5); }
+	50% { box-shadow: 0 0 0 6px rgb(var(--pulse-rgb, 16 185 129) / 0); }
+}
+@keyframes ember-bar-grow {
+	from { transform: scaleY(0.15); opacity: 0.2; }
+	to { transform: scaleY(1); opacity: 1; }
+}
+@keyframes ember-toast-in {
+	from { opacity: 0; transform: translateX(16px) scale(0.97); }
+	to { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes ember-spark-draw {
+	from { stroke-dashoffset: 1; }
+	to { stroke-dashoffset: 0; }
+}
+@keyframes ember-caret-blink {
+	0%, 49% { opacity: 1; }
+	50%, 100% { opacity: 0; }
+}
+@keyframes ember-spin {
+	to { transform: rotate(360deg); }
+}
+
+/* -------------------------------------------------------------------------
+   10. ATMOSPHERE — ambient page background, animated gradient, orbs, noise
+   Usage: <body class="ember-atmo">, or <div class="ember-atmo atmo-local">
+   ------------------------------------------------------------------------- */
+.ember-atmo { position: relative; isolation: isolate; }
+.ember-atmo::before {
+	content: ''; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+	background:
+		radial-gradient(ellipse 55% 38% at 12% -6%, rgb(var(--tw-gradient-from) / 0.09), transparent 62%),
+		radial-gradient(ellipse 48% 36% at 88% 4%, rgb(var(--tw-gradient-to) / 0.11), transparent 60%),
+		radial-gradient(ellipse 60% 45% at 50% 110%, rgb(232 121 249 / 0.05), transparent 65%);
+}
+.ember-light.ember-atmo::before {
+	background:
+		radial-gradient(ellipse 55% 38% at 12% -6%, rgb(217 119 6 / 0.08), transparent 62%),
+		radial-gradient(ellipse 48% 36% at 88% 4%, rgb(225 29 72 / 0.08), transparent 60%),
+		radial-gradient(ellipse 60% 45% at 50% 110%, rgb(217 70 239 / 0.05), transparent 65%);
+}
+/* film-grain noise overlay (SVG turbulence, zero requests) */
+.noise { position: relative; }
+.noise::after {
+	content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+	opacity: 0.5; mix-blend-mode: overlay; border-radius: inherit;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.28'/%3E%3C/svg%3E");
+}
+.ember-light .noise::after { opacity: 0.35; }
+
+/* animated signature gradient (hero banners, logo marks, CTAs) */
+.bg-gradient-animated {
+	background-image: linear-gradient(120deg, #F59E0B, #F43F5E, #E879F9, #F43F5E, #F59E0B);
+	background-size: 220% 220%;
+	animation: ember-gradient-pan 9s ease-in-out infinite;
+}
+.text-gradient-animated {
+	background-image: linear-gradient(110deg, #FBBF24, #F43F5E, #E879F9, #FBBF24);
+	background-size: 220% auto;
+	-webkit-background-clip: text; background-clip: text; color: transparent;
+	animation: ember-gradient-pan 7s ease-in-out infinite;
+}
+
+/* floating glow orbs (decorative, absolutely positioned by the page) */
+.orb { position: absolute; border-radius: 50%; filter: blur(70px); pointer-events: none; z-index: 0; }
+.orb-amber { background: rgb(245 158 11 / 0.16); animation: ember-orb-drift 14s ease-in-out infinite; }
+.orb-rose { background: rgb(244 63 94 / 0.18); animation: ember-orb-drift 18s ease-in-out infinite reverse; }
+.orb-fuchsia { background: rgb(232 121 249 / 0.12); animation: ember-orb-drift 22s ease-in-out infinite; }
+.ember-light .orb-amber { background: rgb(217 119 6 / 0.14); }
+.ember-light .orb-rose { background: rgb(225 29 72 / 0.12); }
+.ember-light .orb-fuchsia { background: rgb(217 70 239 / 0.1); }
+
+.ember-midnight .orb-amber { background: rgb(56 189 248 / 0.14); }
+.ember-midnight .orb-rose { background: rgb(99 102 241 / 0.16); }
+.ember-midnight .orb-fuchsia { background: rgb(139 92 246 / 0.12); }
+.ember-forest .orb-amber { background: rgb(110 231 183 / 0.13); }
+.ember-forest .orb-rose { background: rgb(52 211 153 / 0.15); }
+.ember-forest .orb-fuchsia { background: rgb(45 212 191 / 0.12); }
+.ember-frost .orb-amber { background: rgb(14 165 233 / 0.12); }
+.ember-frost .orb-rose { background: rgb(99 102 241 / 0.12); }
+.ember-frost .orb-fuchsia { background: rgb(139 92 246 / 0.10); }
+.ember-sand .orb-amber { background: rgb(217 119 6 / 0.14); }
+.ember-sand .orb-rose { background: rgb(225 29 72 / 0.12); }
+.ember-sand .orb-fuchsia { background: rgb(217 70 239 / 0.1); }
+
+/* ---- Theme dots: compact 6-theme switcher ---- */
+.theme-dots { display: inline-flex; align-items: center; gap: 6px; padding: 4px; border: 1px solid var(--color-border); border-radius: 9999px; background: var(--color-card); }
+.theme-dots button { width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--color-border-strong); cursor: pointer; padding: 0; transition: transform var(--dur-fast) ease, box-shadow var(--dur-fast) ease; }
+.theme-dots button:hover { transform: scale(1.12); }
+.theme-dots button.active { box-shadow: 0 0 0 2px var(--color-card), 0 0 0 4px var(--color-primary); }
+.theme-dots button[data-theme-btn="ember"] { background: linear-gradient(135deg, #0A0A0C 50%, #F43F5E 50%); }
+.theme-dots button[data-theme-btn="midnight"] { background: linear-gradient(135deg, #0D1117 50%, #60A5FA 50%); }
+.theme-dots button[data-theme-btn="forest"] { background: linear-gradient(135deg, #090E0C 50%, #34D399 50%); }
+.theme-dots button[data-theme-btn="light"] { background: linear-gradient(135deg, #FFFFFF 50%, #E11D48 50%); }
+.theme-dots button[data-theme-btn="frost"] { background: linear-gradient(135deg, #F8FAFC 50%, #2563EB 50%); }
+.theme-dots button[data-theme-btn="sand"] { background: linear-gradient(135deg, #FAF7F2 50%, #E11D48 50%); }
+
+/* ---- Theme cards: full 6-theme gallery ---- */
+.theme-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (max-width: 900px) { .theme-cards { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .theme-cards { grid-template-columns: 1fr; } }
+.theme-card { text-align: left; font: inherit; background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 12px; cursor: pointer; color: var(--color-foreground); transition: border-color var(--dur-fast) ease, transform var(--dur-fast) ease, box-shadow var(--dur-fast) ease; }
+.theme-card:hover { transform: translateY(-2px); border-color: var(--color-border-strong); }
+.theme-card.active { border-color: var(--color-primary); box-shadow: 0 0 0 1px var(--color-primary); }
+.theme-card-swatches { display: flex; gap: 4px; margin-bottom: 10px; }
+.theme-card-swatches span { height: 28px; flex: 1; border-radius: 4px; border: 1px solid rgb(0 0 0 / 0.12); }
+.theme-card-swatches span:first-child { flex: 1.4; }
+.theme-card-name { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.theme-card-desc { font-size: 11.5px; color: var(--color-subtle); margin-top: 2px; }
+
+/* -------------------------------------------------------------------------
+   11. EFFECTS — glass, glow, spotlight, shine, lift
+   ------------------------------------------------------------------------- */
+.glass {
+	background: rgb(var(--tw-card) / 0.62);
+	backdrop-filter: blur(14px) saturate(1.3);
+	-webkit-backdrop-filter: blur(14px) saturate(1.3);
+	border: 1px solid rgb(var(--tw-foreground) / 0.08);
+}
+.glow-ember { box-shadow: var(--glow-ember); }
+.ring-ember { box-shadow: 0 0 0 1px rgb(var(--tw-primary) / 0.4), 0 0 20px rgb(var(--tw-primary) / 0.15); }
+
+/* spotlight card — radial highlight follows the cursor (--mx/--my set by ember.js) */
+.spotlight { position: relative; }
+.spotlight::before {
+	content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+	opacity: 0; transition: opacity var(--dur-normal) ease; z-index: 0;
+	background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgb(244 63 94 / 0.12), transparent 65%);
+}
+.spotlight:hover::before { opacity: 1; }
+.spotlight > * { position: relative; z-index: 1; }
+.spotlight-border { position: relative; }
+.spotlight-border::after {
+	content: ''; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none;
+	opacity: 0; transition: opacity var(--dur-normal) ease;
+	padding: 1px;
+	background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgb(244 63 94 / 0.55), transparent 70%);
+	-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+	mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+	-webkit-mask-composite: xor; mask-composite: exclude;
+}
+.spotlight-border:hover::after { opacity: 1; }
+
+/* button shine sweep + press physics (layered on top of v1 .btn) */
+.btn { position: relative; overflow: hidden; transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease, color var(--dur-fast) ease, opacity var(--dur-fast) ease, transform 120ms var(--ease-out), box-shadow var(--dur-fast) ease, filter var(--dur-fast) ease; }
+.btn:active { transform: translateY(1px) scale(0.985); }
+.btn-ember { box-shadow: var(--shadow-ember); }
+.btn-ember:hover { box-shadow: var(--shadow-ember-lg); }
+.btn-ember::after {
+	content: ''; position: absolute; top: 0; bottom: 0; width: 45%; left: -60%;
+	background: linear-gradient(105deg, transparent, rgb(255 255 255 / 0.35), transparent);
+	transform: skewX(-20deg); transition: left 600ms var(--ease-out);
+}
+.btn-ember:hover::after { left: 130%; }
+.btn-primary:hover { box-shadow: 0 2px 14px -2px rgb(var(--tw-primary) / 0.5); }
+
+/* card lift */
+.card-lift { transition: transform var(--dur-normal) var(--ease-out), border-color var(--dur-fast) ease, box-shadow var(--dur-normal) ease; }
+.card-lift:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+/* gradient hairline on top edge */
+.hairline-top { position: relative; overflow: hidden; }
+.hairline-top::before {
+	content: ''; position: absolute; top: 0; left: 8%; right: 8%; height: 1px;
+	background: linear-gradient(90deg, transparent, rgb(244 63 94 / 0.6), rgb(245 158 11 / 0.6), transparent);
+}
+
+/* pulsing live dot */
+.pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: rgb(var(--pulse-rgb, 16 185 129)); animation: ember-pulse-dot 2s ease-in-out infinite; flex: none; }
+
+/* spinning loader */
+.spin { animation: ember-spin 0.9s linear infinite; }
+
+/* -------------------------------------------------------------------------
+   12. GLOBAL PRIMITIVES (v1 pages used some of these w/o definitions)
+   ------------------------------------------------------------------------- */
+.icon-btn { width: 30px; height: 30px; border-radius: var(--radius-sm); display: inline-grid; place-items: center; color: var(--color-muted-foreground); transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease, transform 120ms var(--ease-out); flex: none; }
+.icon-btn:hover { background: var(--color-accent); color: var(--color-foreground); }
+.icon-btn:active { transform: scale(0.92); }
+.topbar-spacer { flex: 1; }
+.stack { display: flex; flex-direction: column; gap: 0.75rem; }
+.stack-tight { display: flex; flex-direction: column; gap: 0.375rem; }
+.min-w-0 { min-width: 0; }
+.hidden { display: none !important; }
+.text-center { text-align: center; }
+.pointer { cursor: pointer; }
+.truncate-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.p-1 { padding: 0.25rem; } .p-2 { padding: 0.5rem; } .p-3 { padding: 0.75rem; } .p-4 { padding: 1rem; }
+.px-1 { padding-left: 0.25rem; padding-right: 0.25rem; } .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; } .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+.py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; } .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; } .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.ml-2 { margin-left: 0.5rem; } .mr-2 { margin-right: 0.5rem; } .mb-1 { margin-bottom: 0.25rem; }
+.gap-5 { gap: 1.5rem; } .gap-6 { gap: 2rem; }
+.text-xl { font-size: 20px; } .text-2xl { font-size: 24px; }
+.font-bold { font-weight: 700; } .font-extrabold { font-weight: 800; }
+.leading-tight { line-height: 1.25; } .leading-snug { line-height: 1.375; }
+.tracking-tight { letter-spacing: -0.02em; }
+.border { border: 1px solid var(--color-border); }
+.border-t { border-top: 1px solid var(--color-border); }
+.shadow-sm { box-shadow: var(--shadow-sm); } .shadow-md { box-shadow: var(--shadow-md); } .shadow-lg { box-shadow: var(--shadow-lg); }
+.transition { transition: all var(--dur-fast) ease; }
+
+/* code chip */
+.code-chip { font-family: var(--font-mono); font-size: 11.5px; background: var(--color-muted); border: 1px solid var(--color-border); padding: 1px 6px; border-radius: var(--radius-sm); color: var(--color-foreground); white-space: nowrap; }
+
+/* -------------------------------------------------------------------------
+   13. NEW COMPONENTS v2
+   ------------------------------------------------------------------------- */
+
+/* ---- Switch ---- */
+.switch { position: relative; display: inline-flex; align-items: center; cursor: pointer; flex: none; }
+.switch input { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
+.switch .track { width: 34px; height: 20px; border-radius: 9999px; background: var(--color-muted); border: 1px solid var(--color-border-strong); transition: all var(--dur-fast) ease; display: block; }
+.switch .track::after { content: ''; display: block; width: 14px; height: 14px; margin: 2px; border-radius: 50%; background: var(--color-muted-foreground); transition: all var(--dur-fast) var(--ease-spring); }
+.switch input:checked + .track { background: rgb(var(--tw-primary) / 0.9); border-color: transparent; box-shadow: 0 0 12px rgb(var(--tw-primary) / 0.4); }
+.switch input:checked + .track::after { transform: translateX(14px); background: #fff; }
+.switch input:focus-visible + .track { box-shadow: 0 0 0 2px var(--color-background), 0 0 0 4px rgb(var(--tw-ring) / 0.6); }
+
+/* ---- Checkbox / radio ---- */
+.checkbox, .radio { appearance: none; -webkit-appearance: none; width: 15px; height: 15px; border-radius: 4px; border: 1.5px solid var(--color-border-strong); background: var(--color-background); cursor: pointer; position: relative; flex: none; transition: all var(--dur-fast) ease; vertical-align: -2px; }
+.radio { border-radius: 50%; }
+.checkbox:checked { background: var(--color-primary); border-color: var(--color-primary); }
+.checkbox:checked::after { content: ''; position: absolute; left: 4px; top: 1px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(42deg); }
+.checkbox:indeterminate { background: var(--color-primary); border-color: var(--color-primary); }
+.checkbox:indeterminate::after { content: ''; position: absolute; left: 2.5px; top: 6px; width: 8px; height: 2px; background: #fff; border-radius: 1px; }
+.radio:checked { border-color: var(--color-primary); border-width: 4.5px; }
+
+/* ---- Segmented control ---- */
+.segmented { display: inline-flex; gap: 2px; background: var(--color-muted); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 2px; }
+.segmented button { font-size: 12px; font-weight: 500; color: var(--color-muted-foreground); padding: 4px 10px; border-radius: var(--radius-sm); transition: all var(--dur-fast) ease; display: inline-flex; align-items: center; gap: 4px; }
+.segmented button:hover { color: var(--color-foreground); }
+.segmented button.active { background: var(--color-card-elevated); color: var(--color-foreground); box-shadow: var(--shadow-xs); }
+
+/* ---- Tooltip (pure CSS, data-tip) ---- */
+[data-tip] { position: relative; }
+[data-tip]::after {
+	content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(2px);
+	background: var(--color-card-elevated); color: var(--color-foreground); border: 1px solid var(--color-border-strong);
+	font-size: 11px; font-weight: 500; padding: 4px 8px; border-radius: var(--radius-sm); white-space: nowrap;
+	opacity: 0; pointer-events: none; transition: all var(--dur-fast) ease; z-index: var(--z-dropdown);
+	box-shadow: var(--shadow-md);
+}
+[data-tip]:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ---- Dropdown menu ---- */
+.dropdown { position: relative; display: inline-block; }
+.menu {
+	position: absolute; top: calc(100% + 6px); right: 0; min-width: 188px; z-index: var(--z-dropdown);
+	background: var(--color-card-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-md);
+	box-shadow: var(--shadow-lg); padding: 4px;
+	opacity: 0; transform: translateY(-4px) scale(0.98); transform-origin: top right;
+	pointer-events: none; transition: all var(--dur-fast) var(--ease-out);
+}
+.dropdown.open .menu { opacity: 1; transform: none; pointer-events: auto; }
+.menu-item { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; font-size: 12.5px; color: var(--color-foreground); padding: 7px 9px; border-radius: var(--radius-sm); transition: background var(--dur-instant) ease; }
+.menu-item:hover { background: var(--color-accent); }
+.menu-item.danger { color: var(--color-destructive); }
+.menu-item.danger:hover { background: rgb(var(--tw-destructive) / 0.12); }
+.menu-sep { height: 1px; background: var(--color-border); margin: 4px 6px; }
+.menu-label { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-subtle); padding: 6px 9px 3px; }
+
+/* ---- Toasts ---- */
+#ember-toasts { position: fixed; bottom: 20px; right: 20px; z-index: var(--z-toast); display: flex; flex-direction: column; gap: 8px; max-width: min(360px, calc(100vw - 40px)); }
+.toast {
+	display: flex; align-items: flex-start; gap: 10px;
+	background: var(--color-card-elevated); border: 1px solid var(--color-border);
+	border-radius: var(--radius-md); box-shadow: var(--shadow-lg);
+	padding: 10px 12px; font-size: 12.5px;
+	animation: ember-toast-in var(--dur-normal) var(--ease-out);
+}
+.toast.leaving { opacity: 0; transform: translateX(12px); transition: all var(--dur-normal) ease; }
+.toast .t-icon { width: 26px; height: 26px; border-radius: var(--radius-sm); display: grid; place-items: center; flex: none; }
+.toast .t-title { font-weight: 600; font-size: 12.5px; }
+.toast .t-desc { color: var(--color-muted-foreground); font-size: 12px; margin-top: 1px; }
+.toast-success .t-icon { background: rgb(var(--tw-success) / 0.14); color: var(--color-success); }
+.toast-info .t-icon { background: rgb(var(--tw-info) / 0.14); color: var(--color-info); }
+.toast-warning .t-icon { background: rgb(var(--tw-amber) / 0.14); color: var(--color-amber); }
+.toast-error .t-icon { background: rgb(var(--tw-destructive) / 0.14); color: var(--color-destructive); }
+
+/* ---- Dialog / modal ---- */
+.dialog-overlay { position: fixed; inset: 0; z-index: var(--z-dialog); background: rgb(0 0 0 / 0.62); backdrop-filter: blur(3px); display: grid; place-items: center; padding: 16px; opacity: 0; pointer-events: none; transition: opacity var(--dur-normal) ease; }
+.dialog-overlay.open { opacity: 1; pointer-events: auto; }
+.dialog { width: 420px; max-width: 100%; transform: scale(0.96) translateY(8px); transition: transform var(--dur-normal) var(--ease-out); box-shadow: var(--shadow-lg); }
+.dialog-overlay.open .dialog { transform: none; }
+
+/* ---- Command palette (Cmd+K) ---- */
+.cmdk-overlay { position: fixed; inset: 0; z-index: var(--z-palette); background: rgb(0 0 0 / 0.55); backdrop-filter: blur(3px); display: flex; justify-content: center; align-items: flex-start; padding: 12vh 16px 16px; opacity: 0; pointer-events: none; transition: opacity var(--dur-fast) ease; }
+.cmdk-overlay.open { opacity: 1; pointer-events: auto; }
+.cmdk { width: 560px; max-width: 100%; background: var(--color-card-elevated); border: 1px solid var(--color-border-strong); border-radius: 10px; box-shadow: var(--shadow-lg); overflow: hidden; transform: translateY(-8px) scale(0.98); transition: transform var(--dur-normal) var(--ease-out); }
+.cmdk-overlay.open .cmdk { transform: none; }
+.cmdk-input-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--color-border); }
+.cmdk-input-row input { flex: 1; background: transparent; border: none; outline: none; color: var(--color-foreground); font-size: 14px; font-family: var(--font-sans); }
+.cmdk-input-row input::placeholder { color: var(--color-subtle); }
+.cmdk-list { max-height: 320px; overflow-y: auto; padding: 6px; }
+.cmdk-group { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-subtle); padding: 8px 10px 4px; }
+.cmdk-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: var(--radius-sm); font-size: 13px; color: var(--color-foreground); cursor: pointer; }
+.cmdk-item .cmdk-icon { width: 26px; height: 26px; border-radius: var(--radius-sm); background: var(--color-muted); display: grid; place-items: center; color: var(--color-muted-foreground); flex: none; }
+.cmdk-item .cmdk-hint { margin-left: auto; font-size: 11px; color: var(--color-subtle); font-family: var(--font-mono); }
+.cmdk-item.selected { background: rgb(var(--tw-primary) / 0.12); }
+.cmdk-item.selected .cmdk-icon { background: rgb(var(--tw-primary) / 0.18); color: var(--color-primary); }
+.cmdk-footer { display: flex; gap: 12px; padding: 8px 14px; border-top: 1px solid var(--color-border); font-size: 11px; color: var(--color-subtle); }
+
+/* ---- Code block with header ---- */
+.codeblock { background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; }
+.codeblock-head { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-bottom: 1px solid var(--color-border); background: rgb(var(--tw-muted) / 0.4); font-size: 11px; color: var(--color-muted-foreground); font-family: var(--font-mono); }
+.codeblock-head .dots { display: flex; gap: 5px; }
+.codeblock-head .dots span { width: 9px; height: 9px; border-radius: 50%; background: var(--color-border-strong); }
+.codeblock pre { padding: 12px 14px; overflow-x: auto; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; color: var(--color-foreground); }
+.codeblock .tok-k { color: #E879F9; } .codeblock .tok-s { color: #FBBF24; } .codeblock .tok-c { color: var(--color-subtle); } .codeblock .tok-f { color: #22D3EE; } .codeblock .tok-n { color: #FB923C; }
+
+/* ---- Avatar stack ---- */
+.avatar-stack { display: flex; align-items: center; }
+.avatar-stack .avatar { border: 2px solid var(--color-card); margin-left: -8px; }
+.avatar-stack .avatar:first-child { margin-left: 0; }
+.avatar-stack .more { width: 28px; height: 28px; border-radius: 50%; background: var(--color-muted); border: 2px solid var(--color-card); margin-left: -8px; display: grid; place-items: center; font-size: 10px; font-weight: 600; color: var(--color-muted-foreground); font-family: var(--font-mono); }
+
+/* ---- Banner (gradient announcement) ---- */
+.banner { border-radius: var(--radius-lg); padding: 14px 16px; display: flex; align-items: center; gap: 12px; position: relative; overflow: hidden; border: 1px solid transparent; }
+.banner-ember { background-image: linear-gradient(135deg, #F59E0B 0%, #F43F5E 100%); color: #fff; box-shadow: var(--shadow-ember); }
+.banner-ember .banner-sub { color: rgb(255 255 255 / 0.85); }
+.banner-ghost { background: rgb(var(--tw-primary) / 0.07); border-color: rgb(var(--tw-primary) / 0.25); }
+.banner-icon { width: 36px; height: 36px; border-radius: 8px; display: grid; place-items: center; flex: none; }
+.banner-ember .banner-icon { background: rgb(255 255 255 / 0.18); backdrop-filter: blur(4px); }
+.banner-ghost .banner-icon { background: rgb(var(--tw-primary) / 0.12); color: var(--color-primary); }
+
+/* ---- Animated bars (dashboard chart) ---- */
+.bars { display: flex; align-items: flex-end; gap: 3px; height: 140px; }
+.bar { flex: 1; min-width: 0; border-radius: 2px 2px 0 0; background-image: linear-gradient(180deg, #F43F5E, #F59E0B); transform-origin: bottom; position: relative; cursor: pointer; transition: filter var(--dur-fast) ease; }
+.bar:hover { filter: brightness(1.35); }
+.bar .bar-tip {
+	position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+	background: var(--color-card-elevated); border: 1px solid var(--color-border-strong); border-radius: var(--radius-sm);
+	font-family: var(--font-mono); font-size: 10.5px; padding: 3px 7px; white-space: nowrap;
+	opacity: 0; pointer-events: none; transition: opacity var(--dur-fast) ease; z-index: 5;
+}
+.bar:hover .bar-tip { opacity: 1; }
+.bars.animate .bar { animation: ember-bar-grow var(--dur-slow) var(--ease-out) backwards; }
+
+/* ---- Sparkline ---- */
+.spark { display: block; }
+.spark path.line { fill: none; stroke: url(#emberSpark); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.spark path.area { fill: url(#emberSparkArea); stroke: none; }
+.spark.animate path.line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: ember-spark-draw 1.2s var(--ease-out) forwards; }
+
+/* ---- Activity feed ---- */
+.feed { display: flex; flex-direction: column; }
+.feed-item { display: flex; gap: 10px; position: relative; padding-bottom: 16px; }
+.feed-item:last-child { padding-bottom: 0; }
+.feed-item::before { content: ''; position: absolute; left: 13px; top: 30px; bottom: 0; width: 1px; background: var(--color-border); }
+.feed-item:last-child::before { display: none; }
+.feed-dot { width: 27px; height: 27px; border-radius: 50%; display: grid; place-items: center; flex: none; background: var(--color-muted); color: var(--color-muted-foreground); border: 1px solid var(--color-border); }
+
+/* ---- Table selection ---- */
+.table tbody tr.selected { background: rgb(var(--tw-primary) / 0.07); }
+.table tbody tr.selected:hover { background: rgb(var(--tw-primary) / 0.1); }
+
+/* ---- Pagination ---- */
+.pagination { display: flex; align-items: center; gap: 4px; }
+.pagination .page-btn { min-width: 28px; height: 28px; padding: 0 8px; border-radius: var(--radius-sm); font-size: 12px; font-family: var(--font-mono); color: var(--color-muted-foreground); display: inline-grid; place-items: center; }
+.pagination .page-btn:hover { background: var(--color-accent); color: var(--color-foreground); }
+.pagination .page-btn.active { background: rgb(var(--tw-primary) / 0.14); color: var(--color-primary); font-weight: 600; }
+
+/* ---- Slide-in panel (shared; api-keys local styles kept for BC) ---- */
+.panel-overlay { position: fixed; inset: 0; z-index: var(--z-overlay); background: rgb(0 0 0 / 0.5); backdrop-filter: blur(2px); opacity: 0; pointer-events: none; transition: opacity var(--dur-normal) ease; }
+.panel-overlay.open { opacity: 1; pointer-events: auto; }
+.slide-panel { position: fixed; top: 0; right: 0; bottom: 0; width: 400px; max-width: calc(100vw - 32px); z-index: var(--z-panel); background: var(--color-card); border-left: 1px solid var(--color-border); box-shadow: var(--shadow-lg); display: flex; flex-direction: column; transform: translateX(102%); transition: transform var(--dur-normal) var(--ease-out); }
+.slide-panel.open { transform: none; }
+
+/* ---- Marquee (index hero strip) ----
+   Seamless by construction: spacing lives on the items (margin, not container
+   gap), so every cloned copy is pixel-identical. Motion is driven by WAAPI
+   (see the marquee script in index.html), which measures the live set pitch -
+   font swaps, zoom and viewport width can't break the seam. Without JS the
+   strip renders as a clean static row. */
+.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee-track { display: flex; flex-wrap: nowrap; align-items: center; width: max-content; max-width: none; will-change: transform; }
+.marquee-track > * { flex: 0 0 auto; margin: 0; margin-inline-end: 10px; }
+.marquee-chip { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 500; padding: 8px 14px; border-radius: 9999px; background: var(--color-card); border: 1px solid var(--color-border); white-space: nowrap; color: var(--color-muted-foreground); }
+
+/* ---- Icon placeholder: reserve the box before icons.js hydrates ----
+   :empty only matches pre-hydration placeholders (the injected SVG child
+   disqualifies it), so final rendering is untouched - but nothing shifts. */
+i[data-icon]:empty, span[data-icon]:empty { display: inline-block; width: 1em; height: 1em; flex: none; }
+
+/* ---- stepped reveal (stagger children) ---- */
+.reveal { opacity: 0; }
+.reveal.in { animation: ember-fade-up var(--dur-slow) var(--ease-out) forwards; animation-delay: var(--reveal-delay, 0ms); }
+.reveal-scale.in { animation-name: ember-scale-in; }
+
+/* ---- Tabs interactive affordance ---- */
+.tab { cursor: pointer; user-select: none; }
+
+/* ---- Search field composite ---- */
+.search-field { display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 10px; background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--radius-sm); transition: border-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease; }
+.search-field:focus-within { border-color: rgb(var(--tw-ring) / 0.6); box-shadow: 0 0 0 3px rgb(var(--tw-ring) / 0.15); }
+.search-field input { flex: 1; min-width: 0; background: transparent; border: none; outline: none; color: var(--color-foreground); font-size: 12.5px; font-family: var(--font-sans); height: 100%; }
+.search-field input::placeholder { color: var(--color-subtle); }
+
+/* ---- Stat card v2 touches ---- */
+.stat-card { transition: transform var(--dur-normal) var(--ease-out), border-color var(--dur-fast) ease, box-shadow var(--dur-normal) ease; }
+.stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.stat-spark { position: absolute; right: 0; bottom: 0; opacity: 0.9; pointer-events: none; }
+
+/* ---- Chat v2 ---- */
+.msg { animation: ember-fade-up var(--dur-normal) var(--ease-out); }
+.typing-dots { display: inline-flex; gap: 4px; padding: 10px 12px; background: var(--color-card); border: 1px solid var(--color-border); border-radius: 12px; }
+.typing-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--color-muted-foreground); animation: ember-pulse-dot 1.2s ease-in-out infinite; }
+.typing-dots span:nth-child(2) { animation-delay: 150ms; }
+.typing-dots span:nth-child(3) { animation-delay: 300ms; }
+
+/* ---- Sidebar v2 ---- */
+.nav-item { position: relative; }
+.nav-item.active::before { content: ''; position: absolute; left: -8px; top: 6px; bottom: 6px; width: 3px; border-radius: 9999px; background-image: linear-gradient(180deg, #F59E0B, #F43F5E); box-shadow: 0 0 10px rgb(244 63 94 / 0.6); }
+
+/* -------------------------------------------------------------------------
+   14. RESPONSIVE
+   ------------------------------------------------------------------------- */
+@media (max-width: 1200px) {
+	.grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 1024px) {
+	.grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 880px) {
+	.grid-2, .grid-3 { grid-template-columns: 1fr; }
+	.content { padding: 1rem; }
+	.page-header { flex-direction: column; align-items: stretch; }
+	.page-header .flex.gap-2 { justify-content: flex-start; }
+	.topbar-search .kbd-hint { display: none; }
+	.stat-card .stat-value { font-size: 20px; }
+	#ember-toasts { left: 16px; right: 16px; bottom: 16px; max-width: none; }
+	.dialog { width: 100%; }
+	.cmdk-overlay { padding-top: 8vh; }
+}
+@media (max-width: 560px) {
+	.grid-4 { grid-template-columns: 1fr; }
+	.topbar-search span:not(.kbd-hint) { display: none; }
+	.topbar-search { max-width: none; flex: 0 0 auto; }
+}
+
+/* -------------------------------------------------------------------------
+   15. REDUCED MOTION — respect user preference, keep it instant
+   ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+	.reveal { opacity: 1; }
+	.marquee { -webkit-mask-image: none; mask-image: none; overflow: visible; }
+	.marquee-track { animation: none !important; transform: none !important; will-change: auto; width: auto; max-width: 100%; flex-wrap: wrap; justify-content: center; row-gap: 10px; }
+	.bg-gradient-animated, .text-gradient-animated, .orb { animation: none; }
+}

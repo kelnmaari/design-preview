@@ -77,11 +77,37 @@
 		'list': '<path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/>',
 		'image': '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>',
 		'globe': '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/>',
+		/* --- Ember v2 additions --- */
+		'sparkles': '<path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/>',
+		'layers': '<path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/>',
+		'rocket': '<path d="M4 20c8 0 14-6 16-16-10 2-16 8-16 16Z"/><path d="M4 20c2-4 6-8 10-10"/><circle cx="14" cy="10" r="1.5"/>',
+		'sliders': '<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>',
+		'activity': '<path d="M3 12h4l2 6 4-14 2 8h6"/>',
+		'command': '<path d="M9 9V6a3 3 0 1 0-3 3h3ZM15 9V6a3 3 0 1 1 3 3h-3ZM9 15v3a3 3 0 1 1-3-3h3ZM15 15v3a3 3 0 1 0 3-3h-3Z"/><rect x="9" y="9" width="6" height="6" rx="1"/>',
+		'panel-right': '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/>',
+		'circle-xmark': '<circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/>',
+		'arrow-up-right': '<path d="M7 17 17 7"/><path d="M8 7h9v9"/>',
+		'chevron-up': '<path d="m6 15 6-6 6 6"/>',
+		'wifi': '<path d="M2 9a15 15 0 0 1 20 0"/><path d="M5.5 12.5a10 10 0 0 1 13 0"/><path d="M9 16a5 5 0 0 1 6 0"/><circle cx="12" cy="19" r="1"/>',
+		'timer': '<circle cx="12" cy="13" r="7"/><path d="M12 9v4l2.5 2"/><path d="M9 2h6"/>',
+		'coins': '<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>',
+		'inbox': '<path d="M3 13 5.5 5h13L21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-6Z"/><path d="M3 13h6l1.5 2h3L15 13h6"/>',
+		'stop': '<rect x="6" y="6" width="12" height="12" rx="2"/>',
+		'thumbs-up': '<path d="M7 11v9H4a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1h3Z"/><path d="M7 11V6a2 2 0 0 1 4 0v4h7a2 2 0 0 1 2 2.4l-1.5 6A2 2 0 0 1 16.5 20H7v-9Z"/>',
+		'thumbs-down': '<path d="M17 13V4h3a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-3Z"/><path d="M17 13v5a2 2 0 0 1-4 0v-4H6a2 2 0 0 1-2-2.4l1.5-6A2 2 0 0 1 7.5 4H17v9Z"/>',
+		'flask': '<path d="M9 3h6"/><path d="M10 3v5L4.5 18a2 2 0 0 0 1.8 3h11.4a2 2 0 0 0 1.8-3L14 8V3"/><path d="M7.5 14h9"/>',
+		'heart': '<path d="M12 20s-7-4.5-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.5-9 9-9 9Z"/>',
+		'sidebar': '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/>',
+		'signal': '<path d="M5 20v-4M10 20v-8M15 20V8M20 20V4"/>',
+		'send-horizontal': '<path d="M3 12h17"/><path d="m13 6 6 6-6 6"/>',
+		'history': '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/>',
 	};
 
 	function render() {
 		document.querySelectorAll('i[data-icon], span[data-icon]').forEach(function (el) {
 			const name = el.getAttribute('data-icon');
+			if (el.getAttribute('data-icon-done') === name) return; // already hydrated
+			el.setAttribute('data-icon-done', name);
 			const svg = paths[name];
 			if (!svg) { el.textContent = '·'; return; }
 			const size = el.getAttribute('data-size') || '1em';
@@ -92,10 +118,12 @@
 		});
 	}
 
+	// Render synchronously: every page includes this script at the end of <body>,
+	// so the DOM is fully parsed and icons land before first paint (zero shift).
+	render();
+	// Fallback for <head> inclusion: re-run once parsing finishes.
 	if (document.readyState === 'loading') {
 		document.addEventListener('DOMContentLoaded', render);
-	} else {
-		render();
 	}
 	// expose for re-render after dynamic DOM changes
 	window.__renderIcons = render;

@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en" class="ember">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ember Kit · Component Playground</title>
+<link rel="stylesheet" href="styles.css?v=2.2" />
+<style>
+	.kit-nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); background: rgb(var(--tw-background) / 0.78); border-bottom: 1px solid var(--color-border); }
+	.kit-nav-inner { max-width: 1180px; margin: 0 auto; padding: 0 24px; height: 58px; display: flex; align-items: center; gap: 8px; }
+	.kit-logo { display: flex; align-items: center; gap: 10px; margin-right: 8px; }
+	.kit-logo .mark { width: 28px; height: 28px; border-radius: 8px; background-image: linear-gradient(135deg,#F59E0B,#F43F5E); display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; box-shadow: 0 2px 14px rgb(244 63 94 / .4); }
+	.kit-link { font-size: 13px; color: var(--color-muted-foreground); padding: 6px 10px; border-radius: 8px; white-space: nowrap; }
+	.kit-link:hover { color: var(--color-foreground); background: var(--color-accent); }
+	@media (max-width: 760px) { .kit-link { display: none; } }
+	.kit-wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px 90px; }
+	.kit-hero { position: relative; padding: 54px 0 4px; }
+	.kit-hero h1 { font-size: clamp(34px, 5vw, 52px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; }
+	.kit-hero p { color: var(--color-muted-foreground); font-size: 15px; max-width: 68ch; margin-top: 12px; line-height: 1.65; }
+	.kit-meta { display: flex; gap: 8px 18px; flex-wrap: wrap; margin-top: 18px; font-family: var(--font-mono); font-size: 12px; color: var(--color-subtle); }
+	.kit-meta b { color: var(--color-primary); font-weight: 600; }
+	.sec { margin-top: 54px; scroll-margin-top: 76px; }
+	.block-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--color-muted-foreground); margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem; }
+	.block-title::after { content: ''; flex: 1; height: 1px; background: var(--color-border); }
+	.sec-sub { font-size: 13px; color: var(--color-muted-foreground); margin: -6px 0 16px; max-width: 90ch; line-height: 1.6; }
+	/* playground cards */
+	.toc { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 18px; }
+	.toc a { font-size: 12px; padding: 5px 11px; border: 1px solid var(--color-border); border-radius: 9999px; color: var(--color-muted-foreground); transition: all .15s ease; }
+	.toc a:hover { color: var(--color-foreground); border-color: var(--color-border-strong); transform: translateY(-1px); }
+	.play { background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); margin-bottom: 14px; overflow: hidden; scroll-margin-top: 76px; }
+	.play-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 13px 18px; border-bottom: 1px solid var(--color-border); }
+	.play-head h3 { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+	.play-sub { font-size: 12px; color: var(--color-muted-foreground); margin-top: 2px; }
+	.play-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 18px; padding: 18px; }
+	@media (max-width: 920px) { .play-grid { grid-template-columns: 1fr; } }
+	.stage { background: var(--color-background); border: 1px dashed var(--color-border-strong); border-radius: var(--radius-md); min-height: 170px; display: flex; align-items: center; justify-content: center; padding: 26px; }
+	.stage.block { display: block; }
+	.knobs { display: flex; flex-direction: column; gap: 11px; align-content: start; }
+	.knob-label { display: flex; justify-content: space-between; align-items: baseline; font-size: 11px; font-family: var(--font-mono); color: var(--color-subtle); margin-bottom: 5px; }
+	.knob-val { color: var(--color-primary); }
+	.knob .input, .knob select.input, .knob textarea.input { width: 100%; font-size: 12.5px; }
+	.knob textarea.input { font-family: var(--font-mono); font-size: 11.5px; resize: vertical; }
+	input[type="range"].range { width: 100%; accent-color: var(--color-primary); }
+	.knob-check { display: flex; align-items: center; gap: 9px; font-size: 12.5px; color: var(--color-muted-foreground); cursor: pointer; }
+	.play .codeblock { margin: 0 18px 18px; }
+	.play .codeblock pre { max-height: 230px; overflow: auto; }
+	/* brand */
+	.sw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); gap: 8px; }
+	.sw { display: flex; gap: 10px; align-items: center; padding: 8px 10px; background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer; transition: all .15s ease; text-align: left; width: 100%; font-family: var(--font-sans); }
+	.sw:hover { border-color: var(--color-border-strong); transform: translateY(-1px); }
+	.sw-chip { width: 30px; height: 30px; border-radius: 8px; border: 1px solid rgb(128 128 128 / .25); flex: none; }
+	.sw-name { font-size: 12px; font-weight: 500; color: var(--color-foreground); }
+	.sw-val { font-size: 10.5px; font-family: var(--font-mono); color: var(--color-subtle); }
+	.grad-strip { height: 58px; border-radius: var(--radius-md); background-image: linear-gradient(135deg,#F59E0B,#F43F5E); position: relative; overflow: hidden; }
+	/* icons */
+	.icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(86px, 1fr)); gap: 8px; margin-top: 12px; }
+	.icon-cell { display: flex; flex-direction: column; align-items: center; gap: 7px; padding: 13px 6px 10px; background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer; transition: all .15s ease; color: var(--color-muted-foreground); }
+	.icon-cell:hover { color: var(--color-primary); border-color: var(--color-border-strong); transform: translateY(-2px); }
+	.icon-cell span { font-size: 9.5px; font-family: var(--font-mono); color: var(--color-subtle); word-break: break-all; text-align: center; line-height: 1.3; }
+	/* export */
+	.export-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+	@media (max-width: 920px) { .export-grid { grid-template-columns: 1fr; } }
+	.file-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid var(--color-border); font-size: 13px; }
+	.file-row:first-child { border-top: none; }
+	.cheat td:first-child { white-space: nowrap; }
+	.kit-footer { border-top: 1px solid var(--color-border); margin-top: 70px; padding-top: 22px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--color-subtle); }
+</style>
+</head>
+<body class="ember-atmo">
+
+<nav class="kit-nav">
+	<div class="kit-nav-inner">
+		<a href="index.html" class="kit-logo">
+			<div class="mark">E</div>
+			<span style="font-weight:700;font-size:14px;">Ember Kit</span>
+			<span class="badge badge-primary" style="font-size:10px;">playground</span>
+		</a>
+		<a class="kit-link" href="#brand">Brand</a>
+		<a class="kit-link" href="#playground">Playground</a>
+		<a class="kit-link" href="#icons">Icons</a>
+		<a class="kit-link" href="#export">Export</a>
+		<div class="topbar-spacer"></div>
+		<div class="theme-dots" data-theme-pill>
+			<button data-theme-btn="ember" class="active" title="Ember (dark)" aria-label="Ember theme"></button>
+			<button data-theme-btn="midnight" title="Midnight (dark)" aria-label="Midnight theme"></button>
+			<button data-theme-btn="forest" title="Forest (dark)" aria-label="Forest theme"></button>
+			<button data-theme-btn="light" title="Light" aria-label="Light theme"></button>
+			<button data-theme-btn="frost" title="Frost (light)" aria-label="Frost theme"></button>
+			<button data-theme-btn="sand" title="Sand (light)" aria-label="Sand theme"></button>
+		</div>
+		<button class="btn btn-ghost btn-icon btn-sm" data-palette-open aria-label="Command palette"><i data-icon="command" data-size="15"></i></button>
+		<button class="btn btn-ember btn-sm" data-dl-starter><i data-icon="download" data-size="13"></i> Starter .html</button>
+	</div>
+</nav>
+
+<div class="kit-wrap">
+	<header class="kit-hero">
+		<div class="orb orb-amber" style="width:420px;height:420px;top:-160px;left:-140px;"></div>
+		<div class="orb orb-rose" style="width:380px;height:380px;top:-120px;right:-120px;"></div>
+		<div class="reveal in">
+			<span class="badge badge-primary"><i data-icon="flask" data-size="11"></i> interactive · zero build</span>
+		</div>
+		<h1 class="reveal in" style="margin-top:14px;">Tune it live.<br />Ship it <span class="text-gradient-animated">anywhere.</span></h1>
+		<p class="reveal in">Every component below is editable: type into the knobs and the preview <em>and</em> the copy-paste code update instantly. Switch any of the 6 themes to see it re-skin. When it looks right — copy the HTML or download a single-file starter for your own utilities.</p>
+		<div class="kit-meta reveal in">
+			<span><b data-stat="plays">–</b> live components</span>
+			<span><b data-stat="icons">–</b> icons</span>
+			<span><b>6</b> themes</span>
+			<span><b>3</b> files · <b>0</b> dependencies</span>
+		</div>
+	</header>
+
+	<!-- ============ 01 · BRAND ============ -->
+	<section class="sec" id="brand">
+		<div class="block-title reveal">01 · Brand & themes</div>
+		<p class="sec-sub reveal">Click a theme — the whole kit re-skins instantly. Token values below are read live from the active theme; click any swatch to copy it.</p>
+		<div class="theme-cards reveal" data-theme-pill>
+			<button class="theme-card active" data-theme-btn="ember">
+				<span class="theme-card-swatches"><span style="background:#0A0A0C;"></span><span style="background:#121214;"></span><span style="background:#A1A1AA;"></span><span style="background:#F43F5E;"></span></span>
+				<span class="theme-card-name">Ember <span class="badge badge-info" style="font-size:9px;">Dark</span></span>
+				<span class="theme-card-desc">Signature warm dark · rose accent</span>
+			</button>
+			<button class="theme-card" data-theme-btn="midnight">
+				<span class="theme-card-swatches"><span style="background:#0D1117;"></span><span style="background:#161B22;"></span><span style="background:#8B949E;"></span><span style="background:#60A5FA;"></span></span>
+				<span class="theme-card-name">Midnight <span class="badge badge-info" style="font-size:9px;">Dark</span></span>
+				<span class="theme-card-desc">Cool slate dark · blue accent</span>
+			</button>
+			<button class="theme-card" data-theme-btn="forest">
+				<span class="theme-card-swatches"><span style="background:#090E0C;"></span><span style="background:#0F1713;"></span><span style="background:#94A3B8;"></span><span style="background:#34D399;"></span></span>
+				<span class="theme-card-name">Forest <span class="badge badge-info" style="font-size:9px;">Dark</span></span>
+				<span class="theme-card-desc">Deep green dark · emerald accent</span>
+			</button>
+			<button class="theme-card" data-theme-btn="light">
+				<span class="theme-card-swatches"><span style="background:#FFFFFF;"></span><span style="background:#FFFFFF;"></span><span style="background:#71717A;"></span><span style="background:#E11D48;"></span></span>
+				<span class="theme-card-name">Light <span class="badge badge-amber" style="font-size:9px;">Light</span></span>
+				<span class="theme-card-desc">Neutral light · rose accent</span>
+			</button>
+			<button class="theme-card" data-theme-btn="frost">
+				<span class="theme-card-swatches"><span style="background:#F8FAFC;"></span><span style="background:#FFFFFF;"></span><span style="background:#64748B;"></span><span style="background:#2563EB;"></span></span>
+				<span class="theme-card-name">Frost <span class="badge badge-amber" style="font-size:9px;">Light</span></span>
+				<span class="theme-card-desc">Cool slate light · blue accent</span>
+			</button>
+			<button class="theme-card" data-theme-btn="sand">
+				<span class="theme-card-swatches"><span style="background:#FAF7F2;"></span><span style="background:#FFFFFF;"></span><span style="background:#78716C;"></span><span style="background:#E11D48;"></span></span>
+				<span class="theme-card-name">Sand <span class="badge badge-amber" style="font-size:9px;">Light</span></span>
+				<span class="theme-card-desc">Warm paper light · rose accent</span>
+			</button>
+		</div>
+
+		<div class="block-title reveal" style="margin-top:2rem;">Live tokens · <span class="font-mono" data-theme-name style="text-transform:none;">ember</span></div>
+		<div class="sw-grid reveal" id="token-grid"></div>
+
+		<div class="grid grid-2 gap-3 reveal" style="margin-top:12px;">
+			<div class="card card-body">
+				<div class="card-title" style="margin-bottom:10px;">Signature gradient</div>
+				<div class="grad-strip noise"></div>
+				<div class="flex items-center justify-between" style="margin-top:10px;">
+					<code class="code-chip">135deg · #F59E0B → #F43F5E</code>
+					<button class="btn btn-outline btn-sm" data-copy="background-image: linear-gradient(135deg, #F59E0B, #F43F5E);"><i data-icon="copy" data-size="12"></i> Copy CSS</button>
+				</div>
+			</div>
+			<div class="card card-body">
+				<div class="card-title" style="margin-bottom:10px;">Type scale</div>
+				<div style="font-size:26px;font-weight:700;letter-spacing:-0.02em;">Display AaBbCc 123</div>
+				<div style="font-size:16px;font-weight:600;margin-top:6px;">Title · Semibold 16</div>
+				<div class="text-sm" style="margin-top:4px;">Body · Regular 14 — Inter, system fallback.</div>
+				<div class="text-xs text-muted-foreground" style="margin-top:4px;">Small · 12.5 muted for hints & meta.</div>
+				<div class="font-mono text-xs" style="margin-top:6px;color:var(--color-primary);">Mono · JetBrains Mono for keys, ids, code.</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ============ 02 · PLAYGROUND ============ -->
+	<section class="sec" id="playground">
+		<div class="block-title reveal">02 · Playground · live components</div>
+		<p class="sec-sub reveal">Type in any knob — preview and code update together. Clicking tabs, menus and dialogs inside previews works too. Copy the HTML and paste it into your own page (with the 3 kit files included).</p>
+		<nav class="toc reveal" id="play-toc"></nav>
+
+		<!-- BUTTON -->
+		<div class="play reveal" data-play="button" id="play-button">
+			<div class="play-head"><div><h3><i data-icon="plus" data-size="14"></i> Button</h3><p class="play-sub">Variants · sizes · icons · states. Empty label + icon = icon button.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Label</label><input class="input" data-k="label" value="Deploy gateway" /></div>
+					<div class="knob"><label class="knob-label">Variant</label><select class="input" data-k="variant"><option value="primary">primary</option><option value="ember">ember (CTA)</option><option value="secondary">secondary</option><option value="outline">outline</option><option value="ghost">ghost</option><option value="destructive">destructive</option></select></div>
+					<div class="knob"><label class="knob-label">Size</label><select class="input" data-k="size"><option value="sm">sm · 28px</option><option value="md" selected>default · 32px</option><option value="lg">lg · 38px</option></select></div>
+					<div class="knob"><label class="knob-label">Icon</label><select class="input" data-k="icon" data-icon-list data-icon-value="bolt"></select></div>
+					<label class="knob-check"><input type="checkbox" class="checkbox" data-k="disabled" /> Disabled</label>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- INPUT -->
+		<div class="play reveal" data-play="input" id="play-input">
+			<div class="play-head"><div><h3><i data-icon="terminal" data-size="14"></i> Text field</h3><p class="play-sub">Label · placeholder · value · mono · hint · disabled.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Label</label><input class="input" data-k="label" value="API key name" /></div>
+					<div class="knob"><label class="knob-label">Value</label><input class="input" data-k="value" value="worker-02" /></div>
+					<div class="knob"><label class="knob-label">Placeholder</label><input class="input" data-k="ph" value="e.g. worker-02" /></div>
+					<div class="knob"><label class="knob-label">Hint</label><input class="input" data-k="hint" value="Lowercase, hyphenated." /></div>
+					<div class="knob"><label class="knob-label">Type</label><select class="input" data-k="type"><option>text</option><option>password</option><option>email</option><option>number</option><option>search</option><option>url</option></select></div>
+					<label class="knob-check"><input type="checkbox" class="checkbox" data-k="mono" /> Mono font</label>
+					<label class="knob-check"><input type="checkbox" class="checkbox" data-k="disabled" /> Disabled</label>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- BADGE -->
+		<div class="play reveal" data-play="badge" id="play-badge">
+			<div class="play-head"><div><h3><i data-icon="tag" data-size="14"></i> Badge</h3><p class="play-sub">Status pills with optional pulse dot.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Text</label><input class="input" data-k="text" value="Active" /></div>
+					<div class="knob"><label class="knob-label">Variant</label><select class="input" data-k="variant"><option value="primary">primary</option><option value="success" selected>success</option><option value="amber">amber</option><option value="info">info</option><option value="destructive">destructive</option><option value="muted">muted</option></select></div>
+					<label class="knob-check"><input type="checkbox" class="checkbox" data-k="dot" checked /> Status dot</label>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- CARD -->
+		<div class="play reveal" data-play="card" id="play-card">
+			<div class="play-head"><div><h3><i data-icon="cube" data-size="14"></i> Card</h3><p class="play-sub">Header · description · body.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage block" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Title</label><input class="input" data-k="title" value="Usage this week" /></div>
+					<div class="knob"><label class="knob-label">Description</label><input class="input" data-k="desc" value="Across all API keys" /></div>
+					<div class="knob"><label class="knob-label">Body</label><textarea class="input" data-k="body" rows="3">84.2k requests · p50 380ms.
+Quota at 68% — healthy.</textarea></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- DIALOG -->
+		<div class="play reveal" data-play="dialog" id="play-dialog">
+			<div class="play-head"><div><h3><i data-icon="panel-right" data-size="14"></i> Dialog</h3><p class="play-sub">Modal confirm flow — opens a real dialog. Esc / overlay click closes.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Title</label><input class="input" data-k="title" value="Revoke API key" /></div>
+					<div class="knob"><label class="knob-label">Text</label><textarea class="input" data-k="text" rows="2">This cannot be undone. Apps using this key stop working immediately.</textarea></div>
+					<div class="knob"><label class="knob-label">Confirm button</label><input class="input" data-k="confirm" value="Revoke permanently" /></div>
+					<div class="knob"><label class="knob-label">Cancel button</label><input class="input" data-k="cancel" value="Cancel" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- TOAST -->
+		<div class="play reveal" data-play="toast" id="play-toast">
+			<div class="play-head"><div><h3><i data-icon="bell" data-size="14"></i> Toast</h3><p class="play-sub">Fired from JS: <span class="code-chip">Ember.toast.success(title, desc)</span></p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy JS</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Kind</label><select class="input" data-k="kind"><option value="success" selected>success</option><option value="info">info</option><option value="warning">warning</option><option value="error">error</option></select></div>
+					<div class="knob"><label class="knob-label">Title</label><input class="input" data-k="title" value="Deployed" /></div>
+					<div class="knob"><label class="knob-label">Description</label><input class="input" data-k="desc" value="gateway v7.0.1 is live on worker-02." /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>JS</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- TABLE -->
+		<div class="play reveal" data-play="table" id="play-table">
+			<div class="play-head"><div><h3><i data-icon="list" data-size="14"></i> Table</h3><p class="play-sub">One row per line: <span class="code-chip">Name | status | requests</span></p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage block" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Rows</label><textarea class="input" data-k="rows" rows="4">Production · Web | active | 48,201
+Staging · CI | limited | 1,402
+Legacy · Mobile | revoked | 0</textarea></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- DROPDOWN -->
+		<div class="play reveal" data-play="dropdown" id="play-dropdown">
+			<div class="play-head"><div><h3><i data-icon="chevron-down" data-size="14"></i> Dropdown menu</h3><p class="play-sub">One item per line: <span class="code-chip">Label | icon</span> · <span class="code-chip">---</span> separator · <span class="code-chip">!</span> danger</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Button label</label><input class="input" data-k="label" value="Actions" /></div>
+					<div class="knob"><label class="knob-label">Items</label><textarea class="input" data-k="items" rows="5">Rename | pencil
+Duplicate | copy
+---
+!Revoke | trash</textarea></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- TABS -->
+		<div class="play reveal" data-play="tabs" id="play-tabs">
+			<div class="play-head"><div><h3><i data-icon="layers" data-size="14"></i> Tabs</h3><p class="play-sub">Clickable — comma-separated labels, panels switch live.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage block" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Labels (comma)</label><input class="input" data-k="labels" value="Overview, Models, Requests, Settings" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- BANNER -->
+		<div class="play reveal" data-play="banner" id="play-banner">
+			<div class="play-head"><div><h3><i data-icon="circle-info" data-size="14"></i> Banner</h3><p class="play-sub">6 colorways + custom gradient builder with angle control.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage block" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Title</label><input class="input" data-k="title" value="Staging keys rotate on Friday" /></div>
+					<div class="knob"><label class="knob-label">Text</label><input class="input" data-k="text" value="3 keys affected — no action needed for production." /></div>
+					<div class="knob"><label class="knob-label">Button</label><input class="input" data-k="btn" value="Details" /></div>
+					<div class="knob"><label class="knob-label">Tone</label><select class="input" data-k="tone"><option value="ember" selected>ember · signature</option><option value="ocean">ocean · sky → blue</option><option value="grape">grape · violet → pink</option><option value="forest">forest · mint → emerald</option><option value="amber">amber · warning</option><option value="ghost">ghost · subtle</option><option value="custom">custom · gradient builder ↓</option></select></div>
+					<div class="knob"><label class="knob-label">Icon</label><select class="input" data-k="icon" data-icon-list data-icon-auto data-icon-value="auto"></select></div>
+					<div class="knob" data-show-if="tone=custom"><label class="knob-label">From</label><input type="color" class="colorwell" data-k="colorA" value="#38BDF8" /></div>
+					<div class="knob" data-show-if="tone=custom"><label class="knob-label">To</label><input type="color" class="colorwell" data-k="colorB" value="#2563EB" /></div>
+					<div class="knob" data-show-if="tone=custom"><label class="knob-label">Angle · <span class="knob-val" data-val="angle">135</span>°</label><input type="range" class="range" data-k="angle" min="0" max="360" value="135" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- STAT -->
+		<div class="play reveal" data-play="stat" id="play-stat">
+			<div class="play-head"><div><h3><i data-icon="chart-line" data-size="14"></i> Stat card</h3><p class="play-sub">Dense metric with delta · move cursor for spotlight.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Label</label><input class="input" data-k="label" value="Requests today" /></div>
+					<div class="knob"><label class="knob-label">Value</label><input class="input" data-k="value" value="12.4k" /></div>
+					<div class="knob"><label class="knob-label">Delta</label><input class="input" data-k="delta" value="8.1% vs yesterday" /></div>
+					<div class="knob"><label class="knob-label">Icon</label><select class="input" data-k="icon" data-icon-list data-icon-value="chart-line"></select></div>
+					<div class="knob"><label class="knob-label">Trend</label><select class="input" data-k="trend"><option value="up" selected>up · green</option><option value="down">down · red</option><option value="flat">flat · muted</option></select></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- PROGRESS -->
+		<div class="play reveal" data-play="progress" id="play-progress">
+			<div class="play-head"><div><h3><i data-icon="activity" data-size="14"></i> Progress</h3><p class="play-sub">Quota bars, health meters.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Label</label><input class="input" data-k="label" value="Quota usage" /></div>
+					<div class="knob"><label class="knob-label">Value · <span class="knob-val" data-val="value">68</span>%</label><input type="range" class="range" data-k="value" min="0" max="100" value="68" /></div>
+					<div class="knob"><label class="knob-label">Tone</label><select class="input" data-k="tone"><option value="ember" selected>ember</option><option value="primary">primary</option><option value="success">success</option></select></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- SWITCH / CHECK / RADIO -->
+		<div class="play reveal" data-play="check" id="play-check">
+			<div class="play-head"><div><h3><i data-icon="sliders" data-size="14"></i> Switch · Checkbox · Radio</h3><p class="play-sub">Pure CSS controls, one knob switches the type.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Type</label><select class="input" data-k="type"><option value="switch" selected>switch</option><option value="checkbox">checkbox</option><option value="radio">radio</option></select></div>
+					<div class="knob"><label class="knob-label">Label</label><input class="input" data-k="label" value="Streaming responses" /></div>
+					<label class="knob-check"><input type="checkbox" class="checkbox" data-k="checked" checked /> Checked</label>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- SEGMENTED -->
+		<div class="play reveal" data-play="segmented" id="play-segmented">
+			<div class="play-head"><div><h3><i data-icon="circle-dot" data-size="14"></i> Segmented</h3><p class="play-sub">Range pickers, view toggles — clickable.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Options (comma)</label><input class="input" data-k="options" value="7d, 30d, 90d" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- TEXTAREA -->
+		<div class="play reveal" data-play="textarea" id="play-textarea">
+			<div class="play-head"><div><h3><i data-icon="file" data-size="14"></i> Textarea</h3><p class="play-sub">Multi-line input with label.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Label</label><input class="input" data-k="label" value="Description" /></div>
+					<div class="knob"><label class="knob-label">Placeholder</label><input class="input" data-k="ph" value="Describe this resource…" /></div>
+					<div class="knob"><label class="knob-label">Rows · <span class="knob-val" data-val="rows">3</span></label><input type="range" class="range" data-k="rows" min="2" max="8" value="3" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- SEARCH -->
+		<div class="play reveal" data-play="search" id="play-search">
+			<div class="play-head"><div><h3><i data-icon="magnifying-glass" data-size="14"></i> Search field</h3><p class="play-sub">Focus ring + kbd hint built in.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Placeholder</label><input class="input" data-k="ph" value="Search models…" /></div>
+					<div class="knob"><label class="knob-label">Hint key</label><input class="input" data-k="kbd" value="⌘K" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- AVATAR -->
+		<div class="play reveal" data-play="avatar" id="play-avatar">
+			<div class="play-head"><div><h3><i data-icon="user" data-size="14"></i> Avatar</h3><p class="play-sub">Initials + gradient · any size.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Initials</label><input class="input" data-k="initials" value="AK" maxlength="3" /></div>
+					<div class="knob"><label class="knob-label">Size · <span class="knob-val" data-val="size">40</span>px</label><input type="range" class="range" data-k="size" min="24" max="72" value="40" /></div>
+					<div class="knob"><label class="knob-label">Gradient</label><select class="input" data-k="grad"><option value="ember" selected>ember · amber→rose</option><option value="sea">sea · mint→cyan</option><option value="grape">grape · violet→pink</option><option value="steel">steel · slate</option></select></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- EMPTY -->
+		<div class="play reveal" data-play="empty" id="play-empty">
+			<div class="play-head"><div><h3><i data-icon="inbox" data-size="14"></i> Empty state</h3><p class="play-sub">Icon · message · action.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Icon</label><select class="input" data-k="icon" data-icon-list data-icon-value="key"></select></div>
+					<div class="knob"><label class="knob-label">Message</label><input class="input" data-k="title" value="No API keys yet" /></div>
+					<div class="knob"><label class="knob-label">Button</label><input class="input" data-k="btn" value="Create key" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- TOOLTIP -->
+		<div class="play reveal" data-play="tooltip" id="play-tooltip">
+			<div class="play-head"><div><h3><i data-icon="circle-dot" data-size="14"></i> Tooltip</h3><p class="play-sub">Pure CSS — hover the button. Works on any element via <span class="code-chip">data-tip</span>.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Button label</label><input class="input" data-k="label" value="Copy key" /></div>
+					<div class="knob"><label class="knob-label">Tip text</label><input class="input" data-k="tip" value="Copies the key to clipboard" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- CODEBLOCK -->
+		<div class="play reveal" data-play="codeblock" id="play-codeblock">
+			<div class="play-head"><div><h3><i data-icon="terminal" data-size="14"></i> Code block</h3><p class="play-sub">macOS dots + working copy button (copies the code).</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage block" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Filename</label><input class="input" data-k="file" value="deploy.sh" /></div>
+					<div class="knob"><label class="knob-label">Code</label><textarea class="input" data-k="code" rows="4">curl -X POST $GATEWAY/v1/deploy \
+  -H "Authorization: Bearer $KEY" \
+  -d '{"model":"gpt-4o-mini"}'</textarea></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- SKELETON -->
+		<div class="play reveal" data-play="skeleton" id="play-skeleton">
+			<div class="play-head"><div><h3><i data-icon="signal" data-size="14"></i> Skeleton</h3><p class="play-sub">Shimmer loading rows.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Lines · <span class="knob-val" data-val="lines">3</span></label><input type="range" class="range" data-k="lines" min="1" max="6" value="3" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+	</section>
+
+	<!-- ============ 03 · ICONS ============ -->
+	<section class="sec" id="icons">
+		<div class="block-title reveal">03 · Icons · <span class="font-mono" style="text-transform:none;" data-stat="icons2">–</span></div>
+		<p class="sec-sub reveal">Stroke icons, zero requests. Search, click any icon to copy its snippet, paste into <span class="code-chip">data-icon</span> knobs above or your own markup.</p>
+		<div class="reveal" style="max-width:420px;">
+			<div class="search-field">
+				<i data-icon="magnifying-glass" data-size="14" class="text-muted-foreground"></i>
+				<input id="icon-search" placeholder="Search icons…" />
+			</div>
+		</div>
+		<div class="icon-grid reveal" id="icon-grid"></div>
+	</section>
+
+	<!-- ============ 04 · EXPORT ============ -->
+	<section class="sec" id="export">
+		<div class="block-title reveal">04 · Export · reuse in your utilities</div>
+		<p class="sec-sub reveal">Everything on this page runs on 3 files. Grab a single-file starter, the raw files, or the include snippet — then paste any component HTML from the playground.</p>
+		<div class="export-grid">
+			<div class="card card-body reveal spotlight">
+				<div class="card-title"><i data-icon="rocket" data-size="14"></i> Single-file starter</div>
+				<div class="card-description">CSS + icons + JS inlined. Theme switch, toast demo, input — works offline from disk.</div>
+				<div class="flex gap-2" style="margin-top:14px;flex-wrap:wrap;">
+					<button class="btn btn-ember btn-sm" data-dl-starter><i data-icon="download" data-size="13"></i> ember-starter.html</button>
+				</div>
+			</div>
+			<div class="card card-body reveal">
+				<div class="card-title"><i data-icon="file" data-size="14"></i> Raw files</div>
+				<div class="card-description">Drop next to your page, include in this order.</div>
+				<div style="margin-top:6px;">
+					<div class="file-row"><i data-icon="code-branch" data-size="13" class="text-muted-foreground"></i><span class="font-mono text-xs">styles.css</span><span style="flex:1"></span><button class="btn btn-ghost btn-icon btn-sm" data-dl-file="styles.css" aria-label="Download styles.css"><i data-icon="download" data-size="13"></i></button></div>
+					<div class="file-row"><i data-icon="code-branch" data-size="13" class="text-muted-foreground"></i><span class="font-mono text-xs">icons.js</span><span style="flex:1"></span><button class="btn btn-ghost btn-icon btn-sm" data-dl-file="icons.js" aria-label="Download icons.js"><i data-icon="download" data-size="13"></i></button></div>
+					<div class="file-row"><i data-icon="code-branch" data-size="13" class="text-muted-foreground"></i><span class="font-mono text-xs">ember.js</span><span style="flex:1"></span><button class="btn btn-ghost btn-icon btn-sm" data-dl-file="ember.js" aria-label="Download ember.js"><i data-icon="download" data-size="13"></i></button></div>
+				</div>
+			</div>
+			<div class="card card-body reveal">
+				<div class="card-title"><i data-icon="paperclip" data-size="14"></i> Include snippet</div>
+				<div class="card-description">Paste into <span class="code-chip">&lt;head&gt;</span> and end of <span class="code-chip">&lt;body&gt;</span> · set <span class="code-chip">&lt;html class="ember"&gt;</span></div>
+				<div class="codeblock" style="margin-top:12px;">
+					<div class="codeblock-head"><span>snippet</span><span style="margin-left:auto"></span><button class="btn btn-ghost btn-icon btn-sm" data-copy-snippet aria-label="Copy snippet"><i data-icon="copy" data-size="12"></i></button></div>
+<pre><code id="snippet-code">&lt;link rel="stylesheet" href="styles.css" /&gt;
+&lt;script src="icons.js"&gt;&lt;/script&gt;
+&lt;script src="ember.js"&gt;&lt;/script&gt;</code></pre>
+				</div>
+			</div>
+		</div>
+
+		<div class="block-title reveal" style="margin-top:2rem;">Cheat sheet · data attributes & JS api</div>
+		<div class="card reveal" style="overflow:hidden;">
+			<table class="table cheat">
+				<thead><tr><th style="width:290px;">Hook</th><th>What it does</th></tr></thead>
+				<tbody>
+					<tr><td><code class="code-chip">data-icon="bolt" data-size="15"</code></td><td class="cell-subtle">Inline SVG icon — see § Icons for all 90 names.</td></tr>
+					<tr><td><code class="code-chip">data-theme-toggle</code></td><td class="cell-subtle">Click cycles all 6 themes, persisted to localStorage.</td></tr>
+					<tr><td><code class="code-chip">[data-theme-pill] button[data-theme-btn]</code></td><td class="cell-subtle">Direct theme buttons / cards (§ Brand markup).</td></tr>
+					<tr><td><code class="code-chip">data-tip="…"</code></td><td class="cell-subtle">Pure-CSS tooltip on any element.</td></tr>
+					<tr><td><code class="code-chip">data-copy="text"</code></td><td class="cell-subtle">Click-to-copy + toast confirmation.</td></tr>
+					<tr><td><code class="code-chip">data-menu-btn</code> inside <code class="code-chip">.dropdown</code></td><td class="cell-subtle">Toggle menu; Esc / outside-click closes.</td></tr>
+					<tr><td><code class="code-chip">.tabs &gt; .tab</code> + <code class="code-chip">[data-tab-panel]</code></td><td class="cell-subtle">Tab switching with panels.</td></tr>
+					<tr><td><code class="code-chip">data-dialog-open="id"</code> / <code class="code-chip">data-dialog-close</code></td><td class="cell-subtle">Open / close modal dialogs.</td></tr>
+					<tr><td><code class="code-chip">data-count="2418" data-format="compact"</code></td><td class="cell-subtle">Animated counter on scroll into view.</td></tr>
+					<tr><td><code class="code-chip">data-table-filter="#tbl"</code></td><td class="cell-subtle">Input live-filters table rows.</td></tr>
+					<tr><td><code class="code-chip">table.table</code> + <code class="code-chip">[data-selected-count]</code></td><td class="cell-subtle">Row selection with header checkbox + counter.</td></tr>
+					<tr><td><code class="code-chip">data-palette-open</code> / <code class="code-chip">⌘K</code></td><td class="cell-subtle">Command palette (global keybinding included).</td></tr>
+					<tr><td><code class="code-chip">.reveal · .spotlight · .bars.animate</code></td><td class="cell-subtle">Scroll reveal · cursor glow · animated bar charts.</td></tr>
+					<tr><td><code class="code-chip">Ember.toast.success/info/warning/error(t, d)</code></td><td class="cell-subtle">Toast notifications from JS.</td></tr>
+					<tr><td><code class="code-chip">Ember.theme.get() / .apply(name) / .toggle()</code></td><td class="cell-subtle">Theme control from JS.</td></tr>
+					<tr><td><code class="code-chip">__renderIcons()</code></td><td class="cell-subtle">Re-run after injecting dynamic HTML with data-icon.</td></tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+
+	<footer class="kit-footer">
+		<span class="font-mono">ember-kit · static · no build · <a href="tokens.html" class="text-primary">tokens →</a> · <a href="components.html" class="text-primary">components →</a></span>
+		<span class="font-mono">copy the html · keep the 3 files · done</span>
+	</footer>
+</div>
+
+<!-- LIVE DIALOG (synced from the dialog playground) -->
+<div class="dialog-overlay" id="kit-dialog">
+	<div class="dialog card">
+		<div class="card-header flex items-center justify-between">
+			<span class="card-title" data-slot="title">Revoke API key</span>
+			<button class="btn btn-ghost btn-icon btn-sm" data-dialog-close><i data-icon="xmark"></i></button>
+		</div>
+		<div class="card-body"><p class="text-sm text-muted-foreground" data-slot="text"></p></div>
+		<div class="card-footer flex justify-between">
+			<button class="btn btn-ghost btn-sm" data-dialog-close data-slot="cancel">Cancel</button>
+			<button class="btn btn-destructive btn-sm" data-dialog-close data-slot="confirm">Revoke permanently</button>
+		</div>
+	</div>
+</div>
+
+<script src="icons.js?v=2.2"></script>
+<script src="ember.js?v=2.2"></script>
+<script>
+(function () {
+'use strict';
+
+/* ---------------- utils ---------------- */
+const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const $ = (sel, root) => (root || document).querySelector(sel);
+const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+
+function copyText(text, label) {
+	const done = () => { if (window.Ember) Ember.toast.success('Copied to clipboard', (label || '').slice(0, 48)); };
+	const fallback = () => {
+		const ta = document.createElement('textarea');
+		ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+		document.body.appendChild(ta); ta.select();
+		try { document.execCommand('copy'); } catch (e) {}
+		ta.remove(); done();
+	};
+	if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(fallback);
+	else fallback();
+}
+
+/* ---------------- icons ---------------- */
+const ICONS = ['grid','home','gauge','comments','key','cube','microchip','chart-line','chart-bar','plus','arrow-right','arrow-up','arrow-down','chevron-down','chevron-right','chevron-left','xmark','check','circle-check','circle-info','triangle-exclamation','magnifying-glass','gear','user','users','user-plus','building','shield','shield-halved','download','upload','bolt','fire','wand-sparkles','paper-plane','paperclip','copy','trash','pencil','dots','filter','sort','circle-dot','pause','play','refresh','folder','file','link','book','database','server','clock','bell','sun','moon','spinner','tag','star','eye','grip','lock','envelope','sign-out','code-branch','terminal','plug','list','image','globe','sparkles','layers','rocket','sliders','activity','command','panel-right','circle-xmark','arrow-up-right','chevron-up','wifi','timer','coins','inbox','stop','thumbs-up','thumbs-down','flask','heart','sidebar','signal','send-horizontal','history'];
+
+$$('select[data-icon-list]').forEach((sel) => {
+	const cur = sel.getAttribute('data-icon-value') || 'none';
+	let html = '';
+	if (sel.hasAttribute('data-icon-auto')) html += '<option value="auto">auto (tone default)</option>';
+	html += '<option value="none">none</option>';
+	ICONS.forEach((n) => { html += '<option value="' + n + '"' + (n === cur ? ' selected' : '') + '>' + n + '</option>'; });
+	sel.innerHTML = html;
+});
+
+/* ---------------- playground renderers ---------------- */
+const GRADS = {
+	ember: 'linear-gradient(135deg,#F59E0B,#F43F5E)',
+	sea: 'linear-gradient(135deg,#10B981,#22D3EE)',
+	grape: 'linear-gradient(135deg,#8B5CF6,#EC4899)',
+	steel: 'linear-gradient(135deg,#64748B,#334155)'
+};
+
+const BANNER_TONES = {
+	ocean: { css: 'linear-gradient(135deg,#38BDF8,#2563EB)', icon: 'globe' },
+	grape: { css: 'linear-gradient(135deg,#A78BFA,#EC4899)', icon: 'sparkles' },
+	forest: { css: 'linear-gradient(135deg,#34D399,#059669)', icon: 'shield' },
+	amber: { css: 'linear-gradient(135deg,#FBBF24,#EA580C)', icon: 'bell' }
+};
+
+function badgeForStatus(st) {
+	const w = String(st || '').trim().toLowerCase();
+	if (w === 'active') return '<span class="badge badge-success badge-dot">Active</span>';
+	if (w === 'limited') return '<span class="badge badge-amber">Limited</span>';
+	if (w === 'revoked') return '<span class="badge badge-destructive">Revoked</span>';
+	return '<span class="badge badge-muted">' + esc(String(st || '').trim() || '—') + '</span>';
+}
+
+const PLAYS = {
+	button: {
+		render(s) {
+			const cls = ['btn', 'btn-' + s.variant];
+			if (s.size !== 'md') cls.push('btn-' + s.size);
+			const label = esc(s.label).trim();
+			const icon = (s.icon && s.icon !== 'none')
+				? '<i data-icon="' + s.icon + '"' + (s.size === 'sm' ? ' data-size="13"' : '') + '></i>' : '';
+			if (!label && icon) cls.push('btn-icon');
+			return '<button class="' + cls.join(' ') + '"' + (s.disabled ? ' disabled' : '') + '>' +
+				(icon ? icon + (label ? ' ' : '') : '') + label + '</button>';
+		}
+	},
+	input: {
+		render(s) {
+			let h = '<div style="width:100%;max-width:340px;text-align:left;">';
+			if (s.label.trim()) h += '<label class="field-label">' + esc(s.label) + '</label>';
+			h += '<input class="input' + (s.mono ? ' input-mono' : '') + '" type="' + s.type +
+				'" placeholder="' + esc(s.ph) + '" value="' + esc(s.value) + '"' + (s.disabled ? ' disabled' : '') + ' />';
+			if (s.hint.trim()) h += '<div class="field-hint">' + esc(s.hint) + '</div>';
+			return h + '</div>';
+		}
+	},
+	badge: {
+		render(s) {
+			return '<span class="badge badge-' + s.variant + (s.dot ? ' badge-dot' : '') + '">' + esc(s.text) + '</span>';
+		}
+	},
+	card: {
+		render(s) {
+			return '<div class="card" style="width:100%;max-width:440px;text-align:left;">' +
+				'<div class="card-header"><div class="card-title">' + esc(s.title) + '</div>' +
+				(s.desc.trim() ? '<div class="card-description">' + esc(s.desc) + '</div>' : '') + '</div>' +
+				'<div class="card-body"><p class="text-sm text-muted-foreground">' + esc(s.body).replace(/\n/g, '<br />') + '</p></div></div>';
+		}
+	},
+	dialog: {
+		render() {
+			return '<div style="text-align:center;"><button class="btn btn-outline" data-dialog-open="kit-dialog">' +
+				'<i data-icon="panel-right" data-size="13"></i> Open dialog</button>' +
+				'<p class="text-xs text-muted-foreground" style="margin-top:10px;">Live — knob edits apply to the real dialog.</p></div>';
+		},
+		code(s) {
+			return '<!-- trigger -->\n<button class="btn btn-outline" data-dialog-open="my-dialog">Open dialog</button>\n\n' +
+				'<!-- dialog (place before </body>) -->\n<div class="dialog-overlay" id="my-dialog">\n' +
+				'  <div class="dialog card">\n' +
+				'    <div class="card-header flex items-center justify-between">\n' +
+				'      <span class="card-title">' + esc(s.title) + '</span>\n' +
+				'      <button class="btn btn-ghost btn-icon btn-sm" data-dialog-close><i data-icon="xmark"></i></button>\n' +
+				'    </div>\n' +
+				'    <div class="card-body"><p class="text-sm text-muted-foreground">' + esc(s.text) + '</p></div>\n' +
+				'    <div class="card-footer flex justify-between">\n' +
+				'      <button class="btn btn-ghost btn-sm" data-dialog-close>' + esc(s.cancel) + '</button>\n' +
+				'      <button class="btn btn-destructive btn-sm" data-dialog-close>' + esc(s.confirm) + '</button>\n' +
+				'    </div>\n  </div>\n</div>';
+		},
+		after(play, s) {
+			const dlg = document.getElementById('kit-dialog');
+			if (!dlg) return;
+			dlg.querySelector('[data-slot="title"]').textContent = s.title;
+			dlg.querySelector('[data-slot="text"]').textContent = s.text;
+			dlg.querySelector('[data-slot="confirm"]').textContent = s.confirm;
+			dlg.querySelector('[data-slot="cancel"]').textContent = s.cancel;
+		}
+	},
+	toast: {
+		render(s) {
+			return '<div style="text-align:center;"><button class="btn btn-outline" data-fire-toast>' +
+				'<i data-icon="bell" data-size="13"></i> Fire ' + esc(s.kind) + ' toast</button>' +
+				'<p class="text-xs text-muted-foreground" style="margin-top:10px;">Calls Ember.toast live.</p></div>';
+		},
+		code(s) {
+			const q = (v) => "'" + String(v).replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "'";
+			return 'Ember.toast.' + s.kind + '(' + q(s.title) + (s.desc.trim() ? ', ' + q(s.desc) : '') + ');';
+		}
+	},
+	table: {
+		render(s) {
+			const rows = s.rows.split('\n').map((x) => x.trim()).filter(Boolean);
+			let h = '<div class="card" style="width:100%;overflow:hidden;text-align:left;">' +
+				'<table class="table"><thead><tr><th>Name</th><th>Status</th><th>Requests</th></tr></thead><tbody>';
+			rows.forEach((r) => {
+				const c = r.split('|').map((x) => (x || '').trim());
+				h += '<tr><td><span class="font-medium">' + esc(c[0] || '—') + '</span></td><td>' +
+					badgeForStatus(c[1] || '') + '</td><td class="cell-mono">' + esc(c[2] || '—') + '</td></tr>';
+			});
+			return h + '</tbody></table></div>';
+		}
+	},
+	dropdown: {
+		render(s) {
+			const lines = s.items.split('\n').map((x) => x.trim()).filter((x) => x !== '');
+			let h = '<div class="dropdown"><button class="btn btn-outline" data-menu-btn>' + esc(s.label) +
+				' <i data-icon="chevron-down" data-size="13"></i></button><div class="menu">';
+			lines.forEach((line) => {
+				if (line === '---') { h += '<div class="menu-sep"></div>'; return; }
+				let danger = false;
+				if (line.charAt(0) === '!') { danger = true; line = line.slice(1).trim(); }
+				const parts = line.split('|').map((x) => x.trim());
+				h += '<button class="menu-item' + (danger ? ' danger' : '') + '">' +
+					(parts[1] ? '<i data-icon="' + esc(parts[1]) + '" data-size="13"></i> ' : '') + esc(parts[0]) + '</button>';
+			});
+			return h + '</div></div>';
+		}
+	},
+	tabs: {
+		render(s) {
+			const labels = s.labels.split(',').map((x) => x.trim()).filter(Boolean);
+			let h = '<div class="card" style="width:100%;text-align:left;"><div class="card-body"><div class="tabs mb-3">';
+			labels.forEach((l, i) => { h += '<div class="tab' + (i === 0 ? ' active' : '') + '">' + esc(l) + '</div>'; });
+			h += '</div>';
+			labels.forEach((l, i) => {
+				h += '<div data-tab-panel' + (i === 0 ? '' : ' class="hidden"') +
+					'><p class="text-sm text-muted-foreground">Content for \u201C' + esc(l) + '\u201D — replace with your own.</p></div>';
+			});
+			return h + '</div></div>';
+		}
+	},
+	banner: {
+		render(s) {
+			const pickIcon = (def) => (!s.icon || s.icon === 'auto') ? def : (s.icon === 'none' ? null : s.icon);
+			if (s.tone === 'ghost') {
+				const ic = pickIcon('circle-info');
+				return '<div class="banner banner-ghost">' +
+					(ic ? '<div class="banner-icon"><i data-icon="' + ic + '" data-size="17"></i></div>' : '') +
+					'<div class="flex-1"><div class="text-sm font-medium">' + esc(s.title) + '</div>' +
+					'<div class="text-xs text-muted-foreground">' + esc(s.text) + '</div></div>' +
+					(s.btn.trim() ? '<button class="btn btn-outline btn-sm">' + esc(s.btn) + '</button>' : '') + '</div>';
+			}
+			if (s.tone === 'ember') {
+				const ic = pickIcon('wand-sparkles');
+				return '<div class="banner banner-ember noise">' +
+					(ic ? '<div class="banner-icon"><i data-icon="' + ic + '" data-size="17"></i></div>' : '') +
+					'<div class="flex-1"><div class="text-sm font-semibold">' + esc(s.title) + '</div>' +
+					'<div class="text-xs banner-sub">' + esc(s.text) + '</div></div>' +
+					(s.btn.trim() ? '<button class="btn btn-sm" style="background:#fff;color:#1a1a1f;">' + esc(s.btn) + '</button>' : '') + '</div>';
+			}
+			const T = BANNER_TONES[s.tone] || BANNER_TONES.ocean;
+			const grad = s.tone === 'custom'
+				? 'linear-gradient(' + Math.round(s.angle) + 'deg,' + s.colorA + ',' + s.colorB + ')'
+				: T.css;
+			const ic = pickIcon(s.tone === 'custom' ? 'wand-sparkles' : T.icon);
+			return '<div class="banner noise" style="background-image:' + grad + ';color:#fff;">' +
+				(ic ? '<div class="banner-icon" style="background:rgb(255 255 255 / 0.18);"><i data-icon="' + ic + '" data-size="17"></i></div>' : '') +
+				'<div class="flex-1"><div class="text-sm font-semibold">' + esc(s.title) + '</div>' +
+				'<div class="text-xs" style="color:rgb(255 255 255 / 0.85);">' + esc(s.text) + '</div></div>' +
+				(s.btn.trim() ? '<button class="btn btn-sm" style="background:#fff;color:#1a1a1f;">' + esc(s.btn) + '</button>' : '') + '</div>';
+		}
+	},
+	stat: {
+		render(s) {
+			const cls = s.trend === 'up' ? 'text-success' : (s.trend === 'down' ? 'text-destructive' : 'text-muted-foreground');
+			const ic = s.trend === 'up' ? '<i data-icon="arrow-up" data-size="10"></i> '
+				: (s.trend === 'down' ? '<i data-icon="arrow-down" data-size="10"></i> ' : '');
+			return '<div class="stat-card spotlight" style="width:100%;max-width:290px;text-align:left;">' +
+				'<div class="stat-icon bg-primary/10 text-stat-apikeys"><i data-icon="' + s.icon + '" data-size="15"></i></div>' +
+				'<div class="stat-label">' + esc(s.label) + '</div>' +
+				'<div class="stat-value">' + esc(s.value) + '</div>' +
+				'<div class="stat-delta ' + cls + '">' + ic + esc(s.delta) + '</div></div>';
+		}
+	},
+	progress: {
+		render(s) {
+			const v = Math.max(0, Math.min(100, Math.round(s.value)));
+			return '<div style="width:100%;max-width:340px;text-align:left;">' +
+				'<div class="flex justify-between mb-2"><span class="text-sm font-medium">' + esc(s.label) +
+				'</span><span class="font-mono text-xs text-muted-foreground">' + v + '%</span></div>' +
+				'<div class="progress"><div class="progress-bar ' + s.tone + '" style="width:' + v + '%"></div></div></div>';
+		}
+	},
+	check: {
+		render(s) {
+			const c = s.checked ? ' checked' : '';
+			const lab = esc(s.label);
+			if (s.type === 'switch') {
+				return '<label class="flex items-center gap-2 text-sm" style="cursor:pointer;"><span class="switch">' +
+					'<input type="checkbox"' + c + ' /><span class="track"></span></span> ' + lab + '</label>';
+			}
+			if (s.type === 'radio') {
+				return '<label class="flex items-center gap-2 text-sm" style="cursor:pointer;">' +
+					'<input type="radio" name="kit-radio" class="radio"' + c + ' /> ' + lab + '</label>';
+			}
+			return '<label class="flex items-center gap-2 text-sm" style="cursor:pointer;">' +
+				'<input type="checkbox" class="checkbox"' + c + ' /> ' + lab + '</label>';
+		}
+	},
+	segmented: {
+		render(s) {
+			const opts = s.options.split(',').map((x) => x.trim()).filter(Boolean);
+			return '<div class="segmented">' + opts.map((o, i) =>
+				'<button' + (i === 0 ? ' class="active"' : '') + '>' + esc(o) + '</button>').join('') + '</div>';
+		}
+	},
+	textarea: {
+		render(s) {
+			let h = '<div style="width:100%;max-width:340px;text-align:left;">';
+			if (s.label.trim()) h += '<label class="field-label">' + esc(s.label) + '</label>';
+			return h + '<textarea class="textarea" rows="' + Math.round(s.rows) + '" placeholder="' + esc(s.ph) + '"></textarea></div>';
+		}
+	},
+	search: {
+		render(s) {
+			return '<div class="search-field" style="width:100%;max-width:320px;">' +
+				'<i data-icon="magnifying-glass" data-size="14" class="text-muted-foreground"></i>' +
+				'<input placeholder="' + esc(s.ph) + '" /><kbd>' + esc(s.kbd) + '</kbd></div>';
+		}
+	},
+	avatar: {
+		render(s) {
+			const size = Math.round(s.size);
+			const fs = Math.max(9, Math.round(size * 0.36));
+			return '<span class="avatar" style="width:' + size + 'px;height:' + size + 'px;font-size:' + fs +
+				'px;background-image:' + GRADS[s.grad] + ';">' + esc(s.initials) + '</span>';
+		}
+	},
+	empty: {
+		render(s) {
+			const eic = (s.icon && s.icon !== 'none') ? '<i data-icon="' + s.icon + '" data-size="20"></i>' : '';
+			return '<div class="card" style="width:100%;max-width:360px;"><div class="empty-state">' +
+				'<div class="empty-icon">' + eic + '</div>' +
+				'<p class="text-sm">' + esc(s.title) + '</p>' +
+				(s.btn.trim() ? '<button class="btn btn-primary btn-sm mt-3"><i data-icon="plus"></i> ' + esc(s.btn) + '</button>' : '') +
+				'</div></div>';
+		}
+	},
+	tooltip: {
+		render(s) {
+			return '<button class="btn btn-outline" data-tip="' + esc(s.tip) + '">' +
+				'<i data-icon="copy" data-size="13"></i> ' + esc(s.label) + '</button>';
+		}
+	},
+	codeblock: {
+		render(s) {
+			const code = String(s.code).replace(/\n$/, '');
+			return '<div class="codeblock" style="width:100%;"><div class="codeblock-head">' +
+				'<span class="dots"><span></span><span></span><span></span></span><span>' + esc(s.file) + '</span>' +
+				'<span style="margin-left:auto"></span>' +
+				'<button class="btn btn-ghost btn-icon btn-sm" data-copy="' + esc(code) + '"><i data-icon="copy" data-size="12"></i></button>' +
+				'</div><pre><code>' + esc(code) + '</code></pre></div>';
+		}
+	},
+	skeleton: {
+		render(s) {
+			const widths = [88, 64, 79, 45, 92, 58];
+			let h = '<div class="stack" style="width:100%;max-width:320px;">';
+			for (let i = 0; i < Math.round(s.lines); i++) {
+				h += '<div class="skeleton" style="height:14px;width:' + widths[i % widths.length] + '%"></div>';
+			}
+			return h + '</div>';
+		}
+	}
+};
+
+/* ---------------- playground framework ---------------- */
+function playState(play) {
+	const s = {};
+	$$('[data-k]', play).forEach((el) => {
+		const k = el.getAttribute('data-k');
+		if (el.type === 'checkbox') s[k] = el.checked;
+		else if (el.type === 'range') s[k] = parseFloat(el.value);
+		else s[k] = el.value;
+	});
+	return s;
+}
+
+function bindSpotlight(root) {
+	$$('.spotlight:not([data-spot])', root).forEach((card) => {
+		card.setAttribute('data-spot', '1');
+		card.addEventListener('pointermove', (e) => {
+			const r = card.getBoundingClientRect();
+			card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+			card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+		});
+	});
+}
+
+function refreshPlay(play) {
+	const P = PLAYS[play.getAttribute('data-play')];
+	if (!P) return;
+	const s = playState(play);
+	const stage = $('[data-stage]', play);
+	if (stage) { stage.innerHTML = P.render(s); bindSpotlight(stage); }
+	const code = $('[data-code]', play);
+	if (code) code.textContent = P.code ? P.code(s) : P.render(s);
+	$$('[data-val]', play).forEach((out) => { out.textContent = s[out.getAttribute('data-val')]; });
+	$$('[data-show-if]', play).forEach((el) => {
+		const parts = el.getAttribute('data-show-if').split('=');
+		el.style.display = String(s[parts[0]]) === parts[1] ? '' : 'none';
+	});
+	if (window.__renderIcons) window.__renderIcons();
+	if (P.after) P.after(play, s);
+}
+
+['input', 'change'].forEach((evt) => {
+	document.addEventListener(evt, (e) => {
+		const t = e.target;
+		if (t.hasAttribute && t.hasAttribute('data-k')) {
+			const p = t.closest('[data-play]');
+			if (p) refreshPlay(p);
+		}
+	});
+});
+
+document.addEventListener('click', (e) => {
+	const cp = e.target.closest('[data-copycode]');
+	if (cp) {
+		const play = cp.closest('[data-play]');
+		const code = play && $('[data-code]', play);
+		if (code) copyText(code.textContent, 'component html');
+		return;
+	}
+	const ft = e.target.closest('[data-fire-toast]');
+	if (ft) {
+		const play = ft.closest('[data-play]');
+		if (play && window.Ember) {
+			const s = playState(play);
+			Ember.toast[s.kind](s.title, s.desc);
+		}
+		return;
+	}
+	const tab = e.target.closest('[data-stage] .tab');
+	if (tab) {
+		const stage = tab.closest('[data-stage]');
+		const tabs = $$('.tab', stage);
+		tabs.forEach((t) => t.classList.toggle('active', t === tab));
+		$$('[data-tab-panel]', stage).forEach((p, i) => p.classList.toggle('hidden', i !== tabs.indexOf(tab)));
+		return;
+	}
+	const seg = e.target.closest('[data-stage] .segmented button');
+	if (seg) {
+		$$('button', seg.closest('.segmented')).forEach((b) => b.classList.toggle('active', b === seg));
+	}
+	const sw = e.target.closest('[data-sw]');
+	if (sw) {
+		const parts = sw.getAttribute('data-sw').split('|');
+		copyText('var(' + parts[0] + ')  /* ' + parts[1] + ' */', parts[0]);
+		return;
+	}
+	const cell = e.target.closest('[data-icon-name]');
+	if (cell) {
+		copyText('<i data-icon="' + cell.getAttribute('data-icon-name') + '"></i>', cell.getAttribute('data-icon-name'));
+	}
+});
+
+/* ---------------- toc + stats ---------------- */
+(function buildToc() {
+	const toc = document.getElementById('play-toc');
+	$$('[data-play]').forEach((play) => {
+		const h = $('h3', play);
+		const a = document.createElement('a');
+		a.href = '#' + play.id;
+		a.textContent = h ? h.textContent.trim() : play.getAttribute('data-play');
+		toc.appendChild(a);
+	});
+	$$('[data-stat="plays"]').forEach((el) => { el.textContent = $$('[data-play]').length; });
+})();
+
+/* ---------------- live tokens ---------------- */
+const TOKEN_VARS = [
+	['Background', '--color-background'], ['Foreground', '--color-foreground'],
+	['Card', '--color-card'], ['Elevated', '--color-card-elevated'],
+	['Muted', '--color-muted'], ['Muted text', '--color-muted-foreground'],
+	['Subtle', '--color-subtle'], ['Border', '--color-border'],
+	['Border strong', '--color-border-strong'], ['Input', '--color-input'],
+	['Ring', '--color-ring'], ['Primary', '--color-primary'],
+	['Primary ink', '--color-primary-foreground'], ['Amber', '--color-amber'],
+	['Destructive', '--color-destructive'], ['Success', '--color-success'],
+	['Info', '--color-info']
+];
+const THEME_NAMES = { ember: 'ember', 'ember-midnight': 'midnight', 'ember-forest': 'forest', 'ember-light': 'light', 'ember-frost': 'frost', 'ember-sand': 'sand' };
+
+function toHex(v) {
+	const m = String(v).match(/rgba?\(([^)]+)\)/);
+	if (!m) return String(v).trim() || '—';
+	const hex = m[1].split(',').slice(0, 3)
+		.map((x) => Math.max(0, Math.min(255, Math.round(parseFloat(x)))).toString(16).padStart(2, '0')).join('');
+	return '#' + hex.toUpperCase();
+}
+
+function renderTokens() {
+	const grid = document.getElementById('token-grid');
+	if (!grid) return;
+	const cs = getComputedStyle(document.documentElement);
+	grid.innerHTML = TOKEN_VARS.map(([name, v]) => {
+		const val = cs.getPropertyValue(v).trim();
+		const hex = toHex(val);
+		return '<button class="sw" data-sw="' + v + '|' + hex + '"><span class="sw-chip" style="background:' + esc(val) + ';"></span>' +
+			'<span><span class="sw-name">' + name + '</span><br /><span class="sw-val">' + hex + '</span></span></button>';
+	}).join('');
+	const cls = Array.from(document.documentElement.classList).find((c) => c === 'ember' || c.indexOf('ember-') === 0) || 'ember';
+	$$('[data-theme-name]').forEach((el) => { el.textContent = THEME_NAMES[cls] || cls; });
+}
+new MutationObserver(renderTokens).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+/* ---------------- icon browser ---------------- */
+function renderIconGrid(filter) {
+	const grid = document.getElementById('icon-grid');
+	const q = (filter || '').trim().toLowerCase();
+	const list = ICONS.filter((n) => !q || n.indexOf(q) !== -1);
+	grid.innerHTML = list.length
+		? list.map((n) => '<button class="icon-cell" data-icon-name="' + n + '"><i data-icon="' + n + '" data-size="18"></i><span>' + n + '</span></button>').join('')
+		: '<p class="text-sm text-muted-foreground">No icons match \u201C' + esc(filter || '') + '\u201D.</p>';
+	if (window.__renderIcons) window.__renderIcons();
+}
+document.getElementById('icon-search').addEventListener('input', (e) => renderIconGrid(e.target.value));
+
+/* ---------------- export ---------------- */
+function dl(name, text, type) {
+	const blob = new Blob([text], { type: type || 'text/plain' });
+	const a = document.createElement('a');
+	a.href = URL.createObjectURL(blob);
+	a.download = name;
+	document.body.appendChild(a);
+	a.click();
+	setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 400);
+}
+
+async function fetchText(path) {
+	const r = await fetch(path);
+	if (!r.ok) throw new Error(path);
+	return await r.text();
+}
+
+const STARTER = `<!DOCTYPE html>
+<html lang="en" class="ember">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Utility · Ember</title>
+<style>
+/* ===== Ember v2 · styles (inlined by Ember Kit) ===== */
+/*__STYLES__*/
+</style>
+</head>
+<body class="ember-atmo">
+<div style="max-width:720px;margin:0 auto;padding:56px 24px 80px;">
+  <div class="theme-dots" data-theme-pill style="margin-bottom:22px;">
+    <button data-theme-btn="ember" class="active" title="Ember (dark)" aria-label="Ember theme"></button>
+    <button data-theme-btn="midnight" title="Midnight (dark)" aria-label="Midnight theme"></button>
+    <button data-theme-btn="forest" title="Forest (dark)" aria-label="Forest theme"></button>
+    <button data-theme-btn="light" title="Light" aria-label="Light theme"></button>
+    <button data-theme-btn="frost" title="Frost (light)" aria-label="Frost theme"></button>
+    <button data-theme-btn="sand" title="Sand (light)" aria-label="Sand theme"></button>
+  </div>
+  <h1 style="font-size:30px;font-weight:800;letter-spacing:-0.02em;">My utility</h1>
+  <p class="text-sm text-muted-foreground" style="margin:8px 0 22px;">Single-file Ember starter — everything inlined, works offline from disk. Paste components from Ember Kit below.</p>
+  <div class="card card-body">
+    <label class="field-label">Project name</label>
+    <div class="flex gap-2">
+      <input class="input" id="st-name" placeholder="my-utility" style="flex:1;" />
+      <button class="btn btn-ember" onclick="Ember.toast.success('Saved', document.getElementById('st-name').value || 'my-utility')"><i data-icon="check"></i> Save</button>
+    </div>
+    <div class="field-hint">Type a name, hit Save — live toast, zero backend.</div>
+  </div>
+  <div class="flex gap-2" style="margin-top:14px;flex-wrap:wrap;">
+    <button class="btn btn-outline btn-sm" data-theme-toggle><i data-icon="sun" data-size="14" data-theme-icon></i> Cycle theme</button>
+    <button class="btn btn-ghost btn-sm" onclick="Ember.toast.info('Hello', 'Starter is wired up.')"><i data-icon="bell" data-size="13"></i> Test toast</button>
+  </div>
+  <!-- paste kit components here -->
+</div>
+<script>
+/* ===== Ember v2 · icons (inlined by Ember Kit) ===== */
+/*__ICONS__*/
+<\/script>
+<script>
+/* ===== Ember v2 · interactions (inlined by Ember Kit) ===== */
+/*__EMBER__*/
+<\/script>
+</body>
+</html>
+`;
+
+async function downloadStarter() {
+	try {
+		const [css, icons, ember] = await Promise.all([fetchText('styles.css'), fetchText('icons.js'), fetchText('ember.js')]);
+		const safe = (js) => js.replace(/<\/script/gi, '<\\/script');
+		const out = STARTER
+			.replace('/*__STYLES__*/', () => css)
+			.replace('/*__ICONS__*/', () => safe(icons))
+			.replace('/*__EMBER__*/', () => safe(ember));
+		dl('ember-starter.html', out, 'text/html');
+		if (window.Ember) Ember.toast.success('Starter downloaded', 'ember-starter.html · single file.');
+	} catch (err) {
+		if (window.Ember) Ember.toast.error('Download failed', 'Could not inline kit files.');
+	}
+}
+
+document.addEventListener('click', (e) => {
+	if (e.target.closest('[data-dl-starter]')) { downloadStarter(); return; }
+	const f = e.target.closest('[data-dl-file]');
+	if (f) {
+		const name = f.getAttribute('data-dl-file');
+		fetchText(name)
+			.then((t) => { dl(name, t, 'text/plain'); if (window.Ember) Ember.toast.success('Downloaded', name); })
+			.catch(() => { if (window.Ember) Ember.toast.error('Download failed', name); });
+		return;
+	}
+	if (e.target.closest('[data-copy-snippet]')) {
+		copyText('<link rel="stylesheet" href="styles.css" />\n<script src="icons.js"><\/script>\n<script src="ember.js"><\/script>', 'include snippet');
+	}
+});
+
+/* ---------------- boot ---------------- */
+renderTokens();
+renderIconGrid('');
+$$('[data-play]').forEach(refreshPlay);
+$$('[data-stat="icons"], [data-stat="icons2"]').forEach((el) => { el.textContent = ICONS.length; });
+
+})();
+</script>
+</body>
+</html>
+- */
+renderTokens();
+renderIconGrid('');
+$$('[data-play]').forEach(refreshPlay);
+$$('[data-stat="icons"], [data-stat="icons2"]').forEach((el) => { el.textContent = ICONS.length; });
+
+})();
+</script>
+</body>
+</html>

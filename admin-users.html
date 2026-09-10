@@ -4,35 +4,37 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ember · Admin · Users</title>
-<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles.css?v=2.2" />
 <style>
 	.role-badge.admin { background: rgb(var(--tw-primary) / 0.12); color: var(--color-primary); border-color: rgb(var(--tw-primary) / 0.2); }
 	.role-badge.maintainer { background: rgb(var(--tw-amber) / 0.12); color: var(--color-amber); border-color: rgb(var(--tw-amber) / 0.2); }
 	.role-badge.member { background: var(--color-muted); color: var(--color-muted-foreground); }
 	.status-dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
-	.status-dot.online { background: var(--color-success); box-shadow: 0 0 8px rgb(16 185 129 / .6); }
+	.status-dot.online { background: var(--color-success); box-shadow: 0 0 8px rgb(16 185 129 / .6); animation: ember-pulse-dot 2.4s ease-in-out infinite; --pulse-rgb: 16 185 129; }
 	.status-dot.idle { background: var(--color-amber); }
 	.status-dot.offline { background: var(--color-subtle); }
+	.bulk-bar { display: none; align-items: center; gap: 8px; }
+	.bulk-bar.show { display: flex; animation: ember-fade-up .25s var(--ease-out); }
 </style>
 </head>
 <body data-page="admin-users">
 <div id="page-root">
 
 	<!-- PAGE HEADER -->
-	<div class="page-header">
+	<div class="page-header reveal in">
 		<div>
 			<div class="eyebrow mb-2">Administration</div>
 			<h1 class="page-title">Users</h1>
 			<p class="page-subtitle">Manage members, roles, and access across all tenants.</p>
 		</div>
 		<div class="flex gap-2">
-			<button class="btn btn-outline btn-sm"><i data-icon="upload" data-size="13"></i> Import CSV</button>
-			<button class="btn btn-ember btn-sm"><i data-icon="user-plus" data-size="13"></i> Invite user</button>
+			<button class="btn btn-outline btn-sm" onclick="Ember.toast.success('Import queued', 'users.csv · 12 rows will be processed.')"><i data-icon="upload" data-size="13"></i> Import CSV</button>
+			<button class="btn btn-ember btn-sm" data-dialog-open="invite-dialog"><i data-icon="user-plus" data-size="13"></i> Invite user</button>
 		</div>
 	</div>
 
 	<!-- ADMIN TABS -->
-	<div class="tabs mb-4">
+	<div class="tabs mb-4 reveal in">
 		<div class="tab">Overview</div>
 		<div class="tab active">Users <span class="badge badge-muted" style="margin-left:.3rem;">248</span></div>
 		<div class="tab">Tenants</div>
@@ -42,148 +44,253 @@
 	</div>
 
 	<!-- SUMMARY STRIP -->
-	<div class="grid grid-4 mb-4">
-		<div class="stat-card">
+	<div class="grid grid-4 mb-4" data-reveal-group>
+		<div class="stat-card spotlight reveal">
 			<div class="stat-icon bg-primary/10 text-stat-apikeys"><i data-icon="users" data-size="15"></i></div>
 			<div class="stat-label">Total users</div>
-			<div class="stat-value">248</div>
+			<div class="stat-value" data-count="248">0</div>
 			<div class="stat-delta text-success"><i data-icon="arrow-up" data-size="10"></i> 12 <span class="text-subtle">this month</span></div>
 		</div>
-		<div class="stat-card">
+		<div class="stat-card spotlight reveal">
 			<div class="stat-icon bg-success/10 text-success"><i data-icon="circle-dot" data-size="15"></i></div>
 			<div class="stat-label">Active now</div>
-			<div class="stat-value">34</div>
+			<div class="stat-value" data-count="34">0</div>
 			<div class="stat-delta text-muted-foreground">across 6 tenants</div>
 		</div>
-		<div class="stat-card">
+		<div class="stat-card spotlight reveal">
 			<div class="stat-icon bg-amber/10 text-stat-conversations"><i data-icon="envelope" data-size="15"></i></div>
 			<div class="stat-label">Pending invites</div>
-			<div class="stat-value">7</div>
+			<div class="stat-value" data-count="7">0</div>
 		</div>
-		<div class="stat-card">
+		<div class="stat-card spotlight reveal">
 			<div class="stat-icon bg-destructive/10 text-destructive"><i data-icon="lock" data-size="15"></i></div>
 			<div class="stat-label">Suspended</div>
-			<div class="stat-value">3</div>
+			<div class="stat-value" data-count="3">0</div>
 		</div>
 	</div>
 
 	<!-- FILTER BAR + TABLE -->
-	<div class="card" style="overflow:hidden;">
+	<div class="card reveal" style="overflow:hidden;">
 		<div class="card-body-compact" style="border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:.5rem; padding:.625rem .75rem; flex-wrap:wrap;">
-			<div class="input" style="display:flex;align-items:center;gap:.5rem;height:30px;max-width:260px;padding:0 .5rem;">
+			<div class="search-field" style="max-width:260px;">
 				<i data-icon="magnifying-glass" data-size="13" class="text-muted-foreground"></i>
-				<input placeholder="Search users…" style="background:transparent;border:none;outline:none;color:inherit;font-size:12.5px;flex:1;height:100%;" />
+				<input placeholder="Search users…" data-table-filter="#users-table" />
 			</div>
-			<button class="btn btn-outline btn-sm"><i data-icon="filter" data-size="13"></i> Role: All <i data-icon="chevron-down" data-size="11"></i></button>
-			<button class="btn btn-outline btn-sm"><i data-icon="building" data-size="13"></i> Tenant: All <i data-icon="chevron-down" data-size="11"></i></button>
-			<button class="btn btn-outline btn-sm"><i data-icon="circle-dot" data-size="13"></i> Status: All <i data-icon="chevron-down" data-size="11"></i></button>
+			<div class="dropdown">
+				<button class="btn btn-outline btn-sm" data-menu-btn><i data-icon="filter" data-size="13"></i> Role: <span id="role-filter-label">All</span> <i data-icon="chevron-down" data-size="11"></i></button>
+				<div class="menu" style="left:0;right:auto;">
+					<button class="menu-item" data-role-filter="all">All roles</button>
+					<button class="menu-item" data-role-filter="admin"><span class="badge role-badge admin">admin</span></button>
+					<button class="menu-item" data-role-filter="maintainer"><span class="badge role-badge maintainer">maintainer</span></button>
+					<button class="menu-item" data-role-filter="member"><span class="badge role-badge member">member</span></button>
+				</div>
+			</div>
+			<div class="dropdown">
+				<button class="btn btn-outline btn-sm" data-menu-btn><i data-icon="circle-dot" data-size="13"></i> Status: <span id="status-filter-label">All</span> <i data-icon="chevron-down" data-size="11"></i></button>
+				<div class="menu" style="left:0;right:auto;">
+					<button class="menu-item" data-presence-filter="all">All statuses</button>
+					<button class="menu-item" data-presence-filter="Online"><span class="status-dot online"></span> Online</button>
+					<button class="menu-item" data-presence-filter="Idle"><span class="status-dot idle"></span> Idle</button>
+					<button class="menu-item" data-presence-filter="Offline"><span class="status-dot offline"></span> Offline</button>
+				</div>
+			</div>
 			<div class="topbar-spacer"></div>
-			<button class="btn btn-ghost btn-sm"><i data-icon="refresh" data-size="13"></i></button>
-			<span class="text-xs text-muted-foreground font-mono">248 users</span>
+			<div class="bulk-bar" data-bulk-bar>
+				<span class="badge badge-primary"><span data-selected-count>0</span>&nbsp;selected</span>
+				<button class="btn btn-outline btn-sm" onclick="Ember.toast.success('Roles updated', 'Bulk role change applied in this preview.')"><i data-icon="tag" data-size="12"></i> Change role</button>
+				<button class="btn btn-outline btn-sm" style="color:var(--color-destructive)" onclick="Ember.toast.warning('Users suspended', 'Bulk suspend applied in this preview.')"><i data-icon="lock" data-size="12"></i> Suspend</button>
+			</div>
+			<span class="text-xs text-muted-foreground font-mono"><span data-filter-count>6</span> shown</span>
 		</div>
 
 		<div style="overflow-x:auto;">
-		<table class="table">
-			<thead>
-				<tr>
-					<th style="width:28px;"><input type="checkbox" /></th>
-					<th>User <i data-icon="sort" data-size="10" class="text-subtle"></i></th>
-					<th>Role</th>
-					<th>Tenant</th>
-					<th>Status</th>
-					<th>Last active</th>
-					<th>Requests</th>
-					<th style="width:80px;"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><input type="checkbox" /></td>
-					<td><div class="flex items-center gap-2"><span class="avatar" style="width:28px;height:28px;font-size:10px;">AK</span><div><div class="font-medium">Alex Kim</div><div class="text-xs text-subtle">alex.kim@acme.io</div></div></div></td>
-					<td><span class="badge role-badge admin">admin</span></td>
-					<td><span class="text-sm">Acme</span> <span class="text-xs text-subtle">· default</span></td>
-					<td><span class="flex items-center gap-2"><span class="status-dot online"></span><span class="text-sm">Online</span></span></td>
-					<td class="cell-subtle">now</td>
-					<td class="cell-mono">48,201</td>
-					<td><button class="btn btn-ghost btn-icon btn-sm"><i data-icon="dots"></i></button></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" /></td>
-					<td><div class="flex items-center gap-2"><span class="avatar" style="width:28px;height:28px;font-size:10px;background-image:linear-gradient(135deg,#10B981,#22D3EE)">JN</span><div><div class="font-medium">Jordan Ng</div><div class="text-xs text-subtle">jordan.n@acme.io</div></div></div></td>
-					<td><span class="badge role-badge member">member</span></td>
-					<td><span class="text-sm">Acme</span></td>
-					<td><span class="flex items-center gap-2"><span class="status-dot online"></span><span class="text-sm">Online</span></span></td>
-					<td class="cell-subtle">2 min ago</td>
-					<td class="cell-mono">12,440</td>
-					<td><button class="btn btn-ghost btn-icon btn-sm"><i data-icon="dots"></i></button></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" /></td>
-					<td><div class="flex items-center gap-2"><span class="avatar" style="width:28px;height:28px;font-size:10px;background-image:linear-gradient(135deg,#8B5CF6,#EC4899)">SR</span><div><div class="font-medium">Sasha Rivera</div><div class="text-xs text-subtle">sasha.r@acme.io</div></div></div></td>
-					<td><span class="badge role-badge maintainer">maintainer</span></td>
-					<td><span class="text-sm">Acme</span> <span class="text-xs text-subtle">· platform</span></td>
-					<td><span class="flex items-center gap-2"><span class="status-dot idle"></span><span class="text-sm">Idle</span></span></td>
-					<td class="cell-subtle">18 min ago</td>
-					<td class="cell-mono">31,902</td>
-					<td><button class="btn btn-ghost btn-icon btn-sm"><i data-icon="dots"></i></button></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" /></td>
-					<td><div class="flex items-center gap-2"><span class="avatar" style="width:28px;height:28px;font-size:10px;background-image:linear-gradient(135deg,#F59E0B,#F43F5E)">TM</span><div><div class="font-medium">Taylor Morgan</div><div class="text-xs text-subtle">taylor.m@northwind.dev</div></div></div></td>
-					<td><span class="badge role-badge admin">admin</span></td>
-					<td><span class="text-sm">Northwind</span></td>
-					<td><span class="flex items-center gap-2"><span class="status-dot offline"></span><span class="text-sm text-muted-foreground">Offline</span></span></td>
-					<td class="cell-subtle">3 days ago</td>
-					<td class="cell-mono">8,771</td>
-					<td><button class="btn btn-ghost btn-icon btn-sm"><i data-icon="dots"></i></button></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" /></td>
-					<td><div class="flex items-center gap-2"><span class="avatar" style="width:28px;height:28px;font-size:10px;background-image:linear-gradient(135deg,#06B6D4,#3B82F6)">PC</span><div><div class="font-medium">Priya Chen</div><div class="text-xs text-subtle">priya.c@acme.io</div></div></div></td>
-					<td><span class="badge role-badge member">member</span></td>
-					<td><span class="text-sm">Acme</span></td>
-					<td><span class="flex items-center gap-2"><span class="status-dot online"></span><span class="text-sm">Online</span></span></td>
-					<td class="cell-subtle">5 min ago</td>
-					<td class="cell-mono">4,029</td>
-					<td><button class="btn btn-ghost btn-icon btn-sm"><i data-icon="dots"></i></button></td>
-				</tr>
-				<tr style="opacity:.6;">
-					<td><input type="checkbox" /></td>
-					<td><div class="flex items-center gap-2"><span class="avatar" style="width:28px;height:28px;font-size:10px;background-image:linear-gradient(135deg,#71717A,#A1A1AA)">DB</span><div><div class="font-medium text-muted-foreground">Dana Booth</div><div class="text-xs text-subtle">dana.b@oldcorp.com</div></div></div></td>
-					<td><span class="badge role-badge member">member</span></td>
-					<td><span class="text-sm text-muted-foreground">OldCorp</span></td>
-					<td><span class="badge badge-destructive" style="font-size:9px;padding:1px 5px;">SUSPENDED</span></td>
-					<td class="cell-subtle">2 months ago</td>
-					<td class="cell-mono cell-subtle">0</td>
-					<td><button class="btn btn-ghost btn-icon btn-sm"><i data-icon="dots"></i></button></td>
-				</tr>
-			</tbody>
-		</table>
+			<table class="table" id="users-table">
+				<thead>
+					<tr>
+						<th style="width:28px;"><input type="checkbox" class="checkbox" /></th>
+						<th>User <i data-icon="sort" data-size="10" class="text-subtle"></i></th>
+						<th>Role</th>
+						<th>Tenant</th>
+						<th>Status</th>
+						<th>Last active</th>
+						<th>Requests</th>
+						<th style="width:60px;"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input type="checkbox" class="checkbox" /></td>
+						<td><div class="flex items-center gap-2"><span class="avatar" style="width:28px;height:28px;font-size:10px;">AK</span><div><div class="font-medium">Alex Kim</div><div class="text-xs text-subtle">alex.kim@acme.io</div></div></div></td>
+						<td><span class="badge role-badge admin">admin</span></td>
+						<td><span class="text-sm">Acme</span> <span class="text-xs text-subtle">· default</span></td>
+						<td><span class="flex items-center gap-2"><span class="status-dot online"></span><span class="text-sm">Online</span></span></td>
+						<td class="cell-subtle">now</td>
+						<td class="cell-mono">48,201</td>
+						<td><div class="dropdown"><button class="btn btn-ghost btn-icon btn-sm" data-menu-btn><i data-icon="dots"></i></button><div class="menu"><button class="menu-item"><i data-icon="pencil" data-size="13"></i> Edit</button><button class="menu-item"><i data-icon="tag" data-size="13"></i> Change role</button><div class="menu-sep"></div><button class="menu-item danger"><i data-icon="lock" data-size="13"></i> Suspend</button></div></div></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checkbox" /></td>
+						<td><div class="flex items-center gap-2"><span class="avatar" style="width:28px;height:28px;font-size:10px;background-image:linear-gradient(135deg,#10B981,#22D3EE)">JN</span><div><div class="font-medium">Jordan Ng</div><div class="text-xs text-subtle">jordan.n@acme.io</div></div></div></td>
+						<td><span class="badge role-badge member">member</span></td>
+						<td><span class="text-sm">Acme</span></td>
+						<td><span class="flex items-center gap-2"><span class="status-dot online"></span><span class="text-sm">Online</span></span></td>
+						<td class="cell-subtle">2 min ago</td>
+						<td class="cell-mono">12,440</td>
+						<td><div class="dropdown"><button class="btn btn-ghost btn-icon btn-sm" data-menu-btn><i data-icon="dots"></i></button><div class="menu"><button class="menu-item"><i data-icon="pencil" data-size="13"></i> Edit</button><button class="menu-item"><i data-icon="tag" data-size="13"></i> Change role</button><div class="menu-sep"></div><button class="menu-item danger"><i data-icon="lock" data-size="13"></i> Suspend</button></div></div></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checkbox" /></td>
+						<td><div class="flex items-center gap-2"><span class="avatar" style="width:28px;height:28px;font-size:10px;background-image:linear-gradient(135deg,#8B5CF6,#EC4899)">SR</span><div><div class="font-medium">Sasha Rivera</div><div class="text-xs text-subtle">sasha.r@acme.io</div></div></div></td>
+						<td><span class="badge role-badge maintainer">maintainer</span></td>
+						<td><span class="text-sm">Acme</span> <span class="text-xs text-subtle">· platform</span></td>
+						<td><span class="flex items-center gap-2"><span class="status-dot idle"></span><span class="text-sm">Idle</span></span></td>
+						<td class="cell-subtle">18 min ago</td>
+						<td class="cell-mono">31,902</td>
+						<td><div class="dropdown"><button class="btn btn-ghost btn-icon btn-sm" data-menu-btn><i data-icon="dots"></i></button><div class="menu"><button class="menu-item"><i data-icon="pencil" data-size="13"></i> Edit</button><button class="menu-item"><i data-icon="tag" data-size="13"></i> Change role</button><div class="menu-sep"></div><button class="menu-item danger"><i data-icon="lock" data-size="13"></i> Suspend</button></div></div></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checkbox" /></td>
+						<td><div class="flex items-center gap-2"><span class="avatar" style="width:28px;height:28px;font-size:10px;background-image:linear-gradient(135deg,#F59E0B,#F43F5E)">TM</span><div><div class="font-medium">Taylor Morgan</div><div class="text-xs text-subtle">taylor.m@northwind.dev</div></div></div></td>
+						<td><span class="badge role-badge admin">admin</span></td>
+						<td><span class="text-sm">Northwind</span></td>
+						<td><span class="flex items-center gap-2"><span class="status-dot offline"></span><span class="text-sm text-muted-foreground">Offline</span></span></td>
+						<td class="cell-subtle">3 days ago</td>
+						<td class="cell-mono">8,771</td>
+						<td><div class="dropdown"><button class="btn btn-ghost btn-icon btn-sm" data-menu-btn><i data-icon="dots"></i></button><div class="menu"><button class="menu-item"><i data-icon="pencil" data-size="13"></i> Edit</button><button class="menu-item"><i data-icon="tag" data-size="13"></i> Change role</button><div class="menu-sep"></div><button class="menu-item danger"><i data-icon="lock" data-size="13"></i> Suspend</button></div></div></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checkbox" /></td>
+						<td><div class="flex items-center gap-2"><span class="avatar" style="width:28px;height:28px;font-size:10px;background-image:linear-gradient(135deg,#06B6D4,#3B82F6)">PC</span><div><div class="font-medium">Priya Chen</div><div class="text-xs text-subtle">priya.c@acme.io</div></div></div></td>
+						<td><span class="badge role-badge member">member</span></td>
+						<td><span class="text-sm">Acme</span></td>
+						<td><span class="flex items-center gap-2"><span class="status-dot online"></span><span class="text-sm">Online</span></span></td>
+						<td class="cell-subtle">5 min ago</td>
+						<td class="cell-mono">4,029</td>
+						<td><div class="dropdown"><button class="btn btn-ghost btn-icon btn-sm" data-menu-btn><i data-icon="dots"></i></button><div class="menu"><button class="menu-item"><i data-icon="pencil" data-size="13"></i> Edit</button><button class="menu-item"><i data-icon="tag" data-size="13"></i> Change role</button><div class="menu-sep"></div><button class="menu-item danger"><i data-icon="lock" data-size="13"></i> Suspend</button></div></div></td>
+					</tr>
+					<tr style="opacity:.6;">
+						<td><input type="checkbox" class="checkbox" /></td>
+						<td><div class="flex items-center gap-2"><span class="avatar" style="width:28px;height:28px;font-size:10px;background-image:linear-gradient(135deg,#71717A,#A1A1AA)">DB</span><div><div class="font-medium text-muted-foreground">Dana Booth</div><div class="text-xs text-subtle">dana.b@oldcorp.com</div></div></div></td>
+						<td><span class="badge role-badge member">member</span></td>
+						<td><span class="text-sm text-muted-foreground">OldCorp</span></td>
+						<td><span class="badge badge-destructive" style="font-size:9px;padding:1px 5px;">SUSPENDED</span></td>
+						<td class="cell-subtle">2 months ago</td>
+						<td class="cell-mono cell-subtle">0</td>
+						<td><div class="dropdown"><button class="btn btn-ghost btn-icon btn-sm" data-menu-btn><i data-icon="dots"></i></button><div class="menu"><button class="menu-item"><i data-icon="refresh" data-size="13"></i> Restore</button><div class="menu-sep"></div><button class="menu-item danger"><i data-icon="trash" data-size="13"></i> Delete</button></div></div></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 
-		<!-- pagination -->
 		<div class="card-body-compact flex items-center justify-between" style="border-top:1px solid var(--color-border);">
-			<div class="flex items-center gap-3">
-				<span class="text-xs text-muted-foreground">6 selected</span>
-				<button class="btn btn-outline btn-sm"><i data-icon="tag" data-size="13"></i> Change role</button>
-				<button class="btn btn-outline btn-sm text-destructive" style="color:var(--color-destructive)"><i data-icon="lock" data-size="13"></i> Suspend</button>
-			</div>
-			<div class="flex items-center gap-3">
-				<span class="text-xs text-muted-foreground">1–6 of 248</span>
-				<div class="flex gap-2">
-					<button class="btn btn-outline btn-sm" disabled><i data-icon="chevron-left" data-size="13"></i></button>
-					<button class="btn btn-outline btn-sm"><i data-icon="chevron-right" data-size="13"></i></button>
-				</div>
+			<span class="text-xs text-muted-foreground">1–6 of 248</span>
+			<div class="pagination">
+				<button class="page-btn"><i data-icon="chevron-left" data-size="12"></i></button>
+				<button class="page-btn active">1</button>
+				<button class="page-btn">2</button>
+				<button class="page-btn">3</button>
+				<span class="text-xs text-subtle px-1">…</span>
+				<button class="page-btn">42</button>
+				<button class="page-btn"><i data-icon="chevron-right" data-size="12"></i></button>
 			</div>
 		</div>
 	</div>
 </div>
 
-<script src="icons.js"></script>
+<!-- INVITE DIALOG -->
+<div class="dialog-overlay" id="invite-dialog">
+	<div class="dialog card">
+		<div class="card-header flex items-center justify-between">
+			<div>
+				<div class="card-title">Invite user</div>
+				<div class="card-description">They'll receive an email with a setup link.</div>
+			</div>
+			<button class="btn btn-ghost btn-icon btn-sm" data-dialog-close><i data-icon="xmark"></i></button>
+		</div>
+		<div class="card-body">
+			<div class="stack">
+				<div>
+					<label class="field-label">Email</label>
+					<input class="input" placeholder="teammate@company.io" />
+				</div>
+				<div class="grid grid-2 gap-3">
+					<div>
+						<label class="field-label">Role</label>
+						<div class="dropdown w-full">
+							<button class="input pointer" data-menu-btn style="display:flex;align-items:center;justify-content:space-between;"><span class="text-sm">member</span><i data-icon="chevron-down" data-size="13" class="text-muted-foreground"></i></button>
+							<div class="menu" style="left:0;right:auto;min-width:100%;">
+								<button class="menu-item"><span class="badge role-badge admin">admin</span></button>
+								<button class="menu-item"><span class="badge role-badge maintainer">maintainer</span></button>
+								<button class="menu-item"><span class="badge role-badge member">member</span></button>
+							</div>
+						</div>
+					</div>
+					<div>
+						<label class="field-label">Tenant</label>
+						<div class="dropdown w-full">
+							<button class="input pointer" data-menu-btn style="display:flex;align-items:center;justify-content:space-between;"><span class="text-sm">Acme</span><i data-icon="chevron-down" data-size="13" class="text-muted-foreground"></i></button>
+							<div class="menu" style="left:0;right:auto;min-width:100%;">
+								<button class="menu-item">Acme</button>
+								<button class="menu-item">Northwind</button>
+								<button class="menu-item">OldCorp</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-footer flex justify-between">
+			<button class="btn btn-ghost btn-sm" data-dialog-close>Cancel</button>
+			<button class="btn btn-ember btn-sm" data-dialog-close onclick="Ember.toast.success('Invite sent', 'Check pending invites for status.')"><i data-icon="envelope" data-size="13"></i> Send invite</button>
+		</div>
+	</div>
+</div>
+
+<script src="icons.js?v=2.2"></script>
+<script src="ember.js?v=2.2"></script>
 <script src="_shell.js"></script>
 <script>
-	// Add user-plus icon since it's admin-specific
 	EmberShell.mount();
+
+	let roleFilter = 'all', presenceFilter = 'all';
+	function applyFilters() {
+		let n = 0;
+		document.querySelectorAll('#users-table tbody tr').forEach(tr => {
+			const role = (tr.querySelector('td:nth-child(3) .badge') || {}).textContent || '';
+			const status = (tr.querySelector('td:nth-child(5)') || {}).textContent || '';
+			const hitRole = roleFilter === 'all' || role.trim() === roleFilter;
+			const hitPresence = presenceFilter === 'all' || status.includes(presenceFilter);
+			const hit = hitRole && hitPresence;
+			tr.style.display = hit ? '' : 'none';
+			if (hit) n++;
+		});
+		document.querySelectorAll('[data-filter-count]').forEach(el => el.textContent = n);
+	}
+	document.querySelectorAll('[data-role-filter]').forEach(b => b.addEventListener('click', () => {
+		roleFilter = b.dataset.roleFilter;
+		document.getElementById('role-filter-label').textContent = roleFilter === 'all' ? 'All' : roleFilter;
+		applyFilters();
+	}));
+	document.querySelectorAll('[data-presence-filter]').forEach(b => b.addEventListener('click', () => {
+		presenceFilter = b.dataset.presenceFilter;
+		document.getElementById('status-filter-label').textContent = presenceFilter === 'all' ? 'All' : presenceFilter;
+		applyFilters();
+	}));
+
+	/* bulk bar visibility */
+	const countEl = document.querySelector('[data-selected-count]');
+	new MutationObserver(() => {
+		const n = parseInt(countEl.textContent, 10) || 0;
+		document.querySelector('[data-bulk-bar]').classList.toggle('show', n > 0);
+	}).observe(countEl, { childList: true, characterData: true, subtree: true });
+
+	/* pagination demo */
+	document.querySelectorAll('.pagination .page-btn').forEach(b => b.addEventListener('click', () => {
+		if (!b.textContent.trim() || isNaN(parseInt(b.textContent, 10))) return;
+		document.querySelectorAll('.pagination .page-btn').forEach(x => x.classList.remove('active'));
+		b.classList.add('active');
+		Ember.toast.info('Page ' + b.textContent.trim(), 'Pagination is a visual demo in this preview.');
+	}));
 </script>
 </body>
 </html>

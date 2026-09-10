@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ember · Before / After — Tokenization</title>
-<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles.css?v=2.2" />
 <style>
 	.wrap { max-width: 1280px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
 	.head { margin-bottom: 2rem; }
@@ -46,13 +46,25 @@
 	code.snip { font-family: var(--font-mono); font-size:10.5px; background: var(--color-muted); padding:1px 5px; border-radius:4px; color: var(--color-foreground); }
 </style>
 </head>
-<body>
+<body class="ember-atmo" data-page="admin-models">
 <div class="wrap">
 	<!-- HEAD -->
-	<div class="head">
-		<div class="eyebrow mb-2">Case Study · The "dirty zone"</div>
+	<div class="head reveal in">
+		<div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
+			<div class="eyebrow" style="margin:0;">Case Study · The "dirty zone"</div>
+			<div class="topbar-spacer"></div>
+			<div class="theme-dots" data-theme-pill>
+				<button data-theme-btn="ember" class="active" title="Ember (dark)" aria-label="Ember theme"></button>
+				<button data-theme-btn="midnight" title="Midnight (dark)" aria-label="Midnight theme"></button>
+				<button data-theme-btn="forest" title="Forest (dark)" aria-label="Forest theme"></button>
+				<button data-theme-btn="light" title="Light" aria-label="Light theme"></button>
+				<button data-theme-btn="frost" title="Frost (light)" aria-label="Frost theme"></button>
+				<button data-theme-btn="sand" title="Sand (light)" aria-label="Sand theme"></button>
+			</div>
+			<button class="btn btn-ghost btn-sm" data-palette-open><i data-icon="command" data-size="13"></i> <kbd>⌘K</kbd></button>
+		</div>
 		<h1 class="page-title">Before & After — tokenizing hardcoded components</h1>
-		<p class="page-subtitle" style="max-width:70ch;">7 files in <code class="snip">web-svelte</code> bypass the token system with hardcoded hex and phantom CSS variables (<code class="snip">--card-bg</code>, <code class="snip">--color-blue</code>) that don't exist — so they render fixed light colors and <strong>break in dark mode</strong>. This page proves the Ember tokens fix it.</p>
+		<p class="page-subtitle" style="max-width:70ch;">7 files in <code class="snip">web-svelte</code> bypass the token system with hardcoded hex and phantom CSS variables (<code class="snip">--card-bg</code>, <code class="snip">--color-blue</code>) that don't exist — so they render fixed light colors and <strong>break in dark mode</strong>. Flip the theme above: the AFTER card adapts, the BEFORE card stays broken. That's the whole proof.</p>
 	</div>
 
 	<div class="cmp">
@@ -161,11 +173,13 @@ text-muted-foreground
 		</div>
 	</div>
 
-	<div class="text-center mt-4">
+	<div class="text-center mt-4 flex gap-2" style="justify-content:center;">
+		<a href="index.html" class="btn btn-ghost btn-sm">⌂ Hub</a>
 		<a href="tokens.html" class="btn btn-outline btn-sm">← Back to tokens</a>
 	</div>
 </div>
 
-<script src="icons.js"></script>
+<script src="icons.js?v=2.2"></script>
+<script src="ember.js?v=2.2"></script>
 </body>
 </html>

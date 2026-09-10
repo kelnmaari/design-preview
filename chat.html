@@ -4,116 +4,116 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ember · Chat</title>
-<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles.css?v=2.2" />
 <style>
-	/* Chat uses a bespoke full-height 3-pane layout, not the page shell. */
 	html, body { height: 100%; overflow: hidden; }
-	.chat-layout { display: flex; height: 100vh; }
+	.chat-layout { display: flex; height: 100dvh; }
 
-	/* Conversation list pane */
-	.conv-list { width: 260px; flex: none; background: var(--color-card); border-right: 1px solid var(--color-border); display: flex; flex-direction: column; }
+	.conv-list { width: 260px; flex: none; background: var(--color-card); border-right: 1px solid var(--color-border); display: flex; flex-direction: column; z-index: 30; }
 	.conv-list-head { padding: .75rem; border-bottom: 1px solid var(--color-border); display:flex; flex-direction:column; gap:.5rem; }
 	.conv-list-head .row1 { display:flex; align-items:center; justify-content:space-between; }
-	.conv-list-head .row1 a { font-size: 12px; color: var(--color-muted-foreground); display:flex; align-items:center; gap:.3rem; }
-	.conv-search { height: 30px; background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--radius-sm); display:flex; align-items:center; gap:.4rem; padding: 0 .5rem; font-size: 12px; color: var(--color-subtle); }
+	.conv-search { height: 30px; background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--radius-sm); display:flex; align-items:center; gap:.4rem; padding: 0 .5rem; font-size: 12px; color: var(--color-subtle); cursor: pointer; transition: border-color .15s ease; }
+	.conv-search:hover { border-color: var(--color-border-strong); }
 	.conv-list-body { flex: 1; overflow-y: auto; padding: .375rem; }
-	.conv-item { display:block; padding: .5rem .625rem; border-radius: var(--radius-sm); margin-bottom: 1px; cursor: pointer; transition: background-color .12s ease; }
+	.conv-item { display:block; padding: .5rem .625rem; border-radius: var(--radius-sm); margin-bottom: 1px; cursor: pointer; transition: background-color .12s ease; border: 1px solid transparent; }
 	.conv-item:hover { background: var(--color-accent); }
-	.conv-item.active { background: rgb(var(--tw-primary) / 0.10); }
+	.conv-item.active { background: rgb(var(--tw-primary) / 0.10); border-color: rgb(var(--tw-primary) / 0.2); }
 	.conv-item.active .conv-title { color: var(--color-primary); }
 	.conv-title { font-size: 13px; font-weight: 500; color: var(--color-foreground); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 	.conv-meta { font-size: 11px; color: var(--color-subtle); margin-top: 2px; display:flex; align-items:center; gap:.3rem; }
 
-	/* Chat thread pane */
-	.thread { flex: 1; display: flex; flex-direction: column; min-width: 0; }
-	.thread-head { height: 52px; flex: none; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: .75rem; padding: 0 1rem; background: rgb(var(--tw-card) / 0.6); backdrop-filter: blur(8px); }
-	.thread-title { font-size: 14px; font-weight: 600; }
-	.thread-model-pill { font-family: var(--font-mono); font-size: 11px; background: var(--color-muted); padding: 2px 7px; border-radius: var(--radius-sm); color: var(--color-muted-foreground); }
+	.thread { flex: 1; display: flex; flex-direction: column; min-width: 0; background: var(--color-background); }
+	.thread-head { height: 52px; flex: none; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: .6rem; padding: 0 1rem; background: rgb(var(--tw-card) / 0.6); backdrop-filter: blur(8px); }
+	.thread-title { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+	.thread-model-pill { font-family: var(--font-mono); font-size: 11px; background: var(--color-muted); padding: 2px 7px; border-radius: var(--radius-sm); color: var(--color-muted-foreground); cursor: pointer; transition: all .15s ease; border: 1px solid transparent; }
+	.thread-model-pill:hover { border-color: var(--color-border-strong); color: var(--color-foreground); }
 	.thread-body { flex: 1; overflow-y: auto; padding: 1.5rem 0; }
 	.msg { max-width: 760px; margin: 0 auto; padding: 0 2rem; display:flex; gap: .875rem; margin-bottom: 1.75rem; }
 	.msg-avatar { width: 30px; height: 30px; border-radius: 8px; flex: none; display:grid; place-items:center; font-size:12px; font-weight:600; }
 	.msg-avatar.user { background: var(--color-secondary); color: var(--color-foreground); }
-	.msg-avatar.assistant { background-image: linear-gradient(135deg, #F59E0B, #F43F5E); color: #fff; }
+	.msg-avatar.assistant { background-image: linear-gradient(135deg, #F59E0B, #F43F5E); color: #fff; box-shadow: 0 2px 10px rgb(244 63 94 / .35); }
 	.msg-content { flex: 1; min-width: 0; padding-top: 3px; }
 	.msg-role { font-size: 12px; font-weight: 600; color: var(--color-foreground); margin-bottom: .3rem; display:flex; align-items:center; gap:.5rem; }
 	.msg-body { font-size: 13.5px; line-height: 1.6; color: var(--color-foreground); }
 	.msg-body p { margin-bottom: .6rem; }
 	.msg-body code { font-family: var(--font-mono); font-size: 12px; background: var(--color-muted); padding: 1px 5px; border-radius: 4px; }
-	.msg-body pre { font-family: var(--font-mono); font-size: 12px; background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: .75rem; overflow-x: auto; margin: .6rem 0; }
+	.msg-body pre { font-family: var(--font-mono); font-size: 12px; background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: .75rem; overflow-x: auto; margin: .6rem 0; position: relative; }
 	.msg-actions { display:flex; gap:.25rem; margin-top:.5rem; opacity: 0; transition: opacity .15s ease; }
 	.msg:hover .msg-actions { opacity: 1; }
-	.msg-actions button { width: 26px; height: 26px; border-radius: var(--radius-sm); display:grid; place-items:center; color: var(--color-subtle); }
+	.msg-actions button { width: 26px; height: 26px; border-radius: var(--radius-sm); display:grid; place-items:center; color: var(--color-subtle); transition: all .12s ease; }
 	.msg-actions button:hover { background: var(--color-accent); color: var(--color-foreground); }
 	.msg-meta { font-size: 11px; color: var(--color-subtle); font-family: var(--font-mono); }
 
-	/* Streaming caret */
-	.stream-caret { display:inline-block; width: 7px; height: 15px; background: var(--color-primary); margin-left: 2px; vertical-align: text-bottom; animation: blink 1s steps(2) infinite; border-radius: 1px; }
-	@keyframes blink { 50% { opacity: 0; } }
+	.stream-caret { display:inline-block; width: 7px; height: 15px; background: var(--color-primary); margin-left: 2px; vertical-align: text-bottom; animation: ember-caret-blink 1s steps(2) infinite; border-radius: 1px; box-shadow: 0 0 8px rgb(244 63 94 / .8); }
 
-	/* Composer */
 	.composer { flex: none; border-top: 1px solid var(--color-border); padding: .875rem 2rem 1.25rem; background: var(--color-background); }
 	.composer-box { max-width: 760px; margin: 0 auto; }
 	.composer-input { background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); transition: border-color .15s ease, box-shadow .15s ease; }
 	.composer-input:focus-within { border-color: rgb(var(--tw-ring) / 0.5); box-shadow: 0 0 0 3px rgb(var(--tw-ring) / 0.12); }
-	.composer-input textarea { width: 100%; background: transparent; border: none; outline: none; color: var(--color-foreground); font-family: var(--font-sans); font-size: 13.5px; line-height: 1.5; padding: .75rem 1rem; resize: none; min-height: 44px; max-height: 200px; }
+	.composer-input textarea { width: 100%; background: transparent; border: none; outline: none; color: var(--color-foreground); font-family: var(--font-sans); font-size: 13.5px; line-height: 1.5; padding: .75rem 1rem; resize: none; min-height: 44px; max-height: 200px; display: block; }
 	.composer-input textarea::placeholder { color: var(--color-subtle); }
-	.composer-bar { display:flex; align-items:center; gap:.4rem; padding: .4rem .5rem; }
-	.composer-tool { height: 28px; padding: 0 .5rem; border-radius: var(--radius-sm); display:inline-flex; align-items:center; gap:.3rem; font-size: 12px; color: var(--color-muted-foreground); }
+	.composer-bar { display:flex; align-items:center; gap:.4rem; padding: .4rem .5rem; flex-wrap: wrap; }
+	.composer-tool { height: 28px; padding: 0 .5rem; border-radius: var(--radius-sm); display:inline-flex; align-items:center; gap:.3rem; font-size: 12px; color: var(--color-muted-foreground); transition: all .12s ease; }
 	.composer-tool:hover { background: var(--color-accent); color: var(--color-foreground); }
+	.composer-tool.on { background: rgb(var(--tw-primary) / 0.12); color: var(--color-primary); }
 	.composer-send { margin-left:auto; }
 
-	/* Right context panel */
-	.ctx-panel { width: 280px; flex: none; background: var(--color-card); border-left: 1px solid var(--color-border); display:flex; flex-direction:column; overflow-y:auto; }
+	.ctx-panel { width: 280px; flex: none; background: var(--color-card); border-left: 1px solid var(--color-border); display:flex; flex-direction:column; overflow-y:auto; z-index: 30; }
 	.ctx-section { padding: .875rem 1rem; border-bottom: 1px solid var(--color-border); }
-	@media (max-width: 1100px) { .ctx-panel { display: none; } }
-	@media (max-width: 760px) { .conv-list { display: none; } }
+	.chat-scrim { position: fixed; inset: 0; z-index: 25; background: rgb(0 0 0 / .5); opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+	.chat-scrim.open { opacity: 1; pointer-events: auto; }
+	#conv-burger, #ctx-toggle { display: none; }
+	@media (max-width: 1100px) {
+		.ctx-panel { position: fixed; top: 0; right: 0; bottom: 0; transform: translateX(105%); transition: transform .28s var(--ease-out); box-shadow: var(--shadow-lg); }
+		.ctx-panel.open { transform: none; }
+		#ctx-toggle { display: inline-grid; }
+	}
+	@media (max-width: 760px) {
+		.conv-list { position: fixed; top: 0; left: 0; bottom: 0; transform: translateX(-105%); transition: transform .28s var(--ease-out); box-shadow: var(--shadow-lg); }
+		.conv-list.open { transform: none; }
+		#conv-burger { display: inline-grid; }
+		.msg { padding: 0 1rem; }
+		.composer { padding: .75rem 1rem 1rem; }
+	}
 </style>
 </head>
-<body>
+<body class="ember-atmo">
 <div class="chat-layout">
+	<div class="chat-scrim" id="chat-scrim"></div>
 	<!-- CONVERSATION LIST -->
-	<aside class="conv-list">
+	<aside class="conv-list" id="conv-list">
 		<div class="conv-list-head">
 			<div class="row1">
-				<a href="tokens.html" style="display:flex;align-items:center;gap:.5rem;font-weight:600;font-size:14px;color:var(--color-foreground);">
+				<a href="index.html" style="display:flex;align-items:center;gap:.5rem;font-weight:600;font-size:14px;color:var(--color-foreground);">
 					<div style="width:26px;height:26px;border-radius:7px;background-image:linear-gradient(135deg,#F59E0B,#F43F5E);display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px;">E</div>
 					AIGateway
 				</a>
-				<button class="btn btn-ember btn-sm btn-icon"><i data-icon="plus"></i></button>
+				<button class="btn btn-ember btn-sm btn-icon" id="new-chat-btn" data-tip="New chat"><i data-icon="plus"></i></button>
 			</div>
-			<div class="conv-search"><i data-icon="magnifying-glass" data-size="13"></i><span>Search conversations…</span></div>
+			<div class="conv-search" data-palette-open><i data-icon="magnifying-glass" data-size="13"></i><span>Search conversations…</span></div>
 		</div>
-		<div class="conv-list-body">
+		<div class="conv-list-body" id="conv-list-body">
 			<div class="eyebrow" style="padding:.5rem .625rem .375rem;">Today</div>
-			<div class="conv-item active">
+			<div class="conv-item active" data-title="Refactoring auth middleware">
 				<div class="conv-title">Refactoring auth middleware</div>
 				<div class="conv-meta"><i data-icon="comments" data-size="10"></i> 12 msgs · 2m ago</div>
 			</div>
-			<div class="conv-item">
+			<div class="conv-item" data-title="SQL query optimization">
 				<div class="conv-title">SQL query optimization</div>
 				<div class="conv-meta"><i data-icon="comments" data-size="10"></i> 8 msgs · 1h ago</div>
 			</div>
-			<div class="conv-item">
+			<div class="conv-item" data-title="Draft API docs for v2">
 				<div class="conv-title">Draft API docs for v2</div>
 				<div class="conv-meta"><i data-icon="comments" data-size="10"></i> 24 msgs · 3h ago</div>
 			</div>
 			<div class="eyebrow" style="padding:.75rem .625rem .375rem;">Yesterday</div>
-			<div class="conv-item">
+			<div class="conv-item" data-title="Debug WebSocket reconnect">
 				<div class="conv-title">Debug WebSocket reconnect</div>
 				<div class="conv-meta"><i data-icon="comments" data-size="10"></i> 31 msgs</div>
 			</div>
-			<div class="conv-item">
+			<div class="conv-item" data-title="K8s deployment manifest">
 				<div class="conv-title">K8s deployment manifest</div>
 				<div class="conv-meta"><i data-icon="comments" data-size="10"></i> 6 msgs</div>
-			</div>
-			<div class="eyebrow" style="padding:.75rem .625rem .375rem;">Last 7 days</div>
-			<div class="conv-item">
-				<div class="conv-title">Benchmark token throughput</div>
-				<div class="conv-meta"><i data-icon="comments" data-size="10"></i> 19 msgs</div>
-			</div>
-			<div class="conv-item">
-				<div class="conv-title">RAG chunking strategy review</div>
-				<div class="conv-meta"><i data-icon="comments" data-size="10"></i> 14 msgs</div>
 			</div>
 		</div>
 	</aside>
@@ -121,16 +121,25 @@
 	<!-- THREAD -->
 	<section class="thread">
 		<div class="thread-head">
-			<button class="icon-btn"><i data-icon="chevron-left" data-size="16"></i></button>
-			<div class="thread-title">Refactoring auth middleware</div>
-			<span class="thread-model-pill">gpt-4o-mini</span>
+			<button class="icon-btn" id="conv-burger" aria-label="Conversations"><i data-icon="sidebar" data-size="16"></i></button>
+			<div class="thread-title" id="thread-title">Refactoring auth middleware</div>
+			<div class="dropdown">
+				<button class="thread-model-pill" data-menu-btn><span id="model-pill-label">gpt-4o-mini</span> <i data-icon="chevron-down" data-size="10"></i></button>
+				<div class="menu" style="left:0;right:auto;min-width:220px;">
+					<div class="menu-label">Switch model</div>
+					<button class="menu-item" data-model="gpt-4o-mini"><i data-icon="microchip" data-size="13" class="text-primary"></i> gpt-4o-mini <span class="badge badge-success" style="font-size:9px;margin-left:auto;">STABLE</span></button>
+					<button class="menu-item" data-model="claude-3.5-sonnet"><i data-icon="microchip" data-size="13" class="text-primary"></i> claude-3.5-sonnet <span class="badge badge-success" style="font-size:9px;margin-left:auto;">STABLE</span></button>
+					<button class="menu-item" data-model="llama-3.1-70b"><i data-icon="microchip" data-size="13" class="text-muted-foreground"></i> llama-3.1-70b <span class="badge badge-amber" style="font-size:9px;margin-left:auto;">EXP</span></button>
+					<button class="menu-item" data-model="qwen2.5-coder"><i data-icon="microchip" data-size="13" class="text-muted-foreground"></i> qwen2.5-coder <span class="badge badge-primary" style="font-size:9px;margin-left:auto;">CODE</span></button>
+				</div>
+			</div>
 			<div class="topbar-spacer"></div>
-			<button class="icon-btn"><i data-icon="refresh" data-size="15"></i></button>
-			<button class="icon-btn"><i data-icon="pencil" data-size="15"></i></button>
-			<button class="icon-btn"><i data-icon="trash" data-size="15"></i></button>
+			<button class="icon-btn" data-palette-open aria-label="Commands"><i data-icon="command" data-size="15"></i></button>
+			<button class="icon-btn" data-theme-toggle aria-label="Toggle theme"><i data-icon="sun" data-size="15" data-theme-icon></i></button>
+			<button class="icon-btn" id="ctx-toggle" aria-label="Context panel"><i data-icon="panel-right" data-size="15"></i></button>
 		</div>
 
-		<div class="thread-body">
+		<div class="thread-body" id="thread-body">
 			<!-- USER -->
 			<div class="msg">
 				<div class="msg-avatar user">AK</div>
@@ -140,38 +149,23 @@
 						<p>I'm refactoring our JWT auth middleware. Right now it does three things in one function — extracts the token, verifies it, and loads the user. I want to split these into separate concerns. What's a clean structure?</p>
 					</div>
 					<div class="msg-actions">
-						<button title="Copy"><i data-icon="copy" data-size="13"></i></button>
-						<button title="Edit"><i data-icon="pencil" data-size="13"></i></button>
+						<button data-msg-copy title="Copy"><i data-icon="copy" data-size="13"></i></button>
+						<button title="Edit" onclick="Ember.toast.info('Mockup', 'Message editing isn’t wired in this preview.')"><i data-icon="pencil" data-size="13"></i></button>
 					</div>
 				</div>
 			</div>
 
-			<!-- ASSISTANT -->
-			<div class="msg">
+			<!-- ASSISTANT (streams on load) -->
+			<div class="msg" id="intro-assistant">
 				<div class="msg-avatar assistant">E</div>
 				<div class="msg-content">
-					<div class="msg-role">
-						Assistant
-						<span class="msg-meta">· 1.2s · 487 tok</span>
-					</div>
-					<div class="msg-body">
-						<p>Good instinct — single-responsibility will make each piece testable in isolation. Here's a clean three-layer split:</p>
-						<pre><code>// 1. Extraction — pulls the raw token from the request
-func extractToken(r *http.Request) (string, error) {
-    auth := r.Header.Get("Authorization")
-    if !strings.HasPrefix(auth, "Bearer ") {
-        return "", ErrNoToken
-    }
-    return strings.TrimPrefix(auth, "Bearer "), nil
-}</code></pre>
-						<p>The key insight: each function returns an error, so the middleware becomes a short pipeline where any stage can short-circuit with a typed error. Want me to sketch the verifier and loader layers too?</p>
-						<span class="stream-caret"></span>
-					</div>
+					<div class="msg-role">Assistant <span class="msg-meta" id="intro-meta">· streaming…</span></div>
+					<div class="msg-body" id="intro-body"></div>
 					<div class="msg-actions">
-						<button title="Copy"><i data-icon="copy" data-size="13"></i></button>
-						<button title="Regenerate"><i data-icon="refresh" data-size="13"></i></button>
-						<button title="Good response"><i data-icon="arrow-up" data-size="13"></i></button>
-						<button title="Bad response"><i data-icon="arrow-down" data-size="13"></i></button>
+						<button data-msg-copy title="Copy"><i data-icon="copy" data-size="13"></i></button>
+						<button title="Regenerate" onclick="Ember.toast.info('Regenerating', 'A fresh completion would stream here.')"><i data-icon="refresh" data-size="13"></i></button>
+						<button title="Good response" onclick="Ember.toast.success('Feedback saved', 'Thanks — this helps tune routing.')"><i data-icon="thumbs-up" data-size="13"></i></button>
+						<button title="Bad response" onclick="Ember.toast.warning('Feedback saved', 'This thread was flagged for review.')"><i data-icon="thumbs-down" data-size="13"></i></button>
 					</div>
 				</div>
 			</div>
@@ -181,13 +175,12 @@ func extractToken(r *http.Request) (string, error) {
 		<div class="composer">
 			<div class="composer-box">
 				<div class="composer-input">
-					<textarea placeholder="Send a message…  (Shift+Enter for newline)" rows="1"></textarea>
+					<textarea id="composer-text" placeholder="Send a message…  (Enter to send · Shift+Enter for newline)" rows="1"></textarea>
 					<div class="composer-bar">
-						<button class="composer-tool"><i data-icon="paperclip" data-size="14"></i> Attach</button>
-						<button class="composer-tool"><i data-icon="database" data-size="14"></i> RAG</button>
-						<button class="composer-tool"><i data-icon="plug" data-size="14"></i> Tools</button>
-						<button class="composer-tool"><i data-icon="microchip" data-size="14"></i> gpt-4o-mini <i data-icon="chevron-down" data-size="11"></i></button>
-						<button class="btn btn-ember btn-sm composer-send"><i data-icon="paper-plane" data-size="13"></i> Send</button>
+						<button class="composer-tool" onclick="Ember.toast.info('Attachments', 'File picker isn’t wired in this preview.')"><i data-icon="paperclip" data-size="14"></i> Attach</button>
+						<button class="composer-tool on" id="rag-toggle"><i data-icon="database" data-size="14"></i> RAG</button>
+						<button class="composer-tool" onclick="Ember.toast.info('Tools', 'MCP servers: GitLab · filesystem · search.')"><i data-icon="plug" data-size="14"></i> Tools</button>
+						<button class="btn btn-ember btn-sm composer-send" id="send-btn"><i data-icon="paper-plane" data-size="13"></i> Send</button>
 					</div>
 				</div>
 				<div class="text-xs text-subtle" style="text-align:center; margin-top:.5rem;">Responses are generated by AI and may contain errors.</div>
@@ -196,32 +189,32 @@ func extractToken(r *http.Request) (string, error) {
 	</section>
 
 	<!-- CONTEXT PANEL -->
-	<aside class="ctx-panel">
+	<aside class="ctx-panel" id="ctx-panel">
 		<div class="ctx-section">
 			<div class="eyebrow mb-2">Model</div>
 			<div class="card card-body-compact" style="padding:.625rem;">
 				<div class="flex items-center justify-between mb-2">
-					<div class="flex items-center gap-2"><i data-icon="microchip" data-size="14" class="text-primary"></i><span class="text-sm font-semibold">gpt-4o-mini</span></div>
+					<div class="flex items-center gap-2"><i data-icon="microchip" data-size="14" class="text-primary"></i><span class="text-sm font-semibold" id="ctx-model">gpt-4o-mini</span></div>
 					<span class="badge badge-success" style="font-size:9px;padding:1px 5px;">STABLE</span>
 				</div>
 				<div class="grid grid-2 gap-1 text-xs">
 					<div><span class="text-subtle">Context</span><br><span class="font-mono">128k</span></div>
-					<div><span class="text-subtle">Latency</span><br><span class="font-mono">1.2s</span></div>
+					<div><span class="text-subtle">Latency</span><br><span class="font-mono" id="ctx-latency">1.2s</span></div>
 				</div>
 			</div>
 		</div>
 		<div class="ctx-section">
 			<div class="flex items-center justify-between mb-2"><span class="eyebrow">Sources (RAG)</span><span class="badge badge-info">3</span></div>
 			<div class="stack">
-				<div class="card card-body-compact card-hover" style="padding:.5rem .625rem;">
+				<div class="card card-body-compact model-mini" style="padding:.5rem .625rem;">
 					<div class="flex items-center gap-2"><i data-icon="file" data-size="13" class="text-muted-foreground"></i><span class="text-xs truncate">auth_middleware.go</span></div>
 					<div class="text-xs text-subtle font-mono">0.94 match</div>
 				</div>
-				<div class="card card-body-compact card-hover" style="padding:.5rem .625rem;">
+				<div class="card card-body-compact model-mini" style="padding:.5rem .625rem;">
 					<div class="flex items-center gap-2"><i data-icon="file" data-size="13" class="text-muted-foreground"></i><span class="text-xs truncate">token_service.go</span></div>
 					<div class="text-xs text-subtle font-mono">0.81 match</div>
 				</div>
-				<div class="card card-body-compact card-hover" style="padding:.5rem .625rem;">
+				<div class="card card-body-compact model-mini" style="padding:.5rem .625rem;">
 					<div class="flex items-center gap-2"><i data-icon="book" data-size="13" class="text-muted-foreground"></i><span class="text-xs truncate">JWT RFC 7519</span></div>
 					<div class="text-xs text-subtle font-mono">0.72 match</div>
 				</div>
@@ -229,12 +222,175 @@ func extractToken(r *http.Request) (string, error) {
 		</div>
 		<div class="ctx-section">
 			<div class="eyebrow mb-2">Usage this thread</div>
-			<div class="flex justify-between text-xs mb-2"><span class="text-muted-foreground">Tokens</span><span class="font-mono">4,218 / 128k</span></div>
-			<div class="progress"><div class="progress-bar ember" style="width:3.3%"></div></div>
+			<div class="flex justify-between text-xs mb-2"><span class="text-muted-foreground">Tokens</span><span class="font-mono" id="usage-label">4,218 / 128k</span></div>
+			<div class="progress"><div class="progress-bar ember" id="usage-bar" style="width:3.3%"></div></div>
 		</div>
 	</aside>
 </div>
 
-<script src="icons.js"></script>
+<script src="icons.js?v=2.2"></script>
+<script src="ember.js?v=2.2"></script>
+<script>
+	const threadBody = document.getElementById('thread-body');
+	const scrollDown = () => threadBody.scrollTo({ top: threadBody.scrollHeight, behavior: 'smooth' });
+	let usageTokens = 4218;
+
+	/* ---------- streaming renderer ---------- */
+	function streamBlocks(bodyEl, blocks, metaEl, done) {
+		const caret = document.createElement('span');
+		caret.className = 'stream-caret';
+		let bi = 0;
+		const t0 = performance.now();
+		function nextBlock() {
+			if (bi >= blocks.length) { caret.remove(); if (metaEl) metaEl.textContent = '· ' + ((performance.now() - t0) / 1000).toFixed(1) + 's · ' + (380 + Math.floor(Math.random() * 220)) + ' tok'; if (done) done(); return; }
+			const b = blocks[bi++];
+			if (b.code) {
+				const pre = document.createElement('pre');
+				const code = document.createElement('code');
+				code.textContent = b.code;
+				pre.appendChild(code);
+				bodyEl.appendChild(pre);
+				pre.style.animation = 'ember-fade-up .3s var(--ease-out)';
+				bodyEl.appendChild(caret);
+				scrollDown();
+				setTimeout(nextBlock, 350);
+			} else {
+				const p = document.createElement('p');
+				bodyEl.appendChild(p);
+				bodyEl.appendChild(caret);
+				const words = b.text.split(' ');
+				let wi = 0;
+				(function tick() {
+					if (wi >= words.length) { setTimeout(nextBlock, 220); return; }
+					p.textContent += (wi ? ' ' : '') + words[wi++];
+					scrollDown();
+					setTimeout(tick, 26 + Math.random() * 30);
+				})();
+			}
+		}
+		nextBlock();
+	}
+
+	const INTRO = [
+		{ text: 'Good instinct — single-responsibility will make each piece testable in isolation. Here is a clean three-layer split:' },
+		{ code: '// 1. Extraction — pulls the raw token from the request\nfunc extractToken(r *http.Request) (string, error) {\n    auth := r.Header.Get("Authorization")\n    if !strings.HasPrefix(auth, "Bearer ") {\n        return "", ErrNoToken\n    }\n    return strings.TrimPrefix(auth, "Bearer "), nil\n}' },
+		{ text: 'The key insight: each function returns an error, so the middleware becomes a short pipeline where any stage can short-circuit with a typed error. Want me to sketch the verifier and loader layers too?' }
+	];
+
+	/* ---------- composer ---------- */
+	const textarea = document.getElementById('composer-text');
+	textarea.addEventListener('input', () => {
+		textarea.style.height = 'auto';
+		textarea.style.height = Math.min(textarea.scrollHeight, 200) + 'px';
+	});
+	textarea.addEventListener('keydown', (e) => {
+		if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+	});
+	document.getElementById('send-btn').addEventListener('click', send);
+
+	function addUserMsg(text) {
+		const el = document.createElement('div');
+		el.className = 'msg';
+		el.innerHTML = '<div class="msg-avatar user">AK</div><div class="msg-content"><div class="msg-role">You</div><div class="msg-body"></div><div class="msg-actions"><button data-msg-copy title="Copy"><i data-icon="copy" data-size="13"></i></button></div></div>';
+		el.querySelector('.msg-body').appendChild(Object.assign(document.createElement('p'), { textContent: text }));
+		threadBody.appendChild(el);
+		if (window.__renderIcons) window.__renderIcons();
+		scrollDown();
+	}
+	function addAssistantShell() {
+		const el = document.createElement('div');
+		el.className = 'msg';
+		el.innerHTML = '<div class="msg-avatar assistant">E</div><div class="msg-content"><div class="msg-role">Assistant <span class="msg-meta">· streaming…</span></div><div class="msg-body"></div><div class="msg-actions"><button data-msg-copy title="Copy"><i data-icon="copy" data-size="13"></i></button><button title="Regenerate" onclick="Ember.toast.info(\'Regenerating\', \'A fresh completion would stream here.\')"><i data-icon="refresh" data-size="13"></i></button></div></div>';
+		threadBody.appendChild(el);
+		if (window.__renderIcons) window.__renderIcons();
+		scrollDown();
+		return { body: el.querySelector('.msg-body'), meta: el.querySelector('.msg-meta') };
+	}
+	const REPLIES = [
+		'Layer two is the verifier — it takes the raw token string and returns typed claims. Keep crypto options (issuer, audience, clock skew) in one config struct so rotation is a single diff.',
+		'For the loader, cache the user row by subject for ~60s. That turns every authenticated request into one cache hit instead of a DB round-trip, and revocation stays fast enough for most products.',
+		'One more tip: log extraction failures at debug level but verification failures at warn — the second bucket is where credential-stuffing attempts show up in your dashboards.'
+	];
+	let replyIdx = 0;
+	function send() {
+		const text = textarea.value.trim();
+		if (!text) return;
+		textarea.value = '';
+		textarea.style.height = 'auto';
+		addUserMsg(text);
+		usageTokens += Math.round(text.length / 4) + 120;
+		syncUsage();
+		const typing = document.createElement('div');
+		typing.className = 'msg';
+		typing.innerHTML = '<div class="msg-avatar assistant">E</div><div class="msg-content"><div class="typing-dots"><span></span><span></span><span></span></div></div>';
+		threadBody.appendChild(typing);
+		scrollDown();
+		setTimeout(() => {
+			typing.remove();
+			const shell = addAssistantShell();
+			streamBlocks(shell.body, [{ text: REPLIES[replyIdx++ % REPLIES.length] }], shell.meta, () => {
+				usageTokens += 240 + Math.floor(Math.random() * 200);
+				syncUsage();
+			});
+		}, 900);
+	}
+	function syncUsage() {
+		document.getElementById('usage-label').textContent = usageTokens.toLocaleString('en-US') + ' / 128k';
+		document.getElementById('usage-bar').style.width = Math.max(2, usageTokens / 1280) + '%';
+	}
+
+	/* copy message */
+	document.addEventListener('click', (e) => {
+		const btn = e.target.closest('[data-msg-copy]');
+		if (!btn) return;
+		const body = btn.closest('.msg').querySelector('.msg-body');
+		const text = body ? body.innerText : '';
+		if (navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
+		Ember.toast.success('Copied to clipboard', text.slice(0, 48) + (text.length > 48 ? '…' : ''));
+	});
+
+	/* conversation switching */
+	document.getElementById('conv-list-body').addEventListener('click', (e) => {
+		const item = e.target.closest('.conv-item');
+		if (!item) return;
+		document.querySelectorAll('.conv-item').forEach(c => c.classList.toggle('active', c === item));
+		document.getElementById('thread-title').textContent = item.dataset.title;
+		closePanels();
+	});
+	document.getElementById('new-chat-btn').addEventListener('click', () => {
+		Ember.toast.success('New chat started', 'Blank thread · gpt-4o-mini attached.');
+	});
+
+	/* model switching */
+	const LAT = { 'gpt-4o-mini': '1.2s', 'claude-3.5-sonnet': '2.1s', 'llama-3.1-70b': '0.8s', 'qwen2.5-coder': '0.9s' };
+	document.addEventListener('click', (e) => {
+		const m = e.target.closest('[data-model]');
+		if (!m) return;
+		document.getElementById('model-pill-label').textContent = m.dataset.model;
+		document.getElementById('ctx-model').textContent = m.dataset.model;
+		document.getElementById('ctx-latency').textContent = LAT[m.dataset.model] || '1.2s';
+		Ember.toast.info('Model switched', m.dataset.model + ' attached to this thread.');
+	});
+
+	/* RAG toggle */
+	document.getElementById('rag-toggle').addEventListener('click', function () {
+		this.classList.toggle('on');
+		Ember.toast.info(this.classList.contains('on') ? 'RAG enabled' : 'RAG disabled', this.classList.contains('on') ? '3 sources attached.' : 'Chatting without retrieval.');
+	});
+
+	/* mobile panels */
+	const convList = document.getElementById('conv-list');
+	const ctxPanel = document.getElementById('ctx-panel');
+	const scrim = document.getElementById('chat-scrim');
+	function closePanels() { convList.classList.remove('open'); ctxPanel.classList.remove('open'); scrim.classList.remove('open'); }
+	document.getElementById('conv-burger').addEventListener('click', () => { closePanels(); convList.classList.add('open'); scrim.classList.add('open'); });
+	document.getElementById('ctx-toggle').addEventListener('click', () => { closePanels(); ctxPanel.classList.add('open'); scrim.classList.add('open'); });
+	scrim.addEventListener('click', closePanels);
+
+	/* intro stream on load */
+	setTimeout(() => {
+		streamBlocks(document.getElementById('intro-body'), INTRO, document.getElementById('intro-meta'));
+	}, 500);
+</script>
 </body>
 </html>
