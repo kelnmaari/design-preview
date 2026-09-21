@@ -28,6 +28,7 @@ No build step, no server. Just open the files in a browser (double-click, or `fi
 | **`api-keys.html`** | Dense key table (live filter, status filter, bulk-select) + a slide-in create-key panel with a real create → one-time reveal flow. |
 | **`admin-users.html`** | Admin users table with roles, presence dots, live search + role/status filters, bulk-select bar, invite dialog, pagination. |
 | **`admin-models-before-after.html`** | Side-by-side: a hardcoded "dirty" component vs the tokenized Ember version. Flip the theme toggle to prove dark mode is fixed. |
+| **`ember-kit.html`** | Interactive playground: every component with live knobs → preview + copy-paste HTML, 6 themes, icon browser, plus the **navigation variants** (landing navs, topbars, sidebars). |
 
 Supporting files (not meant to be opened directly):
 

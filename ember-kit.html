@@ -77,6 +77,7 @@
 		</a>
 		<a class="kit-link" href="#brand">Brand</a>
 		<a class="kit-link" href="#playground">Playground</a>
+		<a class="kit-link" href="#navigation">Navigation</a>
 		<a class="kit-link" href="#icons">Icons</a>
 		<a class="kit-link" href="#export">Export</a>
 		<div class="topbar-spacer"></div>
@@ -479,11 +480,261 @@ Duplicate | copy
 			</div>
 			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
 		</div>
+
+		<!-- KBD -->
+		<div class="play reveal" data-play="kbd" id="play-kbd">
+			<div class="play-head"><div><h3><i data-icon="command" data-size="14"></i> Kbd</h3><p class="play-sub">Клавиша или сочетание — до 3 частей через запятую.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Keys (comma)</label><input class="input" data-k="keys" value="⌘, K" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- DIVIDER -->
+		<div class="play reveal" data-play="divider" id="play-divider">
+			<div class="play-head"><div><h3><i data-icon="xmark" data-size="14" style="transform:rotate(45deg)"></i> Divider</h3><p class="play-sub">Горизонтальная линия; с подписью по центру — knob Label. Есть и <span class="code-chip">.divider-vertical</span>.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Label (пусто = линия)</label><input class="input" data-k="label" value="or" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- AVATAR STACK -->
+		<div class="play reveal" data-play="avatarstack" id="play-avatarstack">
+			<div class="play-head"><div><h3><i data-icon="users" data-size="14"></i> Avatar stack</h3><p class="play-sub">Стопка аватаров + «+N» на перелив.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Initials (comma)</label><input class="input" data-k="initials" value="AK, SR, PM" /></div>
+					<div class="knob"><label class="knob-label">Extra · <span class="knob-val" data-val="extra">4</span></label><input type="range" class="range" data-k="extra" min="0" max="20" value="4" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- PAGINATION -->
+		<div class="play reveal" data-play="pagination" id="play-pagination">
+			<div class="play-head"><div><h3><i data-icon="chevron-right" data-size="14"></i> Pagination</h3><p class="play-sub">Компактный пагинатор с многоточием — страницы кликабельны.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Pages · <span class="knob-val" data-val="pages">42</span></label><input type="range" class="range" data-k="pages" min="1" max="99" value="42" /></div>
+					<div class="knob"><label class="knob-label">Current · <span class="knob-val" data-val="cur">5</span></label><input type="range" class="range" data-k="cur" min="1" max="99" value="5" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- SLIDE PANEL -->
+		<div class="play reveal" data-play="slidepanel" id="play-slidepanel">
+			<div class="play-head"><div><h3><i data-icon="panel-right" data-size="14"></i> Slide panel</h3><p class="play-sub">Выезжающая панель справа — как create-key flow. Открывается кнопкой ниже.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Title</label><input class="input" data-k="title" value="Create API key" /></div>
+					<div class="knob"><label class="knob-label">Description</label><input class="input" data-k="desc" value="Keys are shown once — store securely." /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- COMMAND PALETTE -->
+		<div class="play reveal" data-play="cmdk" id="play-cmdk">
+			<div class="play-head"><div><h3><i data-icon="command" data-size="14"></i> Command palette</h3><p class="play-sub">⌘K уже работает на этой странице (кнопка в шапке). Превью — статичный снимок палитры.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage" data-stage></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Placeholder</label><input class="input" data-k="ph" value="Search or jump to…" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
 	</section>
 
-	<!-- ============ 03 · ICONS ============ -->
+	<!-- ============ 03 · NAVIGATION ============ -->
+	<section class="sec" id="navigation">
+		<style>
+			.kit-nav-prev { width:100%; border:1px solid var(--color-border); border-radius:10px; overflow:hidden; background:var(--color-background); }
+			.kit-shell { display:flex; width:100%; height:320px; border:1px solid var(--color-border); border-radius:10px; overflow:hidden; background:var(--color-background); text-align:left; }
+			.kit-shell .sidebar { height:100%; position:static; }
+			.kit-rail { width:60px !important; align-items:center; }
+			.kit-rail .sidebar-brand { width:100%; justify-content:center; padding:.75rem 0; }
+			.kit-rail .sidebar-nav { display:flex; flex-direction:column; align-items:center; width:100%; }
+			.kit-rail-item { position:relative; width:36px; height:36px; display:grid; place-items:center; border-radius:var(--radius-sm); color:var(--color-muted-foreground); margin:2px 0; text-decoration:none; }
+			.kit-rail-item:hover { background:var(--color-accent); color:var(--color-foreground); }
+			.kit-rail-item.active { background:rgb(var(--tw-primary) / .12); color:var(--color-primary); }
+			.kit-rail-item.active::before { content:""; position:absolute; left:-12px; top:7px; bottom:7px; width:3px; border-radius:3px; background-image:linear-gradient(180deg,#F59E0B,#F43F5E); box-shadow:0 0 10px rgb(244 63 94 / .6); }
+			.kit-ws-card { margin:.625rem .625rem 0; padding:.55rem .625rem; border:1px solid var(--color-border); border-radius:var(--radius-md); display:flex; align-items:center; gap:.55rem; background:var(--color-background); width:calc(100% - 1.25rem); text-align:left; }
+			.kit-ws-logo { width:28px; height:28px; border-radius:7px; background-image:linear-gradient(135deg,#F59E0B,#F43F5E); display:grid; place-items:center; color:#fff; font-weight:800; font-size:12px; flex:none; }
+			.kit-ws-name { font-size:12.5px; font-weight:600; color:var(--color-foreground); line-height:1.2; }
+			.kit-ws-plan { font-size:10px; color:var(--color-subtle); font-family:var(--font-mono); }
+			.kit-crumbs { display:flex; align-items:center; gap:7px; font-size:13px; color:var(--color-subtle); }
+			.kit-crumbs .current { color:var(--color-foreground); font-weight:500; }
+			.kit-ws-pill { display:flex; align-items:center; gap:8px; height:32px; padding:0 8px 0 6px; border-radius:var(--radius-md); border:1px solid var(--color-border); background:var(--color-background); font-size:12.5px; font-weight:600; color:var(--color-foreground); }
+			.kit-ws-pill .kit-ws-logo { width:22px; height:22px; border-radius:6px; font-size:11px; }
+			.kit-ws-pill .ws-sub { font-weight:400; color:var(--color-subtle); font-size:11px; font-family:var(--font-mono); }
+			.kit-bell-dot { position:absolute; top:6px; right:7px; width:7px; height:7px; border-radius:50%; background:var(--color-primary); box-shadow:0 0 8px rgb(244 63 94 / .8); border:1.5px solid var(--color-card); }
+			.kit-avatar-chip { width:26px; height:26px; font-size:10px; margin-left:2px; }
+			.kit-storage { padding:0 .25rem .5rem; }
+			.kit-storage-label { display:flex; justify-content:space-between; font-size:11px; color:var(--color-muted-foreground); padding-bottom:.375rem; }
+			.kit-storage-label b { font-family:var(--font-mono); color:var(--color-foreground); font-weight:600; }
+			/* landing nav variants */
+			.nv1 { display:flex; align-items:center; gap:8px; height:60px; padding:0 18px; background:rgb(var(--tw-background) / .72); border-bottom:1px solid var(--color-border); }
+			.nv2 { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; height:64px; padding:0 18px; }
+			.nv2-link { padding:7px 13px; border-radius:9999px; font-size:13px; font-weight:500; color:var(--color-muted-foreground); text-decoration:none; border:1px solid transparent; }
+			.nv2-link.active { color:var(--color-foreground); background:var(--color-card); border-color:var(--color-border); box-shadow:var(--shadow-xs); }
+			.nv3-pill { display:flex; align-items:center; gap:12px; width:100%; max-width:640px; margin:18px auto 0; padding:8px 10px 8px 16px; border-radius:18px; background:rgb(var(--tw-card) / .55); backdrop-filter:blur(16px); border:1px solid var(--color-border-strong); box-shadow:var(--shadow-lg); }
+			.nv3-link { padding:7px 12px; border-radius:10px; font-size:13px; font-weight:500; color:var(--color-muted-foreground); text-decoration:none; }
+			.nv3-link.active { color:var(--color-primary); background:rgb(var(--tw-primary) / .1); }
+			.nv4-tabs { display:flex; align-items:stretch; height:100%; margin-left:24px; }
+			.nv4-link { position:relative; display:flex; align-items:center; padding:0 4px; margin:0 12px; font-size:13px; font-weight:500; color:var(--color-muted-foreground); text-decoration:none; }
+			.nv4-link.active { color:var(--color-foreground); }
+			.nv4-link.active::after { content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; border-radius:2px 2px 0 0; background-image:linear-gradient(90deg,#F59E0B,#F43F5E); box-shadow:0 0 12px rgb(244 63 94 / .55); }
+			.kit-brand-inline { display:flex; align-items:center; gap:10px; text-decoration:none; }
+			.kit-brand-inline .logo { width:28px; height:28px; border-radius:8px; background-image:linear-gradient(135deg,#F59E0B,#F43F5E); display:grid; place-items:center; color:#fff; font-weight:800; font-size:14px; box-shadow:0 2px 14px rgb(244 63 94 / .4); }
+			.kit-brand-inline .name { font-weight:600; font-size:14px; color:var(--color-foreground); }
+		</style>
+		<div class="block-title reveal">03 · Navigation · variants</div>
+		<p class="sec-sub reveal">Новые компоненты навигации: 4 варианта верхнего меню для лендинга и 3+3 варианта топбара/сайдбара для внутренних страниц. Превью собраны из реальных классов системы — крутите ручки, копируйте HTML вместе с CSS.</p>
+		<nav class="toc reveal" id="nav-toc"></nav>
+
+		<!-- NAV V1 -->
+		<div class="play reveal" data-play="navv1" id="play-navv1">
+			<div class="play-head"><div><h3><i data-icon="home" data-size="14"></i> Landing · V1 Classic hub</h3><p class="play-sub">Бренд слева, ghost-ссылки справа, стеклянный blur. Самый «спокойный» вариант.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage block" data-stage style="min-height:150px"></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Brand</label><input class="input" data-k="brand" value="Ember" /></div>
+					<div class="knob"><label class="knob-label">CTA</label><input class="input" data-k="cta" value="Get started" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML + CSS</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- NAV V2 -->
+		<div class="play reveal" data-play="navv2" id="play-navv2">
+			<div class="play-head"><div><h3><i data-icon="home" data-size="14"></i> Landing · V2 Centered pills</h3><p class="play-sub">Ссылки-«пилюли» по центру, активная — карточка с рамкой. Воздушно, без фона.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage block" data-stage style="min-height:150px"></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Brand</label><input class="input" data-k="brand" value="Ember" /></div>
+					<div class="knob"><label class="knob-label">CTA</label><input class="input" data-k="cta" value="Get started" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML + CSS</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- NAV V3 -->
+		<div class="play reveal" data-play="navv3" id="play-navv3">
+			<div class="play-head"><div><h3><i data-icon="home" data-size="14"></i> Landing · V3 Floating glass pill</h3><p class="play-sub">Отдельная «плавающая» стеклянная капсула с тенями и blur 16. Самый премиальный.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage block" data-stage style="min-height:170px"></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Brand</label><input class="input" data-k="brand" value="Ember" /></div>
+					<div class="knob"><label class="knob-label">CTA</label><input class="input" data-k="cta" value="Get started" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML + CSS</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- NAV V4 -->
+		<div class="play reveal" data-play="navv4" id="play-navv4">
+			<div class="play-head"><div><h3><i data-icon="home" data-size="14"></i> Landing · V4 Gradient hairline</h3><p class="play-sub">Анимированная градиентная линия сверху + подчёркивание активного пункта Amber→Rose.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage block" data-stage style="min-height:150px"></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Brand</label><input class="input" data-k="brand" value="Ember" /></div>
+					<div class="knob"><label class="knob-label">CTA</label><input class="input" data-k="cta" value="Get started" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML + CSS</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- TOPBAR A1 -->
+		<div class="play reveal" data-play="topa1" id="play-topa1">
+			<div class="play-head"><div><h3><i data-icon="panel-right" data-size="14"></i> Topbar · A1 Baseline</h3><p class="play-sub">Текущий вариант: поиск с ⌘K слева, команды / уведомления / тема справа.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage block" data-stage style="min-height:360px"></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Search placeholder</label><input class="input" data-k="ph" value="Search or jump to…" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- TOPBAR A2 -->
+		<div class="play reveal" data-play="topa2" id="play-topa2">
+			<div class="play-head"><div><h3><i data-icon="panel-right" data-size="14"></i> Topbar · A2 Breadcrumb context</h3><p class="play-sub">Вместо поиска — breadcrumbs со страницей и live-бейджем; поиск свёрнут в иконку.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage block" data-stage style="min-height:360px"></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Workspace</label><input class="input" data-k="ws" value="Workspace" /></div>
+					<div class="knob"><label class="knob-label">Page</label><input class="input" data-k="page" value="Dashboard" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- TOPBAR A3 -->
+		<div class="play reveal" data-play="topa3" id="play-topa3">
+			<div class="play-head"><div><h3><i data-icon="panel-right" data-size="14"></i> Topbar · A3 Workspace switcher + env</h3><p class="play-sub">Переключатель воркспейса слева, segmented Production/Staging и помощь справа.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage block" data-stage style="min-height:360px"></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Workspace</label><input class="input" data-k="ws" value="Acme Inc" /></div>
+					<div class="knob"><label class="knob-label">Environment</label><input class="input" data-k="env" value="production" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- SIDEBAR Б1 -->
+		<div class="play reveal" data-play="sideb1" id="play-sideb1">
+			<div class="play-head"><div><h3><i data-icon="sidebar" data-size="14"></i> Sidebar · Б1 Baseline</h3><p class="play-sub">Текущий сайдбар: секции Workspace / Platform / Admin + карточка пользователя.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage block" data-stage style="min-height:360px"></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">User</label><input class="input" data-k="user" value="Alex Kim" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- SIDEBAR Б2 -->
+		<div class="play reveal" data-play="sideb2" id="play-sideb2">
+			<div class="play-head"><div><h3><i data-icon="sidebar" data-size="14"></i> Sidebar · Б2 Icon rail — 60px</h3><p class="play-sub">Только иконки с тултипами, активный пункт — градиентная полка. Контенту +164px.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage block" data-stage style="min-height:360px"></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Badge count</label><input class="input" data-k="badge" value="3" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML + CSS</span></div><pre><code data-code></code></pre></div>
+		</div>
+
+		<!-- SIDEBAR Б3 -->
+		<div class="play reveal" data-play="sideb3" id="play-sideb3">
+			<div class="play-head"><div><h3><i data-icon="sidebar" data-size="14"></i> Sidebar · Б3 Workspace card + usage</h3><p class="play-sub">Плоский список под карточкой воркспейса, в подвале — счётчик и апгрейд. SaaS-вариант.</p></div><button class="btn btn-outline btn-sm" data-copycode><i data-icon="copy" data-size="13"></i> Copy HTML</button></div>
+			<div class="play-grid">
+				<div class="stage block" data-stage style="min-height:360px"></div>
+				<div class="knobs">
+					<div class="knob"><label class="knob-label">Workspace</label><input class="input" data-k="ws" value="Acme Inc" /></div>
+					<div class="knob"><label class="knob-label">Usage · <span class="knob-val" data-val="usage">68</span>%</label><input type="range" class="range" data-k="usage" min="0" max="100" value="68" /></div>
+				</div>
+			</div>
+			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>HTML</span></div><pre><code data-code></code></pre></div>
+		</div>
+	</section>
+
+	<!-- ============ 04 · ICONS ============ -->
 	<section class="sec" id="icons">
-		<div class="block-title reveal">03 · Icons · <span class="font-mono" style="text-transform:none;" data-stat="icons2">–</span></div>
+		<div class="block-title reveal">04 · Icons · <span class="font-mono" style="text-transform:none;" data-stat="icons2">–</span></div>
 		<p class="sec-sub reveal">Stroke icons, zero requests. Search, click any icon to copy its snippet, paste into <span class="code-chip">data-icon</span> knobs above or your own markup.</p>
 		<div class="reveal" style="max-width:420px;">
 			<div class="search-field">
@@ -494,9 +745,9 @@ Duplicate | copy
 		<div class="icon-grid reveal" id="icon-grid"></div>
 	</section>
 
-	<!-- ============ 04 · EXPORT ============ -->
+	<!-- ============ 05 · EXPORT ============ -->
 	<section class="sec" id="export">
-		<div class="block-title reveal">04 · Export · reuse in your utilities</div>
+		<div class="block-title reveal">05 · Export · reuse in your utilities</div>
 		<p class="sec-sub reveal">Everything on this page runs on 3 files. Grab a single-file starter, the raw files, or the include snippet — then paste any component HTML from the playground.</p>
 		<div class="export-grid">
 			<div class="card card-body reveal spotlight">
@@ -574,6 +825,23 @@ Duplicate | copy
 	</div>
 </div>
 
+<!-- LIVE SLIDE PANEL (synced from the slide panel playground) -->
+<div class="panel-overlay" id="kit-slidepanel-ov" onclick="this.classList.remove('open');document.getElementById('kit-slidepanel').classList.remove('open')"></div>
+<aside class="slide-panel" id="kit-slidepanel">
+	<div class="card-header flex items-center justify-between">
+		<div>
+			<div class="card-title" data-slot="title">Create API key</div>
+			<div class="card-description" data-slot="desc">Keys are shown once — store securely.</div>
+		</div>
+		<button class="btn btn-ghost btn-icon btn-sm" onclick="document.getElementById('kit-slidepanel').classList.remove('open');document.getElementById('kit-slidepanel-ov').classList.remove('open')"><i data-icon="xmark"></i></button>
+	</div>
+	<div class="card-body"><p class="text-sm text-muted-foreground">Panel body — paste your form here.</p></div>
+	<div class="card-footer flex justify-between" style="margin-top:auto">
+		<button class="btn btn-ghost btn-sm" onclick="document.getElementById('kit-slidepanel').classList.remove('open');document.getElementById('kit-slidepanel-ov').classList.remove('open')">Cancel</button>
+		<button class="btn btn-ember btn-sm" onclick="document.getElementById('kit-slidepanel').classList.remove('open');document.getElementById('kit-slidepanel-ov').classList.remove('open');if(window.Ember)Ember.toast.success('Key created','sk-ember-9f2e4c1b••• shown once.')">Create key</button>
+	</div>
+</aside>
+
 <script src="icons.js?v=2.2"></script>
 <script src="ember.js?v=2.2"></script>
 <script>
@@ -631,6 +899,51 @@ function badgeForStatus(st) {
 	if (w === 'limited') return '<span class="badge badge-amber">Limited</span>';
 	if (w === 'revoked') return '<span class="badge badge-destructive">Revoked</span>';
 	return '<span class="badge badge-muted">' + esc(String(st || '').trim() || '—') + '</span>';
+}
+
+/* ---- kit nav/shell helpers (§ Navigation) ---- */
+function kitLogo(name, size) {
+	const s = size || 28;
+	return '<span class="kit-brand-inline"><span class="logo" style="width:' + s + 'px;height:' + s + 'px;font-size:' + Math.round(s * .5) + 'px;">E</span><span class="name">' + esc(name || 'Ember') + '</span></span>';
+}
+function kitNavItem(label, icon, active, badge) {
+	return '<a href="#" onclick="return false" class="nav-item' + (active ? ' active' : '') + '">' +
+		'<span class="nav-icon"><i data-icon="' + icon + '" data-size="15"></i></span>' + esc(label) +
+		(badge ? '<span class="nav-badge">' + esc(badge) + '</span>' : '') + '</a>';
+}
+function kitSideDefault(user) {
+	return '<aside class="sidebar" style="height:100%">' + kitSidebarBrand() +
+		'<nav class="sidebar-nav">' +
+		'<div class="sidebar-section-label">Workspace</div>' + kitNavItem('Dashboard', 'gauge', true) + kitNavItem('Chat', 'comments') + kitNavItem('History', 'history') + kitNavItem('API Keys', 'key', false, '3') + kitNavItem('Files', 'folder') +
+		'<div class="sidebar-section-label">Platform</div>' + kitNavItem('Models', 'microchip') + kitNavItem('RAG', 'database') + kitNavItem('GitLab', 'code-branch') + kitNavItem('Monitor', 'chart-line') +
+		'<div class="sidebar-section-label">Admin</div>' + kitNavItem('Users', 'users') + kitNavItem('Settings', 'gear') +
+		'</nav>' +
+		'<div class="sidebar-footer"><a href="#" onclick="return false" class="user-chip"><span class="avatar">' + esc((user || 'Alex Kim').split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase()) + '</span><div style="min-width:0"><div class="u-name truncate">' + esc(user || 'Alex Kim') + '</div><div class="u-role">admin · acme</div></div></a></div></aside>';
+}
+function kitSidebarBrand() {
+	return '<a href="#" onclick="return false" class="sidebar-brand"><div class="logo">E</div><div><div class="brand-name">Ember</div><div class="brand-sub">design system · v2.2</div></div></a>';
+}
+function kitFakeContent() {
+	return '<main class="content" style="padding:14px;overflow:hidden;">' +
+		'<div class="skeleton" style="height:13px;width:34%"></div>' +
+		'<div class="skeleton" style="height:56px;width:100%;margin-top:12px"></div>' +
+		'<div class="skeleton" style="height:12px;width:64%;margin-top:10px"></div></main>';
+}
+function kitShell(sideHtml, topbarHtml) {
+	return '<div class="kit-shell">' + sideHtml +
+		'<div style="flex:1;min-width:0;display:flex;flex-direction:column;">' + topbarHtml + kitFakeContent() + '</div></div>';
+}
+function kitIconBtn(icon, dot) {
+	return '<button class="icon-btn" style="position:relative;" onclick="return false"><i data-icon="' + icon + '" data-size="15"></i>' + (dot ? '<span class="kit-bell-dot"></span>' : '') + '</button>';
+}
+function topa1Topbar() {
+	return '<header class="topbar">' +
+		'<button class="icon-btn" onclick="return false"><i data-icon="sidebar" data-size="16"></i></button>' +
+		'<div class="topbar-search"><i data-icon="magnifying-glass" data-size="14"></i><span>Search or jump to…</span>' +
+		'<span class="kbd-hint" style="margin-left:auto;display:flex;gap:2px;"><kbd>⌘</kbd><kbd>K</kbd></span></div>' +
+		'<div class="topbar-spacer"></div>' + kitIconBtn('command') + kitIconBtn('bell', true) +
+		'<div class="divider-vertical" style="height:20px"></div>' +
+		'<button class="icon-btn" data-theme-toggle><i data-icon="sun" data-size="15" data-theme-icon></i></button></header>';
 }
 
 const PLAYS = {
@@ -883,6 +1196,359 @@ const PLAYS = {
 			}
 			return h + '</div>';
 		}
+	},
+	kbd: {
+		render(s) {
+			const keys = s.keys.split(',').map((x) => x.trim()).filter(Boolean);
+			return '<div style="display:flex;gap:4px;align-items:center;">' +
+				keys.map((k, i) => (i ? '<span class="text-xs text-subtle">+</span>' : '') + '<kbd>' + esc(k) + '</kbd>').join('') + '</div>';
+		}
+	},
+	divider: {
+		render(s) {
+			if (!s.label.trim()) return '<hr class="divider" style="width:100%" />';
+			return '<div style="display:flex;align-items:center;gap:12px;width:100%">' +
+				'<span class="divider" style="flex:1"></span><span class="text-xs text-subtle">' + esc(s.label) + '</span>' +
+				'<span class="divider" style="flex:1"></span></div>';
+		},
+		code(s) {
+			if (!s.label.trim()) return '<hr class="divider" />';
+			return '<div style="display:flex;align-items:center;gap:12px">\n' +
+				'  <span class="divider" style="flex:1"></span>\n' +
+				'  <span class="text-xs text-subtle">' + esc(s.label) + '</span>\n' +
+				'  <span class="divider" style="flex:1"></span>\n</div>';
+		}
+	},
+	avatarstack: {
+		render(s) {
+			const list = s.initials.split(',').map((x) => x.trim()).filter(Boolean);
+			let h = '<div class="avatar-stack">';
+			list.forEach((ini) => { h += '<span class="avatar">' + esc(ini.slice(0, 2).toUpperCase()) + '</span>'; });
+			if (Math.round(s.extra) > 0) h += '<span class="more">+' + Math.round(s.extra) + '</span>';
+			return h + '</div>';
+		},
+		code(s) {
+			const list = s.initials.split(',').map((x) => x.trim()).filter(Boolean);
+			let h = '<div class="avatar-stack">\n';
+			list.forEach((ini) => { h += '  <span class="avatar">' + esc(ini.slice(0, 2).toUpperCase()) + '</span>\n'; });
+			if (Math.round(s.extra) > 0) h += '  <span class="more">+' + Math.round(s.extra) + '</span>\n';
+			return h + '</div>';
+		}
+	},
+	pagination: {
+		pages(s) {
+			const total = Math.max(1, Math.round(s.pages));
+			const cur = Math.min(total, Math.max(1, Math.round(s.cur)));
+			if (total <= 7) return { list: Array.from({ length: total }, (_, i) => i + 1), cur };
+			const out = [1];
+			const start = Math.max(2, cur - 1), end = Math.min(total - 1, cur + 1);
+			if (start > 2) out.push('…');
+			for (let i = start; i <= end; i++) out.push(i);
+			if (end < total - 1) out.push('…');
+			out.push(total);
+			return { list: out, cur };
+		},
+		render(s) {
+			const { list, cur } = this.pages(s);
+			let h = '<div class="pagination">';
+			h += '<button class="page-btn"><i data-icon="chevron-left" data-size="12"></i></button>';
+			list.forEach((p) => {
+				h += (p === '…') ? '<span class="text-xs text-subtle px-1">…</span>'
+					: '<button class="page-btn' + (p === cur ? ' active' : '') + '">' + p + '</button>';
+			});
+			h += '<button class="page-btn"><i data-icon="chevron-right" data-size="12"></i></button></div>';
+			return h;
+		},
+		code(s) {
+			const { list, cur } = this.pages(s);
+			let h = '<div class="pagination">\n  <button class="page-btn"><i data-icon="chevron-left" data-size="12"></i></button>\n';
+			list.forEach((p) => {
+				h += (p === '…') ? '  <span class="text-xs text-subtle px-1">…</span>\n'
+					: '  <button class="page-btn' + (p === cur ? ' active' : '') + '">' + p + '</button>\n';
+			});
+			return h + '  <button class="page-btn"><i data-icon="chevron-right" data-size="12"></i></button>\n</div>';
+		}
+	},
+	slidepanel: {
+		render(s) {
+			return '<div style="text-align:center;"><button class="btn btn-outline" ' +
+				'onclick="document.getElementById(\'kit-slidepanel\').classList.add(\'open\');document.getElementById(\'kit-slidepanel-ov\').classList.add(\'open\')">' +
+				'<i data-icon="panel-right" data-size="13"></i> Open slide panel</button>' +
+				'<p class="text-xs text-muted-foreground" style="margin-top:10px;">Live — knob edits apply to the real panel.</p></div>';
+		},
+		code(s) {
+			return '<!-- trigger -->\n<button class="btn btn-outline" onclick="document.getElementById(\'my-panel\').classList.add(\'open\');document.getElementById(\'my-panel-ov\').classList.add(\'open\')">Open panel</button>\n\n' +
+				'<!-- panel (place before </body>; .open toggles visibility) -->\n<div class="panel-overlay" id="my-panel-ov" onclick="this.classList.remove(\'open\');document.getElementById(\'my-panel\').classList.remove(\'open\')"></div>\n' +
+				'<aside class="slide-panel" id="my-panel">\n' +
+				'  <div class="card-header flex items-center justify-between">\n' +
+				'    <div>\n      <div class="card-title">' + esc(s.title) + '</div>\n      <div class="card-description">' + esc(s.desc) + '</div>\n    </div>\n' +
+				'    <button class="btn btn-ghost btn-icon btn-sm" onclick="document.getElementById(\'my-panel\').classList.remove(\'open\');document.getElementById(\'my-panel-ov\').classList.remove(\'open\')"><i data-icon="xmark"></i></button>\n' +
+				'  </div>\n' +
+				'  <div class="card-body"><!-- form / content --></div>\n' +
+				'</aside>';
+		},
+		after(play, s) {
+			const p = document.getElementById('kit-slidepanel');
+			if (!p) return;
+			p.querySelector('[data-slot="title"]').textContent = s.title;
+			p.querySelector('[data-slot="desc"]').textContent = s.desc;
+		}
+	},
+	cmdk: {
+		render(s) {
+			return '<div style="width:100%;max-width:440px;text-align:left;">' +
+				'<div class="cmdk" style="transform:none;"><div class="cmdk-input-row">' +
+				'<i data-icon="magnifying-glass" data-size="14" class="text-subtle"></i><input placeholder="' + esc(s.ph) + '" /><kbd>Esc</kbd></div>' +
+				'<div class="cmdk-list"><div class="cmdk-group">Actions</div>' +
+				'<div class="cmdk-item"><span class="cmdk-icon"><i data-icon="plus" data-size="13"></i></span>New API key<span class="cmdk-hint">⌘N</span></div>' +
+				'<div class="cmdk-item"><span class="cmdk-icon"><i data-icon="comments" data-size="13"></i></span>Open chat<span class="cmdk-hint">G C</span></div>' +
+				'<div class="cmdk-group">Navigation</div>' +
+				'<div class="cmdk-item"><span class="cmdk-icon"><i data-icon="gauge" data-size="13"></i></span>Dashboard<span class="cmdk-hint">G D</span></div>' +
+				'</div></div>' +
+				'<p class="text-xs text-muted-foreground" style="margin-top:10px;">⌘K уже работает на этой странице — кнопка в шапке.</p></div>';
+		},
+		code() {
+			return '<!-- палитру рисует ember.js: достаточно триггера — ⌘K уже забинден -->\n' +
+				'<button class="btn btn-ghost btn-icon btn-sm" data-palette-open aria-label="Command palette">\n' +
+				'  <i data-icon="command" data-size="15"></i>\n</button>\n\n' +
+				'<!-- или из JS -->\nEmber.palette.open();';
+		}
+	},
+	navv1: {
+		render(s) {
+			return '<div class="kit-nav-prev"><nav class="nv1">' + kitLogo(s.brand) +
+				'<div style="margin-left:auto;display:flex;gap:2px;">' +
+				['Product', 'Features', 'Pricing', 'Docs'].map((l) => '<a href="#" onclick="return false" class="btn btn-ghost btn-sm">' + l + '</a>').join('') +
+				'</div><button class="icon-btn" data-theme-toggle><i data-icon="sun" data-size="15" data-theme-icon></i></button>' +
+				'<a href="#" onclick="return false" class="btn btn-ember btn-sm">' + esc(s.cta) + '</a></nav></div>';
+		},
+		code(s) {
+			return '<!-- V1 · Classic hub -->\n<nav class="lnav">\n' +
+				'  <a class="brand" href="/"><span class="logo">E</span> ' + esc(s.brand) + '</a>\n' +
+				'  <div class="links">\n' +
+				'    <a class="btn btn-ghost btn-sm" href="#product">Product</a>\n    <a class="btn btn-ghost btn-sm" href="#features">Features</a>\n    <a class="btn btn-ghost btn-sm" href="#pricing">Pricing</a>\n    <a class="btn btn-ghost btn-sm" href="#docs">Docs</a>\n  </div>\n' +
+				'  <button class="icon-btn" data-theme-toggle><i data-icon="sun" data-theme-icon></i></button>\n' +
+				'  <a class="btn btn-ember btn-sm" href="#start">' + esc(s.cta) + '</a>\n</nav>\n' +
+				'<style>\n.lnav { display:flex; align-items:center; gap:8px; height:60px; padding:0 20px;\n  background:rgb(var(--tw-background) / .72); backdrop-filter:blur(12px);\n  border-bottom:1px solid var(--color-border); }\n.links { margin-left:auto; }\n.brand { display:flex; align-items:center; gap:10px; font-weight:600; font-size:14px; text-decoration:none; color:var(--color-foreground); }\n.brand .logo { width:28px; height:28px; border-radius:8px; background-image:linear-gradient(135deg,#F59E0B,#F43F5E);\n  display:grid; place-items:center; color:#fff; font-weight:800; font-size:14px; box-shadow:0 2px 14px rgb(244 63 94 / .4); }\n</style>';
+		}
+	},
+	navv2: {
+		render(s) {
+			return '<div class="kit-nav-prev"><nav class="nv2">' + kitLogo(s.brand) +
+				'<div style="display:flex;gap:4px;justify-content:center;">' +
+				['Product', 'Features', 'Pricing', 'Docs', 'Changelog'].map((l, i) => '<a href="#" onclick="return false" class="nv2-link' + (i === 0 ? ' active' : '') + '">' + l + '</a>').join('') +
+				'</div><div style="display:flex;gap:8px;justify-content:flex-end;align-items:center;">' +
+				'<a href="#" onclick="return false" class="btn btn-ghost btn-sm">Sign in</a>' +
+				'<a href="#" onclick="return false" class="btn btn-ember btn-sm">' + esc(s.cta) + '</a></div></nav></div>';
+		},
+		code(s) {
+			return '<!-- V2 · Centered pills -->\n<nav class="lnav">\n' +
+				'  <a class="brand" href="/"><span class="logo">E</span> ' + esc(s.brand) + '</a>\n' +
+				'  <div class="links">\n' +
+				'    <a class="link active" href="#product">Product</a>\n    <a class="link" href="#features">Features</a>\n    <a class="link" href="#pricing">Pricing</a>\n    <a class="link" href="#docs">Docs</a>\n    <a class="link" href="#changelog">Changelog</a>\n  </div>\n' +
+				'  <div class="right">\n    <a class="btn btn-ghost btn-sm" href="#signin">Sign in</a>\n    <a class="btn btn-ember btn-sm" href="#start">' + esc(s.cta) + '</a>\n  </div>\n</nav>\n' +
+				'<style>\n.lnav { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; height:64px; padding:0 20px; }\n.links { justify-self:center; display:flex; gap:4px; }\n.link { padding:7px 13px; border-radius:9999px; font-size:13px; font-weight:500; color:var(--color-muted-foreground); text-decoration:none; border:1px solid transparent; }\n.link:hover { color:var(--color-foreground); background:rgb(var(--tw-muted) / .7); }\n.link.active { color:var(--color-foreground); background:var(--color-card); border-color:var(--color-border); box-shadow:var(--shadow-xs); }\n.right { justify-self:end; display:flex; gap:8px; }\n.brand { display:flex; align-items:center; gap:10px; font-weight:600; font-size:14px; text-decoration:none; color:var(--color-foreground); }\n.brand .logo { width:28px; height:28px; border-radius:8px; background-image:linear-gradient(135deg,#F59E0B,#F43F5E); display:grid; place-items:center; color:#fff; font-weight:800; font-size:14px; }\n</style>';
+		}
+	},
+	navv3: {
+		render(s) {
+			return '<div class="kit-nav-prev" style="padding:20px 18px 26px;background:radial-gradient(420px 200px at 12% -20%, rgb(var(--tw-amber) / .14), transparent), radial-gradient(420px 220px at 88% -20%, rgb(var(--tw-primary) / .12), transparent);">' +
+				'<nav class="nv3-pill">' + kitLogo(s.brand) +
+				'<div style="display:flex;gap:2px;margin:0 auto;">' +
+				['Product', 'Features', 'Pricing', 'Docs'].map((l, i) => '<a href="#" onclick="return false" class="nv3-link' + (i === 0 ? ' active' : '') + '">' + l + '</a>').join('') +
+				'</div><button class="icon-btn" data-theme-toggle><i data-icon="sun" data-size="15" data-theme-icon></i></button>' +
+				'<a href="#" onclick="return false" class="btn btn-ember btn-sm">' + esc(s.cta) + '</a></nav></div>';
+		},
+		code(s) {
+			return '<!-- V3 · Floating glass pill -->\n<header class="hero">\n' +
+				'  <nav class="pill">\n' +
+				'    <a class="brand" href="/"><span class="logo">E</span> ' + esc(s.brand) + '</a>\n' +
+				'    <div class="links">\n      <a class="link active" href="#product">Product</a>\n      <a class="link" href="#features">Features</a>\n      <a class="link" href="#pricing">Pricing</a>\n      <a class="link" href="#docs">Docs</a>\n    </div>\n' +
+				'    <button class="icon-btn" data-theme-toggle><i data-icon="sun" data-theme-icon></i></button>\n' +
+				'    <a class="btn btn-ember btn-sm" href="#start">' + esc(s.cta) + '</a>\n  </nav>\n</header>\n' +
+				'<style>\n.pill { display:flex; align-items:center; gap:12px; max-width:880px; margin:22px auto 0;\n  padding:8px 10px 8px 16px; border-radius:18px; background:rgb(var(--tw-card) / .55);\n  backdrop-filter:blur(16px); border:1px solid var(--color-border-strong); box-shadow:var(--shadow-lg); }\n.links { display:flex; gap:2px; margin:0 auto; }\n.link { padding:7px 12px; border-radius:10px; font-size:13px; font-weight:500; color:var(--color-muted-foreground); text-decoration:none; }\n.link.active { color:var(--color-primary); background:rgb(var(--tw-primary) / .1); }\n.brand { display:flex; align-items:center; gap:10px; font-weight:600; font-size:14px; text-decoration:none; color:var(--color-foreground); }\n.brand .logo { width:28px; height:28px; border-radius:8px; background-image:linear-gradient(135deg,#F59E0B,#F43F5E); display:grid; place-items:center; color:#fff; font-weight:800; font-size:14px; }\n</style>';
+		}
+	},
+	navv4: {
+		render(s) {
+			return '<div class="kit-nav-prev"><div class="bg-gradient-animated" style="height:2px;"></div>' +
+				'<nav class="nv1" style="border-bottom:1px solid var(--color-border);">' + kitLogo(s.brand) +
+				'<div class="nv4-tabs">' +
+				['Product', 'Features', 'Pricing', 'Docs', 'Changelog'].map((l, i) => '<a href="#" onclick="return false" class="nv4-link' + (i === 0 ? ' active' : '') + '">' + l + '</a>').join('') +
+				'</div><div style="margin-left:auto;display:flex;align-items:center;gap:8px;">' +
+				'<button class="icon-btn" data-theme-toggle><i data-icon="sun" data-size="15" data-theme-icon></i></button>' +
+				'<div class="divider-vertical" style="height:20px"></div>' +
+				'<a href="#" onclick="return false" class="btn btn-ember btn-sm">' + esc(s.cta) + '</a></div></nav></div>';
+		},
+		code(s) {
+			return '<!-- V4 · Gradient hairline + underline -->\n<div class="hairline bg-gradient-animated"></div>\n<nav class="lnav">\n' +
+				'  <a class="brand" href="/"><span class="logo">E</span> ' + esc(s.brand) + '</a>\n' +
+				'  <div class="tabs">\n' +
+				'    <a class="tab active" href="#product">Product</a>\n    <a class="tab" href="#features">Features</a>\n    <a class="tab" href="#pricing">Pricing</a>\n    <a class="tab" href="#docs">Docs</a>\n  </div>\n' +
+				'  <button class="icon-btn" data-theme-toggle><i data-icon="sun" data-theme-icon></i></button>\n' +
+				'  <a class="btn btn-ember btn-sm" href="#start">' + esc(s.cta) + '</a>\n</nav>\n' +
+				'<style>\n.hairline { height:2px; }  /* animated Amber→Rose gradient (v2) */\n.lnav { display:flex; align-items:center; height:58px; padding:0 22px;\n  background:rgb(var(--tw-background) / .85); border-bottom:1px solid var(--color-border); }\n.tabs { display:flex; align-items:stretch; height:100%; margin-left:26px; }\n.tab { position:relative; display:flex; align-items:center; margin:0 12px; font-size:13px; font-weight:500;\n  color:var(--color-muted-foreground); text-decoration:none; }\n.tab.active { color:var(--color-foreground); }\n.tab.active::after { content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; border-radius:2px 2px 0 0;\n  background-image:linear-gradient(90deg,#F59E0B,#F43F5E); box-shadow:0 0 12px rgb(244 63 94 / .55); }\n.brand { display:flex; align-items:center; gap:10px; font-weight:600; font-size:14px; text-decoration:none; color:var(--color-foreground); }\n.brand .logo { width:28px; height:28px; border-radius:8px; background-image:linear-gradient(135deg,#F59E0B,#F43F5E); display:grid; place-items:center; color:#fff; font-weight:800; font-size:14px; }\n</style>';
+		}
+	},
+	topa1: {
+		render(s) {
+			return kitShell(kitSideDefault('Alex Kim'),
+				'<header class="topbar">' +
+				'<button class="icon-btn" onclick="return false"><i data-icon="sidebar" data-size="16"></i></button>' +
+				'<div class="topbar-search"><i data-icon="magnifying-glass" data-size="14"></i><span>' + esc(s.ph) + '</span>' +
+				'<span class="kbd-hint" style="margin-left:auto;display:flex;gap:2px;"><kbd>⌘</kbd><kbd>K</kbd></span></div>' +
+				'<div class="topbar-spacer"></div>' + kitIconBtn('command') + kitIconBtn('bell', true) +
+				'<div class="divider-vertical" style="height:20px"></div>' +
+				'<button class="icon-btn" data-theme-toggle><i data-icon="sun" data-size="15" data-theme-icon></i></button></header>');
+		},
+		code(s) {
+			return '<!-- A1 · Baseline topbar (такой же стоит в _shell.js) -->\n<header class="topbar">\n' +
+				'  <button class="icon-btn"><i data-icon="sidebar" data-size="16"></i></button>\n' +
+				'  <div class="topbar-search"><i data-icon="magnifying-glass" data-size="14"></i><span>' + esc(s.ph) + '</span>\n' +
+				'    <span class="kbd-hint" style="margin-left:auto;display:flex;gap:2px;"><kbd>⌘</kbd><kbd>K</kbd></span></div>\n' +
+				'  <div class="topbar-spacer"></div>\n' +
+				'  <button class="icon-btn"><i data-icon="command" data-size="15"></i></button>\n' +
+				'  <button class="icon-btn" style="position:relative;"><i data-icon="bell" data-size="15"></i>\n' +
+				'    <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--color-primary);box-shadow:0 0 8px rgb(244 63 94/.8);border:1.5px solid var(--color-card);"></span></button>\n' +
+				'  <div class="divider-vertical" style="height:20px"></div>\n' +
+				'  <button class="icon-btn" data-theme-toggle><i data-icon="sun" data-size="15" data-theme-icon></i></button>\n</header>';
+		}
+	},
+	topa2: {
+		render(s) {
+			return kitShell(kitSideDefault('Alex Kim'),
+				'<header class="topbar">' +
+				'<button class="icon-btn" onclick="return false"><i data-icon="sidebar" data-size="16"></i></button>' +
+				'<div class="kit-crumbs"><a href="#" onclick="return false" style="text-decoration:none;color:inherit;">' + esc(s.ws) + '</a>' +
+				'<i data-icon="chevron-right" data-size="12" style="opacity:.55"></i><span class="current">' + esc(s.page) + '</span>' +
+				'<span class="badge badge-success badge-dot" style="margin-left:4px;">live</span></div>' +
+				'<div class="topbar-spacer"></div>' +
+				kitIconBtn('magnifying-glass') + kitIconBtn('command') + kitIconBtn('bell') +
+				'<div class="divider-vertical" style="height:20px"></div>' +
+				'<button class="icon-btn" data-theme-toggle><i data-icon="sun" data-size="15" data-theme-icon></i></button>' +
+				'<span class="avatar kit-avatar-chip">AK</span></header>');
+		},
+		code(s) {
+			return '<!-- A2 · Breadcrumb context -->\n<header class="topbar">\n' +
+				'  <div class="crumbs">\n    <a href="/">' + esc(s.ws) + '</a>\n' +
+				'    <i data-icon="chevron-right" data-size="12"></i>\n' +
+				'    <span class="current">' + esc(s.page) + '</span>\n' +
+				'    <span class="badge badge-success badge-dot" style="margin-left:4px;">live</span>\n  </div>\n' +
+				'  <div class="topbar-spacer"></div>\n' +
+				'  <button class="icon-btn" data-tip="Search ⌘K"><i data-icon="magnifying-glass" data-size="15"></i></button>\n' +
+				'  <button class="icon-btn" data-tip="Notifications"><i data-icon="bell" data-size="15"></i></button>\n' +
+				'  <div class="divider-vertical" style="height:20px"></div>\n' +
+				'  <button class="icon-btn" data-theme-toggle><i data-icon="sun" data-size="15" data-theme-icon></i></button>\n' +
+				'  <span class="avatar" style="width:26px;height:26px;font-size:10px;margin-left:2px;">AK</span>\n</header>\n' +
+				'<style>\n.crumbs { display:flex; align-items:center; gap:7px; font-size:13px; color:var(--color-subtle); }\n.crumbs .current { color:var(--color-foreground); font-weight:500; }\n</style>';
+		}
+	},
+	topa3: {
+		render(s) {
+			return kitShell(kitSideDefault('Alex Kim'),
+				'<header class="topbar">' +
+				'<div class="kit-ws-pill"><span class="kit-ws-logo">A</span><span class="truncate">' + esc(s.ws) + '</span>' +
+				'<span class="ws-sub">/ ' + esc(s.env) + '</span><i data-icon="chevron-down" data-size="12" style="color:var(--color-subtle)"></i></div>' +
+				'<div class="topbar-spacer"></div>' +
+				'<div class="segmented"><button class="active" onclick="return false">Production</button><button onclick="return false">Staging</button></div>' +
+				kitIconBtn('book') + kitIconBtn('bell') +
+				'<div class="divider-vertical" style="height:20px"></div>' +
+				'<button class="icon-btn" data-theme-toggle><i data-icon="sun" data-size="15" data-theme-icon></i></button>' +
+				'<span class="avatar kit-avatar-chip">AK</span></header>');
+		},
+		code(s) {
+			return '<!-- A3 · Workspace switcher + env -->\n<header class="topbar">\n' +
+				'  <div class="ws-pill">\n    <span class="ws-logo">A</span> ' + esc(s.ws) + '\n' +
+				'    <span class="ws-sub">/ ' + esc(s.env) + '</span>\n    <i data-icon="chevron-down" data-size="12"></i>\n  </div>\n' +
+				'  <div class="topbar-spacer"></div>\n' +
+				'  <div class="segmented"><button class="active">Production</button><button>Staging</button></div>\n' +
+				'  <button class="icon-btn" data-tip="Docs &amp; support"><i data-icon="book" data-size="15"></i></button>\n' +
+				'  <button class="icon-btn" data-tip="Notifications"><i data-icon="bell" data-size="15"></i></button>\n' +
+				'  <button class="icon-btn" data-theme-toggle><i data-icon="sun" data-size="15" data-theme-icon></i></button>\n' +
+				'  <span class="avatar" style="width:26px;height:26px;font-size:10px;margin-left:2px;">AK</span>\n</header>\n' +
+				'<style>\n.ws-pill { display:flex; align-items:center; gap:8px; height:32px; padding:0 8px 0 6px; border-radius:var(--radius-md);\n  border:1px solid var(--color-border); background:var(--color-background); font-size:12.5px; font-weight:600; }\n.ws-pill:hover { border-color:var(--color-border-strong); }\n.ws-logo { width:22px; height:22px; border-radius:6px; background-image:linear-gradient(135deg,#F59E0B,#F43F5E);\n  display:grid; place-items:center; color:#fff; font-weight:800; font-size:11px; }\n.ws-sub { font-weight:400; color:var(--color-subtle); font-size:11px; font-family:var(--font-mono); }\n</style>';
+		}
+	},
+	sideb1: {
+		render(s) {
+			return kitShell(kitSideDefault(s.user), topa1Topbar());
+		},
+		code(s) {
+			const ini = esc((s.user || 'Alex Kim').split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase());
+			return '<!-- Б1 · Baseline sidebar (классы .sidebar / .nav-item — из styles.css §6) -->\n<aside class="sidebar">\n' +
+				'  <a class="sidebar-brand" href="/"><div class="logo">E</div><div>\n' +
+				'    <div class="brand-name">Ember</div><div class="brand-sub">design system · v2.2</div></div></a>\n' +
+				'  <nav class="sidebar-nav">\n' +
+				'    <div class="sidebar-section-label">Workspace</div>\n' +
+				'    <a class="nav-item active" href="/"><span class="nav-icon"><i data-icon="gauge" data-size="15"></i></span>Dashboard</a>\n' +
+				'    <a class="nav-item" href="/chat"><span class="nav-icon"><i data-icon="comments" data-size="15"></i></span>Chat</a>\n' +
+				'    <a class="nav-item" href="/keys"><span class="nav-icon"><i data-icon="key" data-size="15"></i></span>API Keys<span class="nav-badge">3</span></a>\n' +
+				'    <div class="sidebar-section-label">Admin</div>\n' +
+				'    <a class="nav-item" href="/users"><span class="nav-icon"><i data-icon="users" data-size="15"></i></span>Users</a>\n' +
+				'  </nav>\n' +
+				'  <div class="sidebar-footer">\n    <a class="user-chip" href="/profile"><span class="avatar">' + ini + '</span>\n' +
+				'      <div><div class="u-name truncate">' + esc(s.user) + '</div><div class="u-role">admin · acme</div></div></a>\n  </div>\n</aside>';
+		}
+	},
+	sideb2: {
+		render(s) {
+			const item = (icon, active, tip, badge) =>
+				'<a href="#" onclick="return false" class="kit-rail-item' + (active ? ' active' : '') + '" data-tip="' + tip + '">' +
+				'<i data-icon="' + icon + '" data-size="16"></i>' + (badge ? '<span class="nav-badge" style="position:absolute;top:2px;right:2px;">' + esc(badge) + '</span>' : '') + '</a>';
+			return kitShell(
+				'<aside class="sidebar kit-rail" style="height:100%">' +
+				'<a href="#" onclick="return false" class="sidebar-brand"><div class="logo">E</div></a>' +
+				'<nav class="sidebar-nav">' + item('gauge', true, 'Dashboard') + item('comments', false, 'Chat') + item('history', false, 'History') +
+				item('key', false, 'API Keys', s.badge) + item('folder', false, 'Files') +
+				'<div class="kit-rail-sep" style="width:28px;height:1px;background:var(--color-border);margin:8px 0;"></div>' +
+				item('microchip', false, 'Models') + item('database', false, 'RAG') + item('code-branch', false, 'GitLab') + item('chart-line', false, 'Monitor') +
+				'<div style="width:28px;height:1px;background:var(--color-border);margin:8px 0;"></div>' +
+				item('users', false, 'Users') + item('gear', false, 'Settings') + '</nav>' +
+				'<div class="sidebar-footer" style="width:100%;display:flex;flex-direction:column;align-items:center;">' +
+				'<button class="icon-btn" style="margin-bottom:6px" onclick="return false"><i data-icon="circle-info" data-size="15"></i></button>' +
+				'<span class="avatar" style="width:28px;height:28px;font-size:10px;">AK</span></div></aside>',
+				topa1Topbar());
+		},
+		code(s) {
+			return '<!-- Б2 · Icon rail 60px (тултипы — data-tip, активный — градиентная полка) -->\n<aside class="sidebar sb-rail">\n' +
+				'  <a class="sidebar-brand" href="/"><div class="logo">E</div></a>\n' +
+				'  <nav class="sidebar-nav">\n' +
+				'    <a class="rail-item active" data-tip="Dashboard" href="/"><i data-icon="gauge" data-size="16"></i></a>\n' +
+				'    <a class="rail-item" data-tip="Chat" href="/chat"><i data-icon="comments" data-size="16"></i></a>\n' +
+				'    <a class="rail-item" data-tip="API Keys" href="/keys"><i data-icon="key" data-size="16"></i><span class="rail-badge">' + esc(s.badge) + '</span></a>\n' +
+				'  </nav>\n</aside>\n' +
+				'<style>\n.sb-rail { width:60px !important; align-items:center; }  /* 224px → 60px, +164px контенту */\n.sb-rail .sidebar-nav { display:flex; flex-direction:column; align-items:center; }\n.rail-item { position:relative; width:36px; height:36px; display:grid; place-items:center;\n  border-radius:var(--radius-sm); color:var(--color-muted-foreground); }\n.rail-item.active { background:rgb(var(--tw-primary) / .12); color:var(--color-primary); }\n.rail-item.active::before { content:""; position:absolute; left:-12px; top:7px; bottom:7px; width:3px; border-radius:3px;\n  background-image:linear-gradient(180deg,#F59E0B,#F43F5E); box-shadow:0 0 10px rgb(244 63 94 / .6); }\n.rail-badge { position:absolute; top:2px; right:2px; min-width:14px; height:14px; border-radius:9999px;\n  background:var(--color-primary); color:#fff; font-size:9px; font-weight:700; font-family:var(--font-mono);\n  display:grid; place-items:center; border:2px solid var(--color-card); }\n</style>';
+		}
+	},
+	sideb3: {
+		render(s) {
+			const v = Math.max(0, Math.min(100, Math.round(s.usage)));
+			return kitShell(
+				'<aside class="sidebar" style="height:100%">' + kitSidebarBrand() +
+				'<div class="kit-ws-card"><span class="kit-ws-logo">A</span><span style="min-width:0;">' +
+				'<span class="kit-ws-name truncate">' + esc(s.ws) + '</span><br /><span class="kit-ws-plan">PRO PLAN</span></span>' +
+				'<i data-icon="chevron-down" data-size="13" style="margin-left:auto;color:var(--color-subtle)"></i></div>' +
+				'<nav class="sidebar-nav">' + kitNavItem('Dashboard', 'gauge', true) + kitNavItem('Chat', 'comments') +
+				kitNavItem('History', 'history') + kitNavItem('API Keys', 'key', false, '3') + kitNavItem('Files', 'folder') +
+				kitNavItem('Models', 'microchip') + kitNavItem('Monitor', 'chart-line') + '</nav>' +
+				'<div class="sidebar-footer"><div class="kit-storage"><div class="kit-storage-label"><span>Requests today</span><b>' + v + '%</b></div>' +
+				'<div class="progress"><div class="progress-bar ember" style="width:' + v + '%"></div></div></div>' +
+				'<a href="#" onclick="return false" class="btn btn-ember btn-sm w-full" style="margin-top:.5rem">Upgrade plan</a></div></aside>',
+				topa1Topbar());
+		},
+		code(s) {
+			const v = Math.max(0, Math.min(100, Math.round(s.usage)));
+			return '<!-- Б3 · Workspace card + usage footer -->\n<aside class="sidebar">\n' +
+				'  <a class="sidebar-brand" href="/">…Ember…</a>\n\n' +
+				'  <button class="ws-card">\n    <span class="ws-logo">A</span>\n' +
+				'    <span><span class="ws-name truncate">' + esc(s.ws) + '</span><span class="ws-plan">PRO PLAN</span></span>\n' +
+				'    <i data-icon="chevron-down" data-size="13"></i>\n  </button>\n\n' +
+				'  <nav class="sidebar-nav">\n    <a class="nav-item active" href="/"><span class="nav-icon"><i data-icon="gauge" data-size="15"></i></span>Dashboard</a>\n    …\n  </nav>\n\n' +
+				'  <div class="sidebar-footer">\n    <div class="storage-label"><span>Requests today</span><b>' + v + '%</b></div>\n' +
+				'    <div class="progress"><div class="progress-bar ember" style="width:' + v + '%"></div></div>\n' +
+				'    <a class="btn btn-ember btn-sm w-full" style="margin-top:.5rem" href="#upgrade">Upgrade plan</a>\n  </div>\n</aside>\n' +
+				'<style>\n.ws-card { margin:.625rem; padding:.55rem .625rem; border:1px solid var(--color-border); border-radius:var(--radius-md);\n  display:flex; align-items:center; gap:.55rem; background:var(--color-background); }\n.ws-logo { width:28px; height:28px; border-radius:7px; background-image:linear-gradient(135deg,#F59E0B,#F43F5E);\n  display:grid; place-items:center; color:#fff; font-weight:800; font-size:12px; }\n.ws-name { font-size:12.5px; font-weight:600; }\n.ws-plan { font-size:10px; color:var(--color-subtle); font-family:var(--font-mono); }\n.storage-label { display:flex; justify-content:space-between; font-size:11px; color:var(--color-muted-foreground); padding-bottom:.375rem; }\n</style>';
+		}
 	}
 };
 
@@ -964,6 +1630,12 @@ document.addEventListener('click', (e) => {
 	const seg = e.target.closest('[data-stage] .segmented button');
 	if (seg) {
 		$$('button', seg.closest('.segmented')).forEach((b) => b.classList.toggle('active', b === seg));
+		return;
+	}
+	const pb = e.target.closest('[data-stage] .page-btn');
+	if (pb) {
+		$$('.page-btn', pb.closest('.pagination')).forEach((b) => b.classList.toggle('active', b === pb));
+		return;
 	}
 	const sw = e.target.closest('[data-sw]');
 	if (sw) {
@@ -979,13 +1651,17 @@ document.addEventListener('click', (e) => {
 
 /* ---------------- toc + stats ---------------- */
 (function buildToc() {
-	const toc = document.getElementById('play-toc');
-	$$('[data-play]').forEach((play) => {
-		const h = $('h3', play);
-		const a = document.createElement('a');
-		a.href = '#' + play.id;
-		a.textContent = h ? h.textContent.trim() : play.getAttribute('data-play');
-		toc.appendChild(a);
+	// один TOC на секцию: .toc внутри section.sec собирает play-карточки своей секции
+	$$('section.sec').forEach((sec) => {
+		const toc = $('.toc', sec);
+		if (!toc) return;
+		$$('[data-play]', sec).forEach((play) => {
+			const h = $('h3', play);
+			const a = document.createElement('a');
+			a.href = '#' + play.id;
+			a.textContent = h ? h.textContent.trim() : play.getAttribute('data-play');
+			toc.appendChild(a);
+		});
 	});
 	$$('[data-stat="plays"]').forEach((el) => { el.textContent = $$('[data-play]').length; });
 })();
@@ -1136,16 +1812,6 @@ document.addEventListener('click', (e) => {
 });
 
 /* ---------------- boot ---------------- */
-renderTokens();
-renderIconGrid('');
-$$('[data-play]').forEach(refreshPlay);
-$$('[data-stat="icons"], [data-stat="icons2"]').forEach((el) => { el.textContent = ICONS.length; });
-
-})();
-</script>
-</body>
-</html>
-- */
 renderTokens();
 renderIconGrid('');
 $$('[data-play]').forEach(refreshPlay);
