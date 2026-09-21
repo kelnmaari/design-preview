@@ -1,0 +1,6 @@
+# Local scratch / draft pages (throwaway design reviews) — never commit
+/_drafts/
+
+# OS junk
+.DS_Store
+Thumbs.db
