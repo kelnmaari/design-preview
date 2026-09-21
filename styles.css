@@ -1181,7 +1181,38 @@ i[data-icon]:empty, span[data-icon]:empty { display: inline-block; width: 1em; h
 	.grid-4 { grid-template-columns: 1fr; }
 	.topbar-search span:not(.kbd-hint) { display: none; }
 	.topbar-search { max-width: none; flex: 0 0 auto; }
+	.card .table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
+
+/* ---- v2.3 · Viewport tiers — laptop / 2K / ultrawide / 4K ----------------
+   Container widths grow with the viewport instead of leaving a narrow
+   column on big monitors. Two knobs:
+   --container-max  hub / docs / kit wrappers (pages)
+   --content-max    app shell content column (_shell.js · Shell.svelte)
+   --content-pad    app shell content padding
+   Point page wrappers at them: max-width: var(--container-max). */
+:root,
+.ember,
+.ember-light {
+	--container-max: 1180px;
+	--content-max: 1440px;
+	--content-pad: 1.5rem;
+}
+@media (min-width: 1536px) { /* 2xl · 15"+ laptops, 1440p */
+	:root, .ember, .ember-light { --container-max: 1340px; --content-max: 1600px; }
+}
+@media (min-width: 2048px) { /* 2K wide */
+	:root, .ember, .ember-light { --container-max: 1520px; --content-max: 1800px; }
+	.grid-auto { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+}
+@media (min-width: 3440px) { /* ultrawide */
+	:root, .ember, .ember-light { --container-max: 1680px; --content-max: 2000px; }
+}
+@media (min-width: 3840px) { /* 4K */
+	:root, .ember, .ember-light { --container-max: 1760px; --content-max: 2120px; --content-pad: 2.25rem; }
+	.grid-auto { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+}
+.content { padding: var(--content-pad); }
 
 /* -------------------------------------------------------------------------
    15. REDUCED MOTION — respect user preference, keep it instant

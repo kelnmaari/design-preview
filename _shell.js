@@ -59,7 +59,7 @@
 	.mobile-scrim { position: fixed; inset: 0; z-index: 28; background: rgb(0 0 0 / .5); backdrop-filter: blur(2px); opacity: 0; pointer-events: none; transition: opacity .25s ease; }
 	.mobile-scrim.open { opacity: 1; pointer-events: auto; }
 	#ember-burger { display: none; }
-	.content { flex: 1; padding: 1.5rem; width: 100%; max-width: 1440px; margin: 0 auto; }
+	.content { flex: 1; padding: 1.5rem; width: 100%; max-width: var(--content-max); margin: 0 auto; }
 	.content-tight { padding: 1rem 1.5rem; }
 	@media (max-width: 880px) {
 		#ember-burger { display: inline-grid; }

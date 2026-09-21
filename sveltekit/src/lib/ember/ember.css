@@ -1207,3 +1207,30 @@ i[data-icon]:empty, span[data-icon]:empty { display: inline-block; width: 1em; h
 	box-shadow: 0 0 0 3px rgb(var(--tw-destructive) / .15);
 }
 .input:disabled, .textarea:disabled { opacity: .55; cursor: not-allowed; }
+
+/* ---- v2.3 · Viewport tiers — laptop / 2K / ultrawide / 4K (from styles.css §14) ---- */
+:root,
+.ember,
+.ember-light {
+	--container-max: 1180px;
+	--content-max: 1440px;
+	--content-pad: 1.5rem;
+}
+@media (min-width: 1536px) { /* 2xl · 15"+ laptops, 1440p */
+	:root, .ember, .ember-light { --container-max: 1340px; --content-max: 1600px; }
+}
+@media (min-width: 2048px) { /* 2K wide */
+	:root, .ember, .ember-light { --container-max: 1520px; --content-max: 1800px; }
+	.grid-auto { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+}
+@media (min-width: 3440px) { /* ultrawide */
+	:root, .ember, .ember-light { --container-max: 1680px; --content-max: 2000px; }
+}
+@media (min-width: 3840px) { /* 4K */
+	:root, .ember, .ember-light { --container-max: 1760px; --content-max: 2120px; --content-pad: 2.25rem; }
+	.grid-auto { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+}
+.content { padding: var(--content-pad); }
+@media (max-width: 560px) {
+	.card .table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}

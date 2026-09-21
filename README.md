@@ -126,6 +126,7 @@ Full details in [`SVELTE-INTEGRATION.md`](./SVELTE-INTEGRATION.md); the short ve
 
 ## Notes
 
+- **Responsive by design (v2.3).** Container widths are tiered, not fixed: `--container-max` / `--content-max` / `--content-pad` grow at 1536px (laptop 2xl), 2048px (2K), 3440px (ultrawide) and 3840px (4K); grids collapse at 1200 / 880 / 560px. Live tier indicator: `tokens.html → Breakpoints`.
 - **Dark is primary.** The mockups are dark-first because that's the signature look. Light variant tokens are documented in `styles.css` (`.ember-light`) and `tokens.html`; every surface must work in both.
 - **No new runtime deps.** The mockups deliberately use only inline SVG icons and CSS — no FontAwesome kit, no chart library. The bar charts are pure CSS. This keeps the preview zero-dependency and offline-capable. `icons.js` names mirror FA solid names for a 1:1 swap if you use FontAwesome.
 - **Coverage:** 6 representative screens cover every recurring UI pattern (stat cards, tables, chat shell, create flows, admin row-actions, before/after). Everything else rebuilds by composition from `components.html`.

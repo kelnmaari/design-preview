@@ -4,9 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ember · Design Tokens</title>
-<link rel="stylesheet" href="styles.css?v=2.2" />
+<link rel="stylesheet" href="styles.css?v=2.3" />
 <style>
-	.wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+	.wrap { max-width: var(--container-max); margin: 0 auto; padding: 3rem 2rem 5rem; }
 	.hero { margin-bottom: 3rem; position: relative; overflow: hidden; }
 	.hero h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
 	.hero h1 .accent { font-weight: 800; }
@@ -267,9 +267,73 @@
 			<div class="card card-body spotlight"><div class="eyebrow mb-2">Control height</div><div class="font-mono text-sm">32px (28 sm)</div><div class="text-xs text-muted-foreground mt-2">Buttons & inputs share one height.</div></div>
 		</div>
 	</div>
+
+	<!-- BREAKPOINTS / VIEWPORT TIERS -->
+	<div class="section reveal">
+		<div class="section-title">Breakpoints — laptop · 2K · 4K <span class="badge badge-primary" style="font-size:9px;">v2.3</span>
+			<span class="field-hint" style="margin:0;text-transform:none;letter-spacing:0;">resize the window — the active tier follows</span>
+		</div>
+		<div class="card card-body" style="margin-bottom:.75rem;display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
+			<i data-icon="wifi" data-size="18" class="text-primary"></i>
+			<span class="text-sm">Your viewport:</span>
+			<span class="font-mono text-sm" style="color:var(--color-primary);" id="bp-width">–</span>
+			<span class="badge badge-success" id="bp-tier">–</span>
+			<span class="text-xs text-muted-foreground font-mono" style="margin-left:auto;" id="bp-container">–</span>
+		</div>
+		<div class="grid grid-4 gap-3" id="bp-grid">
+			<div class="card card-body bp-card" data-bp="base"><div class="eyebrow mb-2">base</div><div class="font-mono text-sm">&lt; 1536px</div><div class="text-xs text-muted-foreground mt-2">Контейнер 1180 · контент 1440. Ноутбуки 13–13″, tablet landscape.</div></div>
+			<div class="card card-body bp-card" data-bp="1536"><div class="eyebrow mb-2">2xl · 1536px</div><div class="font-mono text-sm">15″+ ноутбуки, 1440p</div><div class="text-xs text-muted-foreground mt-2">Контейнер 1340 · контент 1600.</div></div>
+			<div class="card card-body bp-card" data-bp="2048"><div class="eyebrow mb-2">2K · 2048px</div><div class="font-mono text-sm">2560 wide</div><div class="text-xs text-muted-foreground mt-2">Контейнер 1520 · контент 1800. grid-auto крупнее.</div></div>
+			<div class="card card-body bp-card" data-bp="3440"><div class="eyebrow mb-2">ultrawide · 3440px</div><div class="font-mono text-sm">21:9</div><div class="text-xs text-muted-foreground mt-2">Контейнер 1680 · контент 2000.</div></div>
+			<div class="card card-body bp-card" data-bp="3840"><div class="eyebrow mb-2">4K · 3840px</div><div class="font-mono text-sm">2160p</div><div class="text-xs text-muted-foreground mt-2">Контейнер 1760 · контент 2120 · padding 2.25rem.</div></div>
+			<div class="card card-body bp-card" data-bp="1200down"><div class="eyebrow mb-2">≤ 1200px</div><div class="font-mono text-sm">laptop · small desktop</div><div class="text-xs text-muted-foreground mt-2">grid-4 → 2 колонки.</div></div>
+			<div class="card card-body bp-card" data-bp="880down"><div class="eyebrow mb-2">≤ 880px</div><div class="font-mono text-sm">tablet</div><div class="text-xs text-muted-foreground mt-2">Сайдбар — off-canvas, grid-2/3 → 1, page-header стеком.</div></div>
+			<div class="card card-body bp-card" data-bp="560down"><div class="eyebrow mb-2">≤ 560px</div><div class="font-mono text-sm">phone</div><div class="text-xs text-muted-foreground mt-2">grid-4 → 1, таблицы скроллятся внутри карточки.</div></div>
+		</div>
+	</div>
 </div>
 
-<script src="icons.js?v=2.2"></script>
+<style>
+	.bp-card { transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease; }
+	.bp-card.active { border-color: rgb(var(--tw-primary) / .55); box-shadow: 0 0 0 1px rgb(var(--tw-primary) / .35), 0 0 22px rgb(244 63 94 / .18); transform: translateY(-2px); }
+	.bp-card.active .eyebrow { color: var(--color-primary); }
+</style>
+<script>
+	(function () {
+		var TIERS = [
+			{ min: 3840, id: '3840', label: '4K' },
+			{ min: 3440, id: '3440', label: 'ultrawide' },
+			{ min: 2048, id: '2048', label: '2K' },
+			{ min: 1536, id: '1536', label: '2xl' },
+			{ min: 1200, id: 'base', label: 'base · desktop' },
+			{ min: 880, id: '1200down', label: '≤ 1200 · laptop' },
+			{ min: 560, id: '880down', label: '≤ 880 · tablet' },
+			{ min: 0, id: '560down', label: '≤ 560 · phone' }
+		];
+		function update() {
+			var w = window.innerWidth;
+			var t = TIERS.find(function (x) { return w >= x.min; }) || TIERS[TIERS.length - 1];
+			var wEl = document.getElementById('bp-width');
+			var tEl = document.getElementById('bp-tier');
+			var cEl = document.getElementById('bp-container');
+			if (wEl) wEl.textContent = w + 'px';
+			if (tEl) tEl.textContent = t.label;
+			if (cEl) {
+				var cs = getComputedStyle(document.documentElement);
+				cEl.textContent = 'container ' + cs.getPropertyValue('--container-max').trim() +
+					' · content ' + cs.getPropertyValue('--content-max').trim();
+			}
+			document.querySelectorAll('.bp-card').forEach(function (c) {
+				c.classList.toggle('active', c.getAttribute('data-bp') === t.id);
+			});
+		}
+		window.addEventListener('resize', update);
+		document.addEventListener('DOMContentLoaded', update);
+		update();
+	})();
+</script>
+
+<script src="icons.js?v=2.3"></script>
 <script src="ember.js?v=2.2"></script>
 </body>
 </html>

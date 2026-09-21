@@ -237,7 +237,7 @@
 	}
 	.mobile-scrim.open { opacity: 1; pointer-events: auto; }
 	.burger { display: none; }
-	.content { flex: 1; padding: 1.5rem; width: 100%; max-width: 1440px; margin: 0 auto; }
+	.content { flex: 1; padding: var(--content-pad); width: 100%; max-width: var(--content-max); margin: 0 auto; }
 	@media (max-width: 880px) {
 		.burger { display: inline-grid; }
 		.sidebar {

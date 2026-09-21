@@ -4,16 +4,16 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ember Kit · Component Playground</title>
-<link rel="stylesheet" href="styles.css?v=2.2" />
+<link rel="stylesheet" href="styles.css?v=2.3" />
 <style>
 	.kit-nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); background: rgb(var(--tw-background) / 0.78); border-bottom: 1px solid var(--color-border); }
-	.kit-nav-inner { max-width: 1180px; margin: 0 auto; padding: 0 24px; height: 58px; display: flex; align-items: center; gap: 8px; }
+	.kit-nav-inner { max-width: var(--container-max); margin: 0 auto; padding: 0 24px; height: 58px; display: flex; align-items: center; gap: 8px; }
 	.kit-logo { display: flex; align-items: center; gap: 10px; margin-right: 8px; }
 	.kit-logo .mark { width: 28px; height: 28px; border-radius: 8px; background-image: linear-gradient(135deg,#F59E0B,#F43F5E); display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; box-shadow: 0 2px 14px rgb(244 63 94 / .4); }
 	.kit-link { font-size: 13px; color: var(--color-muted-foreground); padding: 6px 10px; border-radius: 8px; white-space: nowrap; }
 	.kit-link:hover { color: var(--color-foreground); background: var(--color-accent); }
 	@media (max-width: 760px) { .kit-link { display: none; } }
-	.kit-wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px 90px; }
+	.kit-wrap { max-width: var(--container-max); margin: 0 auto; padding: 0 24px 90px; }
 	.kit-hero { position: relative; padding: 54px 0 4px; }
 	.kit-hero h1 { font-size: clamp(34px, 5vw, 52px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; }
 	.kit-hero p { color: var(--color-muted-foreground); font-size: 15px; max-width: 68ch; margin-top: 12px; line-height: 1.65; }
