@@ -3,7 +3,7 @@
 Reference implementation of the **Ember Design System v2** in **SvelteKit + Svelte 5**
 (runes, TypeScript, zero component dependencies). It mirrors the static mockups in
 `design-preview/` — same tokens, same class names, same look — so you can lift
-patterns straight into `web-svelte/`.
+patterns straight into your own app.
 
 ## Run it
 
@@ -24,15 +24,15 @@ Other scripts: `npm run build`, `npm run preview`, `npm run check` (svelte-check
 | `src/lib/ember/toast.svelte.ts` | Toast store: `toast.success/info/warning/error(title, desc)`. |
 | `src/lib/ember/icons.ts` + `Icon.svelte` | Inline SVG set, 1:1 with `../icons.js`. |
 | `src/lib/ember/*.svelte` | 57 components: forms (`Field`, `TextField`, `Select`, `Checkbox`, `RadioGroup`, `Slider`, `Switch`, `InputGroup`, `Dropzone`, `SearchField`), data (`DataTable`, `ListGroup`, `Timeline`, `Presence`, `Pagination`), overlays (`Modal`, `ConfirmDialog`, `Popover`, `Tooltip`, `Alert`, `Banner`, `Toasts`, `Dropdown`, `SlidePanel`, `CommandPalette`), content (`PageHeader`, `SectionTitle`, `Breadcrumb`, `Stepper`, `Accordion`, `ChatMessage`, `ChatComposer`, `Card`, `Badge`, `Kbd`, `Divider`, `Rating`, `EmptyState`, `ErrorState`, `Skeleton`, `Spinner`, `Progress`, `Avatar`/`AvatarStack`, `CodeBlock`, `CopyButton`), charts (`LineChart`, `Donut`, `Sparkline`, `TokenBars`), system (`Shell`, `Button`, `Tabs`, `Segmented`, `StatCard`, `ThemeToggle`, `Icon`). Full catalog: `src/lib/ember/AGENTS.md`. |
-| `src/lib/ember/tailwind.css` | Tailwind v4 `@theme` bound to the same `--tw-*` tokens (no preflight). Copy into `web-svelte` for `bg-card` / `text-primary` / … |
+| `src/lib/ember/tailwind.css` | Tailwind v4 `@theme` bound to the same `--tw-*` tokens (no preflight). Copy into any Tailwind v4 app for `bg-card` / `text-primary` / … |
 | `src/lib/ember/utils.ts` | `sleep()`, `copyText()`, `seededRandom()` — clipboard + timing + SSR-safe demo data. |
-| `src/routes/` | `/` dashboard, `/chat` (streaming), `/api-keys` (create-key slide-over), `/files` (RAG browser), `/monitor` (live telemetry), `/users` (admin + invite), `/tokens`, `/components` (+ `/forms`, `/data`, `/overlays`, `/content` sub-galleries), `/patterns` (validation, async states, confirms, shortcuts), `/tailwind` (utility-first demo). |
+| `src/routes/` | `/` dashboard, `/chat` (streaming), `/api-keys` (create-key slide-over), `/files` (RAG browser), `/monitor` (live telemetry), `/users` (admin + invite), `/tokens`, `/components` (+ `/forms`, `/data`, `/overlays`, `/content` sub-galleries), `/patterns` (validation, async states, confirms, shortcuts), `/nav/landing` + `/nav/internal` (navigation variants with live previews + copy-paste code), `/tailwind` (utility-first demo). |
 | `src/app.html` | Inline pre-paint theme script (no dark-mode flash). |
 
-## Porting to `web-svelte/`
+## Porting into your app
 
 1. Copy the `:root` / `.ember-light` token blocks from `src/lib/ember/ember.css`
-   into `web-svelte/src/app.css` (see `../SVELTE-INTEGRATION.md` for the exact diff).
+   into your `app.css` (see `../SVELTE-INTEGRATION.md` for the exact diff).
 2. Copy whichever `src/lib/ember/*` components you need — they're self-contained
    and only depend on the token classes.
 3. Keep the `data-icon` names: they match the FontAwesome solids prod already uses,

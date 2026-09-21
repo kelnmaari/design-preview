@@ -107,7 +107,7 @@
 	<div>
 		<div class="eyebrow mb-2">Platform</div>
 		<h1 class="page-title">Monitor</h1>
-		<p class="page-subtitle">Live gateway telemetry — simulated client-side, seeded for SSR.</p>
+		<p class="page-subtitle">Live system telemetry — simulated client-side, seeded for SSR.</p>
 	</div>
 	<div class="flex gap-2 items-center">
 		<span class="flex items-center gap-2 text-xs text-muted-foreground">

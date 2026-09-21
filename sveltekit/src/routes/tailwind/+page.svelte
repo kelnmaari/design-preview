@@ -87,7 +87,7 @@
 </div>
 
 <div class="block" use:reveal>
-	<div class="block-title">Copy-paste into web-svelte</div>
+	<div class="block-title">Copy-paste into your app</div>
 	<div class="grid grid-2 gap-3">
 		<CodeBlock title="tailwind.css — @theme" language="css" code={THEME_SNIPPET} />
 		<CodeBlock title="usage" language="html" code={USAGE_SNIPPET} />

@@ -182,7 +182,7 @@
 			<div class="play-grid">
 				<div class="stage" data-stage></div>
 				<div class="knobs">
-					<div class="knob"><label class="knob-label">Label</label><input class="input" data-k="label" value="Deploy gateway" /></div>
+					<div class="knob"><label class="knob-label">Label</label><input class="input" data-k="label" value="Deploy build" /></div>
 					<div class="knob"><label class="knob-label">Variant</label><select class="input" data-k="variant"><option value="primary">primary</option><option value="ember">ember (CTA)</option><option value="secondary">secondary</option><option value="outline">outline</option><option value="ghost">ghost</option><option value="destructive">destructive</option></select></div>
 					<div class="knob"><label class="knob-label">Size</label><select class="input" data-k="size"><option value="sm">sm · 28px</option><option value="md" selected>default · 32px</option><option value="lg">lg · 38px</option></select></div>
 					<div class="knob"><label class="knob-label">Icon</label><select class="input" data-k="icon" data-icon-list data-icon-value="bolt"></select></div>
@@ -262,7 +262,7 @@ Quota at 68% — healthy.</textarea></div>
 				<div class="knobs">
 					<div class="knob"><label class="knob-label">Kind</label><select class="input" data-k="kind"><option value="success" selected>success</option><option value="info">info</option><option value="warning">warning</option><option value="error">error</option></select></div>
 					<div class="knob"><label class="knob-label">Title</label><input class="input" data-k="title" value="Deployed" /></div>
-					<div class="knob"><label class="knob-label">Description</label><input class="input" data-k="desc" value="gateway v7.0.1 is live on worker-02." /></div>
+					<div class="knob"><label class="knob-label">Description</label><input class="input" data-k="desc" value="v2.4.1 is live on worker-02." /></div>
 				</div>
 			</div>
 			<div class="codeblock"><div class="codeblock-head"><span class="dots"><span></span><span></span><span></span></span><span data-codelang>JS</span></div><pre><code data-code></code></pre></div>
@@ -460,7 +460,7 @@ Duplicate | copy
 				<div class="stage block" data-stage></div>
 				<div class="knobs">
 					<div class="knob"><label class="knob-label">Filename</label><input class="input" data-k="file" value="deploy.sh" /></div>
-					<div class="knob"><label class="knob-label">Code</label><textarea class="input" data-k="code" rows="4">curl -X POST $GATEWAY/v1/deploy \
+					<div class="knob"><label class="knob-label">Code</label><textarea class="input" data-k="code" rows="4">curl -X POST $API/v1/deploy \
   -H "Authorization: Bearer $KEY" \
   -d '{"model":"gpt-4o-mini"}'</textarea></div>
 				</div>

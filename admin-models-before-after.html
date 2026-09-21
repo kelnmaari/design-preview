@@ -16,7 +16,7 @@
 	.panel-label.after .tag { background: rgb(var(--tw-success) / .15); color: var(--color-success); }
 
 	/* ============ THE "BEFORE" — hardcoded, theme-blind ============ */
-	/* This mirrors the actual dirty code in web-svelte: phantom CSS vars that */
+	/* This mirrors the "dirty" pattern seen in real codebases: phantom CSS vars that */
 	/* don't exist (--card-bg, --color-blue) + JS color maps + hardcoded hex.  */
 	.before-card {
 		background: var(--card-bg, #ffffff);
@@ -64,7 +64,7 @@
 			<button class="btn btn-ghost btn-sm" data-palette-open><i data-icon="command" data-size="13"></i> <kbd>⌘K</kbd></button>
 		</div>
 		<h1 class="page-title">Before & After — tokenizing hardcoded components</h1>
-		<p class="page-subtitle" style="max-width:70ch;">7 files in <code class="snip">web-svelte</code> bypass the token system with hardcoded hex and phantom CSS variables (<code class="snip">--card-bg</code>, <code class="snip">--color-blue</code>) that don't exist — so they render fixed light colors and <strong>break in dark mode</strong>. Flip the theme above: the AFTER card adapts, the BEFORE card stays broken. That's the whole proof.</p>
+		<p class="page-subtitle" style="max-width:70ch;">Hardcoded components bypass the token system with fixed hex and phantom CSS variables (<code class="snip">--card-bg</code>, <code class="snip">--color-blue</code>) that don't exist — so they render fixed light colors and <strong>break in dark mode</strong>. Flip the theme above: the AFTER card adapts, the BEFORE card stays broken. That's the whole proof.</p>
 	</div>
 
 	<div class="cmp">

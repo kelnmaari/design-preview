@@ -33,9 +33,9 @@
 	type AsyncState = 'loading' | 'data' | 'empty' | 'error';
 	let asyncState = $state<AsyncState>('data');
 	const DEMO_ROWS = [
-		{ name: 'gateway-worker-01', meta: 'healthy · 14 models' },
-		{ name: 'gateway-worker-02', meta: 'healthy · 18 models' },
-		{ name: 'gateway-worker-03', meta: 'degraded · 10 models' }
+		{ name: 'api-worker-01', meta: 'healthy · 14 models' },
+		{ name: 'api-worker-02', meta: 'healthy · 18 models' },
+		{ name: 'api-worker-03', meta: 'degraded · 10 models' }
 	];
 
 	async function reload() {

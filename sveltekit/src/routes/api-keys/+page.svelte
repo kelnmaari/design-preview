@@ -113,7 +113,7 @@
 	<div>
 		<div class="eyebrow mb-2">Workspace</div>
 		<h1 class="page-title">API Keys</h1>
-		<p class="page-subtitle">Manage credentials for accessing the gateway. Keys inherit your role permissions.</p>
+		<p class="page-subtitle">Manage credentials for accessing the platform. Keys inherit your role permissions.</p>
 	</div>
 	<div class="flex gap-2">
 		<Button variant="outline" size="sm" onclick={() => toast.success('Exported', '156 keys written to keys.csv.')}>

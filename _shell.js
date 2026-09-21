@@ -92,8 +92,8 @@
 					<a href="tokens.html" class="sidebar-brand">
 						<div class="logo">E</div>
 						<div>
-							<div class="brand-name">AIGateway</div>
-							<div class="brand-sub">v7.0.0 · ember</div>
+							<div class="brand-name">Ember</div>
+							<div class="brand-sub">design system · v2.2</div>
 						</div>
 					</a>
 					<nav class="sidebar-nav">${navHTML}</nav>

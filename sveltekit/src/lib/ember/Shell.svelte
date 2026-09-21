@@ -32,6 +32,9 @@
 		{ label: 'Components', icon: 'cube', href: '/components' },
 		{ label: 'Patterns', icon: 'layers', href: '/patterns' },
 		{ label: 'Tailwind', icon: 'sparkles', href: '/tailwind' },
+		{ section: 'Navigation' },
+		{ label: 'Nav · Landing', icon: 'home', href: '/nav/landing' },
+		{ label: 'Nav · Internal', icon: 'panel-right', href: '/nav/internal' },
 		{ section: 'Platform' },
 		{ label: 'Models', icon: 'microchip', href: '#' },
 		{ label: 'RAG', icon: 'database', href: '#' },
@@ -63,8 +66,8 @@
 		<a href="/" class="sidebar-brand">
 			<div class="logo">E</div>
 			<div>
-				<div class="brand-name">AIGateway</div>
-				<div class="brand-sub">v7.0.0 · ember</div>
+				<div class="brand-name">Ember</div>
+				<div class="brand-sub">design system · v2.2</div>
 			</div>
 		</a>
 		<nav class="sidebar-nav">

@@ -1,7 +1,7 @@
 # Ember v2 → Svelte Integration Guide
 
-How to lift the Ember design system from these static mockups into your Svelte
-frontend (`web-svelte/` or any SvelteKit app) without losing the look.
+How to lift the Ember design system from these static mockups into any
+Svelte / SvelteKit app without losing the look.
 
 Three sources, one contract:
 
@@ -22,7 +22,7 @@ your app's global CSS. If you use Tailwind v4, register the aliases in `@theme`
 (see root `README.md` for the exact snippet). Minimum viable set:
 
 ```css
-/* app.css */
+/* app.css — key the dark palette off whichever class your app toggles */
 .dark {
   --tw-background: 10 10 12;
   --tw-foreground: 250 250 250;
@@ -61,7 +61,8 @@ or `.ember-light`. Port `sveltekit/src/lib/ember/theme.svelte.ts` as-is:
 ```
 
 And keep the pre-paint script from `sveltekit/src/app.html` so the persisted
-theme applies before first render (no dark-mode flash).
+theme applies before first render (no dark-mode flash). Set the `theme-color`
+meta to the actual background token — `#0A0A0C` for dark, `#FFFFFF` for light.
 
 ## 3. Effects are actions, not components
 
@@ -70,7 +71,7 @@ Spotlight, reveal-on-scroll and counters work on **any element** via Svelte acti
 
 ```svelte
 <script>
-  import { count, reveal, spotlight } from '$lib/ember/actions.svelte.js';
+  import { count, reveal, spotlight } from '$lib/ember/actions.svelte.ts';
 </script>
 
 <div class="stat-card spotlight" use:spotlight use:reveal={{ delay: 80 }}>
@@ -137,8 +138,12 @@ activity), `/chat` (word-by-word streaming, composer, model switcher, RAG panel)
 telemetry: ticking stats, latency line, throughput, donut, event log),
 `/users` (tabs, role/presence filters, bulk bar, invite modal), `/tokens`
 (data-driven swatches), `/components` (every component, live), `/patterns`
-(validation, async states, confirmations, shortcuts), `/tailwind`
+(validation, async states, confirmations, shortcuts), `/nav/landing` +
+`/nav/internal` (navigation variants — landing top navs, topbars, sidebars —
+each with a live preview and copy-paste code), `/tailwind`
 (utility-first twin of the same tokens).
+
+Charts beyond the static set:
 
 | Static class | Svelte twin | Notes |
 |---|---|---|
@@ -146,19 +151,10 @@ telemetry: ticking stats, latency line, throughput, donut, event log),
 | — | `Donut.svelte` | share-of-total ring + legend |
 | `.input` + error | `TextField` `error` prop | red ring + message, `aria-invalid` |
 
-## 8. Tailwind v4 (optional dialect)
-
-Prefer utilities? `sveltekit/src/lib/ember/tailwind.css` maps `@theme` straight
-onto the runtime `--tw-*` variables — `bg-card`, `text-muted-foreground`,
-`border-border` follow `.ember` / `.ember-light` automatically, and the scale
-overrides (`--text-sm: 13px`, `--radius-md: 6px`) keep utilities pixel-identical
-to the class-first components. Preflight is deliberately **off** (Ember has its
-own reset). See the live side-by-side at `/tailwind`.
-
 ## 5. Icons
 
-`src/lib/ember/icons.ts` + `Icon.svelte` are a 1:1 port of `icons.js`. Names match
-the FontAwesome solids prod uses, so migration is mechanical:
+`src/lib/ember/icons.ts` + `Icon.svelte` are a 1:1 port of `icons.js`. Names
+mirror FontAwesome solid names, so if your app uses FA the migration is mechanical:
 
 ```svelte
 <Icon name="key" size={14} />
@@ -176,12 +172,21 @@ the FontAwesome solids prod uses, so migration is mechanical:
 | tabs / dropdowns / table-select / filters | local `$state` (see `components/+page.svelte` for the table pattern) |
 | dialogs / slide-panels | `Modal.svelte` / `bind:open` + `.slide-panel` classes |
 
-## 7. Checklist for `web-svelte/`
+## 7. Tailwind v4 (optional dialect)
+
+Prefer utilities? `sveltekit/src/lib/ember/tailwind.css` maps `@theme` straight
+onto the runtime `--tw-*` variables — `bg-card`, `text-muted-foreground`,
+`border-border` follow `.ember` / `.ember-light` automatically, and the scale
+overrides (`--text-sm: 13px`, `--radius-md: 6px`) keep utilities pixel-identical
+to the class-first components. Preflight is deliberately **off** (Ember has its
+own reset). See the live side-by-side at `/tailwind`.
+
+## 8. Checklist for your app
 
 - [ ] Paste token blocks into `app.css` (+ `@theme` aliases if Tailwind v4)
 - [ ] Copy `theme.svelte.ts` + pre-paint script in `app.html`
 - [ ] Copy `actions.svelte.ts`, `toast.svelte.ts`, `icons.ts`, `Icon.svelte`
 - [ ] Copy components as needed from `sveltekit/src/lib/ember/`
-- [ ] Replace hardcoded hex / phantom vars (see `admin-models-before-after.html`
-      for the before/after proof)
-- [ ] Verify `.ember-light` — every surface must use semantic tokens, never hex
+- [ ] Replace hardcoded hex / phantom vars (`--card-bg`, JS color maps) with
+      semantic tokens — `admin-models-before-after.html` shows the before/after
+- [ ] Verify the light theme — every surface must use semantic tokens, never hex

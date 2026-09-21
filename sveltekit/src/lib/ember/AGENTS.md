@@ -40,6 +40,7 @@ Live demos (run `npm run dev`, open these to see every state):
 | `/components/overlays` | alerts, tooltips, popovers, confirms, toasts, states |
 | `/components/content` | headers, stepper, accordion, chat UI |
 | `/patterns` | validation, async states, confirmations, shortcuts |
+| `/nav/landing`, `/nav/internal` | navigation variants — landing top navs, topbars, sidebars — live previews + copy-paste code |
 | `/chat`, `/api-keys`, `/users`, `/files`, `/monitor` | full example pages |
 
 ## 2. Setup (new app)

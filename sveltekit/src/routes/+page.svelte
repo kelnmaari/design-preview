@@ -96,7 +96,7 @@
 	<div>
 		<div class="eyebrow mb-2">Overview</div>
 		<h1 class="page-title">Welcome back, Alex</h1>
-		<p class="page-subtitle">Here's what's happening across your gateway today. <Badge variant="success">SvelteKit</Badge></p>
+		<p class="page-subtitle">Here's what's happening across your workspace today. <Badge variant="success">SvelteKit</Badge></p>
 	</div>
 	<div class="flex gap-2">
 		<Button variant="outline" size="sm" onclick={refresh} disabled={refreshing}>

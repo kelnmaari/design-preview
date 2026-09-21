@@ -1,7 +1,7 @@
 /* =========================================================================
    icons.js — inline SVG icon set for design-preview mockups.
    Renders any <i data-icon="name"></i> as an inline SVG (stroke-based, 1.5w).
-   Names loosely mirror FontAwesome solid icons used by web-svelte so the
+   Names loosely mirror common FontAwesome solid icon names so the
    migration to real FA classes is a 1:1 swap. No external requests.
    ========================================================================= */
 (function () {

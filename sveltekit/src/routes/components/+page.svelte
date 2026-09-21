@@ -224,7 +224,7 @@
 				{#if activeTab === 'overview'}Active tab gets a primary underline. State lives in one bindable variable.
 				{:else if activeTab === 'models'}42 models indexed · 4 providers · all healthy.
 				{:else if activeTab === 'requests'}84.2k requests this week · p50 380ms · p99 1.2s.
-				{:else}Gateway URL, default model, retention — all tokenized.{/if}
+				{:else}Workspace URL, default locale, retention — all tokenized.{/if}
 			</p>
 		</Card>
 	</div>
@@ -253,7 +253,7 @@
 			code={'/* .dark becomes the Ember palette */\n.dark {\n  --tw-background: 10 10 12;\n  --tw-primary: 244 63 94;  /* rose-500 */\n  --tw-amber: 245 158 11;\n}'}
 		/>
 		<div class="card">
-			<EmptyState icon="key" title="No API keys yet" description="Create your first key to start calling the gateway.">
+			<EmptyState icon="key" title="No API keys yet" description="Create your first key to start calling the platform.">
 				<Button variant="primary" size="sm" onclick={() => toast.info('Create key', 'Empty-state demo.')}><Icon name="plus" size={13} /> Create key</Button>
 			</EmptyState>
 		</div>
@@ -272,7 +272,7 @@
 			<div class="row">
 				<Button variant="outline" size="sm" onclick={() => (modalOpen = true)}><Icon name="cube" size={13} /> Open dialog</Button>
 				<Button variant="outline" size="sm" onclick={() => (panelOpen = true)}><Icon name="panel-right" size={13} /> Open slide-over</Button>
-				<Button variant="outline" size="sm" onclick={() => toast.success('Deployed', 'gateway v7.0.1 is live on worker-02.')}>Success toast</Button>
+				<Button variant="outline" size="sm" onclick={() => toast.success('Deployed', 'v2.4.1 is live on worker-02.')}>Success toast</Button>
 				<Button variant="outline" size="sm" onclick={() => toast.warning('Quota at 82%', 'Consider raising the limit before Friday.')}>Warning toast</Button>
 			</div>
 			<div class="mt-3"><div class="typing-dots"><span></span><span></span><span></span></div></div>

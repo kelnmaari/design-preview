@@ -38,7 +38,7 @@
 	];
 
 	const ROWS: KeyRow[] = [
-		{ id: 'k1', name: 'prod-gateway', requests: 48210, tokens: 9182033, status: 'active', updated: '2m ago' },
+		{ id: 'k1', name: 'prod-api', requests: 48210, tokens: 9182033, status: 'active', updated: '2m ago' },
 		{ id: 'k2', name: 'web-search', requests: 31204, tokens: 5211880, status: 'active', updated: '9m ago' },
 		{ id: 'k3', name: 'mobile-app', requests: 18933, tokens: 3102901, status: 'active', updated: '1h ago' },
 		{ id: 'k4', name: 'nightly-eval', requests: 8211, tokens: 1988220, status: 'paused', updated: '3h ago' },
@@ -79,11 +79,11 @@
 	];
 
 	const EVENTS: TimelineItem[] = [
-		{ time: '09:41', title: 'Deploy v2.4.1 to prod', desc: 'gateway-worker · 3 replicas', tone: 'success' },
+		{ time: '09:41', title: 'Deploy v2.4.1 to prod', desc: 'api-worker · 3 replicas', tone: 'success' },
 		{ time: '09:12', title: 'VRAM pressure on worker-03', desc: '92% — consider rebalancing', tone: 'warning' },
 		{ time: '08:55', title: 'RAG index rebuilt', desc: '1,204 chunks · 38 files', tone: 'info' },
 		{ time: '08:20', title: 'Nightly eval failed', desc: 'faithfulness < 0.7 on 3 cases', tone: 'danger' },
-		{ time: '07:58', title: 'Key rotated: prod-gateway', tone: 'muted' }
+		{ time: '07:58', title: 'Key rotated: prod-api', tone: 'muted' }
 	];
 </script>
 
