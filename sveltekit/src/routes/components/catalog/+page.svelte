@@ -131,8 +131,8 @@
 		{ value: 'pro', label: 'Pro' }
 	];
 	const TABLE_ROWS = [
-		{ name: 'prod-api-1', requests: 48210, status: 'active' },
-		{ name: 'ci-runner', requests: 1402, status: 'limited' }
+		{ id: 'r1', name: 'prod-api-1', requests: 48210, status: 'active' },
+		{ id: 'r2', name: 'ci-runner', requests: 1402, status: 'limited' }
 	];
 	const TREE_ITEMS = [
 		{
@@ -275,7 +275,7 @@
 				{ name: 'Donut', desc: 'Кольцевая диаграмма + легенда', demo: true,
 					code: '<Donut segments={[{label:"large",value:62},{label:"small",value:38}]} centerValue="9.1M" />' },
 				{ name: 'Sparkline', desc: 'Мини-спарклайн', demo: true,
-					code: '<Sparkline points="0,30 15,26 30,27 45,20" width={120} height={36} />' },
+					code: '<Sparkline points="M0,30 L15,26 L30,27 L45,20" width={120} height={36} />' },
 				{ name: 'TokenBars', desc: 'Столбики токенов по дням', demo: true,
 					code: '<TokenBars days={30} />' }
 			]
@@ -542,7 +542,7 @@
 	{:else if name === 'Donut'}
 		<Donut segments={[{ label: 'large', value: 62, color: 'rgb(var(--chart-1))' }, { label: 'small', value: 38, color: 'rgb(var(--chart-2))' }]} size={110} centerValue="9.1M" />
 	{:else if name === 'Sparkline'}
-		<Sparkline points="0,30 15,26 30,27 45,20 60,22 75,14" width={120} height={36} />
+		<Sparkline points="M0,30 L15,26 L30,27 L45,20 L60,22 L75,14" width={120} height={36} />
 	{:else if name === 'TokenBars'}
 		<TokenBars days={30} />
 	{:else if name === 'Button'}
