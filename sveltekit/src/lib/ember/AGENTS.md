@@ -450,6 +450,7 @@ menus align to the trigger wrapper; context menu opens fixed at the cursor.
 - [ ] date-picker/calendar
 - [ ] number-field · pin-input · tags-input · editable
 - [x] scroll-area · separator · command/combobox (basic)
-- [ ] slider (parts) · splitter/resizable
-- [ ] listbox · tree · carousel · toast (parts over toast store)
-- [ ] asChild-style polymorphic trigger helper
+- [x] slider (parts) · splitter/resizable
+- [x] listbox · tree · carousel
+- [ ] toast (parts over toast store)
+- [x] asChild-style trigger actions (`createDialogTrigger()` и др. — Svelte-идиома: use:action вместо asChild)

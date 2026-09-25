@@ -51,7 +51,8 @@
 		U('Collapsible', 'collapsible'), U('Accordion', 'collapsible'), U('Select', 'collapsible'),
 		U('Tabs', 'popover'), U('Toggle', 'popover'), U('ToggleGroup', 'popover'), U('Toolbar', 'popover'),
 		U('Breadcrumb', 'breadcrumb'), U('Pagination', 'pagination'), U('Separator', 'pagination'),
-		U('ScrollArea', 'pagination'), U('Menubar', 'navigation-menu'), U('NavigationMenu', 'navigation-menu'), U('Command', 'navigation-menu')
+		U('ScrollArea', 'pagination'), U('Menubar', 'navigation-menu'), U('NavigationMenu', 'navigation-menu'), U('Command', 'navigation-menu'),
+		U('Slider', 'slider'), U('Splitter', 'slider'), U('Carousel', 'carousel'), U('ListBox', 'carousel'), U('Tree', 'carousel')
 	];
 
 	let mobileOpen = $state(false);

@@ -79,6 +79,24 @@
 
 	let page = $state(5);
 	let cmd = $state('');
+	import {
+		SliderRoot,
+		SliderTrack,
+		SplitterRoot,
+		SplitterPanel,
+		SplitterHandle,
+		CarouselButton,
+		CarouselContent,
+		CarouselItem,
+		CarouselRoot,
+		ListBoxItem,
+		ListBoxRoot,
+		Tree
+	} from '$lib/ember/index.js';
+
+	let sliderVal = $state(68);
+	let split = $state([60, 40]);
+
 
 
 	let dialogOpen = $state(false);
@@ -460,6 +478,73 @@
 
 <ScrollAreaRoot height="240px">…</ScrollAreaRoot>
 <Separator label="or" />`} />
+	</div>
+</section>
+
+<!-- SLIDER + SPLITTER -->
+<section class="mb-4" id="slider" style="scroll-margin-top:70px;">
+	<div class="eyebrow mb-2">Slider · Splitter</div>
+	<div class="grid grid-2 gap-3">
+		<div class="card card-body">
+			<SliderRoot bind:value={sliderVal} min={0} max={100} step={1}>
+				<SliderTrack />
+			</SliderRoot>
+			<div class="text-xs text-muted-foreground mt-2 font-mono">value: {sliderVal}</div>
+		</div>
+		<div class="card card-body" style="height:240px;">
+			<SplitterRoot bind:sizes={split}>
+				<SplitterPanel index={0}>
+					<div class="card card-body" style="height:100%"><div class="text-sm font-semibold">Left · {split[0]}%</div></div>
+				</SplitterPanel>
+				<SplitterHandle index={0} />
+				<SplitterPanel index={1}>
+					<div class="card card-body" style="height:100%"><div class="text-sm font-semibold">Right · {split[1]}%</div></div>
+				</SplitterPanel>
+			</SplitterRoot>
+			<div class="text-xs text-muted-foreground mt-2 font-mono">потяни разделитель</div>
+		</div>
+	</div>
+</section>
+
+<!-- CAROUSEL + LISTBOX + TREE -->
+<section class="mb-4" id="carousel" style="scroll-margin-top:70px;">
+	<div class="eyebrow mb-2">Carousel · ListBox · Tree</div>
+	<div class="grid grid-2 gap-3">
+		<div class="card card-body" style="display:flex;flex-direction:column;gap:1rem;">
+			<div>
+				<CarouselRoot>
+					<CarouselContent>
+						{#each ['Первый', 'Второй', 'Третий', 'Четвёртый'] as t (t)}
+							<CarouselItem><div class="text-sm font-semibold" style="padding:24px 0;">{t} слайд</div></CarouselItem>
+						{/each}
+					</CarouselContent>
+					<div class="flex gap-2 mt-2">
+						<CarouselButton dir="prev" />
+						<CarouselButton dir="next" />
+					</div>
+				</CarouselRoot>
+			</div>
+			<ListBoxRoot value="b" multiple>
+				<ListBoxItem value="a"><i data-icon="folder" data-size="13"></i> Проекты</ListBoxItem>
+				<ListBoxItem value="b"><i data-icon="key" data-size="13"></i> Ключи</ListBoxItem>
+				<ListBoxItem value="c"><i data-icon="database" data-size="13"></i> Corpus</ListBoxItem>
+			</ListBoxRoot>
+		</div>
+		<div class="card card-body">
+			<Tree
+				items={[
+					{ label: 'src', icon: 'folder', children: [
+						{ label: 'lib', icon: 'folder', children: [
+							{ label: 'Button.svelte', icon: 'file' },
+							{ label: 'Shell.svelte', icon: 'file' }
+						]},
+						{ label: 'routes', icon: 'folder', children: [{ label: '+page.svelte', icon: 'file' }] }
+					]},
+					{ label: 'styles.css', icon: 'file' }
+				]}
+				defaultExpanded={['src']}
+			/>
+		</div>
 	</div>
 </section>
 
