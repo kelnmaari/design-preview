@@ -16,17 +16,20 @@
 	}
 
 	let { value, label, children, ...rest }: Props = $props();
+	let el: HTMLButtonElement | undefined = $state();
 
 	const selected = $derived(ctx.value === value);
 
 	$effect(() => {
-		ctx.register(value, label ?? '');
+		const text = (label ?? el?.textContent ?? '').trim();
+		if (text) ctx.register(value, text);
 	});
 </script>
 
 <button
 	type="button"
 	role="option"
+	bind:this={el}
 	aria-selected={selected}
 	class="menu-item kit-select-item {selected ? 'active' : ''}"
 	onclick={() => ctx.setValue(value)}

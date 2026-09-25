@@ -18,7 +18,7 @@
 
 	let { class: cls = '', children, ...rest }: Props = $props();
 
-	const label = $derived(ctx.labels[ctx.value] ?? ctx.placeholder);
+	const label = $derived(ctx.labels[ctx.value] || ctx.placeholder);
 </script>
 
 <button

@@ -28,6 +28,7 @@
 			return labels;
 		},
 		register: (v: string, label: string) => {
+			if (labels[v] === label) return; // иначе $effect в Item зациклится
 			labels = { ...labels, [v]: label };
 		},
 		placeholder
