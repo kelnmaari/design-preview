@@ -5,3 +5,6 @@ build/
 .env.*
 !.env.example
 dist/
+
+# debug logs
+*.log
