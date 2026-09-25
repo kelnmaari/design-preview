@@ -1,4 +1,6 @@
 // Ember for Svelte — public API barrel.
+// Reka-style component systems (parts: Root/Trigger/Content/Item...)
+export * from "./components/index.js";
 export { default as Accordion } from './Accordion.svelte';
 export { default as Alert } from './Alert.svelte';
 export { default as Avatar } from './Avatar.svelte';
@@ -61,7 +63,7 @@ export { clickOutside, count, reveal, spotlight } from './actions.svelte.js';
 export { THEMES, theme, type EmberTheme, type ThemeMeta } from './theme.svelte.js';
 export { toast, type Toast, type ToastKind } from './toast.svelte.js';
 export { copyText, formatBytes, seededRandom, sleep, timeAgo } from './utils.js';
-export type { AccordionItem } from './Accordion.svelte';
+export type { AccordionItemData } from './Accordion.svelte';
 export type { AlertVariant } from './Alert.svelte';
 export type { Command } from './CommandPalette.svelte';
 export type { ChatSource } from './ChatMessage.svelte';

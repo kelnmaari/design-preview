@@ -3,7 +3,7 @@
 	import Badge from './Badge.svelte';
 	import Icon from './Icon.svelte';
 
-	export interface AccordionItem {
+	export interface AccordionItemData {
 		id?: string;
 		title: string;
 		badge?: string;
@@ -11,20 +11,20 @@
 	}
 
 	interface Props {
-		items: AccordionItem[];
+		items: AccordionItemData[];
 		openIds?: string[];
 		multiple?: boolean;
-		detail?: Snippet<[AccordionItem]>;
+		detail?: Snippet<[AccordionItemData]>;
 		ontoggle?: (id: string, open: boolean) => void;
 	}
 
 	let { items, openIds = $bindable([]), multiple = false, detail, ontoggle }: Props = $props();
 
-	function keyOf(item: AccordionItem, i: number): string {
+	function keyOf(item: AccordionItemData, i: number): string {
 		return item.id ?? `${item.title}-${i}`;
 	}
 
-	function toggle(item: AccordionItem, i: number) {
+	function toggle(item: AccordionItemData, i: number) {
 		const k = keyOf(item, i);
 		const isOpen = openIds.includes(k);
 		if (multiple) {

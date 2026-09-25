@@ -410,3 +410,44 @@ Component checklist for new additions: typed `Props` interface, `label`/
 `hint`/`error` on inputs, `aria-label` on icon-only buttons, no emojis,
 scoped styles with `ember-` prefix, barrel export, demo in the matching
 `/components/*` gallery, catalog row in this file.
+
+## Reka-style systems (`components/`)
+
+Since v2.4 the library also ships **composite headless-behavior components**
+organized like reka-ui: one folder per system, parts API (Root / Trigger /
+Content / Item / Label / Separator), behavior + a11y built in, styling baked
+with Ember classes (override via `class` prop / `{...rest}`).
+
+```
+components/
+  internal/utils.ts   focusable(), roving arrows, focus trap, clickOutside
+  dialog/             DialogRoot(=bind:open) Trigger Content Title Description Close
+  alert-dialog/       same, role=alertdialog, overlay-click does NOT close
+  dropdown-menu/      Root Trigger Content Item(danger,onselect) Label Separator
+  context-menu/       Root(right-click) Content(fixed at cursor) + re-exported items
+  popover/            Root Trigger Content (card, clickOutside, Esc)
+  tooltip/            Root(delay) Trigger(hover/focus) Content
+  hover-card/         Root Trigger Content (rich profile-style card)
+  collapsible/        Root(bind:open) Trigger Content
+  accordion/          Root(openIds,multiple) Item(id,title,badge) Trigger Content
+  tabs/               TabsRoot(bind:value) List(arrows) Trigger Content
+  toggle/             Toggle(bind:pressed)
+  toggle-group/       Root(bind:value, single|multiple) Item
+  toolbar/            Toolbar (roving arrows)
+  select/             SelectRoot(bind:value) Trigger Content Item
+```
+
+Usage: import from the barrel (`import { DialogRoot, DialogTrigger, … } from '$lib/ember/index.js'`).
+Live demos: `/ui`.
+
+Content/anchoring uses CSS relative positioning (no popper dependency) —
+menus align to the trigger wrapper; context menu opens fixed at the cursor.
+
+### Roadmap (reka-ui parity, next waves)
+
+- [ ] menubar · navigation-menu · breadcrumb (parts) · pagination (parts)
+- [ ] combobox/command (filtering listbox) · date-picker/calendar
+- [ ] number-field · pin-input · tags-input · editable
+- [ ] slider (parts) · scroll-area · splitter/resizable
+- [ ] listbox · tree · carousel · toast (parts over toast store)
+- [ ] asChild-style polymorphic trigger helper

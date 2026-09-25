@@ -15,7 +15,7 @@
 		Stepper,
 		reveal,
 		sleep,
-		type AccordionItem,
+		type AccordionItemData,
 		type ChatSource,
 		type Crumb,
 		type Step
@@ -35,7 +35,7 @@
 	];
 	let step = $state(1);
 
-	const FAQ: AccordionItem[] = [
+	const FAQ: AccordionItemData[] = [
 		{ title: 'Which models are supported?', badge: 'new', body: 'Any OpenAI-compatible endpoint, plus local GGUF via the sidecar. Streaming works everywhere.' },
 		{ title: 'Where is data stored?', body: 'Chunks live in Postgres + pgvector inside your cluster. Nothing is sent anywhere unless you configure a remote provider.' },
 		{ title: 'How do evals run?', body: 'Nightly, on a sampled slice. Failures open an incident with the offending cases attached.' }

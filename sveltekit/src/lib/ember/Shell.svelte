@@ -31,6 +31,7 @@
 		{ label: 'Tokens', icon: 'fire', href: '/tokens' },
 		{ label: 'Components', icon: 'cube', href: '/components' },
 		{ label: 'Catalog', icon: 'list', href: '/components/catalog' },
+		{ label: 'Reka UI', icon: 'flask', href: '/ui' },
 		{ label: 'Patterns', icon: 'layers', href: '/patterns' },
 		{ label: 'Tailwind', icon: 'sparkles', href: '/tailwind' },
 		{ section: 'Navigation' },
