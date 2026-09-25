@@ -447,10 +447,10 @@ menus align to the trigger wrapper; context menu opens fixed at the cursor.
 ### Roadmap (reka-ui parity, next waves)
 
 - [x] menubar · navigation-menu · breadcrumb (parts) · pagination (parts)
-- [ ] date-picker/calendar
+- [x] date-picker/calendar (Calendar + DatePicker)
 - [ ] number-field · pin-input · tags-input · editable
 - [x] scroll-area · separator · command/combobox (basic)
-- [x] slider (parts) · splitter/resizable
+- [x] slider (parts, + range two-thumb) · splitter/resizable
 - [x] listbox · tree · carousel
-- [ ] toast (parts over toast store)
+- [x] toast (ToastProvider/useToast alias over store)
 - [x] asChild-style trigger actions (`createDialogTrigger()` и др. — Svelte-идиома: use:action вместо asChild)

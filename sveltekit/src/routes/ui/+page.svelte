@@ -20,6 +20,8 @@
 		CarouselContent,
 		CarouselItem,
 		CarouselRoot,
+		Calendar,
+		DatePicker,
 		CodeBlock,
 		CommandInput,
 		CommandItem,
@@ -98,6 +100,8 @@
 	let page = $state(5);
 	let sliderVal = $state(68);
 	let split = $state([60, 40]);
+	let dateVal = $state<Date | undefined>(undefined);
+	let rangeVal: [number, number] = $state([30, 70]);
 </script>
 
 <svelte:head>
@@ -521,6 +525,12 @@
 				<SliderTrack />
 			</SliderRoot>
 			<div class="text-xs text-muted-foreground mt-2 font-mono">value: {sliderVal}</div>
+			<div class="mt-4">
+				<SliderRoot bind:value={rangeVal} min={0} max={100} step={1}>
+					<SliderTrack />
+				</SliderRoot>
+				<div class="text-xs text-muted-foreground mt-2 font-mono">range: {rangeVal[0]} – {rangeVal[1]}</div>
+			</div>
 		</div>
 		<CodeBlock title="Slider" language="svelte" code={'<SliderRoot bind:value={vol} min={0} max={100} step={1}>\n  <SliderTrack />\n</SliderRoot>'} />
 	</div>
@@ -603,6 +613,26 @@
 			/>
 		</div>
 		<CodeBlock title="Tree" language="svelte" code={'<Tree\n  items={[\n    { label: "src", icon: "folder", children: [\n      { label: "Button.svelte", icon: "file" }\n    ]},\n    { label: "styles.css", icon: "file" }\n  ]}\n  defaultExpanded={["src"]}\n/>'} />
+	</div>
+</section>
+
+<!-- 27 · CALENDAR / DATE PICKER -->
+<section class="mb-4" id="calendar" style="scroll-margin-top:80px;">
+	<div class="eyebrow mb-2">27 · Calendar · DatePicker</div>
+	<div class="grid grid-2 gap-3">
+		<div class="card card-body">
+			<Calendar bind:value={dateVal} />
+		</div>
+		<div class="card card-body" id="date-picker" style="scroll-margin-top:80px;">
+			<div style="max-width:320px">
+				<label class="field-label" for="ui-dp">Report date</label>
+				<DatePicker id="ui-dp" bind:value={dateVal} placeholder="Pick a date…" />
+				<div class="field-hint">Calendar в поповере; выбрано: {dateVal ? dateVal.toLocaleDateString('en-GB') : '—'}</div>
+			</div>
+			<div class="mt-3">
+				<CodeBlock title="Calendar · DatePicker" language="svelte" code={'<Calendar bind:value={date} />\nn\nn<DatePicker bind:value={date} placeholder="Pick a date…" min={new Date()} />'} />
+			</div>
+		</div>
 	</div>
 </section>
 

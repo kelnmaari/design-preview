@@ -51,7 +51,7 @@
 		U('Collapsible', 'collapsible'), U('Accordion', 'accordion'), U('Select', 'select'),
 		U('Tabs', 'tabs'), U('Toggle', 'toggle'), U('ToggleGroup', 'toggle-group'), U('Toolbar', 'toolbar'),
 		U('Breadcrumb', 'breadcrumb'), U('Pagination', 'pagination'), U('Separator', 'separator'),
-		U('ScrollArea', 'scroll-area'), U('Menubar', 'menubar'), U('NavigationMenu', 'navigation-menu'), U('Command', 'command'),
+		U('ScrollArea', 'scroll-area'), U('Menubar', 'menubar'), U('NavigationMenu', 'navigation-menu'), U('Command', 'command'), U('Calendar', 'calendar'), U('DatePicker', 'date-picker'),
 		U('Slider', 'slider'), U('Splitter', 'splitter'), U('Carousel', 'carousel'), U('ListBox', 'listbox'), U('Tree', 'tree')
 	];
 

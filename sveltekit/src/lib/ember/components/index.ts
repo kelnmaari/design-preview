@@ -26,3 +26,6 @@ export * from './carousel/index.js';
 export * from './listbox/index.js';
 export * from './tree/index.js';
 export { createDialogTrigger, createDialogClose, createCollapsibleTrigger, createPopoverTrigger, createDropdownMenuTrigger } from './internal/as-child.js';
+export * from './calendar/index.js';
+export * from './date-picker/index.js';
+export * from './toast/index.js';

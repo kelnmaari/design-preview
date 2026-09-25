@@ -2,7 +2,7 @@
 	import { getContext } from 'svelte';
 
 	const ctx = getContext<{
-		pct: number;
+		pcts: number[];
 		down: (e: PointerEvent) => void;
 		move: (e: PointerEvent) => void;
 		setTrack: (el: HTMLDivElement) => void;
@@ -12,6 +12,9 @@
 	$effect(() => {
 		if (track) ctx.setTrack(track);
 	});
+
+	const from = $derived(Math.min(...ctx.pcts));
+	const to = $derived(Math.max(...ctx.pcts));
 </script>
 
 <div
@@ -20,8 +23,10 @@
 	onpointerdown={ctx.down}
 	onpointermove={ctx.move}
 >
-	<div class="kit-slider-range" style="width:{ctx.pct}%"></div>
-	<span class="kit-slider-thumb" style="left:{ctx.pct}%"></span>
+	<div class="kit-slider-range" style="left:{from}%;width:{to - from}%"></div>
+	{#each ctx.pcts as p, i (i)}
+		<span class="kit-slider-thumb" style="left:{p}%"></span>
+	{/each}
 </div>
 
 <style>
@@ -35,7 +40,6 @@
 	}
 	.kit-slider-range {
 		position: absolute;
-		left: 0;
 		top: 0;
 		bottom: 0;
 		border-radius: 9999px;
