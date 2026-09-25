@@ -21,29 +21,37 @@
 
 	let { onPalette, children }: Props = $props();
 
+	const C = (label: string) => ({ label, href: '/components/catalog#' + label.replace(/\s+/g, '') });
+	const U = (label: string, id: string) => ({ label, href: '/ui#' + id });
+
 	const NAV: NavItem[] = [
-		{ section: 'Workspace' },
-		{ label: 'Dashboard', icon: 'gauge', href: '/' },
-		{ label: 'Chat', icon: 'comments', href: '/chat' },
-		{ label: 'API Keys', icon: 'key', href: '/api-keys', badge: '3' },
-		{ label: 'Files', icon: 'folder', href: '/files' },
-		{ section: 'System' },
+		{ section: 'Foundations' },
 		{ label: 'Tokens', icon: 'fire', href: '/tokens' },
-		{ label: 'Components', icon: 'cube', href: '/components' },
-		{ label: 'Catalog', icon: 'list', href: '/components/catalog' },
-		{ label: 'Reka UI', icon: 'flask', href: '/ui' },
 		{ label: 'Patterns', icon: 'layers', href: '/patterns' },
 		{ label: 'Tailwind', icon: 'sparkles', href: '/tailwind' },
-		{ section: 'Navigation' },
-		{ label: 'Nav · Landing', icon: 'home', href: '/nav/landing' },
-		{ label: 'Nav · Internal', icon: 'panel-right', href: '/nav/internal' },
-		{ section: 'Platform' },
-		{ label: 'Models', icon: 'microchip', href: '#' },
-		{ label: 'RAG', icon: 'database', href: '#' },
-		{ label: 'Monitor', icon: 'chart-line', href: '/monitor' },
-		{ section: 'Admin' },
-		{ label: 'Users', icon: 'users', href: '/users' },
-		{ label: 'Settings', icon: 'gear', href: '#' }
+		{ section: 'Forms' },
+		C('Field'), C('TextField'), C('InputGroup'), C('Select'), C('Checkbox'), C('RadioGroup'), C('Slider'), C('Switch'), C('SearchField'), C('Dropzone'),
+		{ section: 'Data' },
+		C('DataTable'), C('ListGroup'), C('Timeline'), C('Presence'), C('Pagination'),
+		{ section: 'Overlays' },
+		C('Modal'), C('ConfirmDialog'), C('Popover'), C('Tooltip'), C('Alert'), C('Banner'), C('Toasts'), C('Dropdown'), C('SlidePanel'), C('CommandPalette'),
+		{ section: 'Content' },
+		C('PageHeader'), C('SectionTitle'), C('Breadcrumb'), C('Stepper'), C('Accordion'), C('ChatMessage'), C('ChatComposer'), C('Card'), C('Badge'), C('Kbd'), C('Divider'), C('Rating'), C('EmptyState'), C('ErrorState'), C('Skeleton'), C('Spinner'), C('Progress'), C('Avatar'), C('AvatarStack'), C('CodeBlock'), C('CopyButton'),
+		{ section: 'Charts' },
+		C('LineChart'), C('Donut'), C('Sparkline'), C('TokenBars'),
+		{ section: 'System' },
+		C('Shell'), C('Button'), C('Tabs'), C('Segmented'), C('StatCard'), C('ThemeToggle'), C('Icon'),
+		{ section: 'Navigation variants' },
+		{ label: 'Landing navs V1-V4', href: '/nav/landing' },
+		{ label: 'Topbars A1-A3', href: '/nav/internal' },
+		{ label: 'Sidebars B1-B3', href: '/nav/internal' },
+		{ section: 'Headless parts' },
+		U('Dialog', 'dialog'), U('AlertDialog', 'dialog'), U('DropdownMenu', 'dialog'), U('ContextMenu', 'dialog'),
+		U('Popover', 'popover'), U('Tooltip', 'popover'), U('HoverCard', 'popover'),
+		U('Collapsible', 'collapsible'), U('Accordion', 'collapsible'), U('Select', 'collapsible'),
+		U('Tabs', 'popover'), U('Toggle', 'popover'), U('ToggleGroup', 'popover'), U('Toolbar', 'popover'),
+		U('Breadcrumb', 'breadcrumb'), U('Pagination', 'pagination'), U('Separator', 'pagination'),
+		U('ScrollArea', 'pagination'), U('Menubar', 'navigation-menu'), U('NavigationMenu', 'navigation-menu'), U('Command', 'navigation-menu')
 	];
 
 	let mobileOpen = $state(false);
@@ -57,6 +65,7 @@
 
 	function isActive(href: string | undefined) {
 		if (!href || href === '#') return false;
+		if (href.includes('#')) return page.url.pathname + page.url.hash === href;
 		if (href === '/') return page.url.pathname === '/';
 		return page.url.pathname.startsWith(href);
 	}
@@ -73,12 +82,12 @@
 			</div>
 		</a>
 		<nav class="sidebar-nav">
-			{#each NAV as item (item.label ?? item.section)}
+			{#each NAV as item, i (i)}
 				{#if item.section}
 					<div class="sidebar-section-label">{item.section}</div>
 				{:else if item.href === '#'}
 					<button class="nav-item" onclick={(e) => demo(e, item.label ?? '')}>
-						<span class="nav-icon"><Icon name={item.icon ?? 'arrow-right'} size={15} /></span>
+						{#if item.icon}<span class="nav-icon"><Icon name={item.icon} size={15} /></span>{/if}
 						{item.label}
 						{#if item.badge}<span class="nav-badge">{item.badge}</span>{/if}
 					</button>
@@ -89,7 +98,7 @@
 						class:active={isActive(item.href)}
 						onclick={() => (mobileOpen = false)}
 					>
-						<span class="nav-icon"><Icon name={item.icon ?? 'arrow-right'} size={15} /></span>
+						{#if item.icon}<span class="nav-icon"><Icon name={item.icon} size={15} /></span>{/if}
 						{item.label}
 						{#if item.badge}<span class="nav-badge">{item.badge}</span>{/if}
 					</a>

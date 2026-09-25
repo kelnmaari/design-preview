@@ -19,18 +19,16 @@
 	}
 
 	const DEFAULTS: Command[] = [
-		{ group: 'Pages', label: 'Dashboard', hint: 'overview', icon: 'gauge', href: '/' },
-		{ group: 'Pages', label: 'Chat', hint: 'thread', icon: 'comments', href: '/chat' },
-		{ group: 'Pages', label: 'API Keys', hint: '156 keys', icon: 'key', href: '/api-keys' },
-		{ group: 'Pages', label: 'Files', hint: 'RAG corpus', icon: 'folder', href: '/files' },
-		{ group: 'Pages', label: 'Monitor', hint: 'live', icon: 'chart-line', href: '/monitor' },
-		{ group: 'Pages', label: 'Users', hint: 'admin', icon: 'users', href: '/users' },
-		{ group: 'Pages', label: 'Design Tokens', hint: 'system', icon: 'fire', href: '/tokens' },
 		{ group: 'Pages', label: 'Components', hint: 'library', icon: 'cube', href: '/components' },
+		{ group: 'Pages', label: 'Catalog', hint: 'all components + code', icon: 'list', href: '/components/catalog' },
+		{ group: 'Pages', label: 'Design Tokens', hint: 'system', icon: 'fire', href: '/tokens' },
 		{ group: 'Pages', label: 'Forms', hint: 'components', icon: 'pencil', href: '/components/forms' },
 		{ group: 'Pages', label: 'Data', hint: 'components', icon: 'chart-bar', href: '/components/data' },
 		{ group: 'Pages', label: 'Overlays', hint: 'components', icon: 'layers', href: '/components/overlays' },
 		{ group: 'Pages', label: 'Content', hint: 'components', icon: 'comments', href: '/components/content' },
+		{ group: 'Pages', label: 'Navigation · landing', hint: 'variants', icon: 'home', href: '/nav/landing' },
+		{ group: 'Pages', label: 'Navigation · internal', hint: 'variants', icon: 'panel-right', href: '/nav/internal' },
+		{ group: 'Pages', label: 'Reka parts', hint: 'headless systems', icon: 'flask', href: '/ui' },
 		{ group: 'Pages', label: 'Patterns', hint: 'guide', icon: 'layers', href: '/patterns' },
 		{ group: 'Pages', label: 'Tailwind', hint: 'utilities', icon: 'sparkles', href: '/tailwind' },
 		{ group: 'Actions', label: 'Cycle theme', hint: '6 themes', icon: 'sun', action: 'theme' }

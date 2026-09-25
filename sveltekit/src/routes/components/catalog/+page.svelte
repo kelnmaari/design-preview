@@ -580,7 +580,7 @@ let paletteOpen = $state(false);
 		<div class="eyebrow mb-2">{section.title}</div>
 		<div class="catalog-grid">
 			{#each section.items as item (item.name)}
-				<article class="catalog-card">
+				<article class="catalog-card" id={item.name} style="scroll-margin-top:80px;">
 					<header>
 						<h3 class="catalog-name">{item.name}</h3>
 						<p class="catalog-desc">{item.desc}</p>

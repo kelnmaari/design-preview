@@ -41,7 +41,8 @@ Live demos (run `npm run dev`, open these to see every state):
 | `/components/content` | headers, stepper, accordion, chat UI |
 | `/patterns` | validation, async states, confirmations, shortcuts |
 | `/nav/landing`, `/nav/internal` | navigation variants — landing top navs, topbars, sidebars — live previews + copy-paste code |
-| `/chat`, `/api-keys`, `/users`, `/files`, `/monitor` | full example pages |
+| `/ui` | reka-style headless systems — live demos of every parts API |
+| `/components/catalog` | every component listed with a copy-paste snippet |
 
 ## 2. Setup (new app)
 
@@ -445,9 +446,10 @@ menus align to the trigger wrapper; context menu opens fixed at the cursor.
 
 ### Roadmap (reka-ui parity, next waves)
 
-- [ ] menubar · navigation-menu · breadcrumb (parts) · pagination (parts)
-- [ ] combobox/command (filtering listbox) · date-picker/calendar
+- [x] menubar · navigation-menu · breadcrumb (parts) · pagination (parts)
+- [ ] date-picker/calendar
 - [ ] number-field · pin-input · tags-input · editable
-- [ ] slider (parts) · scroll-area · splitter/resizable
+- [x] scroll-area · separator · command/combobox (basic)
+- [ ] slider (parts) · splitter/resizable
 - [ ] listbox · tree · carousel · toast (parts over toast store)
 - [ ] asChild-style polymorphic trigger helper

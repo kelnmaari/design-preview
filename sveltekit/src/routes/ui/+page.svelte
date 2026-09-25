@@ -56,6 +56,30 @@
 		toast,
 		PageHeader
 	} from '$lib/ember/index.js';
+	import {
+		BreadcrumbItem,
+		BreadcrumbLink,
+		BreadcrumbPage,
+		BreadcrumbRoot,
+		BreadcrumbSeparator,
+		CommandInput,
+		CommandItem,
+		CommandList,
+		CommandRoot,
+		MenubarRoot,
+		NavigationMenuLink,
+		NavigationMenuRoot,
+		PaginationNext,
+		PaginationNumbers,
+		PaginationPrev,
+		PaginationRoot,
+		ScrollAreaRoot,
+		Separator
+	} from '$lib/ember/index.js';
+
+	let page = $state(5);
+	let cmd = $state('');
+
 
 	let dialogOpen = $state(false);
 	let alertOpen = $state(false);
@@ -156,7 +180,7 @@
 </PageHeader>
 
 <!-- DIALOG + ALERT DIALOG -->
-<section class="mb-4">
+<section class="mb-4" id="dialog" style="scroll-margin-top:70px;">
 	<div class="eyebrow mb-2">Dialog · AlertDialog</div>
 	<div class="grid grid-2 gap-3">
 		<div class="card card-body">
@@ -222,7 +246,7 @@
 </section>
 
 <!-- POPOVER + TOOLTIP + HOVER CARD -->
-<section class="mb-4">
+<section class="mb-4" id="popover" style="scroll-margin-top:70px;">
 	<div class="eyebrow mb-2">Popover · Tooltip · HoverCard</div>
 	<div class="grid grid-2 gap-3">
 		<div class="card card-body">
@@ -293,7 +317,7 @@
 </section>
 
 <!-- COLLAPSIBLE + ACCORDION + SELECT -->
-<section class="mb-4">
+<section class="mb-4" id="collapsible" style="scroll-margin-top:70px;">
 	<div class="eyebrow mb-2">Collapsible · Accordion · Select</div>
 	<div class="grid grid-2 gap-3">
 		<div class="card card-body">
@@ -336,6 +360,106 @@
 				<CodeBlock title="collapsible · accordion · select" language="svelte" code={MISC_CODE} />
 			</div>
 		</div>
+	</div>
+</section>
+
+<!-- BREADCRUMB -->
+<section class="mb-4" id="breadcrumb" style="scroll-margin-top:70px;">
+	<div class="eyebrow mb-2">Breadcrumb</div>
+	<div class="card card-body">
+		<BreadcrumbRoot>
+			<BreadcrumbItem><BreadcrumbLink href="/">Workspace</BreadcrumbLink></BreadcrumbItem>
+			<BreadcrumbSeparator />
+			<BreadcrumbItem><BreadcrumbLink href="/settings">Settings</BreadcrumbLink></BreadcrumbItem>
+			<BreadcrumbSeparator />
+			<BreadcrumbItem><BreadcrumbPage>Keys</BreadcrumbPage></BreadcrumbItem>
+		</BreadcrumbRoot>
+		<div class="mt-3">
+			<CodeBlock title="breadcrumb" language="svelte" code={`<BreadcrumbRoot>
+  <BreadcrumbItem><BreadcrumbLink href="/">Workspace</BreadcrumbLink></BreadcrumbItem>
+  <BreadcrumbSeparator />
+  <BreadcrumbItem><BreadcrumbPage>Keys</BreadcrumbPage></BreadcrumbItem>
+</BreadcrumbRoot>`} />
+		</div>
+	</div>
+</section>
+
+<!-- PAGINATION + SEPARATOR + SCROLL AREA -->
+<section class="mb-4" id="pagination" style="scroll-margin-top:70px;">
+	<div class="eyebrow mb-2">Pagination · Separator · ScrollArea</div>
+	<div class="grid grid-2 gap-3">
+		<div class="card card-body">
+			<PaginationRoot bind:page total={42}>
+				<PaginationPrev />
+				<PaginationNumbers />
+				<PaginationNext />
+			</PaginationRoot>
+			<Separator />
+			<Separator label="or" />
+			<div class="text-xs text-muted-foreground mt-2 font-mono">page: {page} / 42</div>
+		</div>
+		<div class="card card-body">
+			<ScrollAreaRoot height="180px">
+				{#each Array.from({ length: 12 }, (_, i) => i + 1) as n (n)}
+					<div class="text-sm text-muted-foreground" style="padding:4px 0;">Строка {n} — скролл внутри блока.</div>
+				{/each}
+			</ScrollAreaRoot>
+		</div>
+	</div>
+</section>
+
+<!-- NAVIGATION MENU + MENUBAR + COMMAND -->
+<section class="mb-4" id="navigation-menu" style="scroll-margin-top:70px;">
+	<div class="eyebrow mb-2">NavigationMenu · Menubar · Command</div>
+	<div class="card card-body" style="display:flex;flex-direction:column;gap:1rem;">
+		<NavigationMenuRoot>
+			<NavigationMenuLink href="/ui" active>Overview</NavigationMenuLink>
+			<NavigationMenuLink href="/ui">Logs</NavigationMenuLink>
+			<NavigationMenuLink href="/ui">Settings</NavigationMenuLink>
+		</NavigationMenuRoot>
+		<MenubarRoot>
+			<DropdownMenuRoot>
+				<DropdownMenuTrigger class="btn btn-ghost btn-sm">File</DropdownMenuTrigger>
+				<DropdownMenuContent align="left">
+					<DropdownMenuItem onselect={() => toast.info('New')}><i data-icon="plus" data-size="13"></i> New</DropdownMenuItem>
+					<DropdownMenuSeparator />
+					<DropdownMenuItem danger onselect={() => toast.error('Closed')}><i data-icon="xmark" data-size="13"></i> Close</DropdownMenuItem>
+				</DropdownMenuContent>
+			</DropdownMenuRoot>
+			<DropdownMenuRoot>
+				<DropdownMenuTrigger class="btn btn-ghost btn-sm">Edit</DropdownMenuTrigger>
+				<DropdownMenuContent align="left">
+					<DropdownMenuItem onselect={() => toast.info('Undo')}><i data-icon="refresh" data-size="13"></i> Undo</DropdownMenuItem>
+				</DropdownMenuContent>
+			</DropdownMenuRoot>
+		</MenubarRoot>
+		<CommandRoot placeholder="Type a command or search…">
+			<CommandInput />
+			<CommandList>
+				<CommandItem value="New API key" keywords="create add" onselect={() => toast.success('New key')}><i data-icon="plus" data-size="13"></i> New API key</CommandItem>
+				<CommandItem value="Open chat" keywords="messages" onselect={() => toast.info('Chat')}><i data-icon="comments" data-size="13"></i> Open chat</CommandItem>
+				<CommandItem value="Deploy build" keywords="release" onselect={() => toast.success('Deploying')}><i data-icon="rocket" data-size="13"></i> Deploy build</CommandItem>
+			</CommandList>
+		</CommandRoot>
+		<CodeBlock title="wave-2 systems" language="svelte" code={`<MenubarRoot>…DropdownMenuRoot + Trigger + Content…</MenubarRoot>
+
+<NavigationMenuRoot>
+  <NavigationMenuLink href="/" active>Overview</NavigationMenuLink>
+</NavigationMenuRoot>
+
+<PaginationRoot bind:page total={42}>
+  <PaginationPrev /> <PaginationNumbers /> <PaginationNext />
+</PaginationRoot>
+
+<CommandRoot>
+  <CommandInput />
+  <CommandList>
+    <CommandItem value="New API key" onselect={run}>…</CommandItem>
+  </CommandList>
+</CommandRoot>
+
+<ScrollAreaRoot height="240px">…</ScrollAreaRoot>
+<Separator label="or" />`} />
 	</div>
 </section>
 
