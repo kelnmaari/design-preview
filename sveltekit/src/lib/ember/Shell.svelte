@@ -46,13 +46,13 @@
 		{ label: 'Topbars A1-A3', href: '/nav/internal' },
 		{ label: 'Sidebars B1-B3', href: '/nav/internal' },
 		{ section: 'Headless parts' },
-		U('Dialog', 'dialog'), U('AlertDialog', 'dialog'), U('DropdownMenu', 'dialog'), U('ContextMenu', 'dialog'),
-		U('Popover', 'popover'), U('Tooltip', 'popover'), U('HoverCard', 'popover'),
-		U('Collapsible', 'collapsible'), U('Accordion', 'collapsible'), U('Select', 'collapsible'),
-		U('Tabs', 'popover'), U('Toggle', 'popover'), U('ToggleGroup', 'popover'), U('Toolbar', 'popover'),
-		U('Breadcrumb', 'breadcrumb'), U('Pagination', 'pagination'), U('Separator', 'pagination'),
-		U('ScrollArea', 'pagination'), U('Menubar', 'navigation-menu'), U('NavigationMenu', 'navigation-menu'), U('Command', 'navigation-menu'),
-		U('Slider', 'slider'), U('Splitter', 'slider'), U('Carousel', 'carousel'), U('ListBox', 'carousel'), U('Tree', 'carousel')
+		U('Dialog', 'dialog'), U('AlertDialog', 'alert-dialog'), U('DropdownMenu', 'dropdown-menu'), U('ContextMenu', 'context-menu'),
+		U('Popover', 'popover'), U('Tooltip', 'tooltip'), U('HoverCard', 'hover-card'),
+		U('Collapsible', 'collapsible'), U('Accordion', 'accordion'), U('Select', 'select'),
+		U('Tabs', 'tabs'), U('Toggle', 'toggle'), U('ToggleGroup', 'toggle-group'), U('Toolbar', 'toolbar'),
+		U('Breadcrumb', 'breadcrumb'), U('Pagination', 'pagination'), U('Separator', 'separator'),
+		U('ScrollArea', 'scroll-area'), U('Menubar', 'menubar'), U('NavigationMenu', 'navigation-menu'), U('Command', 'command'),
+		U('Slider', 'slider'), U('Splitter', 'splitter'), U('Carousel', 'carousel'), U('ListBox', 'listbox'), U('Tree', 'tree')
 	];
 
 	let mobileOpen = $state(false);
