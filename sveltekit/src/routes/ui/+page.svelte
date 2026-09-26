@@ -105,11 +105,11 @@
 </script>
 
 <svelte:head>
-	<title>Reka UI · Ember</title>
+	<title>Headless parts · Ember</title>
 </svelte:head>
 
-<PageHeader eyebrow="Headless parts" title="Reka UI on Ember"
-	subtitle="Композитные компоненты в архитектуре reka-ui: Root / Trigger / Content / Item — поведение и a11y на нас, стили на Ember. Секции идут сверху вниз в порядке меню; у каждого компонента свой пример и код.">
+<PageHeader eyebrow="Headless parts" title="Headless systems"
+	subtitle="Композитные компоненты в parts-архитектуре: Root / Trigger / Content / Item — поведение и a11y на нас, стили на Ember. Секции идут сверху вниз в порядке меню; у каждого компонента свой пример и код.">
 	{#snippet actions()}
 		<Badge variant="primary">Svelte 5</Badge>
 	{/snippet}

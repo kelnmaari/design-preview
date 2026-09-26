@@ -41,7 +41,7 @@ Live demos (run `npm run dev`, open these to see every state):
 | `/components/content` | headers, stepper, accordion, chat UI |
 | `/patterns` | validation, async states, confirmations, shortcuts |
 | `/nav/landing`, `/nav/internal` | navigation variants — landing top navs, topbars, sidebars — live previews + copy-paste code |
-| `/ui` | reka-style headless systems — live demos of every parts API |
+| `/ui` | headless systems — live demos of every parts API |
 | `/components/catalog` | every component listed with a copy-paste snippet |
 
 ## 2. Setup (new app)
@@ -412,10 +412,10 @@ Component checklist for new additions: typed `Props` interface, `label`/
 scoped styles with `ember-` prefix, barrel export, demo in the matching
 `/components/*` gallery, catalog row in this file.
 
-## Reka-style systems (`components/`)
+## Headless systems (`components/`)
 
 Since v2.4 the library also ships **composite headless-behavior components**
-organized like reka-ui: one folder per system, parts API (Root / Trigger /
+one folder per system, parts API (Root / Trigger /
 Content / Item / Label / Separator), behavior + a11y built in, styling baked
 with Ember classes (override via `class` prop / `{...rest}`).
 
@@ -444,7 +444,7 @@ Live demos: `/ui`.
 Content/anchoring uses CSS relative positioning (no popper dependency) —
 menus align to the trigger wrapper; context menu opens fixed at the cursor.
 
-### Roadmap (reka-ui parity, next waves)
+### Roadmap (next waves)
 
 - [x] menubar · navigation-menu · breadcrumb (parts) · pagination (parts)
 - [x] date-picker/calendar (Calendar + DatePicker)

@@ -26,6 +26,7 @@
 
 	const NAV: NavItem[] = [
 		{ section: 'Foundations' },
+		{ label: 'Integration', icon: 'rocket', href: '/integration' },
 		{ label: 'Tokens', icon: 'fire', href: '/tokens' },
 		{ label: 'Patterns', icon: 'layers', href: '/patterns' },
 		{ label: 'Tailwind', icon: 'sparkles', href: '/tailwind' },

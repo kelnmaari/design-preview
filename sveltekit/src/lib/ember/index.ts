@@ -1,5 +1,5 @@
 // Ember for Svelte — public API barrel.
-// Reka-style component systems (parts: Root/Trigger/Content/Item...)
+// Headless component systems (parts: Root/Trigger/Content/Item...)
 export * from "./components/index.js";
 export { default as Accordion } from './Accordion.svelte';
 export { default as Alert } from './Alert.svelte';

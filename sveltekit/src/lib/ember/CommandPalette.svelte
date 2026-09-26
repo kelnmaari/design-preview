@@ -28,7 +28,7 @@
 		{ group: 'Pages', label: 'Content', hint: 'components', icon: 'comments', href: '/components/content' },
 		{ group: 'Pages', label: 'Navigation · landing', hint: 'variants', icon: 'home', href: '/nav/landing' },
 		{ group: 'Pages', label: 'Navigation · internal', hint: 'variants', icon: 'panel-right', href: '/nav/internal' },
-		{ group: 'Pages', label: 'Reka parts', hint: 'headless systems', icon: 'flask', href: '/ui' },
+		{ group: 'Pages', label: 'Headless parts', hint: 'headless systems', icon: 'flask', href: '/ui' },
 		{ group: 'Pages', label: 'Patterns', hint: 'guide', icon: 'layers', href: '/patterns' },
 		{ group: 'Pages', label: 'Tailwind', hint: 'utilities', icon: 'sparkles', href: '/tailwind' },
 		{ group: 'Actions', label: 'Cycle theme', hint: '6 themes', icon: 'sun', action: 'theme' }

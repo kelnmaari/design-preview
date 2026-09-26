@@ -1,4 +1,4 @@
-/* Reka-style component systems — one folder per component, parts API. */
+/* Headless component systems — one folder per component, parts API. */
 export * from './dialog/index.js';
 export * from './alert-dialog/index.js';
 export * from './dropdown-menu/index.js';

@@ -1,4 +1,4 @@
-/* Shared behavior helpers for reka-style parts (headless behavior + Ember skin). */
+/* Shared behavior helpers for headless parts (behavior + Ember skin). */
 
 export function getFocusable(container: HTMLElement): HTMLElement[] {
 	return Array.from(
